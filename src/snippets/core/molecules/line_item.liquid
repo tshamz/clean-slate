@@ -1,0 +1,20 @@
+<div class="oo-line-item">
+  <div class="oo-line-item-image-wrapper">
+    {% include 'image',
+      resource: the_product.featured_image,
+      srcset: '480x,600x,768x,450x,575x',
+      size: '800x',
+      sizes: 'max 480px 480px,max 600px 600px,max 768px 768px,max 992px 992px,min 993px 575px' %}
+  </div>
+  <div class="oo-line-item-information-wrapper">
+    {% include 'heading', heading: line_item.product.title, level: 3 %}
+    {% include 'price' with line_item  %}
+    {% include 'text', with line_item.product.title %}
+    {% include 'quantity_selector', quantity: line_item.quantity %}
+    {% include 'price' with line_item.line_price, compare_at_price: line_item.original_line_price %}
+  </div>
+  {% capture button_content %}
+    {% include 'icon', name: 'cancel' %}
+  {% endcapture %}
+  {% include 'button', content: button_content %}
+</div>

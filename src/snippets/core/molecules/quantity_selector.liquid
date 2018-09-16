@@ -1,0 +1,12 @@
+<div class="oo-quantity-selector {{ classes }}" {{ additional_attributes }}>
+  {% include 'button', content: '-', additional_attributes: 'data-quantity-change="-1"' %}
+
+  {% include 'input',
+    type: 'number',
+    name: 'qty',
+    value: quantity,
+    id: 'qty',
+    additional_attributes: 'min=1' %}
+
+  {% include 'button', content: '+', additional_attributes: 'data-quantity-change="+1"' %}
+</div>

@@ -1,0 +1,140 @@
+{%- comment %}{{ content_for_index }}{%- endcomment -%}
+
+{%- assign the_product = all_products['blue-silk-tuxedo'] -%}
+
+<div>
+  {% include 'social-media-icons', networks: 'facebook::twitter::pinterest', type: 'button' %}
+</div>
+
+
+{% comment %}
+{% include 'quantity-selector', quantity: 1 %}
+{% endcomment %}
+
+{% comment %}
+{% include 'icon-with-text', icon: 'facebook', text: 'Our Facebook' %}
+{% endcomment %}
+
+{% comment %}
+<div>
+  {%- capture the_list_items -%}
+    {%- for item in linklists['test-list'].links -%}
+      -->{%- include 'link', text: item.title, href: item.url -%}
+    {%- endfor -%}
+  {%- endcapture -%}
+  {% include 'list' with the_list_items %}
+</div>
+{% endcomment %}
+
+{% comment %}
+<div>
+  {% for group in linklists['test-menu'].links %}
+    {% capture the_list_items %}
+      {% for item in group.links %}
+        {% if group.handle == 'social-media' %}
+          -->{% include 'icon-with-text', icon: item.handle, text: item.title, href: item.url %}
+        {% else %}
+          -->{%- include 'link', text: item.title, href: item.url -%}
+        {% endif %}
+      {% endfor %}
+    {% endcapture %}
+    {% include 'menu', heading: group.title, level: 2, list: the_list_items %}
+  {% endfor %}
+</div>
+{% endcomment %}
+
+{% comment %}
+<div>
+  {%- include 'img_url',
+    resource: the_product.featured_image,
+    filter: 'img',
+    size: '600x',
+    descriptor: '2x' -%}
+</div>
+{% endcomment %}
+
+{% comment %}
+<div>
+  {%- include 'button', text: 'Button' -%}
+</div>
+{% endcomment %}
+
+{% comment %}
+<div>
+  {%- include 'text' with 'This is some text.' -%}
+</div>
+{% endcomment %}
+
+{% comment %}
+<div>
+  {%- include 'price', resource: the_product.selected_or_first_available_variant -%}
+</div>
+{% endcomment %}
+
+{% comment %}
+<div>
+  {%- include 'heading', text: 'Heading', level: '3' -%}
+</div>
+{% endcomment %}
+
+
+{% comment %}
+<div>
+  {%- include 'icon', name: 'facebook' -%}
+</div>
+{% endcomment %}
+
+{% comment %}
+<div>
+  {%- include 'input',
+    type: 'number',
+    name: 'qty',
+    value: 1,
+    id: 'qty',
+    additional_attributes: 'min=1' -%}
+</div>
+{% endcomment %}
+
+{% comment %}
+<div>
+  {%- include 'label', text: 'Label' -%}
+</div>
+{% endcomment %}
+
+{% comment %}
+<div>
+  {%- include 'link', text: 'Link', href: '#' -%}
+</div>
+{% endcomment %}
+
+{% comment %}
+<div>
+  {%- include 'overlay' -%}
+</div>
+{% endcomment %}
+
+{% comment %}
+<div>
+  {%- include 'video',
+    controls: true,
+    src: 'https://archive.org/download/BigBuckBunny_124/Content/big_buck_bunny_720p_surround.mp4' -%}
+</div>
+{% endcomment %}
+
+{% comment %}
+<div>
+  {% include 'image',
+    resource: the_product.featured_image,
+    srcset: '480x,600x,768x,450x,575x',
+    size: '800x',
+    sizes: 'max 480px 480px,max 600px 600px,max 768px 768px,max 992px 992px,min 993px 575px' %}
+</div>
+{% endcomment %}
+
+{% comment %}
+<div>
+  {%- assign the_list = the_product.variants | map: 'title' -%}
+  {%- include 'list', _list: the_list -%}
+  {%- assign the_list = blank -%}
+</div>
+{% endcomment %}

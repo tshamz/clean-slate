@@ -1,0 +1,26 @@
+{%- assign errors = validate_arguments | remove_first: '::' | split: '::' -%}
+
+{%- capture all_errors -%}
+  {%- for error in errors -%}
+
+    {%- assign error_parts = error | split: ',' -%}
+    {%- assign is_error = error_parts | first | strip -%}
+
+    {%- if is_error == 'error' -%}
+      {%- assign error_type = error_parts[1] | strip -%}
+      {%- assign error_value = error_parts[2] | strip -%}
+
+      {%- capture error_message -%}
+        error in {{ snippet -}}.liquid: {{ error_type }} - {{ error_value -}}
+      {%- endcapture -%}
+
+      <pre>{{ error_message }}</pre>
+      <script>console.log('{{ error_message }}')</script>
+    {%- endif -%}
+
+  {%- endfor -%}
+{%- endcapture -%}
+
+{%- if all_errors == '' -%}
+  true
+{%- endif -%}

@@ -1,0 +1,34 @@
+{%- capture arguments -%}
+  {%- include 'argument',
+    _name: 'icon',
+    _required: true,
+    _value: icon,
+    _type: '',
+    _description: '' -%}
+  {%- include 'argument',
+    _name: 'text',
+    _required: true,
+    _value: text,
+    _type: '',
+    _description: '' -%}
+{%- endcapture -%}
+
+{%- capture errors -%}
+  {%- include 'errors' with arguments, snippet: 'icon-with-text' -%}
+{%- endcapture -%}
+
+{%- if errors == '' -%}
+  <div class="oo-icon-with-text {{ classes }}" {{ additional_attributes }}>
+    {%- include 'icon', name: icon -%}
+    {%- if href != blank -%}
+      {%- include 'link', text: text, href: href -%}
+    {%- else -%}
+      {%- include 'text', _text: text -%}
+    {%- endif -%}
+  </div>
+{%- else -%}
+  {{ errors }}
+{%- endif -%}
+
+{%- assign arguments = blank -%}
+{%- assign errors = blank -%}

@@ -1,0 +1,16 @@
+{%- capture arguments -%}
+
+{%- endcapture -%}
+
+{%- capture errors -%}
+  {%- include 'errors' with arguments, snippet: 'table' -%}
+{%- endcapture -%}
+
+{%- if errors == '' -%}
+  <table class="oo-table {{ classes }}"></table>
+{%- else -%}
+  {{ errors }}
+{%- endif -%}
+
+{%- assign arguments = blank -%}
+{%- assign errors = blank -%}

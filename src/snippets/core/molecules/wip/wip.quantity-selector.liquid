@@ -1,0 +1,39 @@
+{%- capture arguments -%}
+  {%- include 'argument',
+    _name: 'quantity',
+    _required: false,
+    _value: quantity,
+    _type: '',
+    _description: '',
+    _default: 1 -%}
+{%- endcapture -%}
+
+{%- capture errors -%}
+  {%- include 'errors' with arguments, snippet: 'quantity-selector' -%}
+{%- endcapture -%}
+
+{%- if quantity == blank -%}1{%- endif -%}
+
+{%- if errors == '' -%}
+  <div class="oo-quantity-selector {{ classes }}" {{ additional_attributes }}>
+    {% include 'button',
+      text: '-',
+      type: 'button',
+      additional_attributes: 'data-quantity-change="-1"' %}
+    {% include 'input',
+      type: 'number',
+      value: quantity,
+      additional_attributes: 'min=0',
+      name: 'qty' %}
+    {% include 'button',
+      text: '+',
+      type: 'button',
+      additional_attributes: 'data-quantity-change="+1"' %}
+  </div>
+{%- else -%}
+  {{ errors }}
+{%- endif -%}
+
+{%- assign arguments = blank -%}
+{%- assign errors = blank -%}
+{%- assign quantity = blank -%}

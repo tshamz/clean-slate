@@ -1,0 +1,5 @@
+<div class="oo-icon icon-{{ name }} {{ classes }}" {{ additional_attributes }}>
+  {%- assign icon_name = name | prepend: 'icon-' -%}
+  {%- include icon_name -%}
+  {%- assign icon_name = blank -%}
+</div>

@@ -1,0 +1,27 @@
+{% assign the_networks = networks | split: '::' %}
+
+<div class="oo-social-media-icons">
+  {% for network in the_networks %}
+    {% capture the_icon %}
+      {% include 'icon', name: network %}
+    {% endcapture %}
+    {% assign setting_name = 'social_' | append: network | append: '_link' %}
+    {% assign href = settings[setting_name] %}
+    {% capture additional_attributes %}
+      data-network="{{ network }}"
+    {% endcapture %}
+    {% if type != blank %}
+      {% include type,
+        content: the_icon,
+        href: href,
+        additional_attributes: additional_attributes %}
+    {% else %}
+      {% include 'link',
+        content: the_icon,
+        href: href,
+        additional_attributes: additional_attributes %}
+    {% endif %}
+    {% assign additional_attributes = blank %}
+  {% endfor %}
+
+</div>

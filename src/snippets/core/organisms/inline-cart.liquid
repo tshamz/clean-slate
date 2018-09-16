@@ -1,0 +1,13 @@
+<section class="oo-inline-cart" data-inline-cart>
+  {% capture cart_heading_contents %}
+    {% include 'icon', name: 'arrow-left' %}
+  {% endcapture %}
+  {% include 'heading', heading: 'Your Shopping Cart', level: 2, content: cart_heading_contents %}
+  <div class="oo-inline-cart-contents" data-inline-cart-contents>
+    {% include 'ajax-inline-cart-contents' %}
+  </div>
+  <footer class="oo-inline-cart-footer">
+    {% include 'button', content: 'View Cart', classes: 'incline-cart--view-cart' %}
+    {% include 'button', content: 'Checkout', classes: 'incline-cart--checkout' %}
+  </footer>
+</section>

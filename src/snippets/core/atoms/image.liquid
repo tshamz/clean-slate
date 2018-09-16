@@ -1,0 +1,43 @@
+{%- capture src -%}
+  {%- include 'img_url', resoure: resource, size: size -%}
+{%- endcapture -%}
+
+{%- assign srcsets = srcset | split: ',' -%}
+{%- capture the_srcset -%}
+  {%- for srcset in srcsets -%}
+    {%- assign srcset_parts = srcset | split: ' ' -%}
+    {%- assign srcset_size = srcset_parts | first -%}
+    {%- assign dimensions = srcset_size | split: 'x' -%}
+    {%- assign descriptor = srcset_parts | last -%}
+    {%- if dimensions.size == 1 -%}
+      {%- if descriptor == srcset_size -%}
+        {%- assign descriptor = descriptor | remove: 'x' | append: 'w' -%}
+      {%- endif -%}
+    {%- elsif dimensions.size == 2 and dimensions[0] == blank -%}
+      {%- assign descriptor = '1x' -%}
+    {%- else -%}
+      {%- if descriptor == srcset_size -%}
+        {%- assign descriptor = dimensions[0] | append: 'w' -%}
+      {%- endif -%}
+    {%- endif -%}
+    {%- include 'img_url', resoure: resource, size: srcset_size, descriptor: descriptor %}{%- unless forloop.last -%},{%- endunless -%}
+  {%- endfor -%}
+{%- endcapture -%}
+
+{%- assign sizeses = sizes | split: ',' -%}
+{%- capture the_sizes -%}
+  {%- for size in sizeses -%}
+    {%- assign size_parts = size | split: ' ' -%}
+    {%- if size_parts.size == 1 -%}
+      {{- size_parts[0] -}}
+    {%- else -%}
+      ({{- size_parts[0] -}}-width: {{ size_parts[1] }}) {{ size_parts[2] -}}{%- unless forloop.last -%}, {% endunless -%}
+    {%- endif -%}
+  {%- endfor -%}
+{%- endcapture -%}
+
+<img class="oo-image {{ classes }}" {{ additional_attributes }}
+     src="{{- src -}}"
+     {%- if srcset != blank %}srcset="{{- the_srcset -}}"{%- endif -%}
+     {%- if sizes != blank -%}sizes="{{- the_sizes -}}"{%- endif -%}
+     alt="{%- if alt != blank -%}{{- alt -}}{%- elsif resource.alt != blank -%}{{- resource.alt -}}{%- endif -%}">

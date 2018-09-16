@@ -1,0 +1,42 @@
+{%- capture arguments -%}
+  {%- include 'argument',
+    _name: 'heading',
+    _required: true,
+    _value: heading,
+    _type: 'String',
+    _description: 'content used for header' -%}
+  {%- include 'argument',
+    _name: 'level',
+    _required: true,
+    _value: level,
+    _type: 'Number',
+    _description: 'value used for heading level (e.g. h1-h6)' -%}
+  {% include 'argument'
+    _name: 'list',
+    _required: true,
+    _value: list,
+    _type: 'Number',
+    _description: '' -%}
+{%- endcapture -%}
+
+{%- capture errors -%}
+  {%- include 'errors' with arguments, snippet: 'menu' -%}
+{%- endcapture -%}
+
+{%- if errors == '' -%}
+  <div class="oo-menu {{ classes }}" {{ additional_attributes }}>
+    {% include 'heading',
+      text: heading,
+      level: level %}
+    <ul>
+      {% for item in list %}
+        <li>{{ item }}</li>
+      {% endfor %}
+    </ul>
+  </div>
+{%- else -%}
+  {{ errors }}
+{%- endif -%}
+
+{%- assign arguments = blank -%}
+{%- assign errors = blank -%}

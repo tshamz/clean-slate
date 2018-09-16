@@ -1,0 +1,372 @@
+{% comment %}
+
+  Required
+  - src:
+  - filter: liquid image filter - 'img_url'
+
+  Optional
+  - alt:
+  - media:
+  - srcset: '480x, 600x, 768x, 450x, 575x',
+  - sources:
+  - sizes: 'max 480px 480px, max 600px 600px, max 768px 768px, max 992px 992px, min 993px 575px'
+  - classes:
+
+{% endcomment %}
+
+{% unless src == blank %}
+  <picture class="oo-image {{ classes }}">
+
+
+    720, 1440 2x,
+
+
+    {% if sources %}
+      {% for source in source %}
+        {{ source }}
+        <source
+          media=""
+          srcset="" />
+      {% endfor %}
+    {% endif %}
+
+    <source media="" srcset="" />
+
+    <img src="{{ src }}" alt="{{ alt }}">
+  </picture>
+{% endunless %}
+
+
+{% include 'element-source',
+  additional_attributes: additional_attributes,
+  image_filter: 'product_img_url', %}
+
+
+<img srcset="{{ image | product_img_url: '480x', format: 'pjpg' }} 480w,
+             {{ image | product_img_url: '600x', format: 'pjpg' }} 600w,
+             {{ image | product_img_url: '768x', format: 'pjpg' }} 768w,
+             {{ image | product_img_url: '450x', format: 'pjpg' }} 450w,
+             {{ image | product_img_url: '575x', format: 'pjpg' }} 575w"
+      sizes="(max-width: 480px) 480px,
+             (max-width: 600px) 600px,
+             (max-width: 768px) 768px,
+             (max-width: 992px) 450px,
+             (min-width: 993px) 575px"
+      data-lazy="{{ image | product_img_url: '575x', format: 'pjpg' }}"
+      alt="{{ img_alt }}"
+      class="product-gallery__img">
+
+
+
+{% if tag == 'img' %}
+  {% assign kind = 'image' %}
+{% elsif type != blank %}
+  {% assign kind = 'audio/video' %}
+{% else %}
+  {% assign kind = 'picture' %}
+{% endif %}
+
+{% if tag == blank %}
+  {% assign tag = 'source' %}
+{% endif %}
+
+{% if crop == blank %}
+  {% assign crop = '' %}
+{% endif %}
+
+{% if format == blank %}
+  {% assign format = 'pjpg' %}
+{% endif %}
+
+{% assign media_string = '' %}
+{% assign srcset_string = '' %}
+{% assign sizes_string = '' %}
+{% assign src_string = '' %}
+{% assign type_string = '' %}
+{% assign alt_string = '' %}
+{% assign class_string = '' %}
+{% assign additional_attributes_string = '' %}
+
+{% if media != blank %}
+  {% assign media_string = 'media="(' | append: media | append: ')"' %}
+{% endif %}
+
+{% if srcset != blank %}
+  {% assign srcset_string = 'srcset="' %}
+  {% assign srcsets = srcset | split: ',' %}
+  {% for srcset in srcsets %}
+    {% assign width = srcset | split: 'x' | first | append: 'w' %}
+
+    {% case image_filter %}
+      {% when 'file_img_url' %}
+         {% assign img_url = resource | file_img_url: srcset, crop: crop, format: format %}
+      {% when 'file_url' %}
+        {% assign img_url = resource | file_url: srcset, crop: crop, format: format %}
+      {% when 'product_img_url' %}
+        {% assign img_url = resource | product_img_url: srcset, crop: crop, format: format %}
+      {% else %}
+         {% assign img_url = resource | img_url: srcset, crop: crop, format: format %}
+    {% endcase %}
+
+    {% assign srcset_string = srcset_string | append: img_url | append: ' ' | append: width %}
+
+    {% if forloop.last %}
+      {% assign srcset_string = srcset_string | append: '"' %}
+    {% else %}
+      {% assign srcset_string = srcset_string | append: ',' %}
+    {% endif %}
+
+  {% endfor %}
+{% endif %}
+
+{% if sizes != blank %}
+  {% assign sizes_string = 'sizes="' %}
+  {% assign sizeses = sizes | split: ',' %}
+  {% for size in sizeses %}
+    {% assign size_parts = size | split: ' ' %}
+
+    {% if size_parts.size == 1 %}
+      {% assign sizes_string = sizes_string | append: size_parts[0] %}
+    {% else %}
+      {% assign sizes_string = sizes_string | append: '(' | append: size_parts[0] | append: '-width: ' | append: size_parts[1] | append: ') ' | append: size_parts[2] %}
+    {% endif %}
+
+    {% if forloop.last %}
+      {% assign sizes_string = sizes_string | append: '"' %}
+    {% else %}
+      {% assign sizes_string = sizes_string | append: ',' %}
+    {% endif %}
+
+  {% endfor %}
+{% endif %}
+
+{% if src != blank and kind != 'picture'%}
+  {% assign src_string = 'src="' %}
+  {% if kind == 'image' %}
+
+    {% case image_filter %}
+      {% when 'file_img_url' %}
+        {% assign url = resource | file_img_url: src, crop: crop, format: format %}
+      {% when 'file_url' %}
+        {% assign url = resource | file_url: src, crop: crop, format: format %}
+      {% when 'product_img_url' %}
+        {% assign url = resource | product_img_url: src, crop: crop, format: format %}
+      {% else %}
+        {% assign url = resource | img_url: src, crop: crop, format: format %}
+    {% endcase %}
+
+  {% elsif kind == 'audio/video' %}
+
+    {% if file_url %}
+      {% assign url = resource | file_url %}
+    {% else %}
+      {% assign url = resource | asset_url %}
+    {% endif %}
+
+  {% endif %}
+  {% assign src_string = src_string | append: url | append: '"' %}
+{% endif %}
+
+
+{% if additional_attributes != blank %}
+  {% assign additional_attributes_string = additional_attributes %}
+{% endif %}
+
+<{{tag}} {{media_string}} {{srcset_string}} {{sizes_string}} {{src_string}} {{type_string}} {{alt_string}} {{class_string}} {{additional_attributes_string}}>
+
+{% assign kind = blank %}
+{% assign tag = blank %}
+{% assign crop = blank %}
+{% assign format = blank %}
+{% assign media = blank %}
+{% assign resource = blank %}
+{% assign srcset = blank %}
+{% assign src = blank %}
+{% assign file_img = blank %}
+{% assign file_url = blank %}
+{% assign product_img_url = blank %}
+{% assign sizes = blank %}
+{% assign width = blank %}
+{% assign img_url = blank %}
+{% assign url = blank %}
+
+
+
+
+
+{% comment %}
+
+  Required
+  - source:
+
+  Optional
+  - filter:
+  - srcset: '480x, 600x, 768x'
+  - sizes: 'max 480px, max 600px, max 768px, min 993px 575px'
+  - alt:
+  - crop:
+  - scale:
+  - format:
+  - classes:
+  - additional_attributes:
+
+{% endcomment %}
+
+
+{% comment %}```
+{% include 'image',
+  src: product.featured_image,
+  filter: img,
+  srcset: '320x, 480x, 600x, 600x, 350x',
+  sizes: 'max 480, max 600, min 601',
+  alt: product.title,
+  classes: 'product-image-container__image' %}
+
+  <img class="product-image-container__image"
+       src="{{ prod.featured_image | img_url: '600x' }}"
+       srcset="{{ prod.featured_image | img_url: '320x' }} 320w,
+               {{ prod.featured_image | img_url: '480x' }} 480w,
+               {{ prod.featured_image | img_url: '600x' }} 600w,
+               {{ prod.featured_image | img_url: '600x' }} 600w,
+               {{ prod.featured_image | img_url: '350x' }} 350w"
+       sizes="(max-width: 480px) 480px,
+              (max-width: 600px) 600px,
+              (min-width: 601px) 350px"
+       alt="{{ prod.title }}">
+```{% endcomment %}
+
+{% comment %}```
+{% include 'image',
+  src: section.settings.photo,
+  filter: img,
+  srcset: '50x50 1x, 100x100 2x' %}
+  <img class="oo-image"
+       src="{{ src | img_url: '' }}"
+       srcset="{{ src | img_url: '50x50' }} 1x,
+               {{ src | img_url: '100x100' }} 2x"
+       alt="">
+```{% endcomment %}
+
+{% comment %}```
+<img src="{{ section.settings.thumbnail | img_url: '366x200', crop: 'center' }}"
+     srcset="{{ section.settings.thumbnail | img_url: '366x200', crop: 'center' }} 1x,
+             {{ section.settings.thumbnail | img_url: '366x200', scale: 2, crop: 'center' }} 2x"
+     alt="">
+```{% endcomment %}
+
+
+{% assign srcsets = srcset | split: ', ' %}
+<pre>srcsets: {{ srcsets }}</pre>
+{% capture x %}
+  {% for srcset_part in srcsets %}
+    {% assign srcset_parts = srcset_part | split: ' ' %}
+    {% assign img_size = srcset_parts | first %}
+    {% assign img_modifier = srcset_parts | last %}
+    {% assign img_size_parts = img_size | split: 'x' %}
+    {% if img_size_parts.size == 2 %}
+      {% assign size = img_size %}
+      {% if img_size == img_modifier %}
+        {% assign img_modifier = '1x' %}
+      {% endif %}
+    {% else %}
+      {% assign size = img_size_parts | first | append: 'x' %}
+      {% if img_size == img_modifier %}
+        {% assign img_modifier = img_modifier | replace: 'x','w' %}
+      {% endif %}
+    {% endif %}
+    {%- include 'img_url',
+      source: source,
+      filter: filter,
+      size: img_size,
+      crop: crop,
+      scale: scale,
+      format: format %} {{ img_modifier -}}{% unless forloop.last %},{% endunless %}
+  {%- endfor %}
+{% endcapture %}
+
+{{ x }}
+
+
+
+
+{% comment %}
+{% if srcset != blank %}
+  {% assign srcset_string = 'srcset="' %}
+  {% assign srcsets = srcset | split: ',' %}
+  {% for srcset in srcsets %}
+    {% assign width = srcset | split: 'x' | first | append: 'w' %}
+
+    {% case image_filter %}
+      {% when 'file_img_url' %}
+         {% assign img_url = resource | file_img_url: srcset, crop: crop, format: format %}
+      {% when 'file_url' %}
+        {% assign img_url = resource | file_url: srcset, crop: crop, format: format %}
+      {% when 'product_img_url' %}
+        {% assign img_url = resource | product_img_url: srcset, crop: crop, format: format %}
+      {% else %}
+         {% assign img_url = resource | img_url: srcset, crop: crop, format: format %}
+    {% endcase %}
+
+    {% assign srcset_string = srcset_string | append: img_url | append: ' ' | append: width %}
+
+    {% if forloop.last %}
+      {% assign srcset_string = srcset_string | append: '"' %}
+    {% else %}
+      {% assign srcset_string = srcset_string | append: ',' %}
+    {% endif %}
+
+  {% endfor %}
+{% endif %}
+
+{% if sizes != blank %}
+  {% assign sizes_string = 'sizes="' %}
+  {% assign sizeses = sizes | split: ',' %}
+  {% for size in sizeses %}
+    {% assign size_parts = size | split: ' ' %}
+
+    {% if size_parts.size == 1 %}
+      {% assign sizes_string = sizes_string | append: size_parts[0] %}
+    {% else %}
+      {% assign sizes_string = sizes_string | append: '(' | append: size_parts[0] | append: '-width: ' | append: size_parts[1] | append: ') ' | append: size_parts[2] %}
+    {% endif %}
+
+    {% if forloop.last %}
+      {% assign sizes_string = sizes_string | append: '"' %}
+    {% else %}
+      {% assign sizes_string = sizes_string | append: ',' %}
+    {% endif %}
+
+  {% endfor %}
+{% endif %}
+{% endcomment %}
+
+{% comment %}```
+{% include 'image',
+  src: image,
+  filter: product_img,
+  srcset: '480, 600, 768'
+  sizes: 'max 480, max 600, max 768, max 992 450, min 993 575',
+  format: 'pjpg' %}
+  <img srcset="{{ image | product_img_url: '480x', format: 'pjpg' }} 480w,
+             {{ image | product_img_url: '600x', format: 'pjpg' }} 600w,
+             {{ image | product_img_url: '768x', format: 'pjpg' }} 768w,"
+      sizes="(max-width: 480px) 480px,
+             (max-width: 600px) 600px,
+             (max-width: 768px) 768px,
+             (max-width: 992px) 450px,
+             (min-width: 993px) 575px"
+      alt="{{ src.alt }}"
+      class="product-gallery__img">
+```{% endcomment %}
+
+{% comment %}
+  <img srcset="{{ prod.featured_image | img_url: '320x' }} 320w,
+             {{ prod.featured_image | img_url: '480x' }} 480w,
+             {{ prod.featured_image | img_url: '600x' }} 600w,
+             {{ prod.featured_image | img_url: '600x' }} 600w,
+             {{ prod.featured_image | img_url: '350x' }} 350w"
+     sizes="(max-width: 480px) 480px,
+            (max-width: 600px) 600px,
+            (min-width: 601px) 350px"
+      src="{{ prod.featured_image | img_url: '600x' }}" alt="{{ prod.title }}" class="product-image-container__image">
+{% endcomment %}

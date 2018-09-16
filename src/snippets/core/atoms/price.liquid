@@ -1,0 +1,10 @@
+<div class="oo-prices {{ classes }}" data-product-price {{ additional_attributes }}>
+  {%- if compare_at_price -%}
+    <div>
+      {{ compare_at_price | money }}
+    </div>
+  {%- endif -%}
+  <div>
+    {{- price | money -}}
+  </div>
+</div>

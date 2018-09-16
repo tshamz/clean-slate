@@ -1,0 +1,25 @@
+{%- capture arguments -%}
+  {%- include 'argument',
+    _name: 'name',
+    _required: true,
+    _value: name,
+    _type: 'String',
+    _description: 'name of icon in src/assets/svg without "icon-" prefix' -%}
+{%- endcapture -%}
+
+{%- capture errors -%}
+  {%- include 'errors' with arguments, snippet: 'icon' -%}
+{%- endcapture -%}
+
+{%- if errors == '' -%}
+  <div class="oo-icon {{ classes }}" data-icon="{{ icon_name }}" {{ additional_attributes }}>
+    {%- assign icon_name = name | prepend: 'icon-' -%}
+    {%- include icon_name -%}
+    {%- assign icon_name = blank -%}
+  </div>
+{%- else -%}
+  {{ errors }}
+{%- endif -%}
+
+{%- assign arguments = blank -%}
+{%- assign errors = blank -%}

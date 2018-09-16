@@ -1,0 +1,10 @@
+{%- case type -%}
+  {%- when 'file' -%}
+    {{- resource | file_img_url: size, crop: crop, scale: scale, format: format }} {{ descriptor }}
+  {%- when 'asset' -%}
+    {{- resource | asset_img_url: size, crop: crop, scale: scale, format: format }} {{ descriptor }}
+  {%- when 'img' -%}
+    {{- resource | img_url: size, crop: crop, scale: scale, format: format }} {{ descriptor }}
+  {%- else -%}
+    {{- resource | img_url: size, crop: crop, scale: scale, format: format }} {{ descriptor }}
+{%- endcase -%}

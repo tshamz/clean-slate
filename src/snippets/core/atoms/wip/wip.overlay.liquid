@@ -1,0 +1,16 @@
+{%- capture arguments -%}
+
+{%- endcapture -%}
+
+{%- capture errors -%}
+  {%- include 'errors' with arguments, snippet: 'list' -%}
+{%- endcapture -%}
+
+{%- if errors == '' -%}
+  <div class="oo-overlay {{ classes }}" data-overlay {{ additional_attributes }}></div>
+{%- else -%}
+  {{ errors }}
+{%- endif -%}
+
+{%- assign arguments = blank -%}
+{%- assign errors = blank -%}

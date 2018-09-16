@@ -1,0 +1,43 @@
+{%- capture arguments -%}
+  {%- include 'argument',
+    _name: 'type',
+    _required: true,
+    _value: type,
+    _type: 'String',
+    _description: '' -%}
+  {%- include 'argument',
+    _name: 'name',
+    _required: true,
+    _value: name,
+    _type: 'String',
+    _description: '' -%}
+  {%- include 'argument',
+    _name: 'value',
+    _required: false,
+    _value: value,
+    _type: 'String',
+    _description: '' -%}
+  {%- include 'argument',
+    _name: 'id',
+    _required: false,
+    _value: id,
+    _type: 'String',
+    _description: '' -%}
+{%- endcapture -%}
+
+{%- capture errors -%}
+  {%- include 'errors' with arguments, snippet: 'input' -%}
+{%- endcapture -%}
+
+{%- if errors == '' -%}
+  <input class="oo-input {{ classes }}" {{ additional_attributes }}
+         type="{{- type -}}"
+         name="{{- name -}}"
+         value="{% if value != blank %}{{- value -}}{% endif %}"
+         id="{{- id -}}">
+{%- else -%}
+  {{ errors }}
+{%- endif -%}
+
+{%- assign arguments = blank -%}
+{%- assign errors = blank -%}

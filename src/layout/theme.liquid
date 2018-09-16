@@ -1,0 +1,45 @@
+<!doctype html>
+  <!--[if IE 9]> <html class="ie9 no-js supports-no-cookies" lang="{{ shop.locale }}"> <![endif]-->
+  <!--[if (gt IE 9)|!(IE)]><!--> <html class="no-js supports-no-cookies" lang="{{ shop.locale }}"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="theme-color" content="{{ settings.color_accent }}">
+    <link rel="canonical" href="{{ canonical_url }}">
+
+    {% include 'favicon' %}
+
+    <title>{% include 'seo-title' %}</title>
+
+    {% include 'page-description' %}
+
+    {% include 'social-meta-tags' %}
+    {% include 'style-tags', layout: 'theme' %}
+    {% include 'css-variables' %}
+
+    {% include 'api-shop' %}
+
+    {% include 'script-tags', layout: 'theme' %}
+
+    {{ content_for_header }}
+  </head>
+
+  <body id="{{ page_title | handle }}" class="template-{{ template.name | handle }}">
+
+    {% comment %}<a class="in-page-link u-visually-hidden u-skip-link" href="#MainContent">Skip to content</a>{% endcomment %}
+
+    {% comment %}{% section 'topbar' %}{% endcomment %}
+
+    {% comment %}{% section 'header' %}{% endcomment %}
+
+    {% include 'inline-cart' %}
+
+    <main role="main" id="MainContent">
+      {{ content_for_layout }}
+    </main>
+
+    {% comment %}{% section 'footer' %}{% endcomment %}
+
+  </body>
+</html>

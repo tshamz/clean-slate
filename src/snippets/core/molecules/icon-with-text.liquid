@@ -1,0 +1,8 @@
+<div class="oo-icon-with-text {{ classes }}" {{ additional_attributes }}>
+  {%- include 'icon', name: icon -%}
+  {%- if href != blank -%}
+    {%- include 'link', content: text, href: href -%}
+  {%- else -%}
+    {%- include 'text' with text -%}
+  {%- endif -%}
+</div>

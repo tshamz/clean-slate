@@ -1,0 +1,132 @@
+{% comment %}
+
+  text:
+  level:
+
+  classes:
+
+{% endcomment %}
+
+<section data-section-id="{{ section.id }}" data-section-type="topbar">
+  {%- for block in section.blocks -%}
+    {%- case block.type -%}
+    {%- when 'text' -%}
+      {%- include 'text', text: text -%}
+    {%- when 'icon_with_text' -%}
+      {%- include 'icon-with-text',
+        icon: block.settings.icon,
+        text: block.settings.title,
+        href: block.settings.href  -%}
+    {%- endcase -%}
+  {%- endfor -%}
+</section>
+
+{% schema %}
+  {
+    "name": "Topbar",
+    "settings": [],
+    "blocks": [
+      {
+        "name": "Text",
+        "type": "text",
+        "settings": [
+          {
+            "id": "title",
+            "type": "text",
+            "label": "Text Block"
+          }
+        ]
+      },
+      {
+        "name": "Icon w/ Text",
+        "type": "icon_with_text",
+        "settings": [
+          {
+            "id": "title",
+            "type": "text",
+            "label": "Text Block"
+          },
+          {
+            "id": "icon",
+            "type": "select",
+            "label": "Icon",
+            "info": "Choose an icon",
+            "options": [
+               {
+                 "group": "Menu",
+                 "value": "cart",
+                 "label": "Cart"
+               },
+               {
+                 "group": "Menu",
+                 "value": "hamburger",
+                 "label": "Hamburger"
+               },
+               {
+                 "group": "Menu",
+                 "value": "search",
+                 "label": "Search"
+               },
+               {
+                 "group": "Control",
+                 "value": "close",
+                 "label": "Close"
+               },
+               {
+                 "group": "Control",
+                 "value": "minus",
+                 "label": "Minus"
+               },
+               {
+                 "group": "Control",
+                 "value": "plus",
+                 "label": "Plus"
+               },
+               {
+                 "group": "Social",
+                 "value": "facebook",
+                 "label": "Facebook"
+               },
+               {
+                 "group": "Social",
+                 "value": "instagram",
+                 "label": "Instagram"
+               },
+               {
+                 "group": "Social",
+                 "value": "pinterest",
+                 "label": "Pinterest"
+               },
+               {
+                 "group": "Social",
+                 "value": "rss",
+                 "label": "Rss"
+               },
+               {
+                 "group": "Social",
+                 "value": "snapchat",
+                 "label": "Snapchat"
+               },
+               {
+                 "group": "Social",
+                 "value": "twitter",
+                 "label": "Twitter"
+               },
+               {
+                 "group": "Social",
+                 "value": "youtube",
+                 "label": "Youtube"
+               }
+             ]
+          },
+          {
+            "id": "href",
+            "type": "url",
+            "label": "`href` of Link",
+            "info": "[Optional] will convert text above into a link"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

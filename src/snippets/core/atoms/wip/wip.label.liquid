@@ -1,0 +1,30 @@
+{%- capture arguments -%}
+  {%- include 'argument',
+    _name: 'text',
+    _required: true,
+    _value: text,
+    _type: 'String',
+    _description: '' -%}
+  {%- include 'argument',
+    _name: 'for',
+    _required: false,
+    _value: for,
+    _type: 'String',
+    _description: '' -%}
+{%- endcapture -%}
+
+{%- capture errors -%}
+  {%- include 'errors' with arguments, snippet: 'label' -%}
+{%- endcapture -%}
+
+{%- if errors == '' -%}
+  <label class="oo-label {{ classes }}" {{ additional_attributes }}
+         for="{{- for -}}">
+    {{- text -}}
+  </label>
+{%- else -%}
+  {{ errors }}
+{%- endif -%}
+
+{%- assign arguments = blank -%}
+{%- assign errors = blank -%}
