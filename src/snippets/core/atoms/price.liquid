@@ -1,10 +1,22 @@
-<div class="oo-prices {{ classes }}" data-product-price {{ additional_attributes }}>
-  {%- if compare_at_price -%}
-    <div>
-      {{ compare_at_price | money }}
+<div class="oo-prices {{ classes }}" data-product-prices {{ extra_attrs }}>
+  {%- if show_compare_at_price == true and resource.compare_at_price or resource. -%}
+    <div class="oo-prices--compare-at-price" data-product-price="compare-at-price">
+      {%- if resource.compare_at_price_varies and range == true -%}
+        {{- compare_at_price_min | money }} - {{ compare_at_price_max | money -}}
+      {%- elsif resource.original_line_price -%}
+        {{- resource.original_line_price | money -}}
+      {%- else -%}
+        {{- compare_at_price | money -}}
+      {%- endif -%}
     </div>
   {%- endif -%}
-  <div>
-    {{- price | money -}}
+  <div class="oo-prices--compare-at-prices" data-product-price="compare-at-price">
+    {%- if resource.price_varies and range == true -%}
+      {{- resource.price_min | money }} - {{ resource.price_max | money -}}
+    {%- elsif resource.line_price -%}
+      {{- resource.line_price | money -}}
+    {%- else -%}
+      {{- resource.price | money -}}
+    {%- endif -%}
   </div>
 </div>

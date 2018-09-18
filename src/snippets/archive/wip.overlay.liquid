@@ -7,7 +7,7 @@
 {%- endcapture -%}
 
 {%- if errors == '' -%}
-  <div class="oo-overlay {{ classes }}" data-overlay {{ additional_attributes }}></div>
+  <div class="oo-overlay {{ classes }}" data-overlay {{ extra_attrs }}></div>
 {%- else -%}
   {{ errors }}
 {%- endif -%}

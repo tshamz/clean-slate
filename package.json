@@ -36,6 +36,7 @@
     "lazysizes": "^4.1.1",
     "lodash-es": "^4.17.4",
     "normalize.css": "^7.0.0",
+    "pubsub-js": "^1.6.1",
     "slick-carousel": "^1.8.1"
   },
   "scripts": {

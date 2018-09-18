@@ -12,7 +12,7 @@
 {%- endcapture -%}
 
 {%- if errors == '' -%}
-  <div class="oo-icon {{ classes }}" data-icon="{{ icon_name }}" {{ additional_attributes }}>
+  <div class="oo-icon {{ classes }}" data-icon="{{ icon_name }}" {{ extra_attrs }}>
     {%- assign icon_name = name | prepend: 'icon-' -%}
     {%- include icon_name -%}
     {%- assign icon_name = blank -%}

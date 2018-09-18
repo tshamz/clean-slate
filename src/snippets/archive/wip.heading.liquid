@@ -4,24 +4,23 @@
     _required: true,
     _value: text,
     _type: 'String',
-    _description: '' -%}
+    _description: 'content used for header' -%}
   {%- include 'argument',
-    _name: 'href',
+    _name: 'level',
     _required: true,
-    _value: href,
-    _type: 'String',
-    _description: '' -%}
+    _value: level,
+    _type: 'Number',
+    _description: 'value used for heading level (e.g. h1-h6)' -%}
 {%- endcapture -%}
 
 {%- capture errors -%}
-  {%- include 'errors' with arguments, snippet: 'link' -%}
+  {%- include 'errors' with arguments, snippet: 'heading' -%}
 {%- endcapture -%}
 
 {%- if errors == '' -%}
-  <a class="oo-link {{ classes }}" {{ additional_attributes }}
-     href="{{- href -}}">
-    {{- text -}}
-  </a>
+  <heading class="oo-heading {{ classes }}" {{ extra_attrs }}>
+    <h{{- level -}}>{{- text -}}</h{{- level -}}>
+  </heading>
 {%- else -%}
   {{ errors }}
 {%- endif -%}

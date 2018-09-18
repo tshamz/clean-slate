@@ -1,0 +1,37 @@
+<div class="oo-line-item {{ classes }}">
+  <div class="oo-line-item-image-wrapper">
+    {% include 'image',
+      resource: line_item.product.featured_image,
+      size: '800x',
+      srcset: '480x,600x,768x,450x,575x',
+      sizes: 'max 480px 480px,max 600px 600px,max 768px 768px,max 992px 992px,min 993px 575px'
+      classes: 'inside-oo-line-item' %}
+  </div>
+  <div class="oo-line-item-information-wrapper">
+    {% include 'heading',
+      text: line_item.product.title,
+      level: 4,
+      classes: 'inside-oo-line-item' %}
+    {% include 'price',
+      resource: line_item.variant,
+      classes: 'inside-oo-line-item' %}
+    {% include 'text',
+      with line_item.product.title,
+      classes: 'inside-oo-line-item' %}
+    {% include 'quantity_selector',
+      quantity: line_item.quantity,
+      classes: 'inside-oo-line-item' %}
+    {% include 'price',
+      resource: line_item,
+      classes: 'inside-oo-line-item' %}
+  </div>
+  {% assign button_content = blank %}
+  {% capture button_content %}
+    {% include 'icon',
+      name: 'cancel',
+      classes: 'inside-oo-button' %}
+  {% endcapture %}
+  {% include 'button',
+    content: button_content,
+    classes: 'inside-oo-line-item' %}
+</div>

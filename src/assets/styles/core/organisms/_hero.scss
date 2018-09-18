@@ -1,0 +1,26 @@
+.hero-component {
+  position: relative;
+}
+
+.hero-background-image {
+  width: 100%;
+}
+
+.overlay-text-container.rte {
+  position: absolute;
+  line-height: 1;
+  p {
+    margin-bottom: 0;
+    font-size: inherit;
+  }
+  a {
+    text-decoration: none;
+    border-bottom: 0;
+    padding-bottom: 0;
+  }
+}
+
+[data-theme-editor-setting="section.hero-component.overlay_text"] {
+  border: 1px dashed #666666;
+  background-color: rgba(255, 255, 255, 0.1);
+}

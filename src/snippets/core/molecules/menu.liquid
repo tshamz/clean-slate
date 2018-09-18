@@ -1,4 +1,8 @@
-<div class="oo-menu {{ classes }}" {{ additional_attributes }}>
-  {% include 'heading', heading: heading, level: level %}
-  {% include 'list' with list %}
+<div class="oo-menu {{ classes }}" {{ extra_attrs }}>
+  {% include 'heading',
+    heading: heading,
+    level: level,
+    classes: 'inside-oo-menu' %}
+  {% include 'list' with list,
+    classes: 'inside-oo-menu' %}
 </div>

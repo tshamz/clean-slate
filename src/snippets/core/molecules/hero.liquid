@@ -1,0 +1,43 @@
+{% comment %}
+
+  Receives the following variables
+
+  - object: The main object from a given template type (ex. collection, product or article objects)
+
+{% endcomment %}
+
+{% assign banner_title = object.title %}
+{% assign banner_tagline = object.metafields.c_f.banner_tagline %}
+{% assign banner_description = object.description %}
+{% assign hero_image = object.image %}
+
+{% if object.metafields.c_f.banner_title != empty %}
+  {% assign banner_title = object.metafields.c_f.banner_title %}
+{% endif %}
+
+{% if object.handle == 'all' %}
+  {% assign banner_title = settings.collections_all_title %}
+  {% assign banner_tagline = settings.collections_all_tagline %}
+  {% assign banner_description = settings.collections_all_description %}
+  {% assign hero_image = settings.collections_all_image %}
+{% endif %}
+
+
+<header class="hero">
+  <picture class="hero--image-wrapper">
+    <img class="hero--image" src="{{ hero_image | img_url: 'master' }}"
+      srcset="{{ hero_image | img_url: '768x' }} 768w,
+              {{ hero_image | img_url: '1180x' }} 1180w,
+              {{ hero_image | img_url: 'master' }} {{ hero_image.width }}w"
+      alt="{{ hero_image.alt }}"
+    />
+  </picture>
+  <div class="hero--content">
+    <h4 class="hero--title">{{ banner_title }}</h4>
+    {% if banner_tagline %}
+      <h2 class="hero--tagline">{{ banner_tagline }}</h2>
+    {% endif %}
+    <div class="hero--description">{{ banner_description }}</div>
+  </div>
+</header>
+

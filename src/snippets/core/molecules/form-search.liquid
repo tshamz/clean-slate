@@ -1,0 +1,13 @@
+<form action="/search" method="get" class="oo-search-form" role="search" data-form="search">
+  {% include 'input',
+    type: 'search',
+    name: 'q',
+    classes: 'inside-of-oo-search-form',
+    extra_attrs: 'placeholder="search"' %}
+  {% assign button_contents = blank %}
+  {% capture button_contents %}
+    {% include 'icon', name: 'search' %}
+    <span class="icon__fallback-text">Search</span>
+  {% endcapture %}
+  {% include 'button', type: 'submit', contents: button_contents %}
+</form>

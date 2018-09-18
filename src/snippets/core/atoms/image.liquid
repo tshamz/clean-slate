@@ -1,8 +1,12 @@
+{%- assign src = blank -%}
 {%- capture src -%}
   {%- include 'img_url', resoure: resource, size: size -%}
 {%- endcapture -%}
 
+{%- assign srcsets = blank -%}
 {%- assign srcsets = srcset | split: ',' -%}
+
+{%- assign the_srcset = blank -%}
 {%- capture the_srcset -%}
   {%- for srcset in srcsets -%}
     {%- assign srcset_parts = srcset | split: ' ' -%}
@@ -20,11 +24,14 @@
         {%- assign descriptor = dimensions[0] | append: 'w' -%}
       {%- endif -%}
     {%- endif -%}
-    {%- include 'img_url', resoure: resource, size: srcset_size, descriptor: descriptor %}{%- unless forloop.last -%},{%- endunless -%}
+    {%- include 'img_url', resoure: resource, size: srcset_size, descriptor: descriptor -%}{%- unless forloop.last -%},{%- endunless -%}
   {%- endfor -%}
 {%- endcapture -%}
 
+{%- assign sizeses = blank -%}
 {%- assign sizeses = sizes | split: ',' -%}
+
+{%- assign the_sizes = blank -%}
 {%- capture the_sizes -%}
   {%- for size in sizeses -%}
     {%- assign size_parts = size | split: ' ' -%}
@@ -36,8 +43,10 @@
   {%- endfor -%}
 {%- endcapture -%}
 
-<img class="oo-image {{ classes }}" {{ additional_attributes }}
-     src="{{- src -}}"
-     {%- if srcset != blank %}srcset="{{- the_srcset -}}"{%- endif -%}
-     {%- if sizes != blank -%}sizes="{{- the_sizes -}}"{%- endif -%}
-     alt="{%- if alt != blank -%}{{- alt -}}{%- elsif resource.alt != blank -%}{{- resource.alt -}}{%- endif -%}">
+<picture class="oo-image-wrapper">
+  <img class="oo-image {{ classes }}" {{ extra_attrs }}
+    src="{{- src -}}"
+    {%- if srcset != blank -%}srcset="{{- the_srcset -}}"{%- endif -%}
+    {%- if sizes != blank -%}sizes="{{- the_sizes -}}"{%- endif -%}
+    alt="{%- if alt != blank -%}{{- alt -}}{%- elsif resource.alt != blank -%}{{- resource.alt -}}{%- endif -%}">
+</picture>

@@ -1,8 +1,14 @@
-<div class="oo-icon-with-text {{ classes }}" {{ additional_attributes }}>
-  {%- include 'icon', name: icon -%}
+<div class="oo-icon-with-text {{ classes }}" {{ extra_attrs }}>
+  {%- include 'icon',
+    name: icon,
+    classes: 'inside-oo-icon-with-text' -%}
   {%- if href != blank -%}
-    {%- include 'link', content: text, href: href -%}
+    {%- include 'link',
+      content: text,
+      href: href,
+      classes: 'inside-oo-icon-with-text' -%}
   {%- else -%}
-    {%- include 'text' with text -%}
+    {%- include 'text' with text,
+      classes: 'inside-oo-icon-with-text' -%}
   {%- endif -%}
 </div>

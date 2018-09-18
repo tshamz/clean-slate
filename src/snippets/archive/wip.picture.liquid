@@ -38,7 +38,7 @@
 
 
 {% include 'element-source',
-  additional_attributes: additional_attributes,
+  extra_attrs: extra_attrs,
   image_filter: 'product_img_url', %}
 
 
@@ -85,7 +85,7 @@
 {% assign type_string = '' %}
 {% assign alt_string = '' %}
 {% assign class_string = '' %}
-{% assign additional_attributes_string = '' %}
+{% assign extra_attrs_string = '' %}
 
 {% if media != blank %}
   {% assign media_string = 'media="(' | append: media | append: ')"' %}
@@ -168,11 +168,11 @@
 {% endif %}
 
 
-{% if additional_attributes != blank %}
-  {% assign additional_attributes_string = additional_attributes %}
+{% if extra_attrs != blank %}
+  {% assign extra_attrs_string = extra_attrs %}
 {% endif %}
 
-<{{tag}} {{media_string}} {{srcset_string}} {{sizes_string}} {{src_string}} {{type_string}} {{alt_string}} {{class_string}} {{additional_attributes_string}}>
+<{{tag}} {{media_string}} {{srcset_string}} {{sizes_string}} {{src_string}} {{type_string}} {{alt_string}} {{class_string}} {{extra_attrs_string}}>
 
 {% assign kind = blank %}
 {% assign tag = blank %}
@@ -208,7 +208,7 @@
   - scale:
   - format:
   - classes:
-  - additional_attributes:
+  - extra_attrs:
 
 {% endcomment %}
 

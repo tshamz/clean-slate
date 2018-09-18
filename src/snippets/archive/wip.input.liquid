@@ -30,7 +30,7 @@
 {%- endcapture -%}
 
 {%- if errors == '' -%}
-  <input class="oo-input {{ classes }}" {{ additional_attributes }}
+  <input class="oo-input {{ classes }}" {{ extra_attrs }}
          type="{{- type -}}"
          name="{{- name -}}"
          value="{% if value != blank %}{{- value -}}{% endif %}"

@@ -2,10 +2,13 @@
 
 {%- assign the_product = all_products['blue-silk-tuxedo'] -%}
 
-<div>
-  {% include 'social-media-icons', networks: 'facebook::twitter::pinterest', type: 'button' %}
-</div>
+{% section 'hero' %}
 
+{% comment %}
+<div>
+  {% include 'social_media_icons', networks: 'facebook::twitter::pinterest', type: 'button' %}
+</div>
+{% endcomment %}
 
 {% comment %}
 {% include 'quantity-selector', quantity: 1 %}
@@ -17,11 +20,13 @@
 
 {% comment %}
 <div>
+  {% assign the_list_items = nil %}
   {%- capture the_list_items -%}
     {%- for item in linklists['test-list'].links -%}
       -->{%- include 'link', text: item.title, href: item.url -%}
     {%- endfor -%}
   {%- endcapture -%}
+
   {% include 'list' with the_list_items %}
 </div>
 {% endcomment %}
@@ -91,7 +96,7 @@
     name: 'qty',
     value: 1,
     id: 'qty',
-    additional_attributes: 'min=1' -%}
+    extra_attrs: 'min=1' -%}
 </div>
 {% endcomment %}
 

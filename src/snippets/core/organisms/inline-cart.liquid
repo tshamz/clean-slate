@@ -2,7 +2,10 @@
   {% capture cart_heading_contents %}
     {% include 'icon', name: 'arrow-left' %}
   {% endcapture %}
-  {% include 'heading', heading: 'Your Shopping Cart', level: 2, content: cart_heading_contents %}
+  {% include 'heading',
+    text: 'Your Shopping Cart',
+    level: 3,
+    content: cart_heading_contents %}
   <div class="oo-inline-cart-contents" data-inline-cart-contents>
     {% include 'ajax-inline-cart-contents' %}
   </div>

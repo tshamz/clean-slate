@@ -42,7 +42,7 @@
 {%- endcapture -%}
 
 {%- if errors == '' -%}
-  <video class="oo-video {{ classes }}" {{ additional_attributes }}
+  <video class="oo-video {{ classes }}" {{ extra_attrs }}
          src="{{- src -}}"
          {%- if controls != blank -%}controls{%- endif -%}
          {%- if muted != blank -%}muted{%- endif -%}

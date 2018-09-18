@@ -1,6 +1,8 @@
-<heading class="oo-heading {{ classes }}" {{ additional_attributes }}>
-  <h{{- level -}}>{{ heading }}</h{{- level -}}>
+<header class="oo-heading {{ classes }}" {{ extra_attrs }}>
+  <h{% if level == blank %}2{% else %}{{- level -}}{% endif %}>
+    {{ text }}
+  </h{% if level == blank %}2{% else %}{{- level -}}{% endif %}>
   {% if content != blank %}
-    <div class="oo-heading-content">{{ content }}</div>
+    <div class="oo-heading--content">{{ content }}</div>
   {% endif %}
-</heading>
+</header>

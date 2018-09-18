@@ -14,11 +14,11 @@
 {%- endcapture -%}
 
 {%- capture errors -%}
-  {%- include 'errors' with arguments, snippet: 'icon-with-text' -%}
+  {%- include 'errors' with arguments, snippet: 'icon_with_text' -%}
 {%- endcapture -%}
 
 {%- if errors == '' -%}
-  <div class="oo-icon-with-text {{ classes }}" {{ additional_attributes }}>
+  <div class="oo-icon_with_text {{ classes }}" {{ extra_attrs }}>
     {%- include 'icon', name: icon -%}
     {%- if href != blank -%}
       {%- include 'link', text: text, href: href -%}

@@ -1,9 +1,9 @@
-<video class="oo-video {{ classes }}" {{ additional_attributes }}
-       src="{{- src -}}"
-       {%- if controls != blank -%}controls{%- endif -%}
-       {%- if muted != blank -%}muted{%- endif -%}
-       {%- if autoplay != blank -%}autoplay{%- endif -%}
-       {%- if loop != blank -%}loop{%- endif -%}
-       {%- if poster != blank -%}poster="{{- poster -}}"{%- endif -%}>
+<video class="oo-video {{ classes }}" {{ extra_attrs }}
+  src="{{- src -}}"
+  {%- if controls != blank -%}controls{%- endif -%}
+  {%- if muted != blank -%}muted{%- endif -%}
+  {%- if autoplay != blank -%}autoplay{%- endif -%}
+  {%- if loop != blank -%}loop{%- endif -%}
+  {%- if poster != blank -%}poster="{{- poster -}}"{%- endif -%}>
   Sorry, your browser doesn't support embedded videos.
 </video>

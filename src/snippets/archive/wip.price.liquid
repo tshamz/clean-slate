@@ -24,7 +24,7 @@
 {%- endcapture -%}
 
 {%- if errors == '' -%}
-  <div class="oo-prices {{ classes }}" {{ additional_attributes }}>
+  <div class="oo-prices {{ classes }}" {{ extra_attrs }}>
     <div>
       {{- _price | money -}}
     </div>

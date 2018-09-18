@@ -15,20 +15,20 @@
 {%- if quantity == blank -%}1{%- endif -%}
 
 {%- if errors == '' -%}
-  <div class="oo-quantity-selector {{ classes }}" {{ additional_attributes }}>
+  <div class="oo-quantity-selector {{ classes }}" {{ extra_attrs }}>
     {% include 'button',
       text: '-',
       type: 'button',
-      additional_attributes: 'data-quantity-change="-1"' %}
+      extra_attrs: 'data-quantity-change="-1"' %}
     {% include 'input',
       type: 'number',
       value: quantity,
-      additional_attributes: 'min=0',
+      extra_attrs: 'min=0',
       name: 'qty' %}
     {% include 'button',
       text: '+',
       type: 'button',
-      additional_attributes: 'data-quantity-change="+1"' %}
+      extra_attrs: 'data-quantity-change="+1"' %}
   </div>
 {%- else -%}
   {{ errors }}

@@ -8,6 +8,8 @@ const alias = {
   'slick': path.resolve('./node_modules/slick-carousel'),
   'styles': path.resolve('./src/assets/styles'),
   'scripts': path.resolve('./src/assets/scripts'),
+  'global': path.resolve('./src/assets/scripts/global'),
+  'components': path.resolve('./src/assets/scripts/components'),
 };
 
 const rules = [
@@ -32,6 +34,7 @@ const plugins = [
     $: 'jquery',
     jQuery: 'jquery',
     'window.jQuery': 'jquery',
+    PubSub: 'pubsub-js',
   }),
 ];
 

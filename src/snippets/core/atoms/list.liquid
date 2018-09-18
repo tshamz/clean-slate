@@ -1,7 +1,8 @@
-{% assign the_list = list | remove_first: '-->' | split: '-->' %}
+{%- assign the_list = blank -%}
+{%- assign the_list = list | remove_first: '-->' | split: '-->' -%}
 
-<ul class="oo-list {{ classes }}" {{ additional_attributes }}>
-  {% for item in the_list %}
-    <li class="oo-list-item">{{ item }}</li>
-  {% endfor %}
+<ul class="oo-list {{ classes }}" {{ extra_attrs }}>
+  {%- for item in the_list -%}
+    <li class="oo-list-item">{{- item -}}</li>
+  {%- endfor -%}
 </ul>

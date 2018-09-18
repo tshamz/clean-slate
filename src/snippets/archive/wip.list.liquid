@@ -19,7 +19,7 @@
 
 
 {%- if errors == '' -%}
-  <ul class="oo-list {{ classes }}" {{ additional_attributes }}>
+  <ul class="oo-list {{ classes }}" {{ extra_attrs }}>
     {% for item in _list %}
       <li class="oo-list-item">{{ item }}</li>
     {% endfor %}

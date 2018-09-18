@@ -26,7 +26,7 @@
 {{ errors }}
 
 {%- if errors == '' -%}
-  <img class="oo-image {{ classes }}" {{ additional_attributes }}
+  <img class="oo-image {{ classes }}" {{ extra_attrs }}
        src="{{- src -}}"
        {% if srcset %}srcset="{{- srcset -}}"{% endif %}
        alt="{%- if alt != blank -%}{{- alt -}}{%- elsif src.alt != blank -%}{{- src.alt -}}{%- endif -%}">
