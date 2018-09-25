@@ -1,20 +1,25 @@
-// import * as cart from '@shopify/theme-cart';
 import { addItem, addItemFromForm as addItemWithData, removeItem } from '@shopify/theme-cart';
 
-import BVA from 'scripts/global/Constants';
+import BVA from 'global/Constants';
+import { getAlternativeTemplate } from 'global/Helpers';
 
 const dom = {
   inlineCart: '[data-inline-cart]',
+  inlineCartContents: '[data-inline-cart-contents]',
 };
+
+const updateInlineCart = async () => {
+  const newCart = await getAlternativeTemplate('cart', 'ajax-inline-cart-contents');
+  $(dom.inlineCartContents).html(newCart);
+}
 
 const addToCartRequestHandler = items => {
   const addActions = items.map(item => addItemWithData(item));
   return Promise.all(addActions);
 };
 
-const addToCartSuccessHandler = results => {
-  console.log(results);
-  PubSub.publish(BVA.addToCartSuccess, {});
+const addToCartSuccessHandler = async results => {
+  updateInlineCart();
   return Promise.resolve();
 };
 
@@ -30,8 +35,7 @@ const removeFromCartRequestHandler = ids => {
 };
 
 const removeFromCartSuccessHandler = results => {
-  console.log(results);
-  PubSub.publish(BVA.removeFromCartSuccess, {});
+  updateInlineCart();
   return Promise.resolve();
 };
 

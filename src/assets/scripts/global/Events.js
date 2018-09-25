@@ -10,6 +10,13 @@ import {
 PubSub.subscribe(BVA.addToCartRequest, async (message, data) => {
   console.log(message, data);
   return addToCartHandlers.request(data)
+    .then(PubSub.publish(BVA.addToCartSuccess, {}))
+    .catch(addToCartHandlers.error);
+});
+
+PubSub.subscribe(BVA.addToCartSuccess, async (message, data) => {
+  console.log(message, data);
+  return addToCartHandlers.request(data)
     .then(addToCartHandlers.success)
     .catch(addToCartHandlers.error);
 });
@@ -17,7 +24,7 @@ PubSub.subscribe(BVA.addToCartRequest, async (message, data) => {
 PubSub.subscribe(BVA.removeFromCartRequest, async (message, data) => {
   console.log(message, data);
   return removeFromCartHandlers.request(data)
-    .then(removeFromCartHandlers.success)
+    .then(PubSub.publish(BVA.removeFromCartSuccess, {}))
     .catch(removeFromCartHandlers.error);
 });
 
