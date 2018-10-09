@@ -1,14 +1,40 @@
-<div class="oo-icon-with-text {{ classes }}" {{ extra_attrs }}>
-  {%- include 'icon',
-    name: icon,
-    classes: 'inside-oo-icon-with-text' -%}
-  {%- if href != blank -%}
-    {%- include 'link',
+{%- capture _arguments -%}
+  {%- include 'argument',
+    _value: icon,
+    _name: 'icon',
+    _required: true -%}
+  {%- include 'argument',
+    _value: text,
+    _name: 'text',
+    _required: true -%}
+{%- endcapture -%}
+
+{%- capture _errors -%}
+  {%- include 'errors' with _arguments, _snippet: 'icon-with-text' -%}
+{%- endcapture -%}
+
+{%- assign _arguments = nil -%}
+
+{%- if _errors == '' -%}
+
+  <div class="oo-icon-with-text {{ classes -}}" {{ extra_attrs -}}>
+
+    {%- include 'icon',
+      name: icon,
+      classes: 'inside-oo-icon-with-text',
+      extra_attrs: '' -%}
+
+    {%- include 'text',
       content: text,
-      href: href,
-      classes: 'inside-oo-icon-with-text' -%}
-  {%- else -%}
-    {%- include 'text' with text,
-      classes: 'inside-oo-icon-with-text' -%}
-  {%- endif -%}
-</div>
+      classes: 'inside-oo-icon-with-text',
+      extra_attrs: '' -%}
+
+  </div>
+
+{%- else -%}
+
+  {{- _errors -}}
+
+{%- endif -%}
+
+{%- assign errors = nil -%}

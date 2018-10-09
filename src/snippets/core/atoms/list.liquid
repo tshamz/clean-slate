@@ -1,8 +1,38 @@
-{%- assign the_list = blank -%}
-{%- assign the_list = list | remove_first: '-->' | split: '-->' -%}
+{%- capture _arguments -%}
+  {%- include 'argument',
+    _value: list,
+    _name: 'list',
+    _required: true -%}
+{%- endcapture -%}
 
-<ul class="oo-list {{ classes }}" {{ extra_attrs }}>
-  {%- for item in the_list -%}
-    <li class="oo-list-item">{{- item -}}</li>
-  {%- endfor -%}
-</ul>
+{%- capture _errors -%}
+  {%- include 'errors' with _arguments, _snippet: 'list' -%}
+{%- endcapture -%}
+
+{%- assign _arguments = nil -%}
+
+{%- if _errors == '' -%}
+
+  <ul class="oo-list {{ classes -}}" {{ extra_attrs -}}>
+
+    {%- assign _list_array = list | remove_first: '-->' | split: '-->' -%}
+    {%- for _item in _list_array -%}
+
+      <li class="oo-list--item">
+
+        {{- _item -}}
+
+      </li>
+
+    {%- endfor -%}
+    {%- assign _list_array = nil -%}
+
+  </ul>
+
+{%- else -%}
+
+  {{- _errors -}}
+
+{%- endif -%}
+
+{%- assign _errors = nil -%}

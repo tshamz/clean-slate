@@ -1,37 +1,78 @@
-<div class="oo-line-item {{ classes }}">
-  <div class="oo-line-item-image-wrapper">
-    {% include 'image',
-      resource: line_item.product.featured_image,
+{%- capture _arguments -%}
+  {%- include 'argument',
+    _value: _line_item,
+    _name: '_line_item',
+    _required: true -%}
+{%- endcapture -%}
+
+{%- capture _errors -%}
+  {%- include 'errors' with _arguments, _snippet: 'line-item' -%}
+{%- endcapture -%}
+
+{%- assign _arguments = nil -%}
+
+{%- if _errors == '' -%}
+
+  <div class="oo-line-item {{ classes -}}" {{ extra_attrs -}}>
+
+    {%- include 'image',
+      resource: _line_item.product.featured_image,
       size: '800x',
       srcset: '480x,600x,768x,450x,575x',
       sizes: 'max 480px 480px,max 600px 600px,max 768px 768px,max 992px 992px,min 993px 575px'
-      classes: 'inside-oo-line-item' %}
+      classes: 'inside-oo-line-item oo-line-item--image-wrapper',
+      extra_attrs: '' -%}
+
+    <div class="oo-line-item--information-wrapper">
+
+      {%- include 'heading',
+        title: _line_item.product.title,
+        level: 4,
+        classes: 'inside-oo-line-item--information-wrapper',
+        extra_attrs: '' -%}
+
+      {%- include 'price',
+        resource: _line_item.variant,
+        classes: 'inside-oo-line-item--information-wrapper',
+        extra_attrs: '' -%}
+
+      {%- include 'text',
+        content: _line_item.product.title,
+        classes: 'inside-oo-line-item--information-wrapper',
+        extra_attrs: '' -%}
+
+      {%- include 'quantity_selector',
+        quantity: _line_item.quantity,
+        classes: 'inside-oo-line-item--information-wrapper',
+        extra_attrs: '' -%}
+
+      {%- include 'price',
+        resource: _line_item,
+        classes: 'inside-oo-line-item--information-wrapper',
+        extra_attrs: '' -%}
+
+    </div>
+
+    {%- capture _content -%}
+      {%- include 'icon',
+        name: 'cancel',
+        classes: 'inside-oo-button',
+        extra_attrs: '' -%}
+    {%- endcapture -%}
+
+    {%- include 'button',
+      content: _content,
+      classes: 'inside-oo-line-item',
+      extra_attrs: '' -%}
+
+    {%- assign _content = nil -%}
+
   </div>
-  <div class="oo-line-item-information-wrapper">
-    {% include 'heading',
-      text: line_item.product.title,
-      level: 4,
-      classes: 'inside-oo-line-item' %}
-    {% include 'price',
-      resource: line_item.variant,
-      classes: 'inside-oo-line-item' %}
-    {% include 'text',
-      with line_item.product.title,
-      classes: 'inside-oo-line-item' %}
-    {% include 'quantity_selector',
-      quantity: line_item.quantity,
-      classes: 'inside-oo-line-item' %}
-    {% include 'price',
-      resource: line_item,
-      classes: 'inside-oo-line-item' %}
-  </div>
-  {% assign button_content = blank %}
-  {% capture button_content %}
-    {% include 'icon',
-      name: 'cancel',
-      classes: 'inside-oo-button' %}
-  {% endcapture %}
-  {% include 'button',
-    content: button_content,
-    classes: 'inside-oo-line-item' %}
-</div>
+
+{%- else -%}
+
+  {{- _errors -}}
+
+{%- endif -%}
+
+{%- assign _errors = nil -%}

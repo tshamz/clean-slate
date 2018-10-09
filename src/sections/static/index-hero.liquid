@@ -1,0 +1,92 @@
+{%- capture _slides -%}
+  {%- for block in section.blocks -%}
+    {%- capture _heading_content -%}
+      <div class="oo-heading--content">
+        {{ block.settings.subtitle }}
+      </div>
+    {%- endcapture -%}
+    {%- capture _hero_content -%}
+      <div class="oo-inside-hero">
+        {%- include 'heading',
+          title: block.settings.title,
+          level: 3,
+          content: _heading_content -%}
+        {%- unless block.settings.button_one_text == blank -%}
+          {%- include 'link',
+            href: block.settings.button_one_href,
+            content: block.settings.button_one_text -%}
+        {%- endunless -%}
+        {%- unless block.settings.button_two_text == blank -%}
+          {%- include 'link',
+            href: block.settings.button_two_href,
+            content: block.settings.button_two_text -%}
+        {%- endunless -%}
+      </div>
+    {%- endcapture -%}
+    -->{%- include 'hero',
+         media: 'image',
+         resource: block.settings.image,
+         size: '1200x',
+         content: _hero_content -%}
+  {%- endfor -%}
+{%- endcapture -%}
+
+<section data-section-id="{{ section.id }}" data-section-type="">
+  {%- include 'slider',
+    name: 'index-hero',
+    slides: _slides -%}
+</section>
+
+{%- assign _slides = nil -%}
+
+{% schema %}
+  {
+    "name": "Index Hero",
+    "settings": [],
+    "blocks": [{
+        "name": "Slide",
+        "type": "slide",
+        "settings": [
+          {
+            "id": "image",
+            "type": "image_picker",
+            "label": "Image"
+          },
+          {
+            "id": "title",
+            "type": "text",
+            "label": "Title"
+          },
+          {
+            "id": "subtitle",
+            "type": "text",
+            "label": "Subtitle"
+          },
+          {
+            "id": "button_one_text",
+            "type": "text",
+            "label": "button 1 text",
+            "info": "[Optional]"
+          },
+          {
+            "id": "button_one_href",
+            "type": "url",
+            "label": "button 1 href",
+            "info": "[Optional]"
+          },
+          {
+            "id": "button_two_text",
+            "type": "text",
+            "label": "button 2 text",
+            "info": "[Optional]"
+          },
+          {
+            "id": "button_two_href",
+            "type": "url",
+            "label": "button 2 href",
+            "info": "[Optional]"
+          }
+        ]
+      }]
+  }
+{% endschema %}

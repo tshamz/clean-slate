@@ -1,10 +1,23 @@
-/* eslint-disable no-undef */
+/* eslint-disable */
+
+// Configuration file for all things Slate.
+// For more information, visit https://github.com/Shopify/slate/wiki/Slate-Configuration
 
 const path = require('path');
-
 const { ProvidePlugin } = require('webpack');
 
+const plugins = [
+  new ProvidePlugin({
+    '$': 'jquery',
+    'jQuery': 'jquery',
+    'window.jQuery': 'jquery',
+    'PubSub': 'pubsub-js',
+  }),
+];
+
 const alias = {
+  'jquery': path.resolve('./node_modules/jquery'),
+  'lodash-es': path.resolve('./node_modules/lodash-es'),
   'slick': path.resolve('./node_modules/slick-carousel'),
   'styles': path.resolve('./src/assets/styles'),
   'scripts': path.resolve('./src/assets/scripts'),
@@ -21,44 +34,34 @@ const rules = [
     }]
   },
   {
-    test: /snippets\//,
+    test: /snippets\/.*\.liquid$/,
     loader: 'file-loader',
     options: {
       name: `../snippets/[name].[ext]`,
     }
   },
-];
-
-const plugins = [
-  new ProvidePlugin({
-    $: 'jquery',
-    jQuery: 'jquery',
-    'window.jQuery': 'jquery',
-    PubSub: 'pubsub-js',
-  }),
+  {
+    test: /sections\/.*\.liquid$/,
+    loader: 'file-loader',
+    options: {
+      name: `../sections/[name].[ext]`,
+    }
+  },
 ];
 
 module.exports = {
-  slateCssVarLoader: {
-    cssVarLoaderLiquidPath: ['src/snippets/base/css-variables.liquid'],
+  'cssVarLoader.liquidPath': [
+    'src/snippets/css-variables.liquid'
+  ],
+  'webpack.extend': {
+    plugins,
+    resolve: { alias },
+    module: { rules },
   },
-  slateTools: {
-    webpackCommonExcludes: [
-      'node_modules',
-      'assets/static/',
-      'snippets/',
-    ],
-    extends: {
-      dev: {
-        plugins,
-        resolve: { alias },
-        module: { rules },
-      },
-      prod: {
-        plugins,
-        resolve: { alias },
-        module: { rules },
-      },
-    },
-  },
+  'webpack.commonExcludes': [
+    /node_modules/,
+    /assets\/static/,
+    /sections\/.*\.liquid$/,
+    /snippets\/.*\.liquid$/,
+  ],
 };

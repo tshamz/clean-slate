@@ -1,17 +1,44 @@
-<div class="oo-quantity-selector {{ classes }}" {{ extra_attrs }}>
-  {% include 'button',
-    content: '-',
-    extra_attrs: 'data-quantity-change="-1"',
-    classes: 'inside-oo-quantity-selctor' %}
-  {% include 'input',
-    type: 'number',
-    name: 'qty',
-    value: quantity,
-    id: 'qty',
-    extra_attrs: 'min=1',
-    classes: 'inside-oo-quantity-selctor' %}
-  {% include 'button',
-    content: '+',
-    extra_attrs: 'data-quantity-change="+1"',
-    classes: 'inside-oo-quantity-selctor' %}
-</div>
+{%- capture _arguments -%}
+  {%- include 'argument',
+    _value: quantity,
+    _name: 'quantity',
+    _required: false -%}
+{%- endcapture -%}
+
+{%- capture _errors -%}
+  {%- include 'errors' with _arguments, _snippet: 'quantity-selector' -%}
+{%- endcapture -%}
+
+{%- assign _arguments = nil -%}
+
+{%- if _errors == '' -%}
+
+  <div class="oo-quantity-selector {{ classes -}}" {{ extra_attrs -}}>
+
+    {%- include 'button',
+      content: '-',
+      classes: 'inside-oo-quantity-selctor',
+      extra_attrs: 'data-quantity-control="-1"' -%}
+
+    {%- include 'input',
+      type: 'number',
+      name: 'qty',
+      value: quantity,
+      id: 'qty',
+      classes: 'inside-oo-quantity-selctor',
+      extra_attrs: 'min=1' -%}
+
+    {%- include 'button',
+      content: '+',
+      classes: 'inside-oo-quantity-selctor',
+      extra_attrs: 'data-quantity-control="1"' -%}
+
+  </div>
+
+{%- else -%}
+
+  {{- _errors -}}
+
+{%- endif -%}
+
+{%- assign _errors = nil -%}

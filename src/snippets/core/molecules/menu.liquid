@@ -1,8 +1,44 @@
-<div class="oo-menu {{ classes }}" {{ extra_attrs }}>
-  {% include 'heading',
-    heading: heading,
-    level: level,
-    classes: 'inside-oo-menu' %}
-  {% include 'list' with list,
-    classes: 'inside-oo-menu' %}
-</div>
+{%- capture _arguments -%}
+  {%- include 'argument',
+    _value: title,
+    _name: 'title',
+    _required: true -%}
+  {%- include 'argument',
+    _value: level,
+    _name: 'level',
+    _required: false -%}
+  {%- include 'argument',
+    _value: list,
+    _name: 'list',
+    _required: true -%}
+{%- endcapture -%}
+
+{%- capture _errors -%}
+  {%- include 'errors' with _arguments, _snippet: 'menu' -%}
+{%- endcapture -%}
+
+{%- assign _arguments = nil -%}
+
+{%- if _errors == '' -%}
+
+  <div class="oo-menu {{ classes -}}" {{ extra_attrs -}}>
+
+    {% include 'heading',
+      title: title,
+      level: level,
+      classes: 'inside-oo-menu',
+      extra_attrs: '' %}
+
+    {% include 'list' with list,
+      classes: 'inside-oo-menu',
+      extra_attrs: '' %}
+
+  </div>
+
+{%- else -%}
+
+  {{- _errors -}}
+
+{%- endif -%}
+
+{%- assign _errors = nil -%}

@@ -1,1 +1,23 @@
-<div class="oo-overlay {{ classes }}" data-overlay {{ extra_attrs }}></div>
+{%- capture _arguments -%}
+{%- endcapture -%}
+
+{%- capture _errors -%}
+  {%- include 'errors' with _arguments, _snippet: 'overlay' -%}
+{%- endcapture -%}
+
+{%- assign _arguments = nil -%}
+
+{%- if _errors == '' -%}
+
+  <div
+    class="oo-overlay {{ classes -}}"
+    data-overlay
+    {{ extra_attrs -}}></div>
+
+{%- else -%}
+
+  {{- _errors -}}
+
+{%- endif -%}
+
+{%- assign _errors = nil -%}

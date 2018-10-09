@@ -1,34 +1,64 @@
-{% assign the_networks = blank %}
-{% assign the_networks = networks | split: '::' %}
+{%- capture _arguments -%}
+  {%- include 'argument',
+    _value: networks,
+    _name: 'networks',
+    _required: true -%}
+  {%- include 'argument',
+    _value: type,
+    _name: 'type',
+    _required: false -%}
+{%- endcapture -%}
 
-<div class="oo-social-media-icons">
-  {% for network in the_networks %}
-    {% assign the_icon = blank %}
-    {% capture the_icon %}
-      {% include 'icon', name: network %}
-    {% endcapture %}
+{%- capture _errors -%}
+  {%- include 'errors' with _arguments, _snippet: 'social-media-icons' -%}
+{%- endcapture -%}
 
-    {% assign setting_name = blank %}
-    {% assign setting_name = 'social_' | append: network | append: '_link' %}
+{%- assign _arguments = nil -%}
 
-    {% assign href = blank %}
-    {% assign href = settings[setting_name] %}
+{%- if _errors == '' -%}
 
-    {% assign extra_attrs = blank %}
-    {% capture extra_attrs %}
-      data-network="{{ network }}"
-    {% endcapture %}
+  <div class="oo-social-media-icons {{ classes -}}" {{ extra_attrs -}}>
 
-    {% if type != blank %}
-      {% include type,
-        content: the_icon,
-        href: href,
-        extra_attrs: extra_attrs %}
-    {% else %}
-      {% include 'link',
-        content: the_icon,
-        href: href,
-        extra_attrs: extra_attrs %}
-    {% endif %}
-  {% endfor %}
-</div>
+    {%- assign _networks_array = networks | split: ',' -%}
+
+    {%- if type == blank -%}
+      {% assign type = 'link' %}
+    {%- endif -%}
+
+    {%- for _network in _networks_array -%}
+      {%- assign _setting_name = 'social_' | append: _network | append: '_link' -%}
+      {%- assign _href = settings[_setting_name] -%}
+      {%- assign _setting_name = nil -%}
+
+      {%- capture _icon -%}
+        {%- include 'icon', name: _network -%}
+      {%- endcapture -%}
+
+      {%- capture _network_attr -%}
+        data-network="{{ _network }}"
+      {%- endcapture -%}
+
+      {%- include type,
+        _content: _icon,
+        _href: _href,
+        _classes: '',
+        _extra_attrs: _network_attr %}
+
+      {%- assign _href = nil -%}
+      {%- assign _icon = nil -%}
+      {%- assign _network_attr = nil -%}
+    {%- endfor -%}
+
+    {%- assign _networks_array = nil -%}
+
+    {%- assign type = nil -%}
+
+  </div>
+
+{%- else -%}
+
+  {{- _errors -}}
+
+{%- endif -%}
+
+{%- assign _errors = nil -%}

@@ -1,0 +1,12 @@
+.oo-label {
+  padding: 5px;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  cursor: pointer;
+  &.inside-oo-input-group {
+    display: block;
+  }
+}
+
+.input-type-radio.inside-oo-input-group:checked + .oo-label {
+  border-color: rgba(0, 0, 0, 1.0);
+}

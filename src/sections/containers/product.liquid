@@ -1,0 +1,32 @@
+<section class="product-container" data-product-container="{{ product.handle }}">
+
+  <div class="product-image-gallery">
+    {% capture _slides %}
+      {% for _image in product.images %}
+        -->{% include 'image',
+          resource: _image,
+          size: '800x' %}
+      {% endfor %}
+    {% endcapture %}
+
+    {% include 'slider',
+      name: 'product-image-gallery',
+      slides: _slides %}
+
+    {%- assign _slides = nil -%}
+  </div>
+
+  <div class="product-information">
+    {% include 'heading',
+      title: product.title,
+      level: 2 %}
+
+    {% include 'price',
+      resource: product,
+      compare_at_price: true,
+      range: true %}
+
+    {% include 'form-add-to-cart', _product: product %}
+  </div>
+
+</section>

@@ -1,0 +1,66 @@
+{%- capture _arguments -%}
+  {%- include 'argument',
+    _value: type,
+    _name: 'type',
+    _required: false -%}
+  {%- include 'argument',
+    _value: name,
+    _name: 'name',
+    _required: false -%}
+  {%- include 'argument',
+    _value: value,
+    _name: 'value',
+    _required: false -%}
+  {%- include 'argument',
+    _value: selected,
+    _name: 'selected',
+    _required: false -%}
+  {%- include 'argument',
+    _value: input,
+    _name: 'input',
+    _required: false -%}
+  {%- include 'argument',
+    _value: label,
+    _name: 'label',
+    _required: false -%}
+{%- endcapture -%}
+
+{%- capture _errors -%}
+  {%- include 'errors' with _arguments, _snippet: 'input-group' -%}
+{%- endcapture -%}
+
+{%- assign _arguments = nil -%}
+
+{%- capture _id -%}
+  {{- name -}}-{{- value -}}-{{ 'now' | date: '%N' | modulo: 9999 | plus: 1 }}
+{%- endcapture -%}
+
+{%- if _errors == '' -%}
+
+  <div class="oo-input-group {{ classes -}}" {{ extra_attrs -}}>
+
+    {%- include 'input',
+      type: type,
+      name: name,
+      value: value,
+      id: _id,
+      classes: 'inside-oo-input-group',
+      extra_attrs: selected -%}
+
+    {%- include 'label',
+      for: _id,
+      content: value,
+      classes: 'inside-oo-input-group',
+      extra_attrs: '' -%}
+
+    {%- assign _id = nil -%}
+
+  </div>
+
+{%- else -%}
+
+  {{- _errors -}}
+
+{%- endif -%}
+
+{%- assign _errors = nil -%}

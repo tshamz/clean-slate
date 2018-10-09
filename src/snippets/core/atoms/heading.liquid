@@ -1,8 +1,47 @@
-<header class="oo-heading {{ classes }}" {{ extra_attrs }}>
-  <h{% if level == blank %}2{% else %}{{- level -}}{% endif %}>
-    {{ text }}
-  </h{% if level == blank %}2{% else %}{{- level -}}{% endif %}>
-  {% if content != blank %}
-    <div class="oo-heading--content">{{ content }}</div>
-  {% endif %}
-</header>
+{%- capture _arguments -%}
+  {%- include 'argument',
+    _value: title,
+    _name: 'title',
+    _required: true -%}
+  {%- include 'argument',
+    _value: level,
+    _name: 'level',
+    _required: false -%}
+  {%- include 'argument',
+    _value: content,
+    _name: 'content',
+    _required: false -%}
+{%- endcapture -%}
+
+{%- capture _errors -%}
+  {%- include 'errors' with _arguments, _snippet: 'heading' -%}
+{%- endcapture -%}
+
+{%- assign _arguments = nil -%}
+
+{%- if _errors == '' -%}
+
+  <header class="oo-heading {{ classes -}}" {{ extra_attrs -}}>
+
+    <h{%- unless level -%}2{% else %}{{- level -}}{%- endunless %}
+      class="oo-heading--title">
+
+      {{- title -}}
+
+    </h{%- unless level -%}2{% else %}{{- level -}}{%- endunless %}>
+
+    {%- unless content == blank -%}
+
+      {{- content -}}
+
+    {%- endunless -%}
+
+  </header>
+
+{%- else -%}
+
+  {{- _errors -}}
+
+{%- endif -%}
+
+{%- assign _errors = nil -%}

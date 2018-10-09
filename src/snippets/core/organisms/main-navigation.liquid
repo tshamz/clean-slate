@@ -1,0 +1,36 @@
+<nav>
+
+  {%- for parent in linklists['main-menu'].links -%}
+    {%- include 'link',
+      href: parent.url,
+      content: parent.title -%}
+  {%- endfor -%}
+
+</nav>
+
+{%- for parent in linklists['main-menu'].links -%}
+
+  {%- if parent.levels == 2 -%}
+
+    <div class="">
+
+      {%- for child in parent.links -%}
+        {%- capture _list -%}
+          {%- for granchild in child.links -%}
+            -->{%- include 'link',
+              href: granchild.url,
+              content: granchild.title -%}
+          {%- endfor -%}
+        {%- endcapture -%}
+
+        {%- include 'menu',
+          title: child.title,
+          level: 3,
+          list: _list -%}
+      {%- endfor -%}
+
+    </div>
+
+  {%- endif -%}
+
+{%- endfor -%}

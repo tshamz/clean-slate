@@ -1,0 +1,84 @@
+
+
+{% schema %}
+  {
+    "name": "Newsletter",
+    "max_blocks": 1,
+    "settings": [
+      {
+        "id": "headline",
+        "type": "text",
+        "label": "Headline for form",
+        "info": "[Optional]"
+      },
+      {
+        "id": "subtitle",
+        "type": "text",
+        "label": "Subtitle for form",
+        "info": "[Optional]"
+      },
+      {
+        "id": "button_text",
+        "type": "text",
+        "label": "Text for submit button",
+        "info": "[Optional]",
+        "default": "Sign Up"
+      },
+      {
+        "id": "form_placeholder",
+        "type": "text",
+        "label": "Placeholder text for form input",
+        "info": "[Optional]"
+      }
+    ],
+    "blocks": [
+      {
+        "name": "Mailchimp",
+        "type": "mailchimp",
+        "settings": [
+          {
+            "id": "url",
+            "type": "text",
+            "label": "Text Block for `url`"
+          },
+          {
+            "id": "u",
+            "type": "text",
+            "label": "Text Block for `u`"
+          },
+          {
+            "id": "id",
+            "type": "text",
+            "label": "Text Block for `id`"
+          },
+          {
+            "id": "ajax_id",
+            "type": "text",
+            "label": "Text Block for `ajax_id`"
+          }
+        ]
+      },
+      {
+        "name": "Klaviyo",
+        "type": "klaviyo",
+        "settings": [
+          {
+            "id": "g",
+            "type": "text",
+            "label": "Text Block for `g`"
+          },
+          {
+            "id": "js_source",
+            "type": "text",
+            "label": "Text Block for `js-source`"
+          }
+        ]
+      },
+      {
+        "name": "Bronto",
+        "type": "bronto",
+        "settings": []
+      }
+    ]
+  }
+{% endschema %}

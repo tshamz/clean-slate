@@ -27,20 +27,22 @@
 
   <body id="{{ page_title | handle }}" class="template-{{ template.name | handle }}">
 
-    {% include 'button', content: 'Add To Cart', extra_attrs: 'data-add-to-cart' %}
-    {% include 'button', content: 'Get Cart', extra_attrs: 'data-get-cart' %}
-    {% include 'button', content: 'Empty Cart', extra_attrs: 'data-empty-cart' %}
-    {% include 'button', content: 'Toggle Inline Cart', extra_attrs: 'data-toggle-inline-cart' %}
+    {% section 'add-to-cart-controls' %}
 
-    {% comment %}<a class="in-page-link u-visually-hidden u-skip-link" href="#MainContent">Skip to content</a>{% endcomment %}
+    {% comment %}{% include 'link',
+      classes: 'in-page-link u-visually-hidden u-skip-link',
+      href: '#MainContent',
+      content: 'Skip to content' %}{% endcomment %}
+
+    {% include 'inline-cart' %}
 
     {% comment %}{% section 'topbar' %}{% endcomment %}
 
     {% comment %}{% section 'header' %}{% endcomment %}
 
-    {% include 'inline-cart' %}
+    {% include 'main-navigation' %}
 
-    <main role="main" id="MainContent">
+    <main role="main" class="oo-main" id="MainContent">
       {{ content_for_layout }}
     </main>
 

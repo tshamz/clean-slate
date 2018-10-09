@@ -1,0 +1,22 @@
+{%- assign random_number = 'now' | date: '%N' | modulo: 9999 | plus: 1 -%}
+{%- capture id -%}
+  {{- option -}}-{{- value -}}-{{- random_number -}}
+{%- endcapture -%}
+
+<div class="oo-option-value {{ classes -}}" {{ extra_attrs }}>
+
+  {%- include 'input',
+    type: 'radio',
+    name: option,
+    value: value,
+    id: id,
+    selected: selected  -%}
+
+  {%- include 'label',
+    for: id,
+    text: value -%}
+
+</div>
+
+{%- assign random_number = blank -%}
+{%- assign id = blank -%}

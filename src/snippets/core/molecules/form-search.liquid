@@ -1,13 +1,51 @@
-<form action="/search" method="get" class="oo-search-form" role="search" data-form="search">
-  {% include 'input',
-    type: 'search',
-    name: 'q',
-    classes: 'inside-of-oo-search-form',
-    extra_attrs: 'placeholder="search"' %}
-  {% assign button_contents = blank %}
-  {% capture button_contents %}
-    {% include 'icon', name: 'search' %}
-    <span class="icon__fallback-text">Search</span>
-  {% endcapture %}
-  {% include 'button', type: 'submit', contents: button_contents %}
-</form>
+{%- capture _arguments -%}
+
+{%- endcapture -%}
+
+{%- capture _errors -%}
+  {%- include 'errors' with _arguments, _snippet: 'form-search' -%}
+{%- endcapture -%}
+
+{%- assign _arguments = nil -%}
+
+{%- if _errors == '' -%}
+
+  <form
+    action="/search"
+    method="get"
+    class="oo-form-search {{ classes -}}"
+    role="search"
+    data-form="search"
+    {{ extra_attrs -}}>
+
+    {% include 'input',
+      _type: 'search',
+      _name: 'q',
+      _classes: 'inside-oo-form-search',
+      _extra_attrs: 'placeholder="search"' %}
+
+    {% capture _contents %}
+      {% include 'icon',
+        _name: 'search',
+        _classes: 'inside-oo-button',
+        _extra_attrs: '' %}
+      <span class="icon__fallback-text">Search</span>
+    {% endcapture %}
+
+    {% include 'button',
+      _type: 'submit',
+      _contents: _contents,
+      _classes: 'inside-oo-form-search',
+      _extra_attrs: ''  %}
+
+    {% assign _contents = nil %}
+
+  </form>
+
+{%- else -%}
+
+  {{- _errors -}}
+
+{%- endif -%}
+
+{%- assign _errors = nil -%}

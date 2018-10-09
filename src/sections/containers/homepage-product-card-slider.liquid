@@ -1,0 +1,9 @@
+{% capture _slides %}
+  {% for _product in collections.frontpage.products %}
+    -->{% include 'product-card', _product: _product  %}
+  {% endfor %}
+{% endcapture %}
+
+{% include 'slider', _name: 'homepage-product-cards', _slides: _slides %}
+
+{% assign _slides = nil %}

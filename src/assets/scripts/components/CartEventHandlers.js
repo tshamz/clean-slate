@@ -1,4 +1,8 @@
-import { addItem, addItemFromForm as addItemWithData, removeItem } from '@shopify/theme-cart';
+import {
+  addItem,
+  addItemFromForm as addItemWithData,
+  removeItem
+} from '@shopify/theme-cart';
 
 import BVA from 'global/Constants';
 import { getAlternativeTemplate } from 'global/Helpers';

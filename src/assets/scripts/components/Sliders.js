@@ -1,29 +1,52 @@
 import 'slick';
 
-const productGalleryOptions = {
+import { uniqueValues } from 'global/Helpers';
+import { updateProductContainer } from 'components/ProductContainers';
+
+const sliders = new Map();
+
+const defaultSliderOptions = {
   autoplay: true,
   arrows: false,
-  autoplaySpeed: 5000
+  autoplaySpeed: 5000,
+  rows: 0,  // needed to fix https://github.com/kenwheeler/slick/issues/3110
 };
 
-const sliders = {
-  'product-gallery': {
-    selector: '[data-slider="product-gallery"]',
-    options: productGalleryOptions,
-  },
+const productGalleryOptions = {
+  ...defaultSliderOptions,
 };
 
-export const getSlider = async sliderName => {
-  const sliderData = sliders[sliderName];
-  return (!sliderData.slider) ? await initSlider(sliderName) : sliderData.slider;
+const sliderOptions = {
+  'default': defaultSliderOptions,
+  'product-gallery': productGalleryOptions,
 };
 
-export const initSlider = sliderName => {
+export const getSlider = productContainer => sliders.get(productContainer);
+
+export const initSlider = node => {
   return new Promise(resolve => {
-    const sliderData = sliders[sliderName];
-    const { selector, options } = sliderData;
-    const $slider = $(selector).slick(options);
-    sliderData.slider = $slider;
-    resolve(sliderData.slider);
+    const options = sliderOptions[node.dataset.slider] || sliderOptions.default;
+    const slider = $(node).slick(options);
+    const productContainer = $(node).closest('[data-product-container]').get(0);
+    updateProductContainer(productContainer, { slider })
+    sliders.set(node, slider);
+    resolve(slider);
   });
+};
+
+export const initSliders = (sliders = '*', ...rest) => {
+  let sliderNodes;
+  const initAllSliders = (sliders === '*');
+  const initSomeSliders = (typeof sliders === 'string' || Array.isArray(sliders));
+
+  if (initAllSliders) {
+    sliderNodes = $('[data-slider]').get()
+  } else if (initSomeSliders) {
+    const sliderNames = (Array.isArray(sliders)) ? sliders : [ sliders, ...rest ];
+    sliderNodes = uniqueValues(sliderNames).reduce((sliderNodes, sliderName) =>
+      [ ...sliderNodes, ...$(`[data-slider="${sliderName}"]`).get() ], []);
+  }
+
+  const sliderPromises = sliderNodes.map(node => initSlider(node));
+  return Promise.all(sliderPromises);
 };

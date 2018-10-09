@@ -1,0 +1,73 @@
+{%- capture _arguments -%}
+  {%- include 'argument',
+    _value: option,
+    _name: 'option',
+    _required: true -%}
+  {%- include 'argument',
+    _value: show_option_name,
+    _name: 'show_option_name',
+    _required: false -%}
+  {%- include 'argument',
+    _value: show_selected_value,
+    _name: 'show_selected_value',
+    _required: false -%}
+{%- endcapture -%}
+
+{%- capture _errors -%}
+  {%- include 'errors' with _arguments, _snippet: 'option-group' -%}
+{%- endcapture -%}
+
+{%- assign _arguments = nil -%}
+
+{%- if _errors == '' -%}
+
+  <div
+    class="oo-option-group {{ classes -}}"
+    data-option-group
+    {{ extra_attrs -}}>
+
+    {% capture _selected_value_container %}
+      {% unless show_selected_value == blank %}
+        <div data-selected-value>{{ option.selected_value }}</div>
+      {% endunless %}
+    {% endcapture %}
+
+    {% assign _title = option.name | append: ':' %}
+
+    {% unless show_option_name == blank %}
+      {% include 'heading',
+        title: _title,
+        level: 3,
+        content: _selected_value_container,
+        classes: 'inside-oo-option-group',
+        extra_attrs: '' %}
+    {% endunless %}
+    {% assign _selected_value_container = nil %}
+    {% assign _title = nil %}
+
+    {%- for _value in option.values -%}
+
+      {%- if option.selected_value == _value -%}
+        {%- assign _selected = 'checked' -%}
+      {%- endif -%}
+
+      {%- include 'input-group',
+        type: 'radio',
+        name: option.name,
+        value: _value,
+        selected: _selected,
+        classes: 'inside-oo-option-group',
+        extra_attrs: 'data-option-value' -%}
+
+      {%- assign _selected = nil -%}
+
+    {%- endfor -%}
+  </div>
+
+{%- else -%}
+
+  {{- _errors -}}
+
+{%- endif -%}
+
+{%- assign _errors = nil -%}

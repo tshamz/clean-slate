@@ -1,0 +1,82 @@
+{%- capture _arguments -%}
+  {%- include 'argument',
+    _value: _product,
+    _name: '_product',
+    _required: true -%}
+{%- endcapture -%}
+
+{%- capture _errors -%}
+  {%- include 'errors' with _arguments, _snippet: 'product-card' -%}
+{%- endcapture -%}
+
+{%- assign _arguments = nil -%}
+
+{%- if _errors == '' -%}
+
+  <div
+    class="oo-product-card {{ classes -}}"
+    data-product-container="{{- _product.handle -}}"
+    {{ extra_attrs -}}>
+
+    {% assign _img_count = _product.options_with_values[0].values.size %}
+
+    {%- capture _slider_content -%}
+      {%- capture _slides -%}
+        {% for i in (1.._img_count) %}
+          -->{%- include 'image',
+            _resource: _product.featured_image,
+            _size: '275x180',
+            _crop: 'center' -%}
+        {% endfor %}
+      {%- endcapture -%}
+      {%- include 'slider',
+        _name: _product.handle,
+        _slides: _slides -%}
+      {%- assign _slides = nil -%}
+    {%- endcapture -%}
+
+    {%- include 'link',
+      _href: _product.url,
+      _content: _slider_content,
+      _classes: '',
+      _extra_attrs: '' -%}
+
+    {%- assign _slider_content = nil -%}
+
+    {% if _product.has_only_default_variant == false %}
+      {% include 'option-group',
+        _option: _product.options_with_values[0],
+        _classes: '',
+        _extra_attrs: '' %}
+    {% endif %}
+
+    {% capture _heading_content %}
+      {%- include 'heading',
+        _title: _product.title,
+        _level: 3,
+        _classes: '',
+        _extra_attrs: '' -%}
+    {% endcapture %}
+
+    {%- include 'link',
+      _href: '#',
+      _content: _heading_content,
+      _classes: '',
+      _extra_attrs: '' -%}
+
+    {%- assign _heading_content = nil -%}
+
+    {%- include 'price',
+      _resource: _product,
+      _classes: '',
+      _extra_attrs: '' -%}
+
+  </div>
+
+{%- else -%}
+
+  {{- _errors -}}
+
+{%- endif -%}
+
+{%- assign _errors = nil -%}

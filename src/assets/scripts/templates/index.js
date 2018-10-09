@@ -1,7 +1,12 @@
-import '../sections/product';
+import 'styles/templates/index.scss';
 
-import {load} from '@shopify/theme-sections';
+import { initSliders } from 'components/Sliders';
 
-document.addEventListener('DOMContentLoaded', () => {
-  load('*');
+document.addEventListener('DOMContentLoaded', async () => {
+  initSliders('index-hero');
 });
+
+window.addEventListener('load', () => {
+
+});
+

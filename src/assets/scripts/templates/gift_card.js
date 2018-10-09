@@ -1,3 +1,5 @@
+import 'styles/templates/gift_card.scss';
+
 // /**
 //  * Gift Card Template Script
 //  * ------------------------------------------------------------------------------

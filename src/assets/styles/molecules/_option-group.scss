@@ -1,0 +1,27 @@
+.oo-option-group {
+  display: flex;
+  flex-wrap: wrap;
+  > * {
+    margin-left: 2px;
+    margin-right: 2px;
+    &:first-child {
+      margin-left: 0;
+    }
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+}
+
+.oo-option-group .input-type-radio {
+  display: none;
+}
+
+.oo-heading.inside-oo-option-group {
+  display: flex;
+  flex-basis: 100%;
+  align-items: center;
+  .oo-heading--title {
+    margin: 0;
+  }
+}

@@ -1,4 +1,35 @@
-<a class="oo-link {{ classes }}" {{ extra_attrs }}
-  href="{{- href -}}">
-  {{- content -}}
-</a>
+{%- capture _arguments -%}
+  {%- include 'argument',
+    _value: href,
+    _name: 'href',
+    _required: true -%}
+  {%- include 'argument',
+    _value: content,
+    _name: 'content',
+    _required: true -%}
+{%- endcapture -%}
+
+{%- capture _errors -%}
+  {%- include 'errors' with _arguments, _snippet: 'link' -%}
+{%- endcapture -%}
+
+{%- assign _arguments = nil -%}
+
+{%- if _errors == '' -%}
+
+  <a
+    class="oo-link {{ classes -}}"
+    href="{{- href -}}"
+    {{ extra_attrs -}}>
+
+    {{- content -}}
+
+  </a>
+
+{%- else -%}
+
+  {{- _errors -}}
+
+{%- endif -%}
+
+{%- assign _errors = nil -%}

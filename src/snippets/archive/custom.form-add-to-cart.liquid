@@ -1,0 +1,34 @@
+<form
+  class="oo-form-add-to-cart {{ classes -}}"
+  method="post"
+  action="/cart/add"
+  accept-charset="UTF-8"
+  enctype="multipart/form-data"
+  {{ extra_attrs }}>
+
+
+  {% include 'input',
+    type: 'hidden',
+    name: 'id',
+    value: product.selected_or_first_available_variant.id %}
+
+  {% include 'input',
+    type: 'hidden',
+    name: 'form_type',
+    value: 'product' %}
+
+  {% include 'input',
+    type: 'hidden',
+    name: 'utf8',
+    value: '✓' %}
+
+  {% for option in product.options_with_values %}
+    {% include 'product-option', option: option %}
+  {% endfor %}
+
+  {% include 'quantity-selector', quantity: 1 %}
+
+  {% include 'button',
+    type: 'submit',
+    content: 'Add to Cart' %}
+</form>
