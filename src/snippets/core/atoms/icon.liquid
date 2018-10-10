@@ -16,7 +16,12 @@
   <div class="oo-icon icon-{{- name }} {{ classes -}}" {{ extra_attrs -}}>
 
     {%- assign _icon_name = name | prepend: 'icon-' -%}
-    {%- include _icon_name -%}
+
+    {%- include 'svg',
+      snippet: _icon_name,
+      classes: 'inside-oo-icon',
+      extra_attrs: '' -%}
+
     {%- assign _icon_name = nil -%}
 
   </div>

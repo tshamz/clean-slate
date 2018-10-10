@@ -1,4 +1,5 @@
 <section data-section-id="{{ section.id }}" data-section-type="bottombar">
+
   {%- for block in section.blocks -%}
     {%- case block.type -%}
 
@@ -8,18 +9,16 @@
 
       {%- when 'image' -%}
 
-        {%- if block.settings.svg != blank -%}
-          {%- include 'svg', content: block.settings.svg -%}
-        {%- elsif block.settings.svg_snippet -%}
-          {%- capture _content -%}
-            {%- include block.settings.svg_snippet -%}
-          {%- endcapture -%}
-          {%- include 'svg', content: _content -%}
-          {%- assign _content = nil -%}
+        {%- if block.settings.svg_snippet != blank -%}
+
+          {%- include 'svg', snippet: block.settings.svg_snippet -%}
+
         {%- else -%}
+
           {%- include 'image',
             resource: block.settings.image,
             size: block.settings.size  -%}
+
         {%- endif -%}
 
       {%- when 'link' -%}
@@ -31,30 +30,14 @@
       {%- when 'social_media_icons' -%}
 
         {%- capture _networks -%}
-          {%- if block.settings.social_network_facebook -%}
-            facebook,
-          {%- endif -%}
-          {%- if block.settings.social_network_twitter -%}
-            twitter,
-          {%- endif -%}
-          {%- if block.settings.social_network_pinterest -%}
-            pinterest,
-          {%- endif -%}
-          {%- if block.settings.social_network_instagram -%}
-            instagram,
-          {%- endif -%}
-          {%- if block.settings.social_network_snapchat -%}
-            snapchat,
-          {%- endif -%}
-          {%- if block.settings.social_network_tumblr -%}
-            tumblr,
-          {%- endif -%}
-          {%- if block.settings.social_network_youtube -%}
-            youtube,
-          {%- endif -%}
-          {%- if block.settings.social_network_vimeo -%}
-            vimeo,
-          {%- endif -%}
+          {% if block.settings.social_network_facebook -%}facebook{%- endif %}
+          {% if block.settings.social_network_twitter -%}twitter{%- endif %}
+          {% if block.settings.social_network_pinterest -%}pinterest{%- endif %}
+          {% if block.settings.social_network_instagram -%}instagram{%- endif %}
+          {% if block.settings.social_network_snapchat -%}snapchat{%- endif %}
+          {% if block.settings.social_network_tumblr -%}tumblr{%- endif %}
+          {% if block.settings.social_network_youtube -%}youtube{%- endif %}
+          {% if block.settings.social_network_vimeo -%}vimeo{%- endif %}
         {%- endcapture -%}
 
         {%- include 'social-media-icons',
@@ -65,6 +48,7 @@
 
     {%- endcase -%}
   {%- endfor -%}
+
 </section>
 
 {% schema %}
@@ -88,6 +72,12 @@
         "type": "image",
         "settings": [
           {
+            "type": "text",
+            "id": "svg_snippet",
+            "label": ".svg Snippet Name",
+            "info": "If svg is a snippet, enter snippet name here"
+          },
+          {
             "type": "image_picker",
             "id": "image",
             "label": "Image"
@@ -96,19 +86,7 @@
             "type": "text",
             "id": "size",
             "label": "Image Size",
-            "info": "[Optional] e.g. 800x"
-          },
-          {
-            "type": "textarea",
-            "id": "svg",
-            "label": ".svg Image",
-            "info": "If image is an .svg, add it here"
-          },
-          {
-            "type": "text",
-            "id": "svg_snippet",
-            "label": ".svg Snippet Name",
-            "info": "If svg is a snippet, enter snippet name here"
+            "info": "e.g. 800x"
           }
         ]
       },
@@ -136,56 +114,56 @@
             "type": "checkbox",
             "id": "social_network_facebook",
             "default": false,
-            "label": "Enable Facebook",
+            "label": "Facebook",
             "default": true
           },
           {
             "type": "checkbox",
             "id": "social_network_twitter",
             "default": false,
-            "label": "Enable Twitter",
+            "label": "Twitter",
             "default": true
           },
           {
             "type": "checkbox",
             "id": "social_network_pinterest",
             "default": false,
-            "label": "Enable Pinterest",
+            "label": "Pinterest",
             "default": true
           },
           {
             "type": "checkbox",
             "id": "social_network_instagram",
             "default": false,
-            "label": "Enable instagram",
+            "label": "Instagram",
             "default": true
           },
           {
             "type": "checkbox",
             "id": "social_network_snapchat",
             "default": false,
-            "label": "Enable snapchat",
+            "label": "Snapchat",
             "default": false
           },
           {
             "type": "checkbox",
             "id": "social_network_tumblr",
             "default": false,
-            "label": "Enable tumblr",
+            "label": "Tumblr",
             "default": false
           },
           {
             "type": "checkbox",
             "id": "social_network_youtube",
             "default": false,
-            "label": "Enable youtube",
+            "label": "YouTube",
             "default": false
           },
           {
             "type": "checkbox",
             "id": "social_network_vimeo",
             "default": false,
-            "label": "Enable vimeo",
+            "label": "Vimeo",
             "default": false
           }
         ]

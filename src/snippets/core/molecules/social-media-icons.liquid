@@ -19,7 +19,7 @@
 
   <div class="oo-social-media-icons {{ classes -}}" {{ extra_attrs -}}>
 
-    {%- assign _networks_array = networks | split: ',' -%}
+    {%- assign _networks_array = networks | split: ' ' -%}
 
     {%- if type == blank -%}
       {% assign type = 'link' %}
@@ -29,6 +29,7 @@
       {%- assign _setting_name = 'social_' | append: _network | append: '_link' -%}
       {%- assign _href = settings[_setting_name] -%}
       {%- assign _setting_name = nil -%}
+
 
       {%- capture _icon -%}
         {%- include 'icon', name: _network -%}

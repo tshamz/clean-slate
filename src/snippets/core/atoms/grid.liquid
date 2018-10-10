@@ -15,7 +15,7 @@
 
   <div class="oo-grid {{ classes -}}" {{ extra_attrs -}}>
 
-    {%- assign _items_array = _items | remove_first: '-->' | split: '-->' -%}
+    {%- assign _items_array = items | remove_first: '-->' | split: '-->' -%}
     {% for _item in _items_array %}
 
       {{ _item }}

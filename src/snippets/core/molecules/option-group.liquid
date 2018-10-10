@@ -23,33 +23,37 @@
 
   <div
     class="oo-option-group {{ classes -}}"
-    data-option-group
+    data-option-group="{{- option.name | handle -}}"
     {{ extra_attrs -}}>
 
-    {% capture _selected_value_container %}
-      {% unless show_selected_value == blank %}
+    {%- capture _selected_value_container -%}
+      {%- unless show_selected_value == blank -%}
         <div data-selected-value>{{ option.selected_value }}</div>
-      {% endunless %}
-    {% endcapture %}
+      {%- endunless -%}
+    {%- endcapture -%}
 
-    {% assign _title = option.name | append: ':' %}
+    {%- assign _title = option.name | append: ':' -%}
 
-    {% unless show_option_name == blank %}
-      {% include 'header',
+    {%- unless show_option_name == blank -%}
+      {%- include 'header',
         title: _title,
         level: 3,
         content: _selected_value_container,
         classes: 'inside-oo-option-group',
-        extra_attrs: '' %}
-    {% endunless %}
-    {% assign _selected_value_container = nil %}
-    {% assign _title = nil %}
+        extra_attrs: '' -%}
+    {%- endunless -%}
+    {%- assign _selected_value_container = nil -%}
+    {%- assign _title = nil -%}
 
     {%- for _value in option.values -%}
 
       {%- if option.selected_value == _value -%}
         {%- assign _selected = 'checked' -%}
       {%- endif -%}
+
+      {%- capture _extra_attrs -%}
+        data-option-value="{{- _value | handle -}}"
+      {%- endcapture -%}
 
       {%- include 'input-group',
         type: 'radio',
@@ -58,9 +62,10 @@
         hide_input: true,
         input_attrs: _selected,
         classes: 'inside-oo-option-group',
-        extra_attrs: 'data-option-value' -%}
+        extra_attrs: _extra_attrs -%}
 
       {%- assign _selected = nil -%}
+      {%- assign _extra_attrs = nil -%}
 
     {%- endfor -%}
   </div>

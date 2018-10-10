@@ -1,7 +1,7 @@
 {%- capture _arguments -%}
   {%- include 'argument',
-    _value: content,
-    _name: 'content',
+    _value: snippet,
+    _name: 'snippet',
     _required: true -%}
 {%- endcapture -%}
 
@@ -13,11 +13,11 @@
 
 {%- if _errors == '' -%}
 
-  <p class="oo-svg {{ classes -}}" {{ extra_attrs -}}>
+  <div class="oo-svg {{ classes -}}" {{ extra_attrs -}}>
 
-    {{- content -}}
+    {%- include snippet -%}
 
-  </p>
+  </div>
 
 {%- else -%}
 

@@ -1,23 +1,43 @@
 {%- capture _arguments -%}
   {%- include 'argument',
-    _value: media,
-    _name: 'media',
-    _required: true -%}
-  {%- include 'argument',
-    _value: resource,
-    _name: 'resource',
+    _value: image,
+    _name: 'image',
     _required: false -%}
   {%- include 'argument',
     _value: size,
     _name: 'size',
     _required: false -%}
   {%- include 'argument',
-    _value: src,
-    _name: 'src',
+    _value: video,
+    _name: 'video',
     _required: false -%}
   {%- include 'argument',
     _value: content,
     _name: 'content',
+    _required: false -%}
+  {%- include 'argument',
+    _value: title,
+    _name: 'title',
+    _required: false -%}
+  {%- include 'argument',
+    _value: subtitle,
+    _name: 'subtitle',
+    _required: false -%}
+  {%- include 'argument',
+    _value: button_one_text,
+    _name: 'button_one_text',
+    _required: false -%}
+  {%- include 'argument',
+    _value: button_one_href,
+    _name: 'button_one_href',
+    _required: false -%}
+  {%- include 'argument',
+    _value: button_two_text,
+    _name: 'button_two_text',
+    _required: false -%}
+  {%- include 'argument',
+    _value: button_two_href,
+    _name: 'button_two_href',
     _required: false -%}
 {%- endcapture -%}
 
@@ -31,32 +51,51 @@
 
   <div class="oo-hero {{ classes -}}" {{ extra_attrs -}}>
 
-    {%- if media == 'image' -%}
+    {%- if image != blank -%}
 
       {%- include 'image',
-        resource: resource,
+        resource: image,
         size: size,
         classes: 'inside-oo-hero',
         extra_attrs: '' -%}
 
-    {%- elsif media == 'video' -%}
+    {%- elsif video != blank -%}
 
       {%- include 'video',
-        src: src,
+        src: video,
         classes: 'inside-oo-hero',
         extra_attrs: '' -%}
 
     {%- else -%}
 
-      {{- media -}}
+      {{- content -}}
 
     {%- endif -%}
 
-    {%- unless content == blank -%}
+    {%- capture _heading_content -%}
+      {%- if subtitle != blank -%}
+        <div class="oo-heading--content">
+          {{ subtitle }}
+        </div>
+      {%- endif -%}
+    {%- endcapture -%}
 
-      {{- content -}}
+    {%- include 'header',
+      title: title,
+      level: 3,
+      content: _heading_content -%}
 
-    {%- endunless -%}
+    {%- if button_one_text != blank -%}
+      {%- include 'link',
+        href: button_one_href,
+        content: button_one_text -%}
+    {%- endif -%}
+
+    {%- if button_two_text != blank -%}
+      {%- include 'link',
+        href: button_two_href,
+        content: button_two_text -%}
+    {%- endif -%}
 
   </div>
 

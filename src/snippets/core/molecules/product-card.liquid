@@ -3,6 +3,10 @@
     _value: _product,
     _name: '_product',
     _required: true -%}
+  {%- include 'argument',
+    _value: show_color_options,
+    _name: 'show_color_options',
+    _required: false -%}
 {%- endcapture -%}
 
 {%- capture _errors -%}
@@ -18,59 +22,58 @@
     data-product-container="{{- _product.handle -}}"
     {{ extra_attrs -}}>
 
-    {% assign _img_count = _product.options_with_values[0].values.size %}
-
-    {%- capture _slider_content -%}
-      {%- capture _slides -%}
-        {% for i in (1.._img_count) %}
-          -->{%- include 'image',
-            resource: _product.featured_image,
-            size: '275x180',
-            crop: 'center' -%}
-        {% endfor %}
-      {%- endcapture -%}
-      {%- include 'slider',
-        name: _product.handle,
-        slides: _slides -%}
-      {%- assign _slides = nil -%}
+    {%- capture _image_link_content -%}
+      {%- include 'image',
+        resource: _product.featured_image,
+        size: '368x480',
+        crop: 'center' -%}
     {%- endcapture -%}
 
     {%- include 'link',
       href: _product.url,
-      content: _slider_content,
+      content: _image_link_content,
       classes: '',
       extra_attrs: '' -%}
 
-    {%- assign _slider_content = nil -%}
+    {%- assign _image_link_content = nil -%}
 
-    {% if _product.has_only_default_variant == false %}
+    {% unless _product.has_only_default_variant or show_color_options == false %}
+      {%- for _option in _product.options_with_values -%}
+        {%- assign _option_name = _option.name | handle -%}
+        {%- if _option_name == 'color' -%}
+          {%- assign _color_option_position = _option.position | minus: 1 -%}
+          {%- break -%}
+        {%- endif -%}
+      {%- endfor -%}
+
       {% include 'option-group',
-        option: _product.options_with_values[0],
+        option: _product.options_with_values[_color_option_position],
         classes: '',
         extra_attrs: '' %}
-    {% endif %}
+    {% endunless %}
 
-    {% capture _heading_content %}
-      {%- include 'heading',
+    {%- capture _title_link_content -%}
+      {%- include 'header',
         title: _product.title,
         level: 3,
         classes: '',
         extra_attrs: '' -%}
-    {% endcapture %}
+
+      {%- include 'price',
+        resource: _product,
+        compare_at_price: true,
+        range: true,
+        classes: '',
+        extra_attrs: '' -%}
+    {%- endcapture -%}
 
     {%- include 'link',
-      href: '#',
-      content: _heading_content,
+      href: _product.url,
+      content: _title_link_content,
       classes: '',
       extra_attrs: '' -%}
 
-    {%- assign _heading_content = nil -%}
-
-    {%- include 'price',
-      resource: _product,
-      classes: '',
-      extra_attrs: '' -%}
-
+    {%- assign _title_link_content_ = nil -%}
   </div>
 
 {%- else -%}

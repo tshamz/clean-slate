@@ -45,9 +45,11 @@
     method=""
     id=""
     name=""
-    class=""
+    class="oo-form {{ classes -}}"
     target="_blank"
-    novalidate>
+    novalidate
+    data-form="newsletter-signup"
+    {{ extra_attrs -}}>
 
     {%- include 'input',
       type: 'hidden',

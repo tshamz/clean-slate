@@ -6,17 +6,17 @@
 {%- endcapture -%}
 
 {%- capture _errors -%}
-  {%- include 'errors' with _arguments, _snippet: 'main-navigation' -%}
+  {%- include 'errors' with _arguments, _snippet: 'primary-navigation' -%}
 {%- endcapture -%}
 
 {%- assign _arguments = nil -%}
 
 {%- if _errors == '' -%}
 
-<nav class="oo-main-navigation">
+<nav class="oo-primary-navigation">
 
   {%- for parent in linklists[menu].links -%}
-    <div class="oo-main-navigation--nav-block">
+    <div class="oo-navigation-block inside-oo-primary-navigation">
 
       {%- include 'link',
         href: parent.url,
@@ -24,7 +24,7 @@
 
       {%- if parent.levels == 2 -%}
 
-        <div class="oo-main-navigation--subnav-container">
+        <div class="oo-primary-subnavigation inside-oo-navigation-block">
 
           {%- for child in parent.links -%}
 
@@ -36,7 +36,7 @@
               {%- endfor -%}
             {%- endcapture -%}
 
-            <div class="oo-main-navigation--subnav-block">
+            <div class="oo-subnavigation-block inside-oo-primary-subnavigation">
 
               {%- include 'menu',
                 title: child.title,

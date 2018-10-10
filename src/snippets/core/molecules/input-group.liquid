@@ -32,7 +32,7 @@
 {%- assign _arguments = nil -%}
 
 {%- capture _id -%}
-  {{- name -}}-{{- value -}}-{{ 'now' | date: '%N' | modulo: 9999 | plus: 1 }}
+  {{- name | handle -}}-{{- value | handle -}}-{{- 'now' | date: '%N' | modulo: 9999 | plus: 1 -}}
 {%- endcapture -%}
 
 {%- if _errors == '' -%}
