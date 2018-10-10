@@ -1,36 +1,67 @@
-<nav>
+{%- capture _arguments -%}
+  {%- include 'argument',
+    _value: menu,
+    _name: 'menu',
+    _required: true -%}
+{%- endcapture -%}
 
-  {%- for parent in linklists['main-menu'].links -%}
-    {%- include 'link',
-      href: parent.url,
-      content: parent.title -%}
+{%- capture _errors -%}
+  {%- include 'errors' with _arguments, _snippet: 'main-navigation' -%}
+{%- endcapture -%}
+
+{%- assign _arguments = nil -%}
+
+{%- if _errors == '' -%}
+
+<nav class="oo-main-navigation">
+
+  {%- for parent in linklists[menu].links -%}
+    <div class="oo-main-navigation--nav-block">
+
+      {%- include 'link',
+        href: parent.url,
+        content: parent.title -%}
+
+      {%- if parent.levels == 2 -%}
+
+        <div class="oo-main-navigation--subnav-container">
+
+          {%- for child in parent.links -%}
+
+            {%- capture _list -%}
+              {%- for grandchild in child.links -%}
+                -->{%- include 'link',
+                  href: grandchild.url,
+                  content: grandchild.title -%}
+              {%- endfor -%}
+            {%- endcapture -%}
+
+            <div class="oo-main-navigation--subnav-block">
+
+              {%- include 'menu',
+                title: child.title,
+                level: 3,
+                list: _list -%}
+
+            </div>
+
+            {% assign _list = nil %}
+          {%- endfor -%}
+
+        </div>
+
+      {%- endif -%}
+
+    </div>
   {%- endfor -%}
 
 </nav>
 
-{%- for parent in linklists['main-menu'].links -%}
 
-  {%- if parent.levels == 2 -%}
+{%- else -%}
 
-    <div class="">
+  {{- _errors -}}
 
-      {%- for child in parent.links -%}
-        {%- capture _list -%}
-          {%- for granchild in child.links -%}
-            -->{%- include 'link',
-              href: granchild.url,
-              content: granchild.title -%}
-          {%- endfor -%}
-        {%- endcapture -%}
+{%- endif -%}
 
-        {%- include 'menu',
-          title: child.title,
-          level: 3,
-          list: _list -%}
-      {%- endfor -%}
-
-    </div>
-
-  {%- endif -%}
-
-{%- endfor -%}
+{%- assign _errors = nil -%}

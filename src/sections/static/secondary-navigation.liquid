@@ -1,0 +1,95 @@
+<section data-section-id="{{ section.id }}" data-section-type="secondar-navigation">
+
+  {%- include 'secondary-navigation' -%}
+
+  <pre>
+    {%- for _block in section.blocks  -%}
+      {{ block.settings.title }}
+    {%- endfor -%}
+  </pre>
+
+</section>
+
+{% schema %}
+  {
+    "name": "Secondary Navigation",
+    "settings": [],
+    "blocks": [
+      {
+        "name": "Text",
+        "type": "text",
+        "settings": [
+          {
+            "id": "title",
+            "type": "text",
+            "label": "Text Block"
+          }
+        ]
+      },
+      {
+        "name": "Icon",
+        "type": "icon",
+        "settings": [
+          {
+            "id": "title",
+            "type": "select",
+            "label": "Icon",
+            "info": "Choose an icon",
+            "options": [
+               {
+                 "group": "Logo",
+                 "value": "facebook",
+                 "label": "Facebook"
+               },
+               {
+                 "group": "Logo",
+                 "value": "google",
+                 "label": "Google"
+               },
+               {
+                 "group": "Logo",
+                 "value": "instagram",
+                 "label": "Instagram"
+               },
+               {
+                 "group": "Logo",
+                 "value": "pinterest",
+                 "label": "Pinterest"
+               },
+               {
+                 "group": "Logo",
+                 "value": "shopify-logo",
+                 "label": "Shopify-logo"
+               },
+               {
+                 "group": "Logo",
+                 "value": "snapchat",
+                 "label": "Snapchat"
+               },
+               {
+                 "group": "Logo",
+                 "value": "tumblr",
+                 "label": "Tumblr"
+               },
+               {
+                 "group": "Logo",
+                 "value": "twitter",
+                 "label": "Twitter"
+               },
+               {
+                 "group": "Logo",
+                 "value": "vimeo",
+                 "label": "Vimeo"
+               },
+               {
+                 "group": "Logo",
+                 "value": "youtube",
+                 "label": "Youtube"
+               }
+             ]
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

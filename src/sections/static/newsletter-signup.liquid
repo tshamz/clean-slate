@@ -1,12 +1,27 @@
+<section data-section-id="{{ section.id }}" data-section-type="newsletter-signup">
 
+  {%- include 'form-newsletter-signup',
+    title: section.settings.title,
+    subtitle: section.settings.subtitle,
+    button_text: section.settings.button_text,
+    placeholder_text: section.settings.placeholder_text,
+    provider: section.blocks[0].type,
+    m_url: section.blocks[0].settings.m_url,
+    m_u: section.blocks[0].settings.m_u,
+    m_id: section.blocks[0].settings.m_id,
+    m_ajax_id: section.blocks[0].settings.m_ajax_id,
+    k_g: section.blocks[0].settings.k_g,
+    k_js_source: section.blocks[0].settings.k_js_source -%}
+
+</section>
 
 {% schema %}
   {
-    "name": "Newsletter",
+    "name": "Newsletter Signup",
     "max_blocks": 1,
     "settings": [
       {
-        "id": "headline",
+        "id": "title",
         "type": "text",
         "label": "Headline for form",
         "info": "[Optional]"
@@ -25,7 +40,7 @@
         "default": "Sign Up"
       },
       {
-        "id": "form_placeholder",
+        "id": "placeholder_text",
         "type": "text",
         "label": "Placeholder text for form input",
         "info": "[Optional]"
@@ -37,23 +52,23 @@
         "type": "mailchimp",
         "settings": [
           {
-            "id": "url",
             "type": "text",
+            "id": "m_url",
             "label": "Text Block for `url`"
           },
           {
-            "id": "u",
             "type": "text",
+            "id": "m_u",
             "label": "Text Block for `u`"
           },
           {
-            "id": "id",
             "type": "text",
+            "id": "m_id",
             "label": "Text Block for `id`"
           },
           {
-            "id": "ajax_id",
             "type": "text",
+            "id": "m_ajax_id",
             "label": "Text Block for `ajax_id`"
           }
         ]
@@ -63,13 +78,13 @@
         "type": "klaviyo",
         "settings": [
           {
-            "id": "g",
             "type": "text",
+            "id": "k_g",
             "label": "Text Block for `g`"
           },
           {
-            "id": "js_source",
             "type": "text",
+            "id": "k_js_source",
             "label": "Text Block for `js-source`"
           }
         ]

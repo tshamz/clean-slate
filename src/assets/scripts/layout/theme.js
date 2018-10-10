@@ -39,6 +39,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   window.productContainers = initProductContainers();
 
   // initSliders('*');
+  initSliders('topbar');
 });
 
 window.addEventListener('load', () => {

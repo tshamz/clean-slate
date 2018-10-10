@@ -79,9 +79,9 @@
       class="oo-image {% unless lazyload -%}lazyload{%- endunless -%}"
       data-src="{{- _src -}}"
       data-srcset="{{- _srcset -}}"
-      alt="{%- if alt %}{{- alt -}}{% elsif resource.alt %}{{- resource.alt -}}{% endif -%}"
-      {%- if _lqip_src -%}src="{{- _lqip_src -}}"{%- endif -%}
-      {%- if _sizes -%}data-sizes="{{- _sizes -}}"{%- endif -%}>
+      alt="{%- if alt != blank %}{{- alt -}}{% elsif resource.alt != blank %}{{- resource.alt -}}{% endif -%}"
+      {%- if _lqip_src != blank -%}src="{{- _lqip_src -}}"{%- endif -%}
+      {%- if _sizes != blank -%}data-sizes="{{- _sizes -}}"{%- endif -%}>
 
   </picture>
 

@@ -1,24 +1,7 @@
-{% comment %}
-
-  text:
-  level:
-
-  classes:
-
-{% endcomment %}
-
 <section data-section-id="{{ section.id }}" data-section-type="main-navigation">
-  {%- for block in section.blocks -%}
-    {%- case block.type -%}
-    {%- when 'text' -%}
-      {%- include 'text', text: text -%}
-    {%- when 'icon_with_text' -%}
-      {%- include 'icon-with-text',
-        icon: block.settings.icon,
-        text: block.settings.title,
-        href: block.settings.href  -%}
-    {%- endcase -%}
-  {%- endfor -%}
+
+  {% include 'main-navigation', menu: section.settings.main_navigation %}
+
 </section>
 
 {% schema %}
@@ -28,7 +11,8 @@
       {
         "type": "link_list",
         "id": "main_navigation",
-        "label": "Main Navigation Linklist"
+        "label": "Main Navigation Linklist",
+        "default": "main-menu"
       }
     ],
     "blocks": []

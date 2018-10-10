@@ -1,18 +1,24 @@
-{% comment %}
-
-  x mailchimp
-  x klayvio
-  x bronto
-  - sailthru
-  - dotmailer
-
-{% endcomment %}
-
 {%- capture _arguments -%}
   {%- include 'argument',
-    _value: _provider,
-    _name: '_provider',
-    _required: true -%}
+    _value: provider,
+    _name: 'provider',
+    _required: false -%}
+  {%- include 'argument',
+    _value: title,
+    _name: 'title',
+    _required: false -%}
+  {%- include 'argument',
+    _value: subtitle,
+    _name: 'subtitle',
+    _required: false -%}
+  {%- include 'argument',
+    _value: button_text,
+    _name: 'button_text',
+    _required: false -%}
+  {%- include 'argument',
+    _value: placeholder_text,
+    _name: 'placeholder_text',
+    _required: false -%}
 {%- endcapture -%}
 
 {%- capture _errors -%}
@@ -23,108 +29,52 @@
 
 {%- if _errors == '' -%}
 
-  {% case provider %}
-    {% when 'mailchimp' %}
+  {%- capture _header_content -%}
+    {%- include 'text', content: subtitle -%}
+  {%- endcapture -%}
 
-      <form
-        action="{{ mailchimp_url }}/post?u={{ mailchimp_u }}&{{ mailchimp_id }}"
-        method="post"
-        id="mc-embedded-subscribe-form"
-        name="mc-embedded-subscribe-form"
-        class="validate"
-        target="_blank"
-        novalidate>
+  {%- include 'header',
+    title: title,
+    level: 2,
+    content: _header_content -%}
 
-        {% include 'input',
-          type: 'hidden',
-          value: {{ mailchimp_url }}/post-json?u={{ mailchimp_u }}&{{ mailchimp_ajax_id }},
-          id: 'mc_ajax' %}
+  {%- assign _header_content = nil -%}
 
-        {% include 'input',
-          type: 'email',
-          name: 'EMAIL',
-          value: '',
-          id: 'mce-EMAIL',
-          extra_attrs: 'placeholder=""' %}
+  <form
+    action=""
+    method=""
+    id=""
+    name=""
+    class=""
+    target="_blank"
+    novalidate>
 
-        <div style="position: absolute; left: -5000px;">
-          {% include 'input',
-            type: 'text',
-            name: 'b_{{ mailchimp_u }}_{{ mailchimp_id }}',
-            value: '',
-            extra_attrs: 'tabindex="-1"' %}
-        </div>
+    {%- include 'input',
+      type: 'hidden',
+      name: 'hidden',
+      value: 'hidden',
+      id: '' -%}
 
-        {% include 'button',
-          type: 'submit',
-          value: ' ' %}
+    {%- capture _input_attrs -%}
+      {%- if placeholder_text != blank -%}
+        placeholder="{{ placeholder_text }}"
+      {%- endif -%}
+    {%- endcapture -%}
 
-      </form>
+    {%- include 'input-group',
+      type: 'email',
+      name: 'email',
+      value: '',
+      input_attrs: _input_attrs,
+      hide_label: true -%}
 
+    {%- assign _input_attrs = nil -%}
 
-    {% when 'klayvio' %}
+    {% include 'button',
+      type: 'submit',
+      content: button_text %}
 
-      <form
-        id="klaviyo-footer"
-        class="mailing-form"
-        action="//manage.kmail-lists.com/subscriptions/subscribe"
-        data-ajax-submit="//manage.kmail-lists.com/ajax/subscriptions/subscribe"
-        method="GET"
-        target="_blank"
-        novalidate="novalidate">
-
-        {% include 'input',
-          type: 'hidden',
-          name: 'js-source',
-          value: klayvio_js_source %}
-
-        {% include 'input',
-          type: 'hidden',
-          name: 'g',
-          value: klayvio_g %}
-
-        {% include 'input',
-          type: 'email',
-          name: 'email',
-          value: '',
-          extra_attrs: 'placeholder=""' %}
-
-        {% include 'button',
-          type: 'submit',
-          content: button_text %}
-
-      </form>
-
-    {% when 'bronto' %}
-
-      <form>
-
-        {% include 'input',
-          type: 'email',
-          name: 'email',
-          value: '',
-          extra_attrs: 'placeholder=""' %}
-
-        {% include 'button',
-          type: 'submit',
-          content: button_text %}
-
-        {% comment %}
-        var brontoUS = 'fid=71rthcv5aqg9fpfijq3zibg6e5s76&sid=eb3a9c529681f56a1e5c75804c732188&delid=&subid=&td=&formtype=addcontact&106163%5B270100%5D=true&104875=';
-        {% endcomment %}
-
-        {% comment %}
-        var shopifyDataString = 'form_type=customer&utf8=%E2%9C%93&customer%5Baccepts_marketing%5D%3Dtrue&contact%5Btags%5D=' + tag + '&contact%5Bemail%5D=';
-        {% endcomment %}
-
-        {% comment %}
-        $.post('http://app.bronto.com/public/webform/process/', dataUrl);
-        {% endcomment %}
-
-      </form>
-
-
-  {% endcase %}
+  </form>
 
 {%- else -%}
 

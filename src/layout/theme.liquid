@@ -8,45 +8,50 @@
     <meta name="theme-color" content="{{ settings.color_accent }}">
     <link rel="canonical" href="{{ canonical_url }}">
 
-    {% include 'favicon' %}
+    {%- include 'favicon' -%}
 
-    <title>{% include 'seo-title' %}</title>
+    <title>{%- include 'seo-title' -%}</title>
 
-    {% include 'page-description' %}
+    {%- include 'page-description' -%}
 
-    {% include 'social-meta-tags' %}
-    {% include 'style-tags', layout: 'theme' %}
-    {% include 'css-variables' %}
+    {%- include 'social-meta-tags' -%}
+    {%- include 'style-tags', layout: 'theme' -%}
+    {%- include 'css-variables' -%}
 
-    {% include 'api-shop' %}
+    {%- include 'api-shop' -%}
 
-    {% include 'script-tags', layout: 'theme' %}
+    {%- include 'script-tags', layout: 'theme' -%}
 
     {{ content_for_header }}
   </head>
 
   <body id="{{ page_title | handle }}" class="template-{{ template.name | handle }}">
 
-    {% section 'add-to-cart-controls' %}
+    {%- include 'add-to-cart-controls' -%}
 
-    {% comment %}{% include 'link',
-      classes: 'in-page-link u-visually-hidden u-skip-link',
+    {%- include 'link',
       href: '#MainContent',
-      content: 'Skip to content' %}{% endcomment %}
+      content: 'Skip to content',
+      classes: 'in-page-link u-visually-hidden u-skip-link' -%}
 
-    {% include 'inline-cart' %}
+    {%- section 'inline-cart' -%}
 
-    {% comment %}{% section 'topbar' %}{% endcomment %}
+    {%- section 'topbar' -%}
 
     {% comment %}{% section 'header' %}{% endcomment %}
 
-    {% include 'main-navigation' %}
+    {%- section 'main-navigation' -%}
+    {%- section 'secondary-navigation' -%}
 
     <main role="main" class="oo-main" id="MainContent">
       {{ content_for_layout }}
     </main>
 
-    {% comment %}{% section 'footer' %}{% endcomment %}
+    {%- section 'newsletter-signup' -%}
+
+    {%- section 'footer' -%}
+
+    {%- section 'bottombar' -%}
 
   </body>
 </html>

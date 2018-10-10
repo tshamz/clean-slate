@@ -24,52 +24,52 @@
       {%- capture _slides -%}
         {% for i in (1.._img_count) %}
           -->{%- include 'image',
-            _resource: _product.featured_image,
-            _size: '275x180',
-            _crop: 'center' -%}
+            resource: _product.featured_image,
+            size: '275x180',
+            crop: 'center' -%}
         {% endfor %}
       {%- endcapture -%}
       {%- include 'slider',
-        _name: _product.handle,
-        _slides: _slides -%}
+        name: _product.handle,
+        slides: _slides -%}
       {%- assign _slides = nil -%}
     {%- endcapture -%}
 
     {%- include 'link',
-      _href: _product.url,
-      _content: _slider_content,
-      _classes: '',
-      _extra_attrs: '' -%}
+      href: _product.url,
+      content: _slider_content,
+      classes: '',
+      extra_attrs: '' -%}
 
     {%- assign _slider_content = nil -%}
 
     {% if _product.has_only_default_variant == false %}
       {% include 'option-group',
-        _option: _product.options_with_values[0],
-        _classes: '',
-        _extra_attrs: '' %}
+        option: _product.options_with_values[0],
+        classes: '',
+        extra_attrs: '' %}
     {% endif %}
 
     {% capture _heading_content %}
       {%- include 'heading',
-        _title: _product.title,
-        _level: 3,
-        _classes: '',
-        _extra_attrs: '' -%}
+        title: _product.title,
+        level: 3,
+        classes: '',
+        extra_attrs: '' -%}
     {% endcapture %}
 
     {%- include 'link',
-      _href: '#',
-      _content: _heading_content,
-      _classes: '',
-      _extra_attrs: '' -%}
+      href: '#',
+      content: _heading_content,
+      classes: '',
+      extra_attrs: '' -%}
 
     {%- assign _heading_content = nil -%}
 
     {%- include 'price',
-      _resource: _product,
-      _classes: '',
-      _extra_attrs: '' -%}
+      resource: _product,
+      classes: '',
+      extra_attrs: '' -%}
 
   </div>
 

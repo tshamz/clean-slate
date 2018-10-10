@@ -1,0 +1,562 @@
+{% schema %}
+  {
+    "name": "Bottombar",
+    "settings": [],
+    "blocks": [
+      {
+        "name": "Text",
+        "type": "text",
+        "settings": [
+          {
+            "id": "title",
+            "type": "text",
+            "label": "Text Block"
+          }
+        ]
+      },
+      {
+        "name": "Image",
+        "type": "image",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image"
+          },
+          {
+            "type": "text",
+            "id": "size",
+            "label": "Image Size",
+            "info": "[Optional] e.g. 800x"
+          },
+          {
+            "type": "textarea",
+            "id": "svg",
+            "label": ".svg Image",
+            "info": "If image is an .svg, add it here"
+          },
+          {
+            "type": "text",
+            "id": "svg_snippet",
+            "label": ".svg Snippet Name",
+            "info": "If svg is a snippet, enter snippet name here"
+          }
+        ]
+      },
+      {
+        "name": "Link",
+        "type": "link",
+        "settings": [
+          {
+            "type": "text",
+            "id": "link_text",
+            "label": "Link text"
+          },
+          {
+            "type": "url",
+            "id": "link_href",
+            "label": "Link destination"
+          }
+        ]
+      },
+      {
+        "name": "Social Media Icons",
+        "type": "social_media_icons",
+        "settings": [
+          {
+            "type": "checkbox",
+            "id": "social_network_facebook",
+            "default": false,
+            "label": "Enable Facebook",
+            "default": true
+          },
+          {
+            "type": "checkbox",
+            "id": "social_network_twitter",
+            "default": false,
+            "label": "Enable Twitter",
+            "default": true
+          },
+          {
+            "type": "checkbox",
+            "id": "social_network_pinterest",
+            "default": false,
+            "label": "Enable Pinterest",
+            "default": true
+          },
+          {
+            "type": "checkbox",
+            "id": "social_network_instagram",
+            "default": false,
+            "label": "Enable instagram",
+            "default": true
+          },
+          {
+            "type": "checkbox",
+            "id": "social_network_snapchat",
+            "default": false,
+            "label": "Enable snapchat",
+            "default": false
+          },
+          {
+            "type": "checkbox",
+            "id": "social_network_tumblr",
+            "default": false,
+            "label": "Enable tumblr",
+            "default": false
+          },
+          {
+            "type": "checkbox",
+            "id": "social_network_youtube",
+            "default": false,
+            "label": "Enable youtube",
+            "default": false
+          },
+          {
+            "type": "checkbox",
+            "id": "social_network_vimeo",
+            "default": false,
+            "label": "Enable vimeo",
+            "default": false
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}
+
+
+{% schema %}
+  {
+    "name": "Topbar",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "is_slider",
+        "label": "is slider?"
+      }
+    ],
+    "blocks": [
+      {
+        "name": "Text",
+        "type": "text",
+        "settings": [
+          {
+            "id": "title",
+            "type": "text",
+            "label": "Text Block"
+          }
+        ]
+      },
+      {
+        "name": "Icon w/ Text",
+        "type": "icon-with-text",
+        "settings": [
+          {
+            "id": "title",
+            "type": "text",
+            "label": "Text Block"
+          },
+          {
+            "id": "icon",
+            "type": "select",
+            "label": "Icon",
+            "info": "Choose an icon",
+            "options": [
+               {
+                 "group": "Menu",
+                 "value": "cart",
+                 "label": "Cart"
+               },
+               {
+                 "group": "Menu",
+                 "value": "hamburger",
+                 "label": "Hamburger"
+               },
+               {
+                 "group": "Menu",
+                 "value": "search",
+                 "label": "Search"
+               },
+               {
+                 "group": "Control",
+                 "value": "close",
+                 "label": "Close"
+               },
+               {
+                 "group": "Control",
+                 "value": "minus",
+                 "label": "Minus"
+               },
+               {
+                 "group": "Control",
+                 "value": "plus",
+                 "label": "Plus"
+               },
+               {
+                 "group": "Social",
+                 "value": "facebook",
+                 "label": "Facebook"
+               },
+               {
+                 "group": "Social",
+                 "value": "instagram",
+                 "label": "Instagram"
+               },
+               {
+                 "group": "Social",
+                 "value": "pinterest",
+                 "label": "Pinterest"
+               },
+               {
+                 "group": "Social",
+                 "value": "rss",
+                 "label": "Rss"
+               },
+               {
+                 "group": "Social",
+                 "value": "snapchat",
+                 "label": "Snapchat"
+               },
+               {
+                 "group": "Social",
+                 "value": "twitter",
+                 "label": "Twitter"
+               },
+               {
+                 "group": "Social",
+                 "value": "youtube",
+                 "label": "Youtube"
+               }
+             ]
+          },
+          {
+            "id": "href",
+            "type": "url",
+            "label": "`href` of Link",
+            "info": "[Optional] will convert text above into a link"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}
+
+
+"options": [
+               {
+                 "group": "direction",
+                 "value": "arrow-down",
+                 "label": "Arrow Down"
+               },
+               {
+                 "group": "direction",
+                 "value": "arrow-left",
+                 "label": "Arrow Left"
+               },
+               {
+                 "group": "direction",
+                 "value": "arrow-right",
+                 "label": "Arrow Right"
+               },
+               {
+                 "group": "direction",
+                 "value": "arrow-up",
+                 "label": "Arrow Up"
+               },
+               {
+                 "group": "direction",
+                 "value": "arrow-up-down",
+                 "label": "Arrow Up-down"
+               },
+               {
+                 "group": "direction",
+                 "value": "caret-down",
+                 "label": "Caret Down"
+               },
+               {
+                 "group": "direction",
+                 "value": "caret-up",
+                 "label": "Caret Up"
+               },
+               {
+                 "group": "direction",
+                 "value": "chevron-down",
+                 "label": "Chevron Down"
+               },
+               {
+                 "group": "direction",
+                 "value": "chevron-left",
+                 "label": "Chevron Left"
+               },
+               {
+                 "group": "direction",
+                 "value": "chevron-right",
+                 "label": "Chevron Right"
+               },
+               {
+                 "group": "direction",
+                 "value": "chevron-up",
+                 "label": "Chevron Up"
+               },
+               {
+                 "group": "direction",
+                 "value": "circle-cancel",
+                 "label": "Circle Cancel"
+               },
+               {
+                 "group": "direction",
+                 "value": "circle-chevron-down",
+                 "label": "Circle Chevron-down"
+               },
+               {
+                 "group": "direction",
+                 "value": "circle-chevron-left",
+                 "label": "Circle Chevron-left"
+               },
+               {
+                 "group": "direction",
+                 "value": "circle-chevron-right",
+                 "label": "Circle Chevron-right"
+               },
+               {
+                 "group": "direction",
+                 "value": "circle-chevron-up",
+                 "label": "Circle Chevron-up"
+               },
+               {
+                 "group": "direction",
+                 "value": "circle-information",
+                 "label": "Circle Information"
+               },
+               {
+                 "group": "direction",
+                 "value": "circle-plus",
+                 "label": "Circle Plus"
+               },
+               {
+                 "group": "Logo",
+                 "value": "facebook",
+                 "label": "Facebook"
+               },
+               {
+                 "group": "Logo",
+                 "value": "google",
+                 "label": "Google"
+               },
+               {
+                 "group": "Logo",
+                 "value": "instagram",
+                 "label": "Instagram"
+               },
+               {
+                 "group": "Logo",
+                 "value": "pinterest",
+                 "label": "Pinterest"
+               },
+               {
+                 "group": "Logo",
+                 "value": "shopify-logo",
+                 "label": "Shopify-logo"
+               },
+               {
+                 "group": "Logo",
+                 "value": "snapchat",
+                 "label": "Snapchat"
+               },
+               {
+                 "group": "Logo",
+                 "value": "tumblr",
+                 "label": "Tumblr"
+               },
+               {
+                 "group": "Logo",
+                 "value": "twitter",
+                 "label": "Twitter"
+               },
+               {
+                 "group": "Logo",
+                 "value": "vimeo",
+                 "label": "Vimeo"
+               },
+               {
+                 "group": "Logo",
+                 "value": "youtube",
+                 "label": "Youtube"
+               },
+               {
+                 "group": "Utility",
+                 "value": "add",
+                 "label": "Add"
+               },
+               {
+                 "group": "Utility",
+                 "value": "alert",
+                 "label": "Alert"
+               },
+               {
+                 "group": "Utility",
+                 "value": "calendar",
+                 "label": "Calendar"
+               },
+               {
+                 "group": "Utility",
+                 "value": "cancel",
+                 "label": "Cancel"
+               },
+               {
+                 "group": "Utility",
+                 "value": "cancel-small",
+                 "label": "Cancel-small"
+               },
+               {
+                 "group": "Utility",
+                 "value": "cart",
+                 "label": "Cart"
+               },
+               {
+                 "group": "Utility",
+                 "value": "checkmark",
+                 "label": "Checkmark"
+               },
+               {
+                 "group": "Utility",
+                 "value": "close",
+                 "label": "Close"
+               },
+               {
+                 "group": "Utility",
+                 "value": "conversation",
+                 "label": "Conversation"
+               },
+               {
+                 "group": "Utility",
+                 "value": "delete",
+                 "label": "Delete"
+               },
+               {
+                 "group": "Utility",
+                 "value": "disable",
+                 "label": "Disable"
+               },
+               {
+                 "group": "Utility",
+                 "value": "dispute",
+                 "label": "Dispute"
+               },
+               {
+                 "group": "Utility",
+                 "value": "duplicate",
+                 "label": "Duplicate"
+               },
+               {
+                 "group": "Utility",
+                 "value": "ellipsis",
+                 "label": "Ellipsis"
+               },
+               {
+                 "group": "Utility",
+                 "value": "embed",
+                 "label": "Embed"
+               },
+               {
+                 "group": "Utility",
+                 "value": "export",
+                 "label": "Export"
+               },
+               {
+                 "group": "Utility",
+                 "value": "external",
+                 "label": "External"
+               },
+               {
+                 "group": "Utility",
+                 "value": "hamburger",
+                 "label": "Hamburger"
+               },
+               {
+                 "group": "Utility",
+                 "value": "help",
+                 "label": "Help"
+               },
+               {
+                 "group": "Utility",
+                 "value": "horizontal-dots",
+                 "label": "Horizontal-dots"
+               },
+               {
+                 "group": "Utility",
+                 "value": "import",
+                 "label": "Import"
+               },
+               {
+                 "group": "Utility",
+                 "value": "lock",
+                 "label": "Lock"
+               },
+               {
+                 "group": "Utility",
+                 "value": "menu",
+                 "label": "Menu"
+               },
+               {
+                 "group": "Utility",
+                 "value": "minus",
+                 "label": "Minus"
+               },
+               {
+                 "group": "Utility",
+                 "value": "notes",
+                 "label": "Notes"
+               },
+               {
+                 "group": "Utility",
+                 "value": "notification",
+                 "label": "Notification"
+               },
+               {
+                 "group": "Utility",
+                 "value": "plus",
+                 "label": "Plus"
+               },
+               {
+                 "group": "Utility",
+                 "value": "print",
+                 "label": "Print"
+               },
+               {
+                 "group": "Utility",
+                 "value": "refresh",
+                 "label": "Refresh"
+               },
+               {
+                 "group": "Utility",
+                 "value": "risk",
+                 "label": "Risk"
+               },
+               {
+                 "group": "Utility",
+                 "value": "rss",
+                 "label": "Rss"
+               },
+               {
+                 "group": "Utility",
+                 "value": "save",
+                 "label": "Save"
+               },
+               {
+                 "group": "Utility",
+                 "value": "search",
+                 "label": "Search"
+               },
+               {
+                 "group": "Utility",
+                 "value": "subtract",
+                 "label": "Subtract"
+               },
+               {
+                 "group": "Utility",
+                 "value": "view",
+                 "label": "View"
+               }
+             ]

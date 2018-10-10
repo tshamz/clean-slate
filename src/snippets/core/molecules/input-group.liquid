@@ -12,16 +12,16 @@
     _name: 'value',
     _required: false -%}
   {%- include 'argument',
-    _value: selected,
-    _name: 'selected',
+    _value: input_attrs,
+    _name: 'input_attrs',
     _required: false -%}
   {%- include 'argument',
-    _value: input,
-    _name: 'input',
+    _value: hide_input,
+    _name: 'hide_input',
     _required: false -%}
   {%- include 'argument',
-    _value: label,
-    _name: 'label',
+    _value: hide_label,
+    _name: 'hide_label',
     _required: false -%}
 {%- endcapture -%}
 
@@ -39,19 +39,31 @@
 
   <div class="oo-input-group {{ classes -}}" {{ extra_attrs -}}>
 
+    {%- capture _input_class_string -%}
+      inside-oo-input-group {% if hide_input == true -%}u-visually-hidden{%- endif -%}
+    {%- endcapture -%}
+
+    {%- capture _label_class_string -%}
+      inside-oo-input-group {% if hide_label == true -%}u-visually-hidden{%- endif -%}
+    {%- endcapture -%}
+
     {%- include 'input',
       type: type,
       name: name,
       value: value,
       id: _id,
-      classes: 'inside-oo-input-group',
-      extra_attrs: selected -%}
+      classes: _input_class_string,
+      extra_attrs: input_attrs -%}
+
+    {%- assign _input_class_string = nil -%}
 
     {%- include 'label',
       for: _id,
       content: value,
-      classes: 'inside-oo-input-group',
+      classes: _label_class_string,
       extra_attrs: '' -%}
+
+    {%- assign _label_class_string = nil -%}
 
     {%- assign _id = nil -%}
 

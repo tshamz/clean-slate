@@ -35,7 +35,7 @@
     {% assign _title = option.name | append: ':' %}
 
     {% unless show_option_name == blank %}
-      {% include 'heading',
+      {% include 'header',
         title: _title,
         level: 3,
         content: _selected_value_container,
@@ -55,7 +55,8 @@
         type: 'radio',
         name: option.name,
         value: _value,
-        selected: _selected,
+        hide_input: true,
+        input_attrs: _selected,
         classes: 'inside-oo-option-group',
         extra_attrs: 'data-option-value' -%}
 

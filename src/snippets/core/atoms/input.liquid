@@ -30,7 +30,7 @@
     type="{{- type -}}"
     name="{{- name -}}"
     value="{{- value -}}"
-    {%- if id -%}id="{{- id -}}"{%- endif -%}
+    {%- if id != blank -%}id="{{- id -}}"{%- endif -%}
     {{ extra_attrs -}}>
 
 {%- else -%}

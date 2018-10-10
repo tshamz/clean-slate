@@ -27,9 +27,14 @@ export const initSlider = node => {
   return new Promise(resolve => {
     const options = sliderOptions[node.dataset.slider] || sliderOptions.default;
     const slider = $(node).slick(options);
-    const productContainer = $(node).closest('[data-product-container]').get(0);
-    updateProductContainer(productContainer, { slider })
     sliders.set(node, slider);
+
+    const productContainer = $(node).closest('[data-product-container]').get(0);
+
+    if (productContainer) {
+      updateProductContainer(productContainer, { slider })
+    }
+
     resolve(slider);
   });
 };

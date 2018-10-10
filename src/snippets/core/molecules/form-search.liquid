@@ -1,5 +1,8 @@
 {%- capture _arguments -%}
-
+  {%- include 'argument',
+    _value: placeholder_text,
+    _name: 'placeholder_text',
+    _required: false -%}
 {%- endcapture -%}
 
 {%- capture _errors -%}
@@ -18,25 +21,32 @@
     data-form="search"
     {{ extra_attrs -}}>
 
+    {%- capture _extra_attrs -%}
+      placeholder="{%- if placeholder_text != blank -%}{{– placeholder_text -}}{%- else -%}search{%- endif -%}"
+    {%- endcapture -%}
+
     {% include 'input',
-      _type: 'search',
-      _name: 'q',
-      _classes: 'inside-oo-form-search',
-      _extra_attrs: 'placeholder="search"' %}
+      type: 'search',
+      name: 'q',
+      classes: 'inside-oo-form-search',
+      extra_attrs: _extra_attrs %}
+
+    {%- assign _extra_attrs = nil -%}
 
     {% capture _contents %}
       {% include 'icon',
-        _name: 'search',
-        _classes: 'inside-oo-button',
-        _extra_attrs: '' %}
+        name: 'search',
+        classes: 'inside-oo-button',
+        value: '',
+        extra_attrs: '' %}
       <span class="icon__fallback-text">Search</span>
     {% endcapture %}
 
     {% include 'button',
-      _type: 'submit',
-      _contents: _contents,
-      _classes: 'inside-oo-form-search',
-      _extra_attrs: ''  %}
+      type: 'submit',
+      contents: _contents,
+      classes: 'inside-oo-form-search',
+      extra_attrs: ''  %}
 
     {% assign _contents = nil %}
 

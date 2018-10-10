@@ -7,6 +7,10 @@
     _value: level,
     _name: 'level',
     _required: false -%}
+  {%- include 'argument',
+    _value: content,
+    _name: 'content',
+    _required: false -%}
 {%- endcapture -%}
 
 {%- capture _errors -%}
@@ -17,12 +21,21 @@
 
 {%- if _errors == '' -%}
 
-  <h{%- unless level -%}2{% else %}{{- level -}}{%- endunless %}
-    class="oo-heading {{ classes -}}" {{ extra_attrs -}}>
+  <header class="oo-header {{ classes -}}" {{ extra_attrs -}}>
 
-    {{- title -}}
+    {%- include 'heading',
+      level: level,
+      title: title,
+      classes: '',
+      extra_attrs: '' -%}
 
-  </h{%- unless level -%}2{% else %}{{- level -}}{%- endunless %}>
+    {%- unless content == blank -%}
+
+      {{- content -}}
+
+    {%- endunless -%}
+
+  </header>
 
 {%- else -%}
 

@@ -36,11 +36,11 @@
   <video
     class="oo-video {{ classes -}}"
     src="{{- src -}}"
-    {%- if controls -%}controls{%- endif -%}
-    {%- if muted -%}muted{%- endif -%}
-    {%- if autoplay -%}autoplay{%- endif -%}
-    {%- if loop -%}loop{%- endif -%}
-    {%- if poster -%}poster="{{- poster -}}"{%- endif -%}
+    {%- if controls != blank -%}controls{%- endif -%}
+    {%- if muted != blank -%}muted{%- endif -%}
+    {%- if autoplay != blank -%}autoplay{%- endif -%}
+    {%- if loop != blank -%}loop{%- endif -%}
+    {%- if poster != blank -%}poster="{{- poster -}}"{%- endif -%}
     {{ extra_attrs -}}>
 
     Sorry, your browser doesn't support embedded videos.

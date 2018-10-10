@@ -1,30 +1,7 @@
-{%- assign delimeter = '' -%}
-{%- if section.settings.is_slider -%}
-  {%- assign delimeter = '-->' -%}
-{%- endif -%}
-
-{%- capture _content -%}
-  {%- for block in section.blocks -%}
-    {%- case block.type -%}
-      {%- when 'text' -%}
-        {{- delimeter -}}{%- include 'text', _content: block.settings.title -%}
-      {%- when 'icon_with_text' -%}
-        {{- delimeter -}}{%- include 'icon-with-text',
-          _icon: block.settings.icon,
-          _text: block.settings.title,
-          _href: block.settings.href  -%}
-    {%- endcase -%}
-  {%- endfor -%}
-{%- endcapture -%}
-
 <section data-section-id="{{ section.id }}" data-section-type="topbar">
-  {%- if section.settings.is_slider -%}
-    {%- include 'slider',
-      _name: 'topbar',
-      _slides: _content -%}
-  {%- else -%}
-    {{- _content -}}
-  {%- endif -%}
+
+  {%- include 'topbar' -%}
+
 </section>
 
 {% schema %}
@@ -51,7 +28,7 @@
       },
       {
         "name": "Icon w/ Text",
-        "type": "icon_with_text",
+        "type": "icon-with-text",
         "settings": [
           {
             "id": "title",

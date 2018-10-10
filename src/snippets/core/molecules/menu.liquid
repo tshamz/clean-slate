@@ -23,15 +23,16 @@
 
   <div class="oo-menu {{ classes -}}" {{ extra_attrs -}}>
 
-    {% include 'heading',
+    {%- include 'header',
       title: title,
       level: level,
       classes: 'inside-oo-menu',
-      extra_attrs: '' %}
+      extra_attrs: '' -%}
 
-    {% include 'list' with list,
+    {%- include 'list',
+      content: list,
       classes: 'inside-oo-menu',
-      extra_attrs: '' %}
+      extra_attrs: '' -%}
 
   </div>
 
