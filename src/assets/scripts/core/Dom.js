@@ -9,16 +9,12 @@ export default {
   cartToggle: '[data-toggle-inline-cart]',
 
 
-  optionGroupValue: '[data-optionGroup-value]',
-  optionGroupControl: '[data-optionGroup-control]',
-  optionGroupContainer: '[data-optionGroup-container]',
-  optionGroup: '[data-option-group]',
   optionValue: '[data-option-value]',
-  optionValueLabel: '[data-option-value] .oo-label',
+  optionGroupContainer: '[data-option-group-container]',
 
   quantityValue: '[data-quantity-value]',
   quantityControl: '[data-quantity-control]',
-  quantityContainer: '[data-quantity-select-container]',
+  quantitySelectContainer: '[data-quantity-select-container]',
 
   productContainer: '[data-product-container]',
 

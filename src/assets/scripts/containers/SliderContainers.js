@@ -1,10 +1,13 @@
 import 'slick';
 
 import dom from 'core/Dom';
-import { uniqueValues } from 'core/Helpers';
-import { productContainers, getProductContainer, updateProductContainer } from 'containers/ProductContainers';
+import bva from 'core/Constants';
+import { uniqueValues, registerContainer } from 'core/Helpers';
 
-const sliders = new Map();
+import { productContainers, updateProductContainer } from 'containers/ProductContainers';
+
+export const sliderContainers = new Map();
+window.s = sliderContainers;
 
 const defaultSliderOptions = {
   autoplay: true,
@@ -22,8 +25,6 @@ const sliderOptions = {
   'product-gallery': productGalleryOptions,
 };
 
-export const getSlider = productContainer => sliders.get(productContainer);
-
 const getSliderNodes = (sliders, rest) => {
   if (sliders === '*') {
     return $(dom.slider).get();
@@ -34,30 +35,20 @@ const getSliderNodes = (sliders, rest) => {
   }
 };
 
-const slickInit = (a, node, resolve) => (event, slick) => {
-  console.log(a);
-  const productContainer = $(node).closest('[data-product-container]')[0];
-  if (productContainer) {
-    updateProductContainer(a, productContainer, ['sliders', [node, slick]]);
-  }
-  sliders.set(node, slick);
-  resolve(node);
+export const registerSliderContainer = node => {
+  const initialState = {
+    'productContainer': $(node).closest(dom.productContainer)[0],
+    'name': node.dataset.slider,
+    '$slider': $(node).slick(sliderOptions[node.dataset.slider] || sliderOptions.default)
+  };
+
+  return Promise.resolve(
+    registerContainer(node, bva.slider, initialState)
+  );
 };
 
-const registerSlider = (a, node, data = {}) => {
-  console.log(a);
-  return new Promise(resolve => {
-    const options = sliderOptions[node.dataset.slider] || sliderOptions.default;
-    $(node).on('init', slickInit(a, node, resolve));
-    $(node).slick(options);
-  });
-};
-
-// export const initSliders = (a, sliders = '*') => {
-export const initSliders = (a) => {
-  console.log(a);
+export const initSliderContainers = async (sliders = '*', ...rest) => {
   return Promise.all(
-    $(dom.slider).get().map(node => registerSlider(a, node))
-    // getSliderNodes(sliders, rest).map(node => registerSlider(a, node))
+    getSliderNodes(sliders, rest).map(node => registerSliderContainer(node))
   );
 };

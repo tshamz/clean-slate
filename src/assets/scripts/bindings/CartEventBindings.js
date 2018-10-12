@@ -1,7 +1,7 @@
 import { getCart } from '@shopify/theme-cart';
 
 import dom from 'core/Dom';
-import BVA from 'core/Constants';
+import bva from 'core/Constants';
 
 const getAddToCartData = () => {
   return [{
@@ -18,7 +18,7 @@ const getAddToCartData = () => {
 export const bindUIActions = () => {
   $(dom.cartAdd).on('click', () => {
     const data = getAddToCartData();
-    PubSub.publish(BVA.addToCartRequest, data);
+    PubSub.publish(bva.addToCartRequest, data);
   });
 
   $(dom.cartGet).on('click', async () => {
@@ -29,20 +29,20 @@ export const bindUIActions = () => {
   $(dom.cartEmpty).on('click', async () => {
     const { items } = await getCart();
     const ids = items.map(item => item.id);
-    PubSub.publish(BVA.removeFromCartRequest, ids);
+    PubSub.publish(bva.removeFromCartRequest, ids);
   });
 
   $(dom.cartToggle).on('click', async () => {
     const topic = ($(dom.inlineCart).is('.is-open'))
-      ? BVA.closeInlineCartStart
-      : BVA.openInlineCartStart;
+      ? bva.closeInlineCartStart
+      : bva.openInlineCartStart;
     PubSub.publish(topic, []);
   });
 
   $(dom.inlineCart).on('transitionend', () => {
     const topic = ($(dom.inlineCart).is('.is-open'))
-      ? BVA.openInlineCartEnd
-      : BVA.closeInlineCartEnd;
+      ? bva.openInlineCartEnd
+      : bva.closeInlineCartEnd;
     PubSub.publish(topic, []);
   })
 };

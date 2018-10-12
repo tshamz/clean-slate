@@ -1,4 +1,4 @@
-import BVA from 'core/Constants';
+import bva from 'core/Constants';
 
 import {
   addToCartHandlers,
@@ -10,64 +10,58 @@ import {
 import { updateProductContainer } from 'containers/ProductContainers';
 
 import {
-  getQuantityContainer,
-  updateQuantityContainer,
-} from 'containers/QuantitySelectContainers';
-
-import {
   handleQuantityChange,
 } from 'handlers/QuantitySelectHandlers';
 
-PubSub.subscribe(BVA.quantityChange, (message, { node, ...data }) => {
-  // handleQuantityChange(node, )
-  const container = getQuantityContainer(node);
-  console.log(container);
-  console.log(data);
+// PubSub.subscribe(bva.quantityChange, (message, { container, quantity }) => {
+PubSub.subscribe(bva.quantityChange, (message, {container, ...data}) => {
+  // handleQuantityChange(container, quantity);
+  handleQuantityChange(container, data);
 });
 
 
-PubSub.subscribe(BVA.addToCartRequest, async (message, data) => {
+PubSub.subscribe(bva.addToCartRequest, async (message, data) => {
   // console.log(message, data);
   return addToCartHandlers.request(data)
-    .then(PubSub.publish(BVA.addToCartSuccess, {}))
+    .then(PubSub.publish(bva.addToCartSuccess, {}))
     .catch(addToCartHandlers.error);
 });
 
-PubSub.subscribe(BVA.addToCartSuccess, async (message, data) => {
+PubSub.subscribe(bva.addToCartSuccess, async (message, data) => {
   // console.log(message, data);
   return addToCartHandlers.request(data)
     .then(addToCartHandlers.success)
     .catch(addToCartHandlers.error);
 });
 
-PubSub.subscribe(BVA.removeFromCartRequest, async (message, data) => {
+PubSub.subscribe(bva.removeFromCartRequest, async (message, data) => {
   // console.log(message, data);
   return removeFromCartHandlers.request(data)
-    .then(PubSub.publish(BVA.removeFromCartSuccess, {}))
+    .then(PubSub.publish(bva.removeFromCartSuccess, {}))
     .catch(removeFromCartHandlers.error);
 });
 
-PubSub.subscribe(BVA.openInlineCartStart, async (message, data) => {
+PubSub.subscribe(bva.openInlineCartStart, async (message, data) => {
   // console.log(message, data);
   return openInlineCartHandlers.start()
 });
 
-PubSub.subscribe(BVA.openInlineCartEnd, async (message, data) => {
+PubSub.subscribe(bva.openInlineCartEnd, async (message, data) => {
   // console.log(message, data);
   return openInlineCartHandlers.end()
 });
 
-PubSub.subscribe(BVA.closeInlineCartStart, async (message, data) => {
+PubSub.subscribe(bva.closeInlineCartStart, async (message, data) => {
   // console.log(message, data);
   return closeInlineCartHandlers.start()
 });
 
-PubSub.subscribe(BVA.closeInlineCartEnd, async (message, data) => {
+PubSub.subscribe(bva.closeInlineCartEnd, async (message, data) => {
   // console.log(message, data);
   return closeInlineCartHandlers.end()
 });
 
-PubSub.subscribe(BVA.optionValueChange, async (message, data) => {
+PubSub.subscribe(bva.optionValueChange, async (message, data) => {
   console.log(message, data);
   const { node, name, value } = data;
   return updateProductContainer(node, { [name]: value} )

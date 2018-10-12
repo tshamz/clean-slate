@@ -1,3 +1,4 @@
+// Events
 export const addToCartRequest = 'ADD_TO_CART_REQUEST';
 export const addToCartSuccess = 'ADD_TO_CART_SUCCESS';
 export const addToCartError = 'ADD_TO_CART_ERROR';
@@ -21,6 +22,15 @@ export const optionValueChange = 'OPTION_VALUE_CHANGE';
 export const quantityChange = 'QUANTITY_CHANGE';
 
 
+// Containers
+export const product = 'PRODUCT';
+export const slider = 'SLIDER';
+export const optionGroup = 'OPTION_GROUP';
+export const variant = 'VARIANT';
+export const quantitySelect = 'QUANTITY_SELECT';
+export const price = 'PRICE';
+export const addToCart = 'ADD_TO_CART';
+
 export default {
   addToCartRequest,
   addToCartSuccess,
@@ -43,4 +53,13 @@ export default {
   optionValueChange,
 
   quantityChange,
+
+
+  product,
+  slider,
+  optionGroup,
+  variant,
+  quantitySelect,
+  price,
+  addToCart,
 };

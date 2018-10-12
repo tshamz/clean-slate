@@ -1,5 +1,5 @@
 import dom from 'core/Dom';
-import BVA from 'core/Constants';
+import bva from 'core/Constants';
 
 export const handleOptionGroupChange = node => {
 

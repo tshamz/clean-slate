@@ -1,40 +1,42 @@
 import dom from 'core/Dom';
+import bva from 'core/Constants';
+import { registerContainer } from 'core/Helpers';
 
 export const productContainers = new Map();
+window.p = productContainers;
 
-export const getProductContainer = node =>
-  productContainers.get(node);
+export const getProductContainer = node => {
+  if (node) {
+    return productContainers.get(node);
+  }
+  return productContainers;
+};
 
-export const updateProductContainer = (a, node, [type, [dataNode, data]]) => {
-  // if (productContainers.has(node)) {
-    console.log(a);
-    // console.log(a.has(node));
-  if (a.has(node)) {
+export const updateProductContainer = (node, [type, [dataNode, ref]]) => {
+  if (productContainers.has(node)) {
     const productContainer = productContainers.get(node);
     const map = productContainer.get(type);
-    map.set(dataNode, data);
+    map.set(dataNode, ref);
   }
   return Promise.resolve(productContainers);
 };
 
-export const registerProductContainer = (node, data = {}) => {
-  return new Promise(resolve => {
-    if (!productContainers.has(node)) {
-      productContainers.set(node, new Map([
-        ['handle', node.dataset.productContainer],
-        ['sliders', new Map()],
-        ['quantitySelects', new Map()],
-        ['optionSelects', new Map()],
-        ['addToCart', new Map()],
-      ]));
-    }
-    resolve(productContainers);
-  });
+export const registerProductContainer = node => {
+  const initialState = {
+    'handle': node.dataset.productContainer,
+    [bva.slider]: new Map(),
+    [bva.quantitySelect]: new Map(),
+    [bva.optionGroup]: new Map(),
+    [bva.addToCart]: new Map(),
+  };
+
+  return Promise.resolve(
+    registerContainer(node, bva.product, initialState)
+  );
 };
 
 export const initProductContainers = async () => {
-  const nodes = $(dom.productContainer).get();
-  const promises = nodes.map(node => registerProductContainer(node));
-  await Promise.all(promises);
-  return productContainers;
+  return Promise.all(
+    $(dom.productContainer).get().map(node => registerProductContainer(node))
+  );
 };

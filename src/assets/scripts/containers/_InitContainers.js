@@ -1,10 +1,11 @@
-import { initSliders } from 'containers/SliderContainers';
-import { initProductContainers } from 'containers/ProductContainers';
-import { initQuantityContainers } from 'containers/QuantitySelectContainers';
+import { productContainers, initProductContainers } from 'containers/ProductContainers';
+import { initQuantitySelectContainers } from 'containers/QuantitySelectContainers';
+import { initSliderContainers } from 'containers/SliderContainers';
+import { initOptionGroupContainers } from 'containers/OptionGroupContainers';
 
 export const initContainers = async () => {
-  const a = await initProductContainers();
-  await initQuantityContainers();
-  // await initSliders(a, ['topbar']);
-  await initSliders(a);
+  await initProductContainers();
+  initQuantitySelectContainers();
+  initSliderContainers();
+  initOptionGroupContainers();
 };

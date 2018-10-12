@@ -5,7 +5,7 @@ import {
 } from '@shopify/theme-cart';
 
 import dom from 'core/Dom';
-import BVA from 'core/Constants';
+import bva from 'core/Constants';
 
 import { getAlternativeTemplate } from 'core/Helpers';
 
@@ -26,7 +26,7 @@ const addToCartSuccessHandler = async results => {
 
 const addToCartErrorHandler = error => {
   console.log(error);
-  PubSub.publish(BVA.addToCartError, {});
+  PubSub.publish(bva.addToCartError, {});
   return Promise.resolve();
 };
 
@@ -42,7 +42,7 @@ const removeFromCartSuccessHandler = results => {
 
 const removeFromCartErrorHandler = error => {
   console.log(error);
-  PubSub.publish(BVA.removeFromCartError, {});
+  PubSub.publish(bva.removeFromCartError, {});
   return Promise.resolve();
 };
 

@@ -1,6 +1,12 @@
 import dom from 'core/Dom';
 
-export const handleQuantityChange = (node, currentQuantity, newQuantity) => {
+import { getCurrentQuantity, updateQuantitySelectContainer } from 'containers/QuantitySelectContainers'
+
+// export const handleQuantityChange = (node, {quantity}) => {
+export const handleQuantityChange = (container, data) => {
+  // updateQuantitySelectContainer(node, ['quantity', quantity]);
+  updateQuantitySelectContainer(container, data);
+
   // check if there's enough in stock
   //   if not display error
   // update input

@@ -1,31 +1,40 @@
 import dom from 'core/Dom';
-import BVA from 'core/Constants';
+import bva from 'core/Constants';
+import { registerContainer, updateState } from 'core/Helpers';
 
-export const quantityContainers = new Map();
+import { productContainers, updateProductContainer } from 'containers/ProductContainers';
+
+export const quantitySelectContainers = new Map();
+window.q = quantitySelectContainers;
 
 export const getCurrentQuantity = container => {
-  return $(container).find(dom.quantityValue).val();
+  return quantitySelectContainers.get(container).get('quantity');
+}
+
+export const updateQuantitySelectContainer = (node, data) => {
+  if (quantitySelectContainers.has(node)) {
+    return Promise.resolve(
+      quantitySelectContainers
+        .set(node, updateState(node, bva.quantitySelect, data))
+        .get(node)
+    );
+  }
+  return Promise.resolve();
 };
 
-export const getQuantityContainer = node =>
-  quantityContainers.get(node);
+export const registerQuantitySelectContainer = node => {
+  const initialState = {
+    productContainer: $(node).closest(dom.productContainer)[0],
+    quantity: parseInt($(node).find(dom.quantityValue).val(), 10),
+  };
 
-export const updateQuantityContainer = (node, newData) => {
-  const oldData = quantityContainers.get(node) || {};
-  quantityContainers.set(node, { ...oldData, ...newData });
-  return Promise.resolve(node);
-};
-
-export const registerQuantityContainer = (node, data = {}) => {
   return Promise.resolve(
-    (quantityContainers.has(node))
-    ? quantityContainers
-    : quantityContainers.set(node, { currentQuantity: getCurrentQuantity(node), ...data })
+    registerContainer(node, bva.quantitySelect, initialState)
   );
 };
 
-export const initQuantityContainers = () => {
+export const initQuantitySelectContainers = async () => {
   return Promise.all(
-    $(dom.quantityContainer).get().map(node => registerQuantityContainer(node))
+    $(dom.quantitySelectContainer).get().map(node => registerQuantitySelectContainer(node))
   );
 };
