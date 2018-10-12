@@ -1,11 +1,11 @@
-.oo-quantity-selector {
+.oo-quantity-select {
   border: 1px solid #dddddd;
   display: flex;
   max-width: 150px;
   font-size: 14px;
 }
 
-.oo-input.inside-oo-quantity-selctor {
+.oo-input.inside-oo-quantity-select {
   width: 66%;
   min-width: 0;
   border: none;
@@ -18,17 +18,13 @@
   &::-webkit-inner-spin-button,
   &::-webkit-outer-spin-button {
     -webkit-appearance: none;
-    margin: 0;
   }
 }
 
-.oo-button.inside-oo-quantity-selctor {
+.oo-button.inside-oo-quantity-select {
   width: 33%;
   -webkit-appearance: none;
   appearance: none;
   padding: 13px 15px;
   border: none;
-  // line-height: inherit;
-  // font-size: inherit;
-  // font-family: inherit;
 }

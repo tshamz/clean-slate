@@ -1,6 +1,6 @@
 import 'styles/templates/index.scss';
 
-import { initSliders } from 'components/Sliders';
+import { initSliders } from 'containers/SliderContainers';
 
 document.addEventListener('DOMContentLoaded', async () => {
   initSliders('index-hero');

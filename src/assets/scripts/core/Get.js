@@ -1,6 +1,6 @@
 import { get as jsCookieGet } from 'js-cookie';
 
-import { getSlider as sliderGet } from './Sliders';
+import { getSlider as sliderGet } from 'containers/SliderContainers';
 
 const httpCache = {};
 

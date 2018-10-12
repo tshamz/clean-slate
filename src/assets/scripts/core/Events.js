@@ -1,13 +1,30 @@
-import BVA from 'scripts/global/Constants';
+import BVA from 'core/Constants';
 
 import {
   addToCartHandlers,
   removeFromCartHandlers,
   openInlineCartHandlers,
   closeInlineCartHandlers,
-} from 'components/CartEventHandlers';
+} from 'handlers/CartHandlers';
 
-import { updateProductContainer } from 'components/ProductContainers';
+import { updateProductContainer } from 'containers/ProductContainers';
+
+import {
+  getQuantityContainer,
+  updateQuantityContainer,
+} from 'containers/QuantitySelectContainers';
+
+import {
+  handleQuantityChange,
+} from 'handlers/QuantitySelectHandlers';
+
+PubSub.subscribe(BVA.quantityChange, (message, { node, ...data }) => {
+  // handleQuantityChange(node, )
+  const container = getQuantityContainer(node);
+  console.log(container);
+  console.log(data);
+});
+
 
 PubSub.subscribe(BVA.addToCartRequest, async (message, data) => {
   // console.log(message, data);

@@ -13,7 +13,11 @@
 
 {%- if _errors == '' -%}
 
-  <div class="oo-line-item {{ classes -}}" {{ extra_attrs -}}>
+  <div
+    class="oo-line-item {{ classes -}}"
+    data-product-container="{{ _line_item.product.handle }}"
+    data-variant-id="{{ _line_item.variant.id }}"
+    {{ extra_attrs -}}>
 
     {%- include 'image',
       resource: _line_item.product.featured_image,
@@ -41,7 +45,7 @@
         classes: 'inside-oo-line-item--information-wrapper',
         extra_attrs: '' -%}
 
-      {%- include 'quantity_selector',
+      {%- include 'quantity-select',
         quantity: _line_item.quantity,
         classes: 'inside-oo-line-item--information-wrapper',
         extra_attrs: '' -%}

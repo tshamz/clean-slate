@@ -18,6 +18,8 @@ export const closeInlineCartEnd = 'CLOSE_INLINE_CART_END';
 
 export const optionValueChange = 'OPTION_VALUE_CHANGE';
 
+export const quantityChange = 'QUANTITY_CHANGE';
+
 
 export default {
   addToCartRequest,
@@ -39,4 +41,6 @@ export default {
   closeInlineCartEnd,
 
   optionValueChange,
+
+  quantityChange,
 };

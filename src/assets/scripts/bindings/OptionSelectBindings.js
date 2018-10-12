@@ -1,10 +1,5 @@
-import BVA from 'scripts/global/Constants';
-
-const dom = {
-  optionGroup: '[data-option-group]',
-  optionValue: '[data-option-value]',
-  optionValueLabel: '[data-option-value] .oo-label',
-};
+import dom from 'core/Dom';
+import BVA from 'core/Constants';
 
 export const bindUIActions = () => {
   $(dom.optionGroup).on('change', ({ currentTarget: self, target }) => {

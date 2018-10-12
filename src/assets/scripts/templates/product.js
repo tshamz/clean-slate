@@ -1,7 +1,7 @@
 import 'styles/templates/product.scss';
 
-import { bindUIActions as QuantitySelctorEventBindings } from 'components/QuantitySelector';
+import { initSliders } from 'containers/SliderContainers';
 
 document.addEventListener('DOMContentLoaded', async () => {
-  QuantitySelctorEventBindings();
+  initSliders(['product-image-gallery']);
 });

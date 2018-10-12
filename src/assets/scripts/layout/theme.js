@@ -12,13 +12,10 @@ import 'lazysizes/plugins/respimg/ls.respimg';
 import { focusHash, bindInPageLinks } from '@shopify/theme-a11y';
 import { cookiesEnabled } from '@shopify/theme-cart';
 
-import 'global/Events';
+import 'core/Events';
 
-import { initProductContainers } from 'components/ProductContainers';
-import { initSliders } from 'components/Sliders';
-
-import { bindUIActions as AddToCartEventBindings } from 'components/CartEventBindings';
-import { bindUIActions as OptionGroupEventBindings } from 'components/OptionGroupBindings';
+import { bindUIActions } from 'bindings/_GlobalUIActions';
+import { initContainers } from 'containers/_InitContainers';
 
 // Common a11y fixes
 focusHash();
@@ -33,13 +30,8 @@ if (cookiesEnabled()) {
 }
 
 document.addEventListener('DOMContentLoaded', async () => {
-  AddToCartEventBindings();
-  OptionGroupEventBindings();
-
-  window.productContainers = initProductContainers();
-
-  // initSliders('*');
-  initSliders('topbar');
+  initContainers();
+  bindUIActions();
 });
 
 window.addEventListener('load', () => {
@@ -48,12 +40,19 @@ window.addEventListener('load', () => {
 
 
 // HMR
-if (module.hot) {
-  module.hot.accept();
-}
+// if (module.hot) {
+//   module.hot.accept();
+// }
 
-if (module.hot) {
-  module.hot.dispose(() => {
-    // reset/undo the behavior/side effect that as possibly enabled/enacted
-  });
-}
+// if (module.hot) {
+//   module.hot.dispose(() => {
+//     // reset/undo the behavior/side effect that as possibly enabled/enacted
+
+//     // $('*').unbind();
+//     // PubSub.clearAllSubscriptions();
+
+
+//     // bindUIActions();
+//     // initContainers();
+//   });
+// }

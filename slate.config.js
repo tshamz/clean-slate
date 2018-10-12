@@ -21,8 +21,10 @@ const alias = {
   'slick': path.resolve('./node_modules/slick-carousel'),
   'styles': path.resolve('./src/assets/styles'),
   'scripts': path.resolve('./src/assets/scripts'),
-  'global': path.resolve('./src/assets/scripts/global'),
-  'components': path.resolve('./src/assets/scripts/components'),
+  'core': path.resolve('./src/assets/scripts/core'),
+  'bindings': path.resolve('./src/assets/scripts/bindings'),
+  'containers': path.resolve('./src/assets/scripts/containers'),
+  'handlers': path.resolve('./src/assets/scripts/handlers'),
 };
 
 const rules = [

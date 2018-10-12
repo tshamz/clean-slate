@@ -1,14 +1,7 @@
 import { getCart } from '@shopify/theme-cart';
 
-import BVA from 'scripts/global/Constants';
-
-const dom = {
-  inlineCart: '[data-inline-cart]',
-  addToCart: '[data-add-to-cart]',
-  getCart: '[data-get-cart]',
-  emptyCart: '[data-empty-cart]',
-  toggleCart: '[data-toggle-inline-cart]',
-};
+import dom from 'core/Dom';
+import BVA from 'core/Constants';
 
 const getAddToCartData = () => {
   return [{
@@ -23,23 +16,23 @@ const getAddToCartData = () => {
 };
 
 export const bindUIActions = () => {
-  $(dom.addToCart).on('click', () => {
+  $(dom.cartAdd).on('click', () => {
     const data = getAddToCartData();
     PubSub.publish(BVA.addToCartRequest, data);
   });
 
-  $(dom.getCart).on('click', async () => {
+  $(dom.cartGet).on('click', async () => {
     const cart = await getCart();
     console.log(cart);
   });
 
-  $(dom.emptyCart).on('click', async () => {
+  $(dom.cartEmpty).on('click', async () => {
     const { items } = await getCart();
     const ids = items.map(item => item.id);
     PubSub.publish(BVA.removeFromCartRequest, ids);
   });
 
-  $(dom.toggleCart).on('click', async () => {
+  $(dom.cartToggle).on('click', async () => {
     const topic = ($(dom.inlineCart).is('.is-open'))
       ? BVA.closeInlineCartStart
       : BVA.openInlineCartStart;

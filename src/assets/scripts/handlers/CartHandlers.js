@@ -4,13 +4,10 @@ import {
   removeItem
 } from '@shopify/theme-cart';
 
-import BVA from 'global/Constants';
-import { getAlternativeTemplate } from 'global/Helpers';
+import dom from 'core/Dom';
+import BVA from 'core/Constants';
 
-const dom = {
-  inlineCart: '[data-inline-cart]',
-  inlineCartContents: '[data-inline-cart-contents]',
-};
+import { getAlternativeTemplate } from 'core/Helpers';
 
 const updateInlineCart = async () => {
   const newCart = await getAlternativeTemplate('cart', 'ajax-inline-cart-contents');
