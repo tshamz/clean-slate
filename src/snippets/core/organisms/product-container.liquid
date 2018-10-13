@@ -1,0 +1,48 @@
+{%- capture _arguments -%}
+  {%- include 'argument',
+    _value: tag,
+    _name: 'tag',
+    _required: true -%}
+  {%- include 'argument',
+    _value: _product,
+    _name: '_product',
+    _required: true -%}
+  {%- include 'argument',
+    _value: _variant,
+    _name: '_variant',
+    _required: false -%}
+  {%- include 'argument',
+    _value: content,
+    _name: 'content',
+    _required: true -%}
+{%- endcapture -%}
+
+{%- capture _errors -%}
+  {%- include 'errors' with _arguments, _snippet: 'product-container' -%}
+{%- endcapture -%}
+
+{%- assign _arguments = nil -%}
+
+{%- if _errors == '' -%}
+
+  <{{- tag }}
+    class="oo-product-container {{ classes -}}"
+    data-product-container="{{ _product.handle }}"
+    {%- if _variant -%}data-variant-id="{{ _variant.id }}"{%- endif -%}
+    {{ extra_attrs -}}>
+
+    {{- content -}}
+
+    {%- include 'variant',
+      _product: _product,
+      _variant: _variant -%}
+
+  </{{- tag -}}>
+
+{%- else -%}
+
+  {{- _errors -}}
+
+{%- endif -%}
+
+{%- assign _errors = nil -%}

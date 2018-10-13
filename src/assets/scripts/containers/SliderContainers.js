@@ -27,19 +27,20 @@ const sliderOptions = {
 
 const getSliderNodes = (sliders, rest) => {
   if (sliders === '*') {
-    return $(dom.slider).get();
+    return $(dom.sliderContainer).get();
   } else {
     const sliderNames = (Array.isArray(sliders)) ? sliders : [ sliders, ...rest ];
     return uniqueValues(sliderNames).reduce((sliderNodes, sliderName) =>
-      [ ...sliderNodes, ...$(`[data-slider="${sliderName}"]`).get() ], []);
+      [ ...sliderNodes, ...$(`[data-slider-container="${sliderName}"]`).get() ], []);
   }
 };
 
 export const registerSliderContainer = node => {
+  const name = node.dataset.sliderContainer;
   const initialState = {
+    name,
     'productContainer': $(node).closest(dom.productContainer)[0],
-    'name': node.dataset.slider,
-    '$slider': $(node).slick(sliderOptions[node.dataset.slider] || sliderOptions.default)
+    '$slider': $(node).slick(sliderOptions[name] || sliderOptions.default)
   };
 
   return Promise.resolve(

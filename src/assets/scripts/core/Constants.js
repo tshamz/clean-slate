@@ -30,6 +30,7 @@ export const variant = 'VARIANT';
 export const quantitySelect = 'QUANTITY_SELECT';
 export const price = 'PRICE';
 export const addToCart = 'ADD_TO_CART';
+export const inventory = 'INVENTORY';
 
 export default {
   addToCartRequest,
@@ -56,9 +57,9 @@ export default {
 
 
   product,
+  variant,
   slider,
   optionGroup,
-  variant,
   quantitySelect,
   price,
   addToCart,

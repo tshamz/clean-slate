@@ -8,15 +8,16 @@ export default {
   cartEmpty: '[data-empty-cart]',
   cartToggle: '[data-toggle-inline-cart]',
 
-
   optionValue: '[data-option-value]',
-  optionGroupContainer: '[data-option-group-container]',
 
   quantityValue: '[data-quantity-value]',
   quantityControl: '[data-quantity-control]',
-  quantitySelectContainer: '[data-quantity-select-container]',
 
   productContainer: '[data-product-container]',
-
-  slider: '[data-slider]',
+  variantContainer: '[data-variant-container]',
+  quantitySelectContainer: '[data-quantity-select-container]',
+  optionGroupContainer: '[data-option-group-container]',
+  sliderContainer: '[data-slider-container]',
+  addToCartContainer: '[data-add-to-cart-container]',
+  priceContainer: '[data-price-container]',
 };

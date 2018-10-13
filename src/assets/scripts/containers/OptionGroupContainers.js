@@ -9,7 +9,9 @@ window.o = optionGroupContainers
 export const registerOptionGroupContainer = node => {
   const initialState = {
     productContainer: $(node).closest(dom.productContainer)[0],
-    name: node.dataset.optionGroupContainer,
+    name: $(node).find('input').get(0).name,
+    selected: $(node).find(':checked').val(),
+    values: $(node).find('input').get().map(input => input.value),
   };
 
   return Promise.resolve(

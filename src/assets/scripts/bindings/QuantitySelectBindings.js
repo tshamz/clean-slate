@@ -1,7 +1,7 @@
 import dom from 'core/Dom';
 import bva from 'core/Constants';
 
-import { quantitySelectContainers, getCurrentQuantity } from 'containers/QuantitySelectContainers'
+import { getCurrentQuantity } from 'containers/QuantitySelectContainers'
 
 export const bindUIActions = () => {
   $(dom.quantityControl).on('click', ({ currentTarget: self }) => {

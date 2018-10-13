@@ -1,0 +1,40 @@
+{%- capture _arguments -%}
+  {%- include 'argument',
+    _value: _product,
+    _name: '_product',
+    _required: true -%}
+  {%- include 'argument',
+    _value: _variant,
+    _name: '_variant',
+    _required: true -%}
+{%- endcapture -%}
+
+{%- capture _errors -%}
+  {%- include 'errors' with _arguments, _snippet: 'variant-object' -%}
+{%- endcapture -%}
+
+{%- assign _arguments = nil -%}
+
+{%- if _errors == '' -%}
+
+  "{{- _variant.id -}}": {
+    "options": {
+      {%- for _option in _product.options -%}
+        {%- assign _option_position = 'option' | append: forloop.index -%}
+        "{{ _option }}": "{{ _variant[_option_position] }}"{%- unless forloop.last -%},{%- endunless -%}
+      {%- endfor -%}
+    },
+    "inventory": {
+      "available": {{- _variant.available -}},
+      "inventory": {{- _variant.inventory_quantity -}}
+    },
+    "price": {{ _variant.price | money_without_currency }}
+  }
+
+{%- else -%}
+
+  {{- _errors -}}
+
+{%- endif -%}
+
+{%- assign _errors = nil -%}

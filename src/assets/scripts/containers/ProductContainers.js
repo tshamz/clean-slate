@@ -24,10 +24,12 @@ export const updateProductContainer = (node, [type, [dataNode, ref]]) => {
 export const registerProductContainer = node => {
   const initialState = {
     'handle': node.dataset.productContainer,
-    [bva.slider]: new Map(),
-    [bva.quantitySelect]: new Map(),
+    [bva.variant]: new Map(),
     [bva.optionGroup]: new Map(),
+    [bva.price]: new Map(),
+    [bva.quantitySelect]: new Map(),
     [bva.addToCart]: new Map(),
+    [bva.slider]: new Map(),
   };
 
   return Promise.resolve(

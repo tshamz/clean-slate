@@ -1,4 +1,4 @@
-<section class="product-container" data-product-container="{{ product.handle }}">
+{%- capture _product_container_content -%}
 
   <div class="product-image-gallery">
     {% capture _slides %}
@@ -29,4 +29,11 @@
     {% include 'form-add-to-cart', _product: product %}
   </div>
 
-</section>
+{%- endcapture -%}
+
+{%- include 'product-container',
+  tag: 'section',
+  _product: product,
+  content: _product_container_content -%}
+
+{%- assign _product_container_content = nil -%}

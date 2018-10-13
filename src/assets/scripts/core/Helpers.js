@@ -6,11 +6,18 @@ import { sliderContainers } from 'containers/SliderContainers';
 import { optionGroupContainers } from 'containers/OptionGroupContainers';
 import { quantitySelectContainers } from 'containers/QuantitySelectContainers';
 
+import { variantContainers } from 'containers/VariantContainers';
+import { addToCartContainers } from 'containers/AddToCartContainers';
+import { priceContainers } from 'containers/PriceContainers';
+
 const containers = {
   [bva.product]: productContainers,
   [bva.slider]: sliderContainers,
   [bva.optionGroup]: optionGroupContainers,
   [bva.quantitySelect]: quantitySelectContainers,
+  [bva.variant]: variantContainers,
+  [bva.addToCart]: addToCartContainers,
+  [bva.price]: priceContainers,
 };
 
 export const getAlternativeTemplate = async (resource, templateName, json = false) => {
@@ -34,6 +41,7 @@ export const getContainer = (type, node) => {
 
 export const registerContainer = (node, type, { productContainer, ...initialState }) => {
   const container = containers[type];
+
   if (!container.has(node)) {
     const state = container
       .set(node, new Map([ ...Object.entries(initialState) ]))
@@ -42,5 +50,6 @@ export const registerContainer = (node, type, { productContainer, ...initialStat
       ? productContainers.get(productContainer).get(type).set(node, state).get(node)
       : state;
   }
+
   return containers[type].get(node);
 };

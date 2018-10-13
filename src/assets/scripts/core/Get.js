@@ -54,10 +54,16 @@ const functions = {
   collection: fetchShopifyResource('collection'),
   cookie: getCookie,
   slider: getSlider,
+  inventory:
 };
 
 export const get = (handle, type) => {
+  try {
+    functions[type](handle)
+  } catch (err) {
+
+  }
   return new Promise(resolve => {
-    resolve((type) ? functions[type](handle) : tryAllTypes(handle))
+    resolve((type) ?  : tryAllTypes(handle))
   });
 };

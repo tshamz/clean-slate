@@ -13,12 +13,9 @@
 
 {%- if _errors == '' -%}
 
-  <div
-    class="oo-line-item {{ classes -}}"
-    data-product-container="{{ _line_item.product.handle }}"
-    data-variant-id="{{ _line_item.variant.id }}"
-    {{ extra_attrs -}}>
+  {%- assign _classes = classes | append: ' oo-line-item' -%}
 
+  {%- capture _product_container_content -%}
     {%- include 'image',
       resource: _line_item.product.featured_image,
       size: '800x',
@@ -70,8 +67,18 @@
       extra_attrs: '' -%}
 
     {%- assign _content = nil -%}
+  {%- endcapture -%}
 
-  </div>
+  {%- include 'product-container',
+    tag: 'div',
+    _product: _line_item.product,
+    _variant: _line_item.variant,
+    content: _product_container_content,
+    classes: _classes,
+    extra_attrs: extra_attrs -%}
+
+  {%- assign _classes = nil -%}
+  {%- assign _product_container_content = nil -%}
 
 {%- else -%}
 

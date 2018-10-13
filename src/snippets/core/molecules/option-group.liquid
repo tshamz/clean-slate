@@ -51,9 +51,11 @@
         {%- assign _selected = 'checked' -%}
       {%- endif -%}
 
+
       {%- capture _extra_attrs -%}
         data-option-value="{{- _value | handle -}}"
       {%- endcapture -%}
+
 
       {%- include 'input-group',
         type: 'radio',
