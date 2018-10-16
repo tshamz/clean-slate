@@ -10,29 +10,27 @@ import {
 import { updateSelectedVariant } from 'handlers/VariantHandlers';
 
 import { updateOptionGroupContainer, updateInStockOptionValues } from 'handlers/OptionGroupHandlers';
-import { updateQuantitySelectContainer } from 'handlers/QuantitySelectHandlers';
+import { updateQuantitySelectContainer, updateQuantitySelectUI } from 'handlers/QuantitySelectHandlers';
 
-PubSub.subscribe(bva.optionValueChange, async (message, { container, ...data }) => {
+import { enoughInStock } from 'handlers/InventoryHandlers';
+
+
+PubSub.subscribe(bva.quantityChange, (message, {node, ...data}) => {
   console.log(message, data);
-  await updateOptionGroupContainer(container, data);
-  updateInStockOptionValues(container);
-  // updateSelectedVariant(container);
-  // check if all options are set
-  //   if so, find and update variant id
-  // update in stock on other options
-  // update in stock on addToCart
-  // update slider to specific option value slide
-
+  return enoughInStock(node, data)  // check if there's enough in stock
+    .catch(err => console.log(err))  // if not display error - [optional] display error message
+    .then(updateQuantitySelectContainer(node))  // update container
+    .then(updateQuantitySelectUI(node))  // update input
 });
 
-PubSub.subscribe(bva.quantityChange, (message, {container, ...data}) => {
+PubSub.subscribe(bva.optionValueChange, async (message, {node, ...data}) => {
   console.log(message, data);
-  enoughInStock(container, data.current);
-  // check if there's enough in stock
-  //   if not display error
-  // update input
-  updateQuantitySelectContainer(container, data);  // update container state
-  // [optional] display message like "only 5 more in stock"
+  return updateOptionGroupContainer(node, data)  // update container
+    .then(updateInStockOptionValues(node))  // update in stock on option values
+    .then(updateSelectedVariant)  // update selected variant
+    // .then()  // update in stock on addToCart
+    // .then()  // update slider to specific slide
+    .catch(err => console.log(err))
 });
 
 PubSub.subscribe(bva.addToCartRequest, (message, {container, ...data}) => {

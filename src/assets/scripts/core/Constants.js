@@ -3,6 +3,10 @@ export const addToCartRequest = 'ADD_TO_CART_REQUEST';
 export const addToCartSuccess = 'ADD_TO_CART_SUCCESS';
 export const addToCartError = 'ADD_TO_CART_ERROR';
 
+export const backInStockRequest = 'BACK_IN_STOCK_REQUEST';
+export const backInStockSuccess = 'BACK_IN_STOCK_SUCCESS';
+export const backInStockError = 'BACK_IN_STOCK_ERROR';
+
 export const removeFromCartRequest = 'REMOVE_FROM_CART_REQUEST';
 export const removeFromCartSuccess = 'REMOVE_FROM_CART_SUCCESS';
 export const removeFromCartError = 'REMOVE_FROM_CART_ERROR';

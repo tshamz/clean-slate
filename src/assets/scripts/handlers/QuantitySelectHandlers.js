@@ -14,14 +14,18 @@ export const handleQuantityChange = (container, data) => {
 };
 
 
-export const updateQuantitySelectContainer = (node, data) => {
-  return Promise.resolve(
-    quantitySelectContainers
-      .set(node, updateState(node, bva.quantitySelect, data))
-      .get(node)
-  );
+export const updateQuantitySelectContainer = node => data => {
+  quantitySelectContainers.set(node, updateState(node, bva.quantitySelect, data));
+  return Promise.resolve(data);
+
+  // return Promise.resolve(
+  //   quantitySelectContainers
+  //     .set(node, updateState(node, bva.quantitySelect, data))
+  //     .get(node)
+  // );
 };
 
-export const updateQuantitySelectUI = (node, amount) => {
-  $(node).find(dom.quantityValue).val(amount);
+export const updateQuantitySelectUI = node => ({ quantity }) => {
+  $(node).find(dom.quantityValue).val(quantity);
+  return Promise.resolve(quantity);
 };

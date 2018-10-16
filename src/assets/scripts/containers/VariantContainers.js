@@ -18,7 +18,7 @@ export const getVariant = (node, variantOptions) => {
     .get('options')
     .find(options =>
       Object.entries(options).every(([name, value]) => variantOptions[name] === value));
-  return variantContainer.get('variants').get(optionObject);
+  return variantContainer.get('variants').get(optionObject) || {};
 };
 
 export const registerVariantContainer = node => {

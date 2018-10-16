@@ -3,7 +3,7 @@ import bva from 'core/Constants';
 
 export const bindUIActions = () => {
   $(dom.optionGroupContainer).on('change', event => {
-    const { currentTarget: container, target: { value }} = event;
-    PubSub.publish(bva.optionValueChange, { container, selected: value });
+    const { currentTarget: node, target: { value }} = event;
+    PubSub.publish(bva.optionValueChange, { node, value });
   });
 };

@@ -15,6 +15,9 @@
   &:checked + .oo-label {
     outline: 1px solid rgb(0, 0, 0);
   }
+  &:disabled + .oo-label {
+    opacity: 0.2;
+  }
 }
 
 [data-option-value-container="black"] .oo-label {

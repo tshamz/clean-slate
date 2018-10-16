@@ -9,17 +9,24 @@ import { initPriceContainers } from 'containers/PriceContainers';
 import { initSliderContainers } from 'containers/SliderContainers';
 
 import { updateSelectedVariant } from 'handlers/VariantHandlers';
+import { updateInStockOptionValues } from 'handlers/OptionGroupHandlers';
 
-export const initContainers = async () => {
-  await initProductContainers();
-  await initVariantContainers();
-  await Promise.all([
-    initAddToCartContainers(),
-    initQuantitySelectContainers(),
-    initOptionGroupContainers(),
-    initPriceContainers(),
-    initSliderContainers(),
-  ]);
-
-  $(dom.productContainer).get().forEach(node => updateSelectedVariant(node));
+export const initContainers = () => {
+  return initProductContainers()
+    .then(initVariantContainers)
+    .then(() => {
+      return Promise.all([
+        initAddToCartContainers(),
+        initQuantitySelectContainers(),
+        initOptionGroupContainers(),
+        initPriceContainers(),
+        initSliderContainers(),
+      ]);
+    })
+    .then(() => {
+      $(dom.productContainer).get().forEach(node => {
+        updateInStockOptionValues(node)();
+        updateSelectedVariant(node);
+      });
+    })
 };

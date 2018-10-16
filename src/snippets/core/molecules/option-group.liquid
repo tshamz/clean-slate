@@ -47,17 +47,13 @@
 
     {%- for _value in option.values -%}
 
-{% comment %}
       {%- if option.selected_value == _value -%}
         {%- assign _selected = 'checked' -%}
       {%- endif -%}
-{% endcomment %}
-
 
       {%- capture _extra_attrs -%}
         data-option-value-container="{{- _value | handle -}}"
       {%- endcapture -%}
-
 
       {%- include 'input-group',
         type: 'radio',

@@ -7,12 +7,13 @@ export const quantitySelectContainers = new Map();
 window.q = quantitySelectContainers;
 
 export const getCurrentQuantity = node =>
-  quantitySelectContainers.get(node).get('current') || undefined;
+  quantitySelectContainers.get(node).get('quantity') || undefined;
 
 export const registerQuantitySelectContainer = node => {
   const initialState = {
     productContainer: $(node).closest(dom.productContainer)[0],
-    current: parseInt($(node).find(dom.quantityValue).val(), 10)
+    quantity: parseInt($(node).find(dom.quantityValue).val(), 10),
+    min: 1,
   };
 
   return Promise.resolve(
