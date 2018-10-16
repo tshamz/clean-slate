@@ -23,10 +23,15 @@ export const quantityChange = 'QUANTITY_CHANGE';
 
 
 // Containers
+export const handle = 'HANDLE';
 export const product = 'PRODUCT';
 export const slider = 'SLIDER';
 export const optionGroup = 'OPTION_GROUP';
+export const option = 'OPTION';
+export const options = 'OPTIONS';
 export const variant = 'VARIANT';
+export const variants = 'variants';
+export const selectedVariant = 'SELECTED_VARIANT';
 export const quantitySelect = 'QUANTITY_SELECT';
 export const price = 'PRICE';
 export const addToCart = 'ADD_TO_CART';
@@ -55,12 +60,23 @@ export default {
 
   quantityChange,
 
+  handle,
 
   product,
+
   variant,
-  slider,
+  variants,
+  selectedVariant,
+
   optionGroup,
+  option,
+  options,
+
   quantitySelect,
+
   price,
+
   addToCart,
+
+  slider,
 };

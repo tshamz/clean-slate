@@ -16,7 +16,11 @@ export default {
   productContainer: '[data-product-container]',
   variantContainer: '[data-variant-container]',
   quantitySelectContainer: '[data-quantity-select-container]',
+
   optionGroupContainer: '[data-option-group-container]',
+  optionGroupSelectedValue: '[data-selected-value]',
+  optionValueContainer: '[data-option-value-container]',
+
   sliderContainer: '[data-slider-container]',
   addToCartContainer: '[data-add-to-cart-container]',
   priceContainer: '[data-price-container]',

@@ -4,8 +4,6 @@ import dom from 'core/Dom';
 import bva from 'core/Constants';
 import { uniqueValues, registerContainer } from 'core/Helpers';
 
-import { productContainers, updateProductContainer } from 'containers/ProductContainers';
-
 export const sliderContainers = new Map();
 window.s = sliderContainers;
 

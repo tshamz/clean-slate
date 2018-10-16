@@ -18,7 +18,7 @@
 {%- if _errors == '' -%}
 
   <script type="application/json" data-variant-container>
-  {
+  [
     {%- if _variant == blank -%}
       {%- for _variant in _product.variants -%}
 
@@ -34,7 +34,7 @@
           _variant: _variant -%}
 
     {%- endif -%}
-  }
+  ]
   </script>
 
 {%- else -%}

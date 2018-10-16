@@ -6,6 +6,12 @@
 * use Maps with dom nodes as keys to keep track of different states
 * every snippet needs a `classes` and `extra_attrs` property to prevent fall through from parent snippets
 * use grid
+* log when container has already been registered
+
+* set key on variant map to array of options (instead of node)
+* data on topic publish is product container and node
+* register function takes node, product container, data
+
 
 Product
   • Variant

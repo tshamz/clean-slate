@@ -22,8 +22,6 @@ export const updateAddToCartContainer = (node, data) => {
 export const registerAddToCartContainer = node => {
   const initialState = {
     productContainer: $(node).closest(dom.productContainer)[0],
-    selectedVariant: getSelectedVariant(),
-    quantity: getCurrentQuantity(),
     lineItemProperty: {},
   };
 

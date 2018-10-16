@@ -3,17 +3,15 @@ import bva from 'core/Constants';
 
 import { registerContainer } from 'core/Helpers';
 
-import { getPrice } from 'containers/VariantContainers';
-
 export const priceContainers = new Map();
 window.pr = priceContainers;
 
 export const registerPriceContainer = node => {
   const initialState = {
     productContainer: $(node).closest(dom.productContainer)[0],
-    currentPrice: getPrice().current,
-    lowest: getPrice().lowest,
-    highest: getPrice().highest,
+    price: $(node).find('[data-price="price"]').get(),
+    compareAtPrice: $(node).find('[data-price="compare-at-price"]').get(),
+    linePrice: $(node).find('[data-price="line-price"]').get(),
   };
 
   return Promise.resolve(

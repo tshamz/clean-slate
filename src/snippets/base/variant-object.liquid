@@ -16,21 +16,18 @@
 {%- assign _arguments = nil -%}
 
 {%- if _errors == '' -%}
-
-  "{{- _variant.id -}}": {
+  {
+    "id": {{- _variant.id -}},
+    "price": {{- _variant.price | money_without_currency -}},
     "options": {
       {%- for _option in _product.options -%}
         {%- assign _option_position = 'option' | append: forloop.index -%}
-        "{{ _option }}": "{{ _variant[_option_position] }}"{%- unless forloop.last -%},{%- endunless -%}
+        "{{- _option -}}": "{{- _variant[_option_position] -}}"{%- unless forloop.last -%},{%- endunless -%}
       {%- endfor -%}
     },
-    "inventory": {
-      "available": {{- _variant.available -}},
-      "inventory": {{- _variant.inventory_quantity -}}
-    },
-    "price": {{ _variant.price | money_without_currency }}
+    "inventory": {{- _variant.inventory_quantity -}},
+    "available": {{- _variant.available -}}
   }
-
 {%- else -%}
 
   {{- _errors -}}

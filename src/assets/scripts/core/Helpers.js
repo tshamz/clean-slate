@@ -39,17 +39,29 @@ export const getContainer = (type, node) => {
   return containers[type].get(node);
 };
 
-export const registerContainer = (node, type, { productContainer, ...initialState }) => {
+export const registerContainer = (node, type, initialState) => {
+  const { productContainer } = initialState;
   const container = containers[type];
 
   if (!container.has(node)) {
     const state = container
       .set(node, new Map([ ...Object.entries(initialState) ]))
       .get(node);
-    return (productContainer)
-      ? productContainers.get(productContainer).get(type).set(node, state).get(node)
-      : state;
+
+    if (!productContainer) {
+      return state;
+    } else if (type === bva.variant) {
+      return productContainers.get(productContainer).set(type, state).get(type);
+    } else {
+      return productContainers.get(productContainer).get(type).set(node, state).get(node)
+    }
   }
+
+  console.log(`
+    container of type: ${type}
+    at node: ${node}
+    registered to product-container ${productContainer} already exists
+  `);
 
   return containers[type].get(node);
 };

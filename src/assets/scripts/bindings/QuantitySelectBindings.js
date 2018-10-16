@@ -12,6 +12,6 @@ export const bindUIActions = () => {
     const change = parseInt(self.dataset.quantityControl, 10);
     const quantity = current + change;
 
-    PubSub.publish(bva.quantityChange, { container, quantity });
+    PubSub.publish(bva.quantityChange, { container, current: quantity });
   });
 };
