@@ -42,23 +42,25 @@
 
       </div>
 
-    {%- elsif resource.compare_at_price and compare_at_price == true -%}
-
-      <div class="oo-prices--compare-at-price" data-price="compare-at-price">
-
-        {%- if resource.compare_at_price_varies and range == true -%}
-
-          {{- resource.compare_at_price_min | money }} - {{ resource.compare_at_price_max | money -}}
-
-        {%- else -%}
-
-          {{- resource.compare_at_price | money -}}
-
-        {%- endif -%}
-
-      </div>
-
     {%- else -%}
+
+      {%- if resource.compare_at_price and compare_at_price == true -%}
+
+        <div class="oo-prices--compare-at-price" data-price="compare-at-price">
+
+          {%- if resource.compare_at_price_varies and range == true -%}
+
+            {{- resource.compare_at_price_min | money }} - {{ resource.compare_at_price_max | money -}}
+
+          {%- else -%}
+
+            {{- resource.compare_at_price | money -}}
+
+          {%- endif -%}
+
+        </div>
+
+      {%- endif -%}
 
       <div class="oo-prices--price" data-price="price">
 

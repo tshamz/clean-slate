@@ -1,13 +1,13 @@
 import dom from 'core/Dom';
 import bva from 'core/Constants';
 
-import { getCurrentQuantity } from 'containers/QuantitySelectContainers'
+import { getCurrentQuantity } from 'controls/QuantitySelectControls'
 
 export const bindUIActions = () => {
-  $(dom.quantityControl).on('click', ({ currentTarget: self }) => {
+  $(dom.quantityChange).on('click', ({ currentTarget: self }) => {
     event.preventDefault();
 
-    const node = $(self).closest(dom.quantitySelectContainer)[0];
+    const node = $(self).closest(dom.quantitySelectControl)[0];
     const current = getCurrentQuantity(node);
     const change = parseInt(self.dataset.quantityControl, 10);
     const quantity = current + change;

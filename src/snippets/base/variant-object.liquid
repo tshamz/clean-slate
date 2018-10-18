@@ -19,6 +19,7 @@
   {
     "id": {{- _variant.id -}},
     "price": {{- _variant.price | money_without_currency -}},
+    "compareAtPrice": {%- if _variant.compare_at_price -%}{{- _variant.compare_at_price | money_without_currency -}}{%- else -%}null{%- endif -%},
     "options": {
       {%- for _option in _product.options -%}
         {%- assign _option_position = 'option' | append: forloop.index -%}
@@ -26,7 +27,9 @@
       {%- endfor -%}
     },
     "inventory": {{- _variant.inventory_quantity -}},
-    "available": {{- _variant.available -}}
+    "inventoryPolicy": "{{- _variant.inventory_policy -}}",
+    "available": {{- _variant.available -}},
+    "sku": "{{- _variant.sku -}}"
   }
 {%- else -%}
 

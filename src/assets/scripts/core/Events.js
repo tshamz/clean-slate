@@ -1,79 +1,94 @@
 import bva from 'core/Constants';
 
-import {
-  addToCartHandlers,
-  removeFromCartHandlers,
-  openInlineCartHandlers,
-  closeInlineCartHandlers,
-} from 'handlers/CartHandlers';
-
-import { updateSelectedVariant } from 'handlers/VariantHandlers';
-
-import { updateOptionGroupContainer, updateInStockOptionValues } from 'handlers/OptionGroupHandlers';
-import { updateQuantitySelectContainer, updateQuantitySelectUI } from 'handlers/QuantitySelectHandlers';
-
 import { enoughInStock } from 'handlers/InventoryHandlers';
+import { updateQuantity, updateQuantitySelectUI } from 'handlers/QuantitySelectHandlers';
 
+import {
+  updateSelectedOption,
+  updateOptionGroupUI,
+  updateInStockOptionValues, } from 'handlers/OptionGroupHandlers';
 
-PubSub.subscribe(bva.quantityChange, (message, {node, ...data}) => {
-  console.log(message, data);
-  return enoughInStock(node, data)  // check if there's enough in stock
-    .catch(err => console.log(err))  // if not display error - [optional] display error message
-    .then(updateQuantitySelectContainer(node))  // update container
-    .then(updateQuantitySelectUI(node))  // update input
+import {
+  cartError,
+  genericCartErrorHandler,
+  updateInlineCart,
+  openInlineCart,
+  closeInlineCart,
+  addItemToCart,
+  addToCartSuccess,
+  removeItemFromCart,
+  removeFromCartSuccess,
+  openInlineCartStart,
+  closeInlineCartEnd } from 'handlers/AddToCartHandlers';
+
+PubSub.subscribe(bva.quantityChange, (message, { node, quantity }) => {
+  console.log(message, { node, quantity });
+  return enoughInStock({ node, quantity })  // check if in stock
+    .catch(err => console.log(err))  // if not, display error
+    .then(updateQuantity)  // update store
+    .then(updateQuantitySelectUI)  // update ui
 });
 
-PubSub.subscribe(bva.optionValueChange, async (message, {node, ...data}) => {
-  console.log(message, data);
-  return updateOptionGroupContainer(node, data)  // update container
-    .then(updateInStockOptionValues(node))  // update in stock on option values
-    .then(updateSelectedVariant)  // update selected variant
+PubSub.subscribe(bva.optionValueChange, (message, { node, name, value }) => {
+  console.log(message, { name, value });
+  return updateSelectedOption({ node, name, value })  // update store
+    .then(updateOptionGroupUI)  // update ui
+    .then(updateInStockOptionValues)  // update out of stock values
+    // .then(updateSelectedVariant(node))  // update selected variant
     // .then()  // update in stock on addToCart
     // .then()  // update slider to specific slide
     .catch(err => console.log(err))
 });
 
-PubSub.subscribe(bva.addToCartRequest, (message, {container, ...data}) => {
-  console.log(message, data);
-  return addToCartHandlers.request(data)
-    .then(PubSub.publish(bva.addToCartSuccess, {}))
-    .catch(addToCartHandlers.error);
+PubSub.subscribe(bva.addToCartRequest, (message, { node, ...item }) => {
+  console.log(message, item);
+  return addItemToCart(item)
+    .then(addToCartSuccess)
+    .catch(cartError('add to cart request'));
 });
 
-PubSub.subscribe(bva.addToCartSuccess, (message, {container, ...data}) => {
-  console.log(message, data);
-  return addToCartHandlers.request(data)
-    .then(addToCartHandlers.success)
-    .catch(addToCartHandlers.error);
+PubSub.subscribe(bva.addToCartSuccess, (message, cart) => {
+  console.log(message, cart);
+  return updateInlineCart()
+    .then(openInlineCart)
+    .catch(cartError('add to cart success'));
 });
 
-PubSub.subscribe(bva.removeFromCartRequest, (message, {container, ...data}) => {
-  console.log(message, data);
-  return removeFromCartHandlers.request(data)
-    .then(PubSub.publish(bva.removeFromCartSuccess, {}))
-    .catch(removeFromCartHandlers.error);
+PubSub.subscribe(bva.removeFromCartRequest, (message, { key }) => {
+  console.log(message, key);
+  return removeItemFromCart(key)
+    .then(removeFromCartSuccess)
+    .catch(cartError('remove from cart request'));
 });
 
-PubSub.subscribe(bva.openInlineCartStart, (message, {container, ...data}) => {
-  console.log(message, data);
-  return openInlineCartHandlers.start();
+PubSub.subscribe(bva.removeFromCartSuccess, (message, cart) => {
+  console.log(message, cart);
+  return updateInlineCart()
+    .then(openInlineCart)
+    .catch(cartError('remove from cart success'));
 });
 
-PubSub.subscribe(bva.openInlineCartEnd, (message, {container, ...data}) => {
-  console.log(message, data);
-  return openInlineCartHandlers.end();
+PubSub.subscribe(bva.cartError, (message, error) => {
+  genericCartErrorHandler(error)
 });
 
-PubSub.subscribe(bva.closeInlineCartStart, (message, {container, ...data}) => {
+PubSub.subscribe(bva.openInlineCart, (message, data) => {
   console.log(message, data);
-  return closeInlineCartHandlers.start();
+  // show overlay
+  return openInlineCart()
+    .then(res => {
+      console.log(`openInlineCart done.`);
+    });
 });
 
-PubSub.subscribe(bva.closeInlineCartEnd, (message, {container, ...data}) => {
+PubSub.subscribe(bva.closeInlineCart, (message, data) => {
   console.log(message, data);
-  return closeInlineCartHandlers.end();
+  return closeInlineCart()
+    .then(res => {
+      console.log(`closeInlineCart done.`);
+    });
+  // hide overlay
 });
-
 
 // initSession
 // add

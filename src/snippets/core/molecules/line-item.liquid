@@ -16,13 +16,21 @@
   {%- assign _classes = classes | append: ' oo-line-item' -%}
 
   {%- capture _product_container_content -%}
-    {%- include 'image',
-      resource: _line_item.product.featured_image,
-      size: '800x',
-      srcset: '480x,600x,768x,450x,575x',
-      sizes: 'max 480px 480px,max 600px 600px,max 768px 768px,max 992px 992px,min 993px 575px'
-      classes: 'inside-oo-line-item oo-line-item--image-wrapper',
-      extra_attrs: '' -%}
+    {%- capture _link_content -%}
+      {%- include 'image',
+        resource: _line_item.product.featured_image,
+        size: '800x',
+        srcset: '480x,600x,768x,450x,575x',
+        sizes: 'max 480px 480px,max 600px 600px,max 768px 768px,max 992px 992px,min 993px 575px'
+        classes: 'inside-oo-line-item oo-line-item--image-wrapper',
+        extra_attrs: '' -%}
+    {%- endcapture -%}
+
+    {%- include 'link',
+      href: _line_item.variant.url,
+      content: _link_content -%}
+
+    {%- assign _link_content = nil -%}
 
     <div class="oo-line-item--information-wrapper">
 
@@ -71,8 +79,7 @@
 
   {%- include 'product-container',
     tag: 'div',
-    _product: _line_item.product,
-    _variant: _line_item.variant,
+    _line_item: _line_item,
     content: _product_container_content,
     classes: _classes,
     extra_attrs: extra_attrs -%}

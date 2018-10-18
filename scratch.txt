@@ -762,3 +762,22 @@
 }
 </script>
 
+// const quantitySelectContainers.map(container => {
+  //   const quantityControls = $(container).find(dom.quantityControl).get();
+  //   const decrement = quantityControls.filter(node => node.dataset.quantityControl < 0)[0];
+  //   const increment = quantityControls.filter(node => node.dataset.quantityControl > 0)[0];
+  //   const value = $(container).find(dom.quantityValue)[0];
+  //   return { container, increment, decrement, value };
+  // })
+  // .forEach(([ node, nodes ]) => quantitySelectNodes.set(node, nodes));
+
+
+const normalizeVariantLookupOptions = (node, lookup) => {
+  return get(node, 'store', 'variant', 'options')
+    .reduce((options, { name, position }) => ({ ...options, [name]: lookup[position-1] }), {});
+};
+
+
+// const optionGroupNodes = get(node, 'nodes', 'optionGroup');
+// const selectedValueNode = optionGroupNodes.get(node).selectedValueNode;
+// $(selectedValueNode).html(value);

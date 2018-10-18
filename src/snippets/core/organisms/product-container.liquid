@@ -6,10 +6,14 @@
   {%- include 'argument',
     _value: _product,
     _name: '_product',
-    _required: true -%}
+    _required: false -%}
   {%- include 'argument',
     _value: _variant,
     _name: '_variant',
+    _required: false -%}
+  {%- include 'argument',
+    _value: _line_item,
+    _name: '_line_item',
     _required: false -%}
   {%- include 'argument',
     _value: content,
@@ -27,15 +31,26 @@
 
   <{{- tag }}
     class="oo-product-container {{ classes -}}"
-    data-product-container="{{ _product.handle }}"
+    data-product-container{%- if _line_item != blank -%}="line-item"{%- endif -%}
     {%- if _variant -%}data-variant-id="{{ _variant.id }}"{%- endif -%}
     {{ extra_attrs -}}>
 
     {{- content -}}
 
-    {%- include 'variant',
-      _product: _product,
-      _variant: _variant -%}
+    {%- if _line_item != blank -%}
+
+      {%- include 'variant',
+        _product: _line_item.product,
+        _variant: _line_item.variant,
+        _line_item: _line_item -%}
+
+    {%- else -%}
+
+      {%- include 'variant',
+        _product: _product,
+        _variant: _variant -%}
+
+    {%- endif -%}
 
   </{{- tag -}}>
 

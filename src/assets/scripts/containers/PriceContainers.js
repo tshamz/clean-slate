@@ -1,26 +1,28 @@
 import dom from 'core/Dom';
 import bva from 'core/Constants';
 
-import { registerContainer } from 'core/Helpers';
+import { get } from 'core/Helpers';
 
-export const priceContainers = new Map();
-window.pr = priceContainers;
+export const attachPrice = node => {
+  const priceNodes = get(node, 'nodes', 'price');
+  const priceContainers = $(node).find(dom.priceContainer).get();
 
-export const registerPriceContainer = node => {
-  const initialState = {
-    productContainer: $(node).closest(dom.productContainer)[0],
-    price: $(node).find('[data-price="price"]').get(),
-    compareAtPrice: $(node).find('[data-price="compare-at-price"]').get(),
-    linePrice: $(node).find('[data-price="line-price"]').get(),
-  };
+  priceContainers.forEach(container => {
+    const price = $(container).find(dom.price)[0];
+    const compareAtPrice = $(container).find(dom.compareAtPrice)[0];
+    const linePrice = $(container).find(dom.linePrice)[0];
+    const prices = {
+      ...(price ? { price } : {}),
+      ...(compareAtPrice ? { compareAtPrice } : {}),
+      ...(linePrice ? { linePrice } : {}),
+    };
+    priceNodes.set(container, prices);
+  });
 
-  return Promise.resolve(
-    registerContainer(node, bva.price, initialState)
-  );
+  return Promise.resolve(get(node));
 };
 
-export const initPriceContainers = async () => {
-  return Promise.all(
-    $(dom.priceContainer).get().map(node => registerPriceContainer(node))
-  );
+export const attachPrices = containers => {
+  const nodes = containers.map(container => container.get('node'));
+  return Promise.all(nodes.map(node => attachPrice(node)));
 };

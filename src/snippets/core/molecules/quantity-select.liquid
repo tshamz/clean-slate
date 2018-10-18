@@ -15,13 +15,13 @@
 
   <div
     class="oo-quantity-select {{ classes -}}"
-    data-quantity-select-container
+    data-quantity-select-control
     {{ extra_attrs -}}>
 
     {%- include 'button',
       content: '-',
       classes: 'inside-oo-quantity-select',
-      extra_attrs: 'data-quantity-control="-1"' -%}
+      extra_attrs: 'data-quantity-change=-1' -%}
 
     {%- include 'input',
       type: 'number',
@@ -34,7 +34,7 @@
     {%- include 'button',
       content: '+',
       classes: 'inside-oo-quantity-select',
-      extra_attrs: 'data-quantity-control="1"' -%}
+      extra_attrs: 'data-quantity-change=1' -%}
 
   </div>
 

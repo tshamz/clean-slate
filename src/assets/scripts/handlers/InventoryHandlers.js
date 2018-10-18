@@ -1,17 +1,14 @@
-import { getProductContainer } from 'containers/ProductContainers';
-import { variantContainers } from 'containers/VariantContainers';
+import { get } from 'core/Helpers';
 
-import { getSelectedVariant } from 'handlers/VariantHandlers';
-
-export const enoughInStock = (node, { quantity }) => {
-  const { inventory } = getSelectedVariant(node);
+export const enoughInStock = ({ node, quantity }) => {
+  const { inventory } = get(node, 'store', 'variant', 'selected');
   return new Promise((resolve, reject) => {
     if (quantity < 1) {
-      resolve({ quantity: 1 });
+      resolve({ node, quantity: 1 });
     } else if (!inventory || inventory >= quantity) {
-      resolve({ quantity });
+      resolve({ node, quantity });
     } else {
-      reject({ inventory });
+      reject({ node, inventory });
     }
   });
 };

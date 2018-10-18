@@ -13,23 +13,25 @@
 * register function takes node, product container, data
 
 
-Product
-  • Variant
-    - productContainer
-    - id ==>
-    - optionValues <==
-    - Inventory
-    - available ==>
-    - inventory ==>
+Product Container
+  • variant
+    - options
+    - variantOptions
+    - variants
+    - selected
+  • quantity
+
+???
+  • upsells
+  • gift with purchase
+  • back in stock
+
+Nodes / Controls
   • AddToCart
     - productContainer
     - variantId <==
     - quantity <==
     - lineItemProperty
-  • Slider
-    - productContainer
-    - name
-    - $slider
   • Price
     - productContainer
     - current
@@ -46,18 +48,7 @@ Product
     - selected
     - values ==>
 
-Nodes:
-  • Acted On:
-    - AddToCart
-    - QuantitySelect
-    - OptionGroup
-
-  • Respond to Action:
-    - AddToCart
-    - QuantitySelect
-    - OptionGroup
-    - Price
-    - Slider
-
-Non-Nodes:
-  • Variant
+Slider
+  • productContainer
+  • name
+  • $slider

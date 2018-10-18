@@ -25,6 +25,8 @@ const alias = {
   'bindings': path.resolve('./src/assets/scripts/bindings'),
   'containers': path.resolve('./src/assets/scripts/containers'),
   'handlers': path.resolve('./src/assets/scripts/handlers'),
+  'nodes': path.resolve('./src/assets/scripts/nodes'),
+  'controls': path.resolve('./src/assets/scripts/controls'),
 };
 
 const rules = [

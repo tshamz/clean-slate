@@ -63,7 +63,61 @@
       type: 'submit',
       content: 'Add to Cart',
       classes: 'inside-oo-form-add-to-cart',
-      extra_attrs: 'data-add-to-cart-container' -%}
+      extra_attrs: 'data-add-to-cart-control' -%}
+
+  </form>
+
+  <form
+    class="oo-form {{ classes -}}"
+    method="post"
+    action="/cart/add"
+    accept-charset="UTF-8"
+    enctype="multipart/form-data"
+    data-form="add-to-cart"
+    {{ extra_attrs -}}>
+
+    {%- include 'input',
+      type: 'hidden',
+      name: 'id',
+      value: _product.selected_or_first_available_variant.id,
+      classes: 'inside-oo-form-add-to-cart',
+      extra_attrs: '' -%}
+
+    {%- include 'input',
+      type: 'hidden',
+      name: 'form_type',
+      value: 'product',
+      classes: 'inside-oo-form-add-to-cart',
+      extra_attrs: '' -%}
+
+    {%- include 'input',
+      type: 'hidden',
+      name: 'utf8',
+      value: '✓',
+      classes: 'inside-oo-form-add-to-cart',
+      extra_attrs: '' -%}
+
+    {%- for _option in _product.options_with_values -%}
+
+      {%- include 'option-group',
+        option: _option,
+        show_option_name: true,
+        show_selected_value: true,
+        classes: 'inside-oo-form-add-to-cart',
+        extra_attrs: '' -%}
+
+    {%- endfor -%}
+
+    {%- include 'quantity-select',
+      quantity: 1,
+      classes: 'inside-oo-form-add-to-cart',
+      extra_attrs: '' -%}
+
+    {%- include 'button',
+      type: 'submit',
+      content: 'Add to Cart',
+      classes: 'inside-oo-form-add-to-cart',
+      extra_attrs: 'data-add-to-cart-control' -%}
 
   </form>
 

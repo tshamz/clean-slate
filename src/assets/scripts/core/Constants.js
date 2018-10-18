@@ -1,86 +1,33 @@
 // Events
-export const addToCartRequest = 'ADD_TO_CART_REQUEST';
-export const addToCartSuccess = 'ADD_TO_CART_SUCCESS';
-export const addToCartError = 'ADD_TO_CART_ERROR';
+const cartError = 'CART_ERROR';
+const addToCartRequest = 'ADD_TO_CART_REQUEST';
+const addToCartSuccess = 'ADD_TO_CART_SUCCESS';
+const backInStockRequest = 'BACK_IN_STOCK_REQUEST';
+const backInStockSuccess = 'BACK_IN_STOCK_SUCCESS';
+const backInStockError = 'BACK_IN_STOCK_ERROR';
+const removeFromCartRequest = 'REMOVE_FROM_CART_REQUEST';
+const removeFromCartSuccess = 'REMOVE_FROM_CART_SUCCESS';
+const updateCartRequest = 'UPDATE_CART_REQUEST';
+const updateCartSuccess = 'UPDATE_CART_SUCCESS';
+const openInlineCart = 'OPEN_INLINE_CART';
+const closeInlineCart = 'CLOSE_INLINE_CART';
+const optionValueChange = 'OPTION_VALUE_CHANGE';
+const quantityChange = 'QUANTITY_CHANGE';
 
-export const backInStockRequest = 'BACK_IN_STOCK_REQUEST';
-export const backInStockSuccess = 'BACK_IN_STOCK_SUCCESS';
-export const backInStockError = 'BACK_IN_STOCK_ERROR';
-
-export const removeFromCartRequest = 'REMOVE_FROM_CART_REQUEST';
-export const removeFromCartSuccess = 'REMOVE_FROM_CART_SUCCESS';
-export const removeFromCartError = 'REMOVE_FROM_CART_ERROR';
-
-export const updateCartRequest = 'UPDATE_CART_REQUEST';
-export const updateCartSuccess = 'UPDATE_CART_SUCCESS';
-export const updateCartError = 'UPDATE_CART_ERROR';
-
-export const openInlineCartStart = 'OPEN_INLINE_CART_START';
-export const openInlineCartEnd = 'OPEN_INLINE_CART_END';
-
-export const closeInlineCartStart = 'CLOSE_INLINE_CART_START';
-export const closeInlineCartEnd = 'CLOSE_INLINE_CART_END';
-
-export const optionValueChange = 'OPTION_VALUE_CHANGE';
-
-export const quantityChange = 'QUANTITY_CHANGE';
-
-
-// Containers
-export const handle = 'HANDLE';
-export const product = 'PRODUCT';
-export const slider = 'SLIDER';
-export const optionGroup = 'OPTION_GROUP';
-export const option = 'OPTION';
-export const options = 'OPTIONS';
-export const variant = 'VARIANT';
-export const variants = 'variants';
-export const selectedVariant = 'SELECTED_VARIANT';
-export const quantitySelect = 'QUANTITY_SELECT';
-export const price = 'PRICE';
-export const addToCart = 'ADD_TO_CART';
-export const inventory = 'INVENTORY';
 
 export default {
+  cartError,
   addToCartRequest,
   addToCartSuccess,
-  addToCartError,
-
+  backInStockRequest,
+  backInStockSuccess,
+  backInStockError,
   removeFromCartRequest,
   removeFromCartSuccess,
-  removeFromCartError,
-
   updateCartRequest,
   updateCartSuccess,
-  updateCartError,
-
-  openInlineCartStart,
-  openInlineCartEnd,
-
-  closeInlineCartStart,
-  closeInlineCartEnd,
-
+  openInlineCart,
+  closeInlineCart,
   optionValueChange,
-
   quantityChange,
-
-  handle,
-
-  product,
-
-  variant,
-  variants,
-  selectedVariant,
-
-  optionGroup,
-  option,
-  options,
-
-  quantitySelect,
-
-  price,
-
-  addToCart,
-
-  slider,
 };

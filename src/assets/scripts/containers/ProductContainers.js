@@ -1,35 +1,50 @@
 import dom from 'core/Dom';
 import bva from 'core/Constants';
 
-import { registerContainer } from 'core/Helpers';
-
 export const productContainers = new Map();
 window.p = productContainers;
 
 export const getProductContainer = node => {
   return (productContainers.has(node))
     ? productContainers.get(node)
-    : productContainers.get($(node).closest('[data-product-container]').get(0));
+    : productContainers.get($(node).closest(dom.productContainer)[0]);
 };
 
 export const registerProductContainer = node => {
   const initialState = {
-    [bva.handle]: node.dataset.productContainer,
-    [bva.variant]: new Map(),
-    [bva.optionGroup]: new Map(),
-    [bva.price]: new Map(),
-    [bva.quantitySelect]: new Map(),
-    [bva.addToCart]: new Map(),
-    [bva.slider]: new Map(),
+    node,
+    store: {
+      variant: {
+        options: null,  // []
+        variantOptions: null,  // []
+        variants: null,  // new Map()
+        selected: {
+          variant: null,  // {}
+          options: null,  // {}
+        },
+        lineItem: null,  // Boolean
+      },
+      quantity: null,  // Number
+    },
+    nodes: {
+      addToCart: [],
+      optionGroup: new Map(),
+      optionValue: [],
+      price: new Map(),
+      quantitySelect: [],
+      sliders: new Map(),
+    },
   };
 
-  return Promise.resolve(
-    registerContainer(node, bva.product, initialState)
-  );
+  const productContainer = productContainers
+    .set(node, new Map([ ...Object.entries(initialState) ]))
+    .get(node);
+
+  return Promise.resolve(productContainer);
 };
 
-export const initProductContainers = async () => {
-  return Promise.all(
-    $(dom.productContainer).get().map(node => registerProductContainer(node))
-  );
+export const registerProductContainers = () => {
+  const nodes = $(dom.productContainer).get();
+  const containers = nodes.map(node => registerProductContainer(node));
+  return Promise.all(containers);
 };

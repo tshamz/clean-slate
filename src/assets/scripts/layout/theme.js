@@ -10,7 +10,6 @@ import 'lazysizes';
 import 'lazysizes/plugins/respimg/ls.respimg';
 
 import { focusHash, bindInPageLinks } from '@shopify/theme-a11y';
-import { cookiesEnabled } from '@shopify/theme-cart';
 
 import 'core/Events';
 
@@ -21,13 +20,6 @@ import { initContainers } from 'containers/_InitContainers';
 focusHash();
 bindInPageLinks();
 
-// Apply a specific class to the html element for browser support of cookies.
-if (cookiesEnabled()) {
-  document.documentElement.className = document.documentElement.className.replace(
-    'supports-no-cookies',
-    'supports-cookies',
-  );
-}
 
 document.addEventListener('DOMContentLoaded', async () => {
   initContainers();

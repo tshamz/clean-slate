@@ -2,7 +2,8 @@ import 'slick';
 
 import dom from 'core/Dom';
 import bva from 'core/Constants';
-import { uniqueValues, registerContainer } from 'core/Helpers';
+
+import { get, unique } from 'core/Helpers';
 
 export const sliderContainers = new Map();
 window.s = sliderContainers;
@@ -28,26 +29,32 @@ const getSliderNodes = (sliders, rest) => {
     return $(dom.sliderContainer).get();
   } else {
     const sliderNames = (Array.isArray(sliders)) ? sliders : [ sliders, ...rest ];
-    return uniqueValues(sliderNames).reduce((sliderNodes, sliderName) =>
+    return unique(sliderNames).reduce((sliderNodes, sliderName) =>
       [ ...sliderNodes, ...$(`[data-slider-container="${sliderName}"]`).get() ], []);
   }
 };
 
 export const registerSliderContainer = node => {
+  const productContainer = $(node).closest(dom.productContainer)[0];
   const name = node.dataset.sliderContainer;
-  const initialState = {
-    name,
-    'productContainer': $(node).closest(dom.productContainer)[0],
-    '$slider': $(node).slick(sliderOptions[name] || sliderOptions.default)
-  };
+  const $slider = $(node).slick(sliderOptions[name] || sliderOptions.default);
+  const initialState = { name, productContainer, $slider };
+  const sliderContainer = sliderContainers
+    .set(node, initialState)
+    .get(node);
 
-  return Promise.resolve(
-    registerContainer(node, bva.slider, initialState)
-  );
+  if (productContainer) {
+    const sliders = get(productContainer, 'nodes', 'sliders');
+    sliders.set(node, initialState)
+  }
+
+  return Promise.resolve(sliderContainer);
 };
 
-export const initSliderContainers = async (sliders = '*', ...rest) => {
-  return Promise.all(
-    getSliderNodes(sliders, rest).map(node => registerSliderContainer(node))
-  );
+// export const registerSliderContainers = (sliders = '*', ...rest) => {
+export const registerSliderContainers = () => {
+  // getSliderNodes(sliders, rest)
+  const nodes = $(dom.sliderContainer).get();
+  const containers = nodes.map(node => registerSliderContainer(node));
+  return Promise.all(containers);
 };

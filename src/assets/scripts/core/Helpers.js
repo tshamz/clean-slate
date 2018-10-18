@@ -1,23 +1,13 @@
 import bva from 'core/Constants';
 
-import { productContainers } from 'containers/ProductContainers';
-
-import { sliderContainers } from 'containers/SliderContainers';
-import { optionGroupContainers } from 'containers/OptionGroupContainers';
-import { quantitySelectContainers } from 'containers/QuantitySelectContainers';
-
+import { productContainers, getProductContainer } from 'containers/ProductContainers';
 import { variantContainers } from 'containers/VariantContainers';
-import { addToCartContainers } from 'containers/AddToCartContainers';
-import { priceContainers } from 'containers/PriceContainers';
+import { sliderContainers } from 'containers/SliderContainers';
 
 const containers = {
-  [bva.product]: productContainers,
-  [bva.slider]: sliderContainers,
-  [bva.optionGroup]: optionGroupContainers,
-  [bva.quantitySelect]: quantitySelectContainers,
-  [bva.variant]: variantContainers,
-  [bva.addToCart]: addToCartContainers,
-  [bva.price]: priceContainers,
+  product: productContainers,
+  variant: variantContainers,
+  slider: sliderContainers,
 };
 
 export const getAlternativeTemplate = async (resource, templateName, json = false) => {
@@ -26,7 +16,7 @@ export const getAlternativeTemplate = async (resource, templateName, json = fals
   return await fetch(url, options).then(res => (json) ? res.json() : res.text());
 };
 
-export const uniqueValues = array => {
+export const unique = array => {
   return [ ...new Set(array)];
 };
 
@@ -39,8 +29,30 @@ export const getContainer = (type, node) => {
   return containers[type].get(node);
 };
 
-export const registerContainer = (node, type, initialState) => {
-  const { productContainer } = initialState;
+export const get = (node, ...rest) => {
+  return rest.reduce((current, next)=> {
+    switch (true) {
+      case current instanceof Map:
+        return (current.has(next)) ? current.get(next) : current;
+      case current instanceof Array:
+        return current.map(item => {
+          if (item instanceof Map) {
+            return item.get(next);  // possibly return current instead
+          } else if (item instanceof Object) {
+            return item[next];
+          } else {
+            return item;
+          }
+        })
+      case current instanceof Object:
+        return (current[next]) ? current[next] : current;
+      default:
+        return current;
+    }
+  }, getProductContainer(node));
+};
+
+export const registerContainer = (node, type, initialState, productContainerNode) => {
   const container = containers[type];
 
   if (!container.has(node)) {
@@ -48,20 +60,40 @@ export const registerContainer = (node, type, initialState) => {
       .set(node, new Map([ ...Object.entries(initialState) ]))
       .get(node);
 
-    if (!productContainer) {
-      return state;
-    } else if (type === bva.variant) {
-      return productContainers.get(productContainer).set(type, state).get(type);
-    } else {
-      return productContainers.get(productContainer).get(type).set(node, state).get(node)
+    const productContainer = productContainers.get(productContainerNode);
+
+    if (productContainer) {
+      state.set('product', productContainer);
+      switch (type) {
+        case 'product':
+          return state.set('node', node);
+        case 'variant':
+          return productContainer
+            .set(type, state)
+            .get(type);
+        case 'addToCart':
+        case 'optionGroup':
+        case 'price':
+        case 'quantitySelect':
+        case 'slider':
+          return productContainer
+            .get(type)
+            .get('nodes')
+            .set(node, state)
+            .get(node);
+        default:
+          throw new Error(`container of type: ${type} doesn't exist.`);
+      }
     }
+
+    return state;
   }
 
   console.log(`
     container of type: ${type}
     at node: ${node}
-    registered to product-container ${productContainer} already exists
+    already registered to product-container: ${productContainer}
   `);
 
-  return containers[type].get(node);
+  return container.get(node);
 };
