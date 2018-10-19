@@ -38,13 +38,19 @@ export const registerSliderContainer = node => {
   const productContainer = $(node).closest(dom.productContainer)[0];
   const name = node.dataset.sliderContainer;
   const $slider = $(node).slick(sliderOptions[name] || sliderOptions.default);
-  const initialState = { name, productContainer, $slider };
+
+  const initialState = {
+    name,
+    productContainer,
+    $slider
+  };
+
   const sliderContainer = sliderContainers
     .set(node, initialState)
     .get(node);
 
   if (productContainer) {
-    const sliders = get(productContainer, 'nodes', 'sliders');
+    const sliders = get(productContainer, ['nodes', 'sliders']);
     sliders.set(node, initialState)
   }
 
@@ -53,8 +59,8 @@ export const registerSliderContainer = node => {
 
 // export const registerSliderContainers = (sliders = '*', ...rest) => {
 export const registerSliderContainers = () => {
-  // getSliderNodes(sliders, rest)
-  const nodes = $(dom.sliderContainer).get();
+  const nodes = $(dom.sliderContainer).get();  // getSliderNodes(sliders, rest)
   const containers = nodes.map(node => registerSliderContainer(node));
+
   return Promise.all(containers);
 };

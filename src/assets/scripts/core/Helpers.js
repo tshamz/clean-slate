@@ -1,14 +1,6 @@
 import bva from 'core/Constants';
 
-import { productContainers, getProductContainer } from 'containers/ProductContainers';
-import { variantContainers } from 'containers/VariantContainers';
-import { sliderContainers } from 'containers/SliderContainers';
-
-const containers = {
-  product: productContainers,
-  variant: variantContainers,
-  slider: sliderContainers,
-};
+import { getProductContainer } from 'containers/ProductContainers';
 
 export const getAlternativeTemplate = async (resource, templateName, json = false) => {
   const url = `/${resource}?view=${templateName}`;
@@ -17,83 +9,61 @@ export const getAlternativeTemplate = async (resource, templateName, json = fals
 };
 
 export const unique = array => {
-  return [ ...new Set(array)];
+  return [ ...new Set(array) ];
 };
 
-export const updateState = (node, type, updates) => {
-  const state = containers[type].get(node);
-  return Object.entries(updates).reduceRight((_, update, index) => state.set(...update), state);
-};
+export const get = (node, properties = [], options) => {
+  return properties.reduce((current, next, index, self) => {
+    let returnedValue;
 
-export const getContainer = (type, node) => {
-  return containers[type].get(node);
-};
-
-export const get = (node, ...rest) => {
-  return rest.reduce((current, next)=> {
     switch (true) {
       case current instanceof Map:
-        return (current.has(next)) ? current.get(next) : current;
+        returnedValue = (current.has(next)) ? current.get(next) : current;
+        break;
       case current instanceof Array:
-        return current.map(item => {
+        returnedValue = current.map(item => {
           if (item instanceof Map) {
-            return item.get(next);  // possibly return current instead
+            returnedValue = item.get(next);  // possibly returnedValue = current instead
           } else if (item instanceof Object) {
-            return item[next];
+            returnedValue = item[next];
           } else {
-            return item;
+            returnedValue = item;
           }
-        })
+        });
+        break;
       case current instanceof Object:
-        return (current[next]) ? current[next] : current;
+        if (current[next]) {
+          returnedValue = current[next];
+        } else {
+          returnedValue = current;
+        }
+        break;
       default:
-        return current;
+        returnedValue = current;
+        break;
     }
-  }, getProductContainer(node));
-};
 
-export const registerContainer = (node, type, initialState, productContainerNode) => {
-  const container = containers[type];
-
-  if (!container.has(node)) {
-    const state = container
-      .set(node, new Map([ ...Object.entries(initialState) ]))
-      .get(node);
-
-    const productContainer = productContainers.get(productContainerNode);
-
-    if (productContainer) {
-      state.set('product', productContainer);
-      switch (type) {
-        case 'product':
-          return state.set('node', node);
-        case 'variant':
-          return productContainer
-            .set(type, state)
-            .get(type);
-        case 'addToCart':
-        case 'optionGroup':
-        case 'price':
-        case 'quantitySelect':
-        case 'slider':
-          return productContainer
-            .get(type)
-            .get('nodes')
-            .set(node, state)
-            .get(node);
-        default:
-          throw new Error(`container of type: ${type} doesn't exist.`);
+    if (index === self.length - 1 && options) {
+      if (returnedValue instanceof Map) {
+        if (options.keys) {
+          returnedValue = Array.from(returnedValue.keys());
+        } else if (options.values) {
+          returnedValue = Array.from(returnedValue.values());
+        } else if (options.entries) {
+          returnedValue = Array.from(returnedValue);
+        }
+      } else if (!returnedValue instanceof Array && returnedValue instanceof Object) {
+        if (options.keys) {
+          returnedValue = Object.keys(returnedValue);
+        } else if (options.values) {
+          returnedValue = Object.values(returnedValue);
+        } else if (options.entries) {
+          returnedValue = Object.entries(returnedValue);
+        }
       }
     }
 
-    return state;
-  }
+    return returnedValue;
 
-  console.log(`
-    container of type: ${type}
-    at node: ${node}
-    already registered to product-container: ${productContainer}
-  `);
-
-  return container.get(node);
+  }, getProductContainer(node));
 };

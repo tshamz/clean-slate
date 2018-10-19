@@ -2,46 +2,40 @@ import dom from 'core/Dom';
 
 import { registerProductContainers } from 'containers/ProductContainers';
 import { registerSliderContainers } from 'containers/SliderContainers';
-import { attachVariants, setInitialSelectedVariantAndOptions } from 'containers/VariantContainers';
-import { attachPrices } from 'containers/PriceContainers';
 
-import { attachQuantitySelects, setQuantityInitialState } from 'controls/QuantitySelectControls';
+import { attachVariants, setInitialSelectedVariantAndOptions } from 'containers/VariantContainers';
 import { attachAddToCarts } from 'controls/AddToCartControls';
 import { attachOptionGroups } from 'controls/OptionGroupControls';
-import { attachOptionValues } from 'controls/OptionValueControls';
+import { attachOptionValues, setOptionValueInitialState  } from 'controls/OptionValueControls';
+import { attachPrices } from 'containers/PriceContainers';
+import { attachQuantitySelects, setQuantityInitialState } from 'controls/QuantitySelectControls';
 
 export const initContainers = async () => {
+  const nodes = $(dom.productContainer).get();
 
-  await registerProductContainers()
+  await registerProductContainers(nodes)
     .then(attachVariants)
     .then(setInitialSelectedVariantAndOptions)
     .then(attachQuantitySelects)
     .then(setQuantityInitialState)
     .then(attachOptionGroups)
     .then(attachOptionValues)
+    .then(setOptionValueInitialState)
     .then(attachPrices)
     .then(attachAddToCarts)
 
   registerSliderContainers();
+};
 
-
-    // .then(initVariantContainers)
-    // .then(() => {
-    //   return Promise.all([
-    //     initAddToCartContainers(),
-    //     initQuantitySelectContainers()
-    //       .then(setQuantityInitialState),
-    //     initOptionGroupContainers()
-    //       .then(setOptionGroupInitialState)
-    //       .then(updateInStockOptionValues),
-    //     initPriceContainers(),
-    //     initSliderContainers(),
-    //   ]);
-    // })
-    // .then(() => {
-    //   $(dom.productContainer).get().forEach(node => {
-    //     updateInStockOptionValues(node);
-    //     updateSelectedVariant(node);
-    //   });
-    // })
+export const initializeProductContainer = node => {
+  return registerProductContainers([node])
+    .then(attachVariants)
+    .then(setInitialSelectedVariantAndOptions)
+    .then(attachQuantitySelects)
+    .then(setQuantityInitialState)
+    .then(attachOptionGroups)
+    .then(attachOptionValues)
+    .then(setOptionValueInitialState)
+    .then(attachPrices)
+    .then(attachAddToCarts)
 };

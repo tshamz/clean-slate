@@ -3,50 +3,55 @@ import bva from 'core/Constants';
 
 import { get } from 'core/Helpers';
 
-export const getVariant = (node, options) => {
-  const variant = get(node, 'store', 'variant');
-  const matchingOption = variant.variantOptions
-    .find(option => Object.entries(option).every(([ name, value ]) => options[name] === value));
-  return variant.variants.get(matchingOption);
-};
-
-export const getSelectedVariant = node => {
-  const selectedOptions = get(node, 'store', 'variant', 'selected', 'options');
-  return getVariant(node, selectedOptions);
-};
+import { getVariant, updateStore } from 'handlers/ProductContainerHandlers';
 
 export const attachVariantData = node => {
   const variantContainer = $(node).find(dom.variantContainer)[0].innerHTML;
-  const variantStore = get(node, 'store', 'variant');
-  const { options, variants: variantObjects, lineItem = null } = JSON.parse(variantContainer);
-  const variantOptions = variantObjects.map(({ options }) => options);
-  const variants = variantObjects.reduce((variants, variant) =>
+  const optionStore = get(node, ['store', 'option']);
+  const variantStore = get(node, ['store', 'variant']);
+  const lineItemStore = get(node, ['store', 'lineItem']);
+
+  const { options, variants, lineItem } = JSON.parse(variantContainer);
+  const variantOptions = variants.map(({ options }) => options);
+  const variantsMap = variants.reduce((variants, variant) =>
     variants.set(variant.options, variant), new Map());
 
-  variantStore.options = options;
+  optionStore.options = options;
   variantStore.variantOptions = variantOptions;
-  variantStore.variants = variants;
-  variantStore.lineItem = lineItem;
+  variantStore.variants = variantsMap;
 
-  return Promise.resolve(get(node));
+  if (lineItem) {
+    const { key, properties } = lineItem;
+    lineItemStore.key = key;
+    lineItemStore.properties = properties;
+    lineItemStore.variant = variantStore.variants[0];
+  }
+
+  // return Promise.resolve(get(node));
+  return Promise.resolve(node);
 };
 
-export const attachVariants = containers => {
-  const nodes = containers.map(container => container.get('node'));
-  return Promise.all(nodes.map(node => attachVariantData(node)));
+// export const attachVariants = containers => {
+export const attachVariants = nodes => {
+  // const nodes = containers.map(({ node }) => node);
+  return Promise.all(
+    nodes.map(node => attachVariantData(node))
+  );
 };
 
-export const setInitialSelectedVariantAndOptions = containers => {
-  containers.forEach(container => {
-    const node = container.get('node');
-    const options = get(node, 'store', 'variant', 'options');
-    const initiallySelectedOptions = options.reduce((selected, { name, initialValue }) =>
+// export const setInitialSelectedVariantAndOptions = containers => {
+export const setInitialSelectedVariantAndOptions = nodes => {
+  // containers.forEach(({ node }) => {
+  nodes.forEach(node => {
+    const optionStore = get(node, ['store', 'option']);
+    const variantStore = get(node, ['store', 'variant']);
+    const initiallySelectedOptions = optionStore.options.reduce((selected, { name, initialValue }) =>
       ({ ...selected, [name]: initialValue }), {});
-    const selectedVariant = getVariant(node, initiallySelectedOptions);
-
-    const variantStore = get(node, 'store', 'variant');
-    variantStore.selected.variant = selectedVariant;
-    variantStore.selected.options = initiallySelectedOptions;
+    const initiallySelectedVariant = getVariant(node, initiallySelectedOptions);
+    variantStore.selected = initiallySelectedVariant;
+    optionStore.selected = initiallySelectedOptions;
   });
-  return Promise.resolve(containers);
+
+  // return Promise.resolve(containers);
+  return Promise.resolve(nodes);
 };

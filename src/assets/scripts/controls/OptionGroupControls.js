@@ -1,26 +1,33 @@
 import dom from 'core/Dom';
 import bva from 'core/Constants';
 
-import { get } from 'core/Helpers';
+import { get, } from 'core/Helpers';
 
 export const attachOptionGroup = node => {
-  const optionGroupNodes = get(node, 'nodes', 'optionGroup');
-  const optionGroupContainers = $(node).find(dom.optionGroupControl).get();
+  const optionGroupControls = $(node).find(dom.optionGroupControl).get();
+  const optionGroupNodes = get(node, ['nodes', 'optionGroup']);
 
-  optionGroupContainers.forEach(container => {
-    const optionValueControls = $(container).find(dom.optionValueControl).get();
-    const selectedValueNode = $(container).find(dom.optionGroupSelectedValue)[0];
+  optionGroupControls.forEach(control => {
+    const name = control.dataset.optionGroupControl;
+    const selectedValueNode = $(control).find(dom.optionGroupSelectedValue)[0];
     const optionGroup = {
-      optionValueControls,
-      ...(selectedValueNode ? { selectedValueNode } : {}),
+      name,
+      nodes: {
+        self: control,
+        selectedValue: selectedValueNode
+      }
     };
-    optionGroupNodes.set(container, optionGroup);
+    optionGroupNodes.set(control, optionGroup);
   });
 
-  return Promise.resolve(get(node));
+  // return Promise.resolve(get(node));
+  return Promise.resolve(node);
 };
 
-export const attachOptionGroups = containers => {
-  const nodes = containers.map(container => container.get('node'));
-  return Promise.all(nodes.map(node => attachOptionGroup(node)));
+// export const attachOptionGroups = containers => {
+export const attachOptionGroups = nodes => {
+  // const nodes = containers.map(({ node }) => node);
+  return Promise.all(
+    nodes.map(node => attachOptionGroup(node))
+  );
 };

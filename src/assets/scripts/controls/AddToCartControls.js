@@ -3,25 +3,27 @@ import bva from 'core/Constants';
 
 import { get } from 'core/Helpers';
 
-export const updateAddToCartContainer = (node, data) => {
-  if (addToCartContainers.has(node)) {
-    return Promise.resolve(
-      addToCartContainers
-        .set(node, updateState(node, 'addToCart', data))
-        .get(node)
-    );
-  }
-  return Promise.resolve();
-};
-
 export const attachAddToCart = node => {
-  const productContainerNodes = get(node, 'nodes');
-  const addToCartContainers = $(node).find(dom.addToCartControl).get();
-  productContainerNodes.addToCart = [ ...addToCartContainers ];
-  return Promise.resolve(get(node));
+  const addToCartControls = $(node).find(dom.addToCartControl).get();
+  const addToCartNodes = get(node, ['nodes', 'addToCart']);
+
+  addToCartControls.forEach(control => {
+    const addToCart = {
+      nodes: {
+        self: control,
+      }
+    };
+    addToCartNodes.set(control, addToCart);
+  });
+
+  // return Promise.resolve(get(node));
+  return Promise.resolve(node);
 };
 
-export const attachAddToCarts = containers => {
-  const nodes = containers.map(container => container.get('node'));
-  return Promise.all(nodes.map(node => attachAddToCart(node)));
+// export const attachAddToCarts = containers => {
+export const attachAddToCarts = nodes => {
+  // const nodes = containers.map(({ node }) => node);
+  return Promise.all(
+    nodes.map(node => attachAddToCart(node))
+  );
 };

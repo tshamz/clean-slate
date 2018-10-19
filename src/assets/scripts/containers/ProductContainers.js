@@ -14,37 +14,46 @@ export const registerProductContainer = node => {
   const initialState = {
     node,
     store: {
-      variant: {
-        options: null,  // []
-        variantOptions: null,  // []
-        variants: null,  // new Map()
-        selected: {
-          variant: null,  // {}
-          options: null,  // {}
-        },
-        lineItem: null,  // Boolean
+      option: {
+        selected: null,        // {}
+        options: null,         // []
+        values: null,          // []
       },
-      quantity: null,  // Number
+      variant: {
+        selected: null,        // {}
+        variantOptions: null,  // []
+        variants: null,        // new Map()
+      },
+      lineItem: {
+        key: null,             // String
+        variant: null,         // {}
+        properties: null,      // []
+      },
+      quantity: null,          // Number
     },
     nodes: {
-      addToCart: [],
+      addToCart: new Map(),
       optionGroup: new Map(),
-      optionValue: [],
+      optionValue: new Map(),
       price: new Map(),
-      quantitySelect: [],
+      quantitySelect: new Map(),
       sliders: new Map(),
     },
   };
 
   const productContainer = productContainers
-    .set(node, new Map([ ...Object.entries(initialState) ]))
+    .set(node, initialState)
     .get(node);
 
-  return Promise.resolve(productContainer);
+  // return Promise.resolve(productContainer);
+  return Promise.resolve(node);
 };
 
-export const registerProductContainers = () => {
-  const nodes = $(dom.productContainer).get();
-  const containers = nodes.map(node => registerProductContainer(node));
-  return Promise.all(containers);
+// export const registerProductContainers = containers => {
+export const registerProductContainers = nodes => {
+  // const containers = nodes.map(node => registerProductContainer(node));
+  // return Promise.all(containers);
+  return Promise.all(
+    nodes.map(node => registerProductContainer(node))
+  );
 };

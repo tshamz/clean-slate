@@ -1,82 +1,55 @@
 import dom from 'core/Dom';
 import bva from 'core/Constants';
 
-import { get, removeUndefinedValues, updateState } from 'core/Helpers';
+import { get } from 'core/Helpers';
+
+import { getOutOfStockOptionValues } from 'handlers/InventoryHandlers';
 
 export const getSelectedOptions = node =>
- get(node, 'optionGroup', 'selected');
+  get(node, ['store', 'option', 'selected']);
 
-export const getAllOptionGroupValues = node => {
-  // const optionGroupContainers = get(node, 'optionGroup', 'nodes');
-  // return Array.from(optionGroupContainers.values())
-  //   .reduce((values, optionGroupContainer) => [...values, ...optionGroupContainer.get('values')], []);
-};
+export const updateInStockOptionValues = node => {
+  const valueNodes = get(node, ['nodes', 'optionValue'], {keys: true});
+  const disabledValues = getOutOfStockOptionValues(node);
+  const disabledNodes = disabledValues.map(({ name, value }) => {
+    const match = get(node, ['nodes', 'optionValue'], {values: true})
+      .find(({ name: optionName, value: optionValue }) => name === optionName && value === optionValue);
 
-const getDisabledOptionValues = node => {
-  const selectedOptions = get(node, 'store', 'variant', 'selected', 'options');
-  // console.log(selectedOptions);
-  const optionGroupValuesNodes = get(node, 'nodes', 'optionValue');
-  // console.log(optionGroupValuesNodes);
-  const variants = Array.from(get(node, 'store', 'variant', 'variants').values());
-  // console.log(variants);
-
-  optionGroupValuesNodes.filter(({ name, value }) => {
-    const a = variants.filter(({ options }) => {
-      const updatedOptions = { ...selectedOptions, [name]: value };
-      // console.log(updatedOptions);
-      const e = Object.entries(updatedOptions);
-      // console.log(e);
-      return e.every(([ name, value ]) => options[name] === value);
-    });
-    console.log(a);
-    a.every(variant => !variant.available);
+    return match.nodes.self;
   });
-  // return optionGroupValues.filter(([ node, { name, value, variants } ]) => {
-  //   return variants.filter(({ options }) => {
-  //     const cloneSelectOptions = new Map(selectedOptions).set(name, value);
-  //     return Array.from(cloneSelectOptions.entries())
-  //       .every(([ name, value ]) => options[name] === value);
-  //   })
-  //   .every(variant => !variant.available);
-  // });
-};
 
-// export const updateInStockOptionValues = (node, property = true, className = 'disabled') => {
-export const updateInStockOptionValues = ({ node, name, value }) => {
-  const optionGroupValuesNodes = get(node, 'nodes', 'optionValue');
-  const $valueNodes = $(optionGroupValuesNodes);
+  const $valueNodes = $(valueNodes);
+  const $disabledNodes = $(disabledNodes);
 
-  const disabledOptionValues = getDisabledOptionValues(node);
+  const property = true;
+  const className = 'disabled';
 
-  console.log(disabledOptionValues);
+  if (property) {
+    $valueNodes.prop('disabled', false);
+    $disabledNodes.prop('disabled', true);
+  }
 
-  // const disabledOptionNodes = disabledOptionValues.map(([node, info]) => node);
-  // const $disabledValueNodes = $(disabledOptionNodes);
-
-  // if (property) {
-  //   $valueNodes.find('input').prop('disabled', false);
-  //   $disabledValueNodes.find('input').prop('disabled', true);
-  // }
-
-  // if (className) {
-  //   $valueNodes.removeClass(className);
-  //   $disabledValueNodes.addClass(className);
-  // }
+  if (className) {
+    $valueNodes.removeClass(className);
+    $disabledNodes.addClass(className);
+  }
 
   return Promise.resolve(node);
 };
 
 export const updateSelectedOption = ({ node, name, value }) => {
-  const selectedValues = get(node, 'store', 'variant', 'selected');
-  selectedValues.options = { ...selectedValues.options, [name]: value };
+  const optionStore = get(node, ['store', 'option']);
+  optionStore.selected = { ...optionStore.selected, [name]: value };
+
   return Promise.resolve({ node, name, value });
 };
 
 export const updateOptionGroupUI = ({ node, name, value }) => {
-  const container = get(node).get('node');
+  const container = get(node, ['node']);
   const optionGroups = $(container).find(dom.optionGroupControl).get();
   const filteredOptionGroups = optionGroups.filter(node => node.dataset.optionGroupControl === name);
   $(filteredOptionGroups).find(dom.optionGroupSelectedValue).html(value);
   $(container).find(`input[name="${name}"][value="${value}"]`).prop('checked', true);
-  return Promise.resolve({ node, name, value });
+
+  return Promise.resolve(node);
 };

@@ -2,6 +2,7 @@ import bva from 'core/Constants';
 
 import { enoughInStock } from 'handlers/InventoryHandlers';
 import { updateQuantity, updateQuantitySelectUI } from 'handlers/QuantitySelectHandlers';
+import { updateSelectedVariant } from 'handlers/ProductContainerHandlers';
 
 import {
   updateSelectedOption,
@@ -11,7 +12,7 @@ import {
 import {
   cartError,
   genericCartErrorHandler,
-  updateInlineCart,
+  updateInlineCartUI,
   openInlineCart,
   closeInlineCart,
   addItemToCart,
@@ -19,24 +20,25 @@ import {
   removeItemFromCart,
   removeFromCartSuccess,
   openInlineCartStart,
-  closeInlineCartEnd } from 'handlers/AddToCartHandlers';
+  reRegisterLineItems,
+  closeInlineCartEnd } from 'handlers/CartHandlers';
 
 PubSub.subscribe(bva.quantityChange, (message, { node, quantity }) => {
   console.log(message, { node, quantity });
   return enoughInStock({ node, quantity })  // check if in stock
-    .catch(err => console.log(err))  // if not, display error
-    .then(updateQuantity)  // update store
-    .then(updateQuantitySelectUI)  // update ui
+    .catch(err => console.log(err))         // if not, display error
+    .then(updateQuantity)                   // update store
+    .then(updateQuantitySelectUI)           // update ui
 });
 
 PubSub.subscribe(bva.optionValueChange, (message, { node, name, value }) => {
   console.log(message, { name, value });
   return updateSelectedOption({ node, name, value })  // update store
-    .then(updateOptionGroupUI)  // update ui
-    .then(updateInStockOptionValues)  // update out of stock values
-    // .then(updateSelectedVariant(node))  // update selected variant
-    // .then()  // update in stock on addToCart
-    // .then()  // update slider to specific slide
+    .then(updateOptionGroupUI)                        // update ui
+    .then(updateInStockOptionValues)                  // update out of stock values
+    .then(updateSelectedVariant)                      // update selected variant
+    // .then()                                        // update in stock on addToCart
+    // .then()                                        // update slider to specific slide
     .catch(err => console.log(err))
 });
 
@@ -49,7 +51,8 @@ PubSub.subscribe(bva.addToCartRequest, (message, { node, ...item }) => {
 
 PubSub.subscribe(bva.addToCartSuccess, (message, cart) => {
   console.log(message, cart);
-  return updateInlineCart()
+  return updateInlineCartUI()
+    .then(reRegisterLineItems)
     .then(openInlineCart)
     .catch(cartError('add to cart success'));
 });
@@ -63,7 +66,8 @@ PubSub.subscribe(bva.removeFromCartRequest, (message, { key }) => {
 
 PubSub.subscribe(bva.removeFromCartSuccess, (message, cart) => {
   console.log(message, cart);
-  return updateInlineCart()
+  return updateInlineCartUI()
+    .then(reRegisterLineItems)
     .then(openInlineCart)
     .catch(cartError('remove from cart success'));
 });

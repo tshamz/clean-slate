@@ -11,44 +11,15 @@
 * set key on variant map to array of options (instead of node)
 * data on topic publish is product container and node
 * register function takes node, product container, data
+* update code to remove jquery
+  - https://github.com/nefe/You-Dont-Need-jQuery
+  - http://youmightnotneedjquery.com/
+  - $().closest => el.closest
+  - $().find => el.querySelectorAll
+* make some of the helper/facade functions chainable
 
-
-Product Container
-  • variant
-    - options
-    - variantOptions
-    - variants
-    - selected
-  • quantity
 
 ???
   • upsells
   • gift with purchase
   • back in stock
-
-Nodes / Controls
-  • AddToCart
-    - productContainer
-    - variantId <==
-    - quantity <==
-    - lineItemProperty
-  • Price
-    - productContainer
-    - current
-    - min
-    - max <==
-  • QuantitySelect
-    - productContainer
-    - current
-    - max <== Inventory
-    - min
-  • OptionGroup
-    - productContainer
-    - name
-    - selected
-    - values ==>
-
-Slider
-  • productContainer
-  • name
-  • $slider

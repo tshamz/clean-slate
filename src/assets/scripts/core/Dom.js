@@ -23,4 +23,6 @@ export default {
   quantitySelectControl: '[data-quantity-select-control]',
   quantityValue: '[data-quantity-value]',
   quantityChange: '[data-quantity-change]',
+
+  cartRemoveItem: '[data-cart-remove-item]'
 };
