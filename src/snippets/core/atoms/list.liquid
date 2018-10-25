@@ -15,7 +15,7 @@
 
   <ul class="oo-list {{ classes -}}" {{ extra_attrs -}}>
 
-    {%- assign _list_array = list | remove_first: '-->' | split: '-->' -%}
+    {%- assign _list_array = content | remove_first: '-->' | split: '-->' -%}
     {%- for _item in _list_array -%}
 
       <li class="oo-list--item">
