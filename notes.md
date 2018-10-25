@@ -23,3 +23,6 @@
   • upsells
   • gift with purchase
   • back in stock
+
+Note to Self 10/24/19
+write set function in Helpers.js

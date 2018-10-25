@@ -12,6 +12,23 @@ export const unique = array => {
   return [ ...new Set(array) ];
 };
 
+export const set = (node, properties = [], value) => {
+  const setProperty = properties.pop();
+  const container = get(node, properties);
+  switch (true) {
+    case container instanceof Map:
+      return container.set(setProperty, value);
+    case container instanceof Array:
+      // return container[setProperty] = value;
+    case container instanceof Object:
+      return container[setProperty] = value;
+  
+    default:
+      
+      break;
+    }
+};
+
 export const get = (node, properties = [], options) => {
   return properties.reduce((current, next, index, self) => {
     let returnedValue;
