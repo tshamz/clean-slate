@@ -12,23 +12,6 @@ export const unique = array => {
   return [ ...new Set(array) ];
 };
 
-export const set = (node, properties = [], value) => {
-  const setProperty = properties.pop();
-  const container = get(node, properties);
-  switch (true) {
-    case container instanceof Map:
-      return container.set(setProperty, value);
-    case container instanceof Array:
-      // return container[setProperty] = value;
-    case container instanceof Object:
-      return container[setProperty] = value;
-  
-    default:
-      
-      break;
-    }
-};
-
 export const get = (node, properties = [], options) => {
   return properties.reduce((current, next, index, self) => {
     let returnedValue;
@@ -83,4 +66,36 @@ export const get = (node, properties = [], options) => {
     return returnedValue;
 
   }, getProductContainer(node));
+};
+
+export const set = (node, properties = [], {key, value}) => {
+  const target = get(node, properties);
+
+  switch (true) {
+    case target instanceof Map:
+      target.set(key, value);
+      break;
+    case target instanceof Object:
+      target[key] = value;
+      break;
+  }
+
+  return Promise.resolve(node);
+};
+
+export const set2 = (node, properties = [], value) => {
+  const setProperty = properties.pop();
+  const container = get(node, properties);
+  switch (true) {
+    case container instanceof Map:
+      return container.set(setProperty, value);
+    case container instanceof Array:
+      // return container[setProperty] = value;
+    case container instanceof Object:
+      return container[setProperty] = value;
+
+    default:
+
+      break;
+    }
 };

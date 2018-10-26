@@ -1,11 +1,10 @@
 import dom from 'core/Dom';
 import bva from 'core/Constants';
 
-import { get, } from 'core/Helpers';
+import { get, set } from 'core/Helpers';
 
 export const attachOptionGroup = node => {
   const optionGroupControls = $(node).find(dom.optionGroupControl).get();
-  const optionGroupNodes = get(node, ['nodes', 'optionGroup']);
 
   optionGroupControls.forEach(control => {
     const name = control.dataset.optionGroupControl;
@@ -17,16 +16,13 @@ export const attachOptionGroup = node => {
         selectedValue: selectedValueNode
       }
     };
-    optionGroupNodes.set(control, optionGroup);
+    set(node, ['nodes', 'optionGroup'], {key: control, value: optionGroup});
   });
 
-  // return Promise.resolve(get(node));
   return Promise.resolve(node);
 };
 
-// export const attachOptionGroups = containers => {
 export const attachOptionGroups = nodes => {
-  // const nodes = containers.map(({ node }) => node);
   return Promise.all(
     nodes.map(node => attachOptionGroup(node))
   );

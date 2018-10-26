@@ -1,10 +1,9 @@
 import dom from 'core/Dom';
 import bva from 'core/Constants';
 
-import { get } from 'core/Helpers';
+import { get, set } from 'core/Helpers';
 
 export const attachPrice = node => {
-  const priceNodes = get(node, ['nodes', 'price']);
   const priceContainers = $(node).find(dom.priceContainer).get();
 
   priceContainers.forEach(container => {
@@ -18,16 +17,14 @@ export const attachPrice = node => {
         linePrice,
       }
     };
-    priceNodes.set(container, prices);
+
+    set(node, ['nodes', 'price'], {key: container, value: prices})
   });
 
-  // return Promise.resolve(get(node));
   return Promise.resolve(node);
 };
 
-// export const attachPrices = containers => {
 export const attachPrices = nodes => {
-  // const nodes = containers.map(({ node }) => node);
   return Promise.all(
     nodes.map(node => attachPrice(node))
   );

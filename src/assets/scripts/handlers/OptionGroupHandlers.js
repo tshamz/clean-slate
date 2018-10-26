@@ -1,7 +1,7 @@
 import dom from 'core/Dom';
 import bva from 'core/Constants';
 
-import { get } from 'core/Helpers';
+import { get, set } from 'core/Helpers';
 
 import { getOutOfStockOptionValues } from 'handlers/InventoryHandlers';
 
@@ -38,8 +38,7 @@ export const updateInStockOptionValues = node => {
 };
 
 export const updateSelectedOption = ({ node, name, value }) => {
-  const optionStore = get(node, ['store', 'option']);
-  optionStore.selected = { ...optionStore.selected, [name]: value };
+  set(node, ['store', 'option'], {key: 'selected', value: { ...optionStore.selected, [name]: value }})
 
   return Promise.resolve({ node, name, value });
 };

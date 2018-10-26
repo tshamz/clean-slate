@@ -29,7 +29,9 @@ export const registerProductContainer = node => {
         variant: null,         // {}
         properties: null,      // []
       },
-      quantity: null,          // Number
+      quantity: {
+        current: null          // Number
+      },
     },
     nodes: {
       addToCart: new Map(),
@@ -41,18 +43,12 @@ export const registerProductContainer = node => {
     },
   };
 
-  const productContainer = productContainers
-    .set(node, initialState)
-    .get(node);
+  productContainers.set(node, initialState);
 
-  // return Promise.resolve(productContainer);
   return Promise.resolve(node);
 };
 
-// export const registerProductContainers = containers => {
 export const registerProductContainers = nodes => {
-  // const containers = nodes.map(node => registerProductContainer(node));
-  // return Promise.all(containers);
   return Promise.all(
     nodes.map(node => registerProductContainer(node))
   );

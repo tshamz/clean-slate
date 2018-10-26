@@ -24,21 +24,12 @@ export const getAddToCartDetails = node => {
   const { id } = getSelectedVariant(node);
   const quantity = getCurrentQuantity(node);
 
-  // return Promise.resolve({ id, quantity });
   return { id, quantity };
 };
 
 export const updateSelectedVariant = node => {
   const selectedOptions = getSelectedOptions(node);
-  const variantStore = get(node, ['store', 'variant']);
   const variant = getVariant(node, selectedOptions);
 
-  return updateStore(node, 'variant', 'selected', variant);
-};
-
-export const updateStore = (node, store, property, value) => {
-  const targetStore = get(node, ['store', store]);
-  targetStore[property] = value;
-
-  return Promise.resolve(node);
+  return set(node, ['store', 'variant'], {key: 'selected', value: variant})
 };

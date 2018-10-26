@@ -3,7 +3,7 @@ import 'slick';
 import dom from 'core/Dom';
 import bva from 'core/Constants';
 
-import { get, unique } from 'core/Helpers';
+import { get, set, unique } from 'core/Helpers';
 
 export const sliderContainers = new Map();
 window.s = sliderContainers;
@@ -50,8 +50,7 @@ export const registerSliderContainer = node => {
     .get(node);
 
   if (productContainer) {
-    const sliders = get(productContainer, ['nodes', 'sliders']);
-    sliders.set(node, initialState)
+    set(node, ['nodes', 'sliders'], {key: node, value: initialState});
   }
 
   return Promise.resolve(sliderContainer);
