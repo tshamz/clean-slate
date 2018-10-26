@@ -5,7 +5,7 @@ import { get, set } from 'core/Helpers';
 
 import { getVariant } from 'handlers/ProductContainerHandlers';
 
-export const attachVariantData = node => {
+export const attachVariant = node => {
   const variantContainer = $(node).find(dom.variantContainer)[0].innerHTML;
   const { options, variants, lineItem } = JSON.parse(variantContainer);
   const variantOptions = variants.map(({ options }) => options);
@@ -28,7 +28,7 @@ export const attachVariantData = node => {
 
 export const attachVariants = nodes => {
   return Promise.all(
-    nodes.map(node => attachVariantData(node))
+    nodes.map(node => attachVariant(node))
   );
 };
 
@@ -44,4 +44,15 @@ export const setInitialSelectedVariantAndOptions = nodes => {
       return node;
     })
   );
+};
+
+export const setInitialSelectedVariantAndOptions2 = node => {
+  const initiallySelectedOptions = get(node, ['store', 'option']).options
+    .reduce((selected, { name, initialValue }) => ({ ...selected, [name]: initialValue }), {});
+  const initiallySelectedVariant = getVariant(node, initiallySelectedOptions);
+
+  set(node, ['store', 'variant'], {key: 'selected', value: initiallySelectedVariant});
+  set(node, ['store', 'option'], {key: 'selected', value: initiallySelectedOptions});
+
+  return Promise.resolve(node);
 };

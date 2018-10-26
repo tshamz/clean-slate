@@ -1,41 +1,65 @@
 import dom from 'core/Dom';
 
-import { registerProductContainers } from 'containers/ProductContainers';
+import { registerProductContainers, registerProductContainer } from 'containers/ProductContainers';
+
+import {
+  attachVariants,
+  attachVariant,
+  setInitialSelectedVariantAndOptions,
+  setInitialSelectedVariantAndOptions2,
+} from 'containers/VariantContainers';
+
+import {
+  attachQuantitySelects,
+  attachQuantitySelect,
+  setQuantityInitialState,
+  setQuantityInitialState2,
+} from 'controls/QuantitySelectControls';
+
+import { attachOptionGroups, attachOptionGroup } from 'controls/OptionGroupControls';
+
+import {
+  attachOptionValues,
+  attachOptionValue,
+  setOptionValueInitialState,
+  setOptionValueInitialState2,
+} from 'controls/OptionValueControls';
+
+import { attachPrices, attachPrice } from 'containers/PriceContainers';
+import { attachAddToCarts, attachAddToCart } from 'controls/AddToCartControls';
+
 import { registerSliderContainers } from 'containers/SliderContainers';
 
-import { attachVariants, setInitialSelectedVariantAndOptions } from 'containers/VariantContainers';
-import { attachAddToCarts } from 'controls/AddToCartControls';
-import { attachOptionGroups } from 'controls/OptionGroupControls';
-import { attachOptionValues, setOptionValueInitialState  } from 'controls/OptionValueControls';
-import { attachPrices } from 'containers/PriceContainers';
-import { attachQuantitySelects, setQuantityInitialState } from 'controls/QuantitySelectControls';
+export const initializeProductContainer = node => {
+  return registerProductContainer(node)
+    .then(attachVariant)
+    .then(setInitialSelectedVariantAndOptions2)
+    .then(attachQuantitySelect)
+    .then(setQuantityInitialState2)
+    .then(attachOptionGroup)
+    .then(attachOptionValue)
+    .then(setOptionValueInitialState2)
+    .then(attachPrice)
+    .then(attachAddToCart)
+    .catch(err => console.error(err));
+};
 
 export const initContainers = async () => {
   const nodes = $(dom.productContainer).get();
-
-  await registerProductContainers(nodes)
-    .then(attachVariants)
-    .then(setInitialSelectedVariantAndOptions)
-    .then(attachQuantitySelects)
-    .then(setQuantityInitialState)
-    .then(attachOptionGroups)
-    .then(attachOptionValues)
-    .then(setOptionValueInitialState)
-    .then(attachPrices)
-    .then(attachAddToCarts)
-
+  const containers = nodes.map(initializeProductContainer);
+  await Promise.all(containers);
   registerSliderContainers();
-};
 
-export const initializeProductContainer = node => {
-  return registerProductContainers([node])
-    .then(attachVariants)
-    .then(setInitialSelectedVariantAndOptions)
-    .then(attachQuantitySelects)
-    .then(setQuantityInitialState)
-    .then(attachOptionGroups)
-    .then(attachOptionValues)
-    .then(setOptionValueInitialState)
-    .then(attachPrices)
-    .then(attachAddToCarts)
+  // await registerProductContainers(nodes)
+  //   .then(attachVariants)
+  //   .then(setInitialSelectedVariantAndOptions)
+  //   .then(attachQuantitySelects)
+  //   .then(setQuantityInitialState)
+  //   .then(attachOptionGroups)
+  //   .then(attachOptionValues)
+  //   .then(setOptionValueInitialState)
+  //   .then(attachPrices)
+  //   .then(attachAddToCarts)
+
+  // registerSliderContainers();
 };

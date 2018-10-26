@@ -46,3 +46,16 @@ export const setOptionValueInitialState = nodes => {
     })
   );
 };
+
+export const setOptionValueInitialState2 = node => {
+  const optionValueNodes = get(node, ['nodes', 'optionValue'], {keys: true});
+  const valueMap = optionValueNodes.map(({ value, name }) => {
+    const filteredOptions = get(node, ['store', 'variant', 'variantOptions'])
+      .filter(option => option[name] === value);
+    const variants = filteredOptions.map(option => get(node, ['store', 'variant', 'variants']).get(option));
+    return { name, value, variants };
+  });
+
+  return set(node, ['store', 'option'], {key: 'values', value: valueMap})
+    .then(updateInStockOptionValues);
+};

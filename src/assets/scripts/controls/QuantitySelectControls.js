@@ -38,3 +38,14 @@ export const setQuantityInitialState = nodes => {
     })
   );
 };
+
+export const setQuantityInitialState2 = node => {
+  const quantitySelects = get(node, ['nodes', 'quantitySelect'], {keys: true});
+  const quantitySelectValues = quantitySelects.map(node => $(node).find(dom.quantityValue)[0].value);
+  const uniqueValues = unique(quantitySelectValues);
+  const quantity = (uniqueValues.length == 1) ? uniqueValues[0] : 1;
+
+  set(node, ['store', 'quantity'], {key: 'current', value: parseInt(quantity, 10)});
+
+  return Promise.resolve(node);
+};

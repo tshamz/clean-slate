@@ -94,6 +94,7 @@ nodes: {
 ## price
 ```
 nodes: {
+  self: container,
   price,
   compareAtPrice,
   linePrice,

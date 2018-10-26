@@ -12,6 +12,7 @@ export const attachPrice = node => {
     const linePrice = $(container).find(dom.linePrice)[0];
     const prices = {
       nodes: {
+        self: container,
         price,
         compareAtPrice,
         linePrice,
