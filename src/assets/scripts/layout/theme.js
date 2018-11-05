@@ -11,10 +11,30 @@ import 'lazysizes/plugins/respimg/ls.respimg';
 
 import { focusHash, bindInPageLinks } from '@shopify/theme-a11y';
 
-import 'core/Events';
+import { $$ } from '../common/Helpers';
 
-import { bindUIActions } from 'bindings/_GlobalUIActions';
-import { initContainers } from 'containers/_InitContainers';
+// import { configureStore } from '../store/configureStore';
+// import reducer from '../reducer';
+import configureStore from '../store';
+
+const store = configureStore();
+
+
+import QuantitySelect from '../components/QuantitySelect';
+
+
+const QuantitySelects = $$('[data-quantity-select]').map(node => {
+  return new QuantitySelect(node);
+});
+
+QuantitySelects.forEach(QuantitySelect => QuantitySelect.addEvents())
+
+console.log(QuantitySelects);
+
+// import 'subscribers/_Events';
+
+// import { bindUIActions } from 'bindings/_GlobalUIActions';
+// import { initContainers } from 'containers/_InitContainers';
 
 // Common a11y fixes
 focusHash();
@@ -22,8 +42,8 @@ bindInPageLinks();
 
 
 document.addEventListener('DOMContentLoaded', async () => {
-  initContainers();
-  bindUIActions();
+  // initContainers();
+  // bindUIActions();
 });
 
 window.addEventListener('load', () => {

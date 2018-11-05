@@ -1,9 +1,5 @@
 {%- capture _arguments -%}
   {%- include 'argument',
-    _value: _product,
-    _name: '_product',
-    _required: true -%}
-  {%- include 'argument',
     _value: _variant,
     _name: '_variant',
     _required: true -%}
@@ -17,19 +13,8 @@
 
 {%- if _errors == '' -%}
   {
-    "id": {{- _variant.id -}},
-    "price": {{- _variant.price | money_without_currency -}},
-    "compareAtPrice": {%- if _variant.compare_at_price -%}{{- _variant.compare_at_price | money_without_currency -}}{%- else -%}null{%- endif -%},
-    "options": {
-      {%- for _option in _product.options -%}
-        {%- assign _option_position = 'option' | append: forloop.index -%}
-        "{{- _option -}}": "{{- _variant[_option_position] -}}"{%- unless forloop.last -%},{%- endunless -%}
-      {%- endfor -%}
-    },
-    "inventory": {{- _variant.inventory_quantity -}},
-    "inventoryPolicy": "{{- _variant.inventory_policy -}}",
-    "available": {{- _variant.available -}},
-    "sku": "{{- _variant.sku -}}"
+    "variant": {{ _variant | json }},
+    "inventory": {{- _variant.inventory_quantity -}}
   }
 {%- else -%}
 
@@ -38,3 +23,23 @@
 {%- endif -%}
 
 {%- assign _errors = nil -%}
+
+    {% comment %}
+    "id": {{- _variant.id -}},
+    "prices": {
+      "price": {{- _variant.price | money_without_currency -}},
+      "compareAtPrice": {%- if _variant.compare_at_price -%}{{- _variant.compare_at_price | money_without_currency -}}{%- else -%}null{%- endif -%}
+    },
+    "options": {
+      {%- for _option in _product.options -%}
+        {%- assign _option_position = 'option' | append: forloop.index -%}
+        "{{- _option -}}": "{{- _variant[_option_position] -}}"{%- unless forloop.last -%},{%- endunless -%}
+      {%- endfor -%}
+    },
+    "inventory": {
+      "quantity": {{- _variant.inventory_quantity -}},
+      "policy": "{{- _variant.inventory_policy -}}",
+      "available": {{- _variant.available -}}
+    },
+    "sku": "{{- _variant.sku -}}"
+    {% endcomment %}

@@ -19,7 +19,7 @@
 
   <div
     class="oo-slider {{ classes -}}"
-    data-slider-container="{{ name }}"
+    data-slider="{{ name }}"
     {{ extra_attrs }}>
 
     {%- assign _slides_array = slides | remove_first: '-->' | split: '-->' -%}

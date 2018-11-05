@@ -23,15 +23,19 @@
 
     {% include 'price',
       resource: product,
-      compare_at_price: true,
+      compare_at_price: false,
       range: true %}
+
+    {% include 'price',
+      resource: product,
+      compare_at_price: true %}
 
     {% include 'form-add-to-cart', _product: product %}
   </div>
 
 {%- endcapture -%}
 
-{%- include 'product-container',
+{%- include 'container',
   tag: 'section',
   _product: product,
   content: _product_container_content -%}

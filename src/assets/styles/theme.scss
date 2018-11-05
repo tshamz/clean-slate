@@ -22,6 +22,7 @@
 @import './atoms/link';
 @import './atoms/price';
 @import './atoms/text';
+@import './atoms/overlay';
 
 // Molecules
 @import './molecules/icon-with-text';
@@ -40,4 +41,11 @@
 
 #preview-bar-iframe {
   display: none !important;
+}
+
+.add-to-cart-controls {
+  width: 200px;
+  position: relative;
+  z-index: 100;
+  background-color: rgb(255, 255, 255);
 }

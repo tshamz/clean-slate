@@ -781,3 +781,31 @@ const normalizeVariantLookupOptions = (node, lookup) => {
 // const optionGroupNodes = get(node, 'nodes', 'optionGroup');
 // const selectedValueNode = optionGroupNodes.get(node).selectedValueNode;
 // $(selectedValueNode).html(value);
+
+export const initContainers = async () => {
+  return await Promise.all([
+    initializeProductContainers(),
+    initializeLineItemContainers(),
+    initializeSliderContainers(),
+  ]);
+};
+
+import { bindUIActions as AddToCartBindings } from 'bindings/AddToCartBindings';
+import { bindUIActions as OptionGroupBindings } from 'bindings/OptionGroupBindings';
+import { bindUIActions as QuantityControlBindings } from 'bindings/QuantitySelectBindings';
+
+export const bindUIActions = () => {
+  AddToCartBindings();
+  OptionGroupBindings();
+  QuantityControlBindings();
+};
+
+
+import 'subscribers/AddToCart';
+import 'subscribers/InlineCart';
+import 'subscribers/Options';
+import 'subscribers/Price';
+import 'subscribers/Quantity';
+import 'subscribers/Variant';
+
+PubSub.subscribe('BVA', (message, data) => console.log(message, data));

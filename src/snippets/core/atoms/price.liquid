@@ -23,7 +23,7 @@
 
   <div
     class="oo-prices {{ classes -}}"
-    data-price-container
+    data-price-control
     {{ extra_attrs -}}>
 
     {%- if resource.line_price -%}
@@ -46,35 +46,43 @@
 
       {%- if resource.compare_at_price and compare_at_price == true -%}
 
-        <div class="oo-prices--compare-at-price" data-price="compare-at-price">
+        {%- if resource.compare_at_price_varies and range == true -%}
 
-          {%- if resource.compare_at_price_varies and range == true -%}
+          <div class="oo-prices--compare-at-price" data-price="compare-at-price" data-price-range>
 
             {{- resource.compare_at_price_min | money }} - {{ resource.compare_at_price_max | money -}}
 
-          {%- else -%}
+          </div>
+
+        {%- else -%}
+
+          <div class="oo-prices--compare-at-price" data-price="compare-at-price">
 
             {{- resource.compare_at_price | money -}}
 
-          {%- endif -%}
+          </div>
+
+        {%- endif -%}
+
+      {%- endif -%}
+
+      {%- if resource.price_varies and range == true -%}
+
+        <div class="oo-prices--price" data-price="price" data-price-range>
+
+          {{- resource.price_min | money }} - {{ resource.price_max | money -}}
+
+        </div>
+
+      {%- else -%}
+
+        <div class="oo-prices--price" data-price="price">
+
+          {{- resource.price | money -}}
 
         </div>
 
       {%- endif -%}
-
-      <div class="oo-prices--price" data-price="price">
-
-        {%- if resource.price_varies and range == true -%}
-
-          {{- resource.price_min | money }} - {{ resource.price_max | money -}}
-
-        {%- else -%}
-
-          {{- resource.price | money -}}
-
-        {%- endif -%}
-
-      </div>
 
     {%- endif -%}
 

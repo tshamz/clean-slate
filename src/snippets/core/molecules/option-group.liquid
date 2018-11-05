@@ -23,7 +23,7 @@
 
   <div
     class="oo-option-group group-{{- option.name | handle }} {{ classes -}}"
-    data-option-group-control="{{- option.name -}}"
+    data-option-group="{{- option.name -}}"
     {{ extra_attrs -}}>
 
     {%- capture _selected_value -%}
@@ -56,7 +56,7 @@
       {%- endcapture -%}
 
       {%- capture _extra_attrs -%}
-        data-option-value-control
+        data-option-value
       {%- endcapture -%}
 
       {%- include 'input-group',

@@ -27,6 +27,7 @@ const alias = {
   'handlers': path.resolve('./src/assets/scripts/handlers'),
   'nodes': path.resolve('./src/assets/scripts/nodes'),
   'controls': path.resolve('./src/assets/scripts/controls'),
+  'subscribers': path.resolve('./src/assets/scripts/subscribers'),
 };
 
 const rules = [
@@ -55,7 +56,7 @@ const rules = [
 
 module.exports = {
   'cssVarLoader.liquidPath': [
-    'src/snippets/css-variables.liquid'
+    'src/snippets/base/css-variables.liquid'
   ],
   'webpack.extend': {
     plugins,

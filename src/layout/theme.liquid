@@ -3,21 +3,6 @@
   <!--[if (gt IE 9)|!(IE)]><!--> <html class="no-js supports-no-cookies" lang="{{ shop.locale }}"> <!--<![endif]-->
   <head>
 
-    {% comment %}
-    <script>
-      console.log(`ding`);
-
-      {%- assign _product = all_products['black-second-skin-v-neck-tee'] -%}
-
-      console.log({{ _product | json }});
-
-      {%- for _variant in _product.variants -%}
-        console.log({{ _variant | json }});
-      {%- endfor -%}
-
-    </script>
-    {% endcomment %}
-
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -47,7 +32,7 @@
     data-alternate-template="{{ template.suffix | handle }}"
     {%- endif -%}>
 
-    {%- include 'add-to-cart-controls' -%}
+    {%- section 'add-to-cart-controls' -%}
 
     {%- include 'link',
       href: '#MainContent',
@@ -55,6 +40,8 @@
       classes: 'in-page-link u-visually-hidden u-skip-link' -%}
 
     {%- section 'inline-cart' -%}
+
+    {%- include 'overlay' -%}
 
     {%- section 'topbar' -%}
 

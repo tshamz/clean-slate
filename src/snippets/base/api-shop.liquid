@@ -2,30 +2,23 @@
   document.documentElement.className = document.documentElement.className.replace('no-js', '');
 
   window.bvaccel = {
-    cachedData: {},
-    cart: {{ cart | json }},
-    collection: {{ collection | json }},
+    product: {{ product.handle | json }},
+    collection: {{ collection.handle | json }},
     customer: {
       loggedIn: {% if customer %}true{% else %}false{% endif %},
-      id: {% if customer %}'{{ customer.id }}'{% else %}null{% endif %},
-      order_count: {% if customer %}'{{ customer.orders_count }}'{% else %}null{% endif %},
-      email: {% if customer %}'{{ customer.email }}'{% else %}null{% endif %}
+      id: {{ customer.id | json }},
+      email: {{ customer.email | json }},
+      order_count: {{ customer.orders_count | json }},
     },
-    product: {{ product | json }},
-    shop: {
-      shopCurrency: {{ shop.currency | json }},
-      moneyFormat: {{ shop.money_format | json }},
-      moneyWithCurrencyFormat: {{ shop.money_with_currency_format | json }},
-      collectionSortBy: {{ collection.sort_by | default: collection.default_sort_by | json }}
+    template: {
+      path: {{ template | json }},
+      name: {{ template.name | json }},
+      alternate: {{ template.suffix | json }},
     },
-    template: {{ template | json }},
     theme: {
       currentPage: {{ current_page }},
-      strings: {
-        addToCart: {{ 'products.product.add_to_cart' | t | json }},
-        soldOut: {{ 'products.product.sold_out' | t | json }},
-        unavailable: {{ 'products.product.unavailable' | t | json }}
-      }
+      name: {{ theme.name | json }},
+      id: {{ theme.id }},
     },
   };
 </script>
