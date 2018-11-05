@@ -1,3 +1,13 @@
+<button
+  class="oo-button {{ classes -}}"
+  {%- if type -%}type="{{- type -}}"{%- endif -%}
+  {{ extra_attrs -}}>
+
+  {{- content -}}
+
+</button>
+
+{% comment %}
 {%- capture _arguments -%}
   {%- include 'argument',
     _value: content,
@@ -33,3 +43,4 @@
 {%- endif -%}
 
 {%- assign _errors = nil -%}
+{% endcomment %}
