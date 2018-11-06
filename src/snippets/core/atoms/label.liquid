@@ -1,3 +1,13 @@
+<label
+  class="oo-label {{ classes -}}"
+  for="{{- for -}}"
+  {{ extra_attrs -}}>
+
+  {{- content -}}
+
+</label>
+
+{% comment %}
 {%- capture _arguments -%}
   {%- include 'argument',
     _value: for,
@@ -33,3 +43,4 @@
 {%- endif -%}
 
 {%- assign _errors = nil -%}
+{% endcomment %}
