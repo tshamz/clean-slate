@@ -1,3 +1,54 @@
+<div class="oo-hero {{ classes -}}" {{ extra_attrs -}}>
+
+  {%- if image != blank -%}
+
+    {%- include 'image',
+      resource: image,
+      size: size,
+      classes: 'inside-oo-hero',
+      extra_attrs: '' -%}
+
+  {%- elsif video != blank -%}
+
+    {%- include 'video',
+      src: video,
+      classes: 'inside-oo-hero',
+      extra_attrs: '' -%}
+
+  {%- else -%}
+
+    {{- content -}}
+
+  {%- endif -%}
+
+  {%- capture _heading_content -%}
+    {%- if subtitle != blank -%}
+      <div class="oo-heading--content">
+        {{ subtitle }}
+      </div>
+    {%- endif -%}
+  {%- endcapture -%}
+
+  {%- include 'header',
+    title: title,
+    level: 3,
+    content: _heading_content -%}
+
+  {%- if button_one_text != blank -%}
+    {%- include 'link',
+      href: button_one_href,
+      content: button_one_text -%}
+  {%- endif -%}
+
+  {%- if button_two_text != blank -%}
+    {%- include 'link',
+      href: button_two_href,
+      content: button_two_text -%}
+  {%- endif -%}
+
+</div>
+
+{% comment %}
 {%- capture _arguments -%}
   {%- include 'argument',
     _value: image,
@@ -106,3 +157,4 @@
 {%- endif -%}
 
 {%- assign _errors = nil -%}
+{% endcomment %}

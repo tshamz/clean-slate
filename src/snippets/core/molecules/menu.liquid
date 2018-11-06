@@ -1,3 +1,19 @@
+<div class="oo-menu {{ classes -}}" {{ extra_attrs -}}>
+
+  {%- include 'header',
+    title: title,
+    level: level,
+    classes: 'inside-oo-menu',
+    extra_attrs: '' -%}
+
+  {%- include 'list',
+    content: list,
+    classes: 'inside-oo-menu',
+    extra_attrs: '' -%}
+
+</div>
+
+{% comment %}
 {%- capture _arguments -%}
   {%- include 'argument',
     _value: title,
@@ -43,3 +59,4 @@
 {%- endif -%}
 
 {%- assign _errors = nil -%}
+{% endcomment %}

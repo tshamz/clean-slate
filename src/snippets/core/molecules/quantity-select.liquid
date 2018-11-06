@@ -1,3 +1,29 @@
+<div
+  class="oo-quantity-select {{ classes -}}"
+  data-quantity-select
+  {{ extra_attrs -}}>
+
+  {%- include 'button',
+    content: '-',
+    classes: 'inside-oo-quantity-select',
+    extra_attrs: 'data-quantity-change=-1' -%}
+
+  {%- include 'input',
+    type: 'number',
+    name: 'quantity',
+    value: quantity,
+    id: 'quantity',
+    classes: 'inside-oo-quantity-select',
+    extra_attrs: 'min=1 data-quantity-value' -%}
+
+  {%- include 'button',
+    content: '+',
+    classes: 'inside-oo-quantity-select',
+    extra_attrs: 'data-quantity-change=1' -%}
+
+</div>
+
+{% comment %}
 {%- capture _arguments -%}
   {%- include 'argument',
     _value: quantity,
@@ -45,3 +71,4 @@
 {%- endif -%}
 
 {%- assign _errors = nil -%}
+{% endcomment %}

@@ -1,3 +1,53 @@
+{%- capture _header_content -%}
+  {%- include 'text', content: subtitle -%}
+{%- endcapture -%}
+
+{%- include 'header',
+  title: title,
+  level: 2,
+  content: _header_content -%}
+
+{%- assign _header_content = nil -%}
+
+<form
+  action=""
+  method=""
+  id=""
+  name=""
+  class="oo-form {{ classes -}}"
+  target="_blank"
+  novalidate
+  data-form="newsletter-signup"
+  {{ extra_attrs -}}>
+
+  {%- include 'input',
+    type: 'hidden',
+    name: 'hidden',
+    value: 'hidden',
+    id: '' -%}
+
+  {%- capture _input_attrs -%}
+    {%- if placeholder_text != blank -%}
+      placeholder="{{ placeholder_text }}"
+    {%- endif -%}
+  {%- endcapture -%}
+
+  {%- include 'input-group',
+    type: 'email',
+    name: 'email',
+    value: '',
+    input_attrs: _input_attrs,
+    hide_label: true -%}
+
+  {%- assign _input_attrs = nil -%}
+
+  {% include 'button',
+    type: 'submit',
+    content: button_text %}
+
+</form>
+
+{% comment %}
 {%- capture _arguments -%}
   {%- include 'argument',
     _value: provider,
@@ -85,3 +135,4 @@
 {%- endif -%}
 
 {%- assign _errors = nil -%}
+{% endcomment %}

@@ -1,3 +1,20 @@
+<header class="oo-header {{ classes -}}" {{ extra_attrs -}}>
+
+  {%- include 'heading',
+    level: level,
+    title: title,
+    classes: '',
+    extra_attrs: '' -%}
+
+  {%- unless content == blank -%}
+
+    {{- content -}}
+
+  {%- endunless -%}
+
+</header>
+
+{% comment %}
 {%- capture _arguments -%}
   {%- include 'argument',
     _value: title,
@@ -44,3 +61,4 @@
 {%- endif -%}
 
 {%- assign _errors = nil -%}
+{% endcomment %}

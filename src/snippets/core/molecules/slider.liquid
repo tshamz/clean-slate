@@ -1,3 +1,19 @@
+<div
+  class="oo-slider {{ classes -}}"
+  data-slider="{{ name }}"
+  {{ extra_attrs }}>
+
+  {%- assign _slides_array = slides | remove_first: '-->' | split: '-->' -%}
+
+  {%- for _slide in _slides_array -%}
+    {{- _slide -}}
+  {%- endfor -%}
+
+  {%- assign _slides_array = nil -%}
+
+</div>
+
+{% comment %}
 {%- capture _arguments -%}
   {%- include 'argument',
     _value: name,
@@ -39,3 +55,4 @@
 {%- endif -%}
 
 {%- assign _errors = nil -%}
+{% endcomment %}
