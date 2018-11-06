@@ -1,3 +1,11 @@
+<h{%- unless level -%}2{% else %}{{- level -}}{%- endunless %}
+  class="oo-heading {{ classes -}}" {{ extra_attrs -}}>
+
+  {{- title -}}
+
+</h{%- unless level -%}2{% else %}{{- level -}}{%- endunless %}>
+
+{% comment %}
 {%- capture _arguments -%}
   {%- include 'argument',
     _value: title,
@@ -31,3 +39,4 @@
 {%- endif -%}
 
 {%- assign _errors = nil -%}
+{% endcomment %}
