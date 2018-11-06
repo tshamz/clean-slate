@@ -1,3 +1,18 @@
+<div class="oo-icon-with-text {{ classes -}}" {{ extra_attrs -}}>
+
+  {%- include 'icon',
+    name: icon,
+    classes: 'inside-oo-icon-with-text',
+    extra_attrs: '' -%}
+
+  {%- include 'text',
+    content: text,
+    classes: 'inside-oo-icon-with-text',
+    extra_attrs: '' -%}
+
+</div>
+
+{% comment %}
 {%- capture _arguments -%}
   {%- include 'argument',
     _value: icon,
@@ -38,3 +53,4 @@
 {%- endif -%}
 
 {%- assign errors = nil -%}
+{% endcomment %}
