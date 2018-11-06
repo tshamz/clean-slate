@@ -1,3 +1,18 @@
+<video
+  class="oo-video {{ classes -}}"
+  src="{{- src -}}"
+  {%- if controls != blank -%}controls{%- endif -%}
+  {%- if muted != blank -%}muted{%- endif -%}
+  {%- if autoplay != blank -%}autoplay{%- endif -%}
+  {%- if loop != blank -%}loop{%- endif -%}
+  {%- if poster != blank -%}poster="{{- poster -}}"{%- endif -%}
+  {{ extra_attrs -}}>
+
+  Sorry, your browser doesn't support embedded videos.
+
+</video>
+
+{% comment %}
 {%- capture _arguments -%}
   {%- include 'argument',
     _value: src,
@@ -54,3 +69,4 @@
 {%- endif -%}
 
 {%- assign _errors = nil -%}
+{% endcomment %}

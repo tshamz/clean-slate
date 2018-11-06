@@ -1,3 +1,20 @@
+<ul class="oo-list {{ classes -}}" {{ extra_attrs -}}>
+
+  {%- assign _list_array = content | remove_first: '-->' | split: '-->' -%}
+  {%- for _item in _list_array -%}
+
+    <li class="oo-list--item">
+
+      {{- _item -}}
+
+    </li>
+
+  {%- endfor -%}
+  {%- assign _list_array = nil -%}
+
+</ul>
+
+{% comment %}
 {%- capture _arguments -%}
   {%- include 'argument',
     _value: content,
@@ -36,3 +53,4 @@
 {%- endif -%}
 
 {%- assign _errors = nil -%}
+{% endcomment %}

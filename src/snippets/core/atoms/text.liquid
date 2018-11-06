@@ -1,3 +1,10 @@
+<p class="oo-text {{ classes -}}" {{ extra_attrs -}}>
+
+  {{- content -}}
+
+</p>
+
+{% comment %}
 {%- capture _arguments -%}
   {%- include 'argument',
     _value: content,
@@ -26,3 +33,4 @@
 {%- endif -%}
 
 {%- assign _errors = nil -%}
+{% endcomment %}
