@@ -1,3 +1,13 @@
+<a
+  class="oo-link {{ classes -}}"
+  href="{{- href -}}"
+  {{ extra_attrs -}}>
+
+  {{- content -}}
+
+</a>
+
+{% comment %}
 {%- capture _arguments -%}
   {%- include 'argument',
     _value: href,
@@ -33,3 +43,4 @@
 {%- endif -%}
 
 {%- assign _errors = nil -%}
+{% endcomment %}
