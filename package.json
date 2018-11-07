@@ -50,6 +50,6 @@
     "zip": "slate-tools build && slate-tools zip",
     "lint": "slate-tools lint",
     "format": "slate-tools format",
-    "test": "node test/screenshot/index.js"
+    "test": "node test"
   }
 }

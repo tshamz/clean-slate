@@ -62,9 +62,9 @@ const getFileName = () => {
       + '.png';
   }
   return process.env.BUDDY_EXECUTION_ID + '.png';
-}
+};
 
-(async () => {
+const takeScreenshot = async () => {
   whoami();
 
   const browser = await puppeteer.launch({args: ['--no-sandbox', '--disable-setuid-sandbox']});
@@ -78,4 +78,6 @@ const getFileName = () => {
   // await page.screenshot({path: `${fileName}.png`});
 
   await browser.close();
-})();
+};
+
+module.exports = takeScreenshot;
