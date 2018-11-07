@@ -8,7 +8,8 @@ const puppeteer = require('puppeteer');
   const fileName = now.toLocaleDateString("en-US", dateOptions)
 
   await page.goto('https://buddy.works');
-  await page.screenshot({path: `${fileName}.png`});
+  await page.screenshot({path: 'buddy-screenshot.png'});
+  // await page.screenshot({path: `${fileName}.png`});
 
   await browser.close();
 })();
