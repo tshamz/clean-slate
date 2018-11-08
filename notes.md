@@ -50,3 +50,10 @@
     * Action (Build and Integrate)
     * Action (Test)
     * Action (Deploy)
+
+### Example Actions
+
+* Build the application on every push to master branch
+* Deliver the application files to server
+* Restart the application on server
+* Notify you if any of the above actions fails
