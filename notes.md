@@ -37,3 +37,16 @@
 * automated testing
 * uncss
 * personal/private pipeline for individual developers
+
+## Pipelines
+
+* A pipeline is a set of actions, executed by a Git push or by a developer in a specific order that delivers an app or website from a Git repository to wherever a developer wants.
+
+* Industrial production lines vary depending on the nature of the business. In case of software delivery it’s exactly the same – they will be different for every project and every team, depending on the technology and the approach used. However, every pipeline has the same major sections:
+
+* Project
+  * Repository
+  * Pipeline(s)
+    * Action (Build and Integrate)
+    * Action (Test)
+    * Action (Deploy)
