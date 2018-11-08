@@ -3,6 +3,7 @@ const puppeteer = require('puppeteer');
 const takeScreenshot = async () => {
   try {
     const url = process.env.BUDDY_PIPELINE_TARGET_SITE_URL;
+    console.log(url);
 
     if (!url) {
       return false;
