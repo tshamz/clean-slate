@@ -28,3 +28,12 @@
 //   getExperience
 //   updateExperience
 // redirecToCartAndOrCheckout
+
+
+# Buddy
+
+* eslint
+* stylelint
+* automated testing
+* uncss
+* personal/private pipeline for individual developers
