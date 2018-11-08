@@ -4,7 +4,6 @@ const puppeteer = require('puppeteer')
 let browser
 let page
 
-
 before(async() => {
   browser = await puppeteer.launch({
     args: [
