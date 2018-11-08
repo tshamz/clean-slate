@@ -1,48 +1,92 @@
-const puppeteer = require('puppeteer');
+const assert = require('assert')
+const puppeteer = require('puppeteer')
 
-const takeScreenshot = async () => {
-  // try {
-  //   const url = process.env.BUDDY_PIPELINE_TARGET_SITE_URL;
-  //   console.log(url);
+let browser
+let page
 
-  //   if (!url) {
-  //     return false;
-  //   }
 
-  //   const browser = await puppeteer.launch({args: ['--no-sandbox', '--disable-setuid-sandbox']});
-  //   const page = await browser.newPage();
+before(async() => {
+  browser = await puppeteer.launch({
+    args: [
+      // Required for Docker version of Puppeteer
+      '--no-sandbox',
+      '--disable-setuid-sandbox',
+      // This will write shared memory files into /tmp instead of /dev/shm,
+      // because Docker’s default for /dev/shm is 64MB
+      '--disable-dev-shm-usage'
+    ]
+  })
 
-  //   const path = `/test/screenshot/images/before/${process.env.BUDDY_EXECUTION_ID}.png`;
+  const browserVersion = await browser.version()
+  console.log(`Started ${browserVersion}`)
+})
 
-  //   await page.goto(url);
-  //   await page.screenshot({ path });
+beforeEach(async() => {
+  page = await browser.newPage()
+})
 
-  //   await browser.close();
-  // } catch (error) {
-  //   console.log(error);
-  // }
+afterEach(async() => {
+  await page.close()
+})
 
-  const url = process.env.BUDDY_PIPELINE_TARGET_SITE_URL;
-  console.log(url);
+after(async() => {
+  await browser.close()
+})
 
-  if (!url) {
-    return false;
-  }
+describe('Site', () => {
+  it('renders', async() => {
+    const url = process.env.BUDDY_PIPELINE_TARGET_SITE_URL
+    const response = await page.goto(url)
+    assert(response.ok())
+    await page.screenshot({ path: `/screenshots/site.png` })
+  })
+})
 
-  const browser = await puppeteer.launch({args: ['--no-sandbox', '--disable-setuid-sandbox']});
-  const page = await browser.newPage();
+// const puppeteer = require('puppeteer');
 
-  const path = `/test/screenshot/images/before/${process.env.BUDDY_EXECUTION_ID}.png`;
+// const takeScreenshot = async () => {
+//   // try {
+//   //   const url = process.env.BUDDY_PIPELINE_TARGET_SITE_URL;
+//   //   console.log(url);
 
-  await page.goto(url);
-  await page.screenshot({ path });
+//   //   if (!url) {
+//   //     return false;
+//   //   }
 
-  await browser.close();
-};
+//   //   const browser = await puppeteer.launch({args: ['--no-sandbox', '--disable-setuid-sandbox']});
+//   //   const page = await browser.newPage();
 
-module.exports = takeScreenshot;
+//   //   const path = `/test/screenshot/images/before/${process.env.BUDDY_EXECUTION_ID}.png`;
 
-// index
-// collection
-// product
+//   //   await page.goto(url);
+//   //   await page.screenshot({ path });
+
+//   //   await browser.close();
+//   // } catch (error) {
+//   //   console.log(error);
+//   // }
+
+//   const url = process.env.BUDDY_PIPELINE_TARGET_SITE_URL;
+//   console.log(url);
+
+//   if (!url) {
+//     return false;
+//   }
+
+//   const browser = await puppeteer.launch({args: ['--no-sandbox', '--disable-setuid-sandbox']});
+//   const page = await browser.newPage();
+
+//   const path = `/test/screenshot/images/before/${process.env.BUDDY_EXECUTION_ID}.png`;
+
+//   await page.goto(url);
+//   await page.screenshot({ path });
+
+//   await browser.close();
+// };
+
+// module.exports = takeScreenshot;
+
+// // index
+// // collection
+// // product
 

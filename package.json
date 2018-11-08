@@ -16,11 +16,12 @@
   },
   "devDependencies": {
     "@shopify/slate-tools": ">=1.0.0-beta.9",
+    "assert": "^1.4.1",
     "babel-preset-shopify": "^16.2.0",
     "eslint-plugin-shopify": "^19.0.0",
+    "puppeteer": "^0.13.0",
     "stylelint-config-prettier": "^3.0.4",
-    "stylelint-config-shopify": "^5.0.0",
-    "puppeteer": "^0.13.0"
+    "stylelint-config-shopify": "^5.0.0"
   },
   "dependencies": {
     "@shopify/slate-config": "^1.0.0-beta.7",
