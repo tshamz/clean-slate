@@ -1,0 +1,392 @@
+<section data-section-id="{{ section.id }}" data-section-type="secondary-navigation">
+
+  {%- include 'secondary-navigation' -%}
+
+</section>
+
+{% schema %}
+  {
+    "name": "Secondary Navigation",
+    "settings": [
+      {
+        "type": "link_list",
+        "id": "secondary_navigation_linklist",
+        "label": "Secondary Navigation Linklist"
+      }
+    ],
+    "blocks": [
+      {
+        "name": "Search Form",
+        "type": "search_form",
+        "settings": [
+          {
+            "type": "text",
+            "id": "placeholder_text",
+            "label": "[Optional] Search Form Placeholder Text"
+          }
+        ]
+      },
+      {
+        "name": "Cart",
+        "type": "cart",
+        "settings": [
+          {
+            "type": "text",
+            "id": "cart_include_text",
+            "label": "[Optional] Text"
+          },
+          {
+            "type": "checkbox",
+            "id": "cart_include_icon",
+            "label": "[Optional] Include Cart Icon"
+          }
+        ]
+      },
+      {
+        "name": "Text",
+        "type": "text",
+        "settings": [
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Block"
+          }
+        ]
+      },
+      {
+        "name": "Icon",
+        "type": "icon",
+        "settings": [
+          {
+            "type": "select",
+            "id": "title",
+            "label": "Icon",
+            "info": "Icon",
+            "options": [
+              {
+                "group": "direction",
+                "value": "arrow-down",
+                "label": "Arrow Down"
+              },
+              {
+                "group": "direction",
+                "value": "arrow-left",
+                "label": "Arrow Left"
+              },
+              {
+                "group": "direction",
+                "value": "arrow-right",
+                "label": "Arrow Right"
+              },
+              {
+                "group": "direction",
+                "value": "arrow-up",
+                "label": "Arrow Up"
+              },
+              {
+                "group": "direction",
+                "value": "arrow-up-down",
+                "label": "Arrow Up-down"
+              },
+              {
+                "group": "direction",
+                "value": "caret-down",
+                "label": "Caret Down"
+              },
+              {
+                "group": "direction",
+                "value": "caret-up",
+                "label": "Caret Up"
+              },
+              {
+                "group": "direction",
+                "value": "chevron-down",
+                "label": "Chevron Down"
+              },
+              {
+                "group": "direction",
+                "value": "chevron-left",
+                "label": "Chevron Left"
+              },
+              {
+                "group": "direction",
+                "value": "chevron-right",
+                "label": "Chevron Right"
+              },
+              {
+                "group": "direction",
+                "value": "chevron-up",
+                "label": "Chevron Up"
+              },
+              {
+                "group": "direction",
+                "value": "circle-cancel",
+                "label": "Circle Cancel"
+              },
+              {
+                "group": "direction",
+                "value": "circle-chevron-down",
+                "label": "Circle Chevron-down"
+              },
+              {
+                "group": "direction",
+                "value": "circle-chevron-left",
+                "label": "Circle Chevron-left"
+              },
+              {
+                "group": "direction",
+                "value": "circle-chevron-right",
+                "label": "Circle Chevron-right"
+              },
+              {
+                "group": "direction",
+                "value": "circle-chevron-up",
+                "label": "Circle Chevron-up"
+              },
+              {
+                "group": "direction",
+                "value": "circle-information",
+                "label": "Circle Information"
+              },
+              {
+                "group": "direction",
+                "value": "circle-plus",
+                "label": "Circle Plus"
+              },
+              {
+                "group": "Logo",
+                "value": "facebook",
+                "label": "Facebook"
+              },
+              {
+                "group": "Logo",
+                "value": "google",
+                "label": "Google"
+              },
+              {
+                "group": "Logo",
+                "value": "instagram",
+                "label": "Instagram"
+              },
+              {
+                "group": "Logo",
+                "value": "pinterest",
+                "label": "Pinterest"
+              },
+              {
+                "group": "Logo",
+                "value": "shopify-logo",
+                "label": "Shopify-logo"
+              },
+              {
+                "group": "Logo",
+                "value": "snapchat",
+                "label": "Snapchat"
+              },
+              {
+                "group": "Logo",
+                "value": "tumblr",
+                "label": "Tumblr"
+              },
+              {
+                "group": "Logo",
+                "value": "twitter",
+                "label": "Twitter"
+              },
+              {
+                "group": "Logo",
+                "value": "vimeo",
+                "label": "Vimeo"
+              },
+              {
+                "group": "Logo",
+                "value": "youtube",
+                "label": "Youtube"
+              },
+              {
+                "group": "Utility",
+                "value": "account",
+                "label": "Account"
+              },
+              {
+                "group": "Utility",
+                "value": "add",
+                "label": "Add"
+              },
+              {
+                "group": "Utility",
+                "value": "alert",
+                "label": "Alert"
+              },
+              {
+                "group": "Utility",
+                "value": "calendar",
+                "label": "Calendar"
+              },
+              {
+                "group": "Utility",
+                "value": "cancel",
+                "label": "Cancel"
+              },
+              {
+                "group": "Utility",
+                "value": "cancel-small",
+                "label": "Cancel-small"
+              },
+              {
+                "group": "Utility",
+                "value": "cart",
+                "label": "Cart"
+              },
+              {
+                "group": "Utility",
+                "value": "checkmark",
+                "label": "Checkmark"
+              },
+              {
+                "group": "Utility",
+                "value": "close",
+                "label": "Close"
+              },
+              {
+                "group": "Utility",
+                "value": "conversation",
+                "label": "Conversation"
+              },
+              {
+                "group": "Utility",
+                "value": "delete",
+                "label": "Delete"
+              },
+              {
+                "group": "Utility",
+                "value": "disable",
+                "label": "Disable"
+              },
+              {
+                "group": "Utility",
+                "value": "dispute",
+                "label": "Dispute"
+              },
+              {
+                "group": "Utility",
+                "value": "duplicate",
+                "label": "Duplicate"
+              },
+              {
+                "group": "Utility",
+                "value": "ellipsis",
+                "label": "Ellipsis"
+              },
+              {
+                "group": "Utility",
+                "value": "embed",
+                "label": "Embed"
+              },
+              {
+                "group": "Utility",
+                "value": "export",
+                "label": "Export"
+              },
+              {
+                "group": "Utility",
+                "value": "external",
+                "label": "External"
+              },
+              {
+                "group": "Utility",
+                "value": "hamburger",
+                "label": "Hamburger"
+              },
+              {
+                "group": "Utility",
+                "value": "help",
+                "label": "Help"
+              },
+              {
+                "group": "Utility",
+                "value": "horizontal-dots",
+                "label": "Horizontal-dots"
+              },
+              {
+                "group": "Utility",
+                "value": "import",
+                "label": "Import"
+              },
+              {
+                "group": "Utility",
+                "value": "lock",
+                "label": "Lock"
+              },
+              {
+                "group": "Utility",
+                "value": "menu",
+                "label": "Menu"
+              },
+              {
+                "group": "Utility",
+                "value": "minus",
+                "label": "Minus"
+              },
+              {
+                "group": "Utility",
+                "value": "notes",
+                "label": "Notes"
+              },
+              {
+                "group": "Utility",
+                "value": "notification",
+                "label": "Notification"
+              },
+              {
+                "group": "Utility",
+                "value": "plus",
+                "label": "Plus"
+              },
+              {
+                "group": "Utility",
+                "value": "print",
+                "label": "Print"
+              },
+              {
+                "group": "Utility",
+                "value": "refresh",
+                "label": "Refresh"
+              },
+              {
+                "group": "Utility",
+                "value": "risk",
+                "label": "Risk"
+              },
+              {
+                "group": "Utility",
+                "value": "rss",
+                "label": "Rss"
+              },
+              {
+                "group": "Utility",
+                "value": "save",
+                "label": "Save"
+              },
+              {
+                "group": "Utility",
+                "value": "search",
+                "label": "Search"
+              },
+              {
+                "group": "Utility",
+                "value": "subtract",
+                "label": "Subtract"
+              },
+              {
+                "group": "Utility",
+                "value": "view",
+                "label": "View"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

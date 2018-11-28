@@ -1,0 +1,113 @@
+<nav class="oo-primary-navigation">
+
+  {%- for parent in linklists[menu].links -%}
+    <div class="oo-navigation-block inside-oo-primary-navigation">
+
+      {%- include 'link',
+        href: parent.url,
+        content: parent.title -%}
+
+      {%- if parent.levels == 2 -%}
+
+        <div class="oo-primary-subnavigation inside-oo-navigation-block">
+
+          {%- for child in parent.links -%}
+
+            {%- capture _list -%}
+              {%- for grandchild in child.links -%}
+                -->{%- include 'link',
+                  href: grandchild.url,
+                  content: grandchild.title -%}
+              {%- endfor -%}
+            {%- endcapture -%}
+
+            <div class="oo-subnavigation-block inside-oo-primary-subnavigation">
+
+              {%- include 'menu',
+                title: child.title,
+                level: 3,
+                list: _list -%}
+
+            </div>
+
+            {% assign _list = nil %}
+          {%- endfor -%}
+
+        </div>
+
+      {%- endif -%}
+
+    </div>
+  {%- endfor -%}
+
+</nav>
+
+{% comment %}
+{%- capture _arguments -%}
+  {%- include 'argument',
+    _value: menu,
+    _name: 'menu',
+    _required: true -%}
+{%- endcapture -%}
+
+{%- capture _errors -%}
+  {%- include 'errors' with _arguments, _snippet: 'primary-navigation' -%}
+{%- endcapture -%}
+
+{%- assign _arguments = nil -%}
+
+{%- if _errors == '' -%}
+
+  <nav class="oo-primary-navigation">
+
+    {%- for parent in linklists[menu].links -%}
+      <div class="oo-navigation-block inside-oo-primary-navigation">
+
+        {%- include 'link',
+          href: parent.url,
+          content: parent.title -%}
+
+        {%- if parent.levels == 2 -%}
+
+          <div class="oo-primary-subnavigation inside-oo-navigation-block">
+
+            {%- for child in parent.links -%}
+
+              {%- capture _list -%}
+                {%- for grandchild in child.links -%}
+                  -->{%- include 'link',
+                    href: grandchild.url,
+                    content: grandchild.title -%}
+                {%- endfor -%}
+              {%- endcapture -%}
+
+              <div class="oo-subnavigation-block inside-oo-primary-subnavigation">
+
+                {%- include 'menu',
+                  title: child.title,
+                  level: 3,
+                  list: _list -%}
+
+              </div>
+
+              {% assign _list = nil %}
+            {%- endfor -%}
+
+          </div>
+
+        {%- endif -%}
+
+      </div>
+    {%- endfor -%}
+
+  </nav>
+
+
+{%- else -%}
+
+  {{- _errors -}}
+
+{%- endif -%}
+
+{%- assign _errors = nil -%}
+{% endcomment %}

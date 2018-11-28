@@ -1,0 +1,91 @@
+<{{- tag }}
+  class="oo-container {{ classes -}}"
+  {%- if _product != blank -%}
+    data-product-container
+  {%- elsif _line_item != blank -%}
+    data-line-item-container
+  {%- endif -%}
+  {{ extra_attrs -}}>
+
+  {{- content -}}
+
+  {%- if _product != blank -%}
+
+    {%- include 'variant-data', _product: _product -%}
+
+    {%- include 'option-data', _product: _product -%}
+
+  {%- elsif _line_item != blank -%}
+
+    {%- include 'line-item-data', _line_item: _line_item -%}
+
+  {%- endif -%}
+
+</{{- tag -}}>
+
+{% comment %}
+{%- capture _arguments -%}
+  {%- include 'argument',
+    _value: tag,
+    _name: 'tag',
+    _required: true -%}
+  {%- include 'argument',
+    _value: _product,
+    _name: '_product',
+    _required: false -%}
+  {%- include 'argument',
+    _value: _variant,
+    _name: '_variant',
+    _required: false -%}
+  {%- include 'argument',
+    _value: _line_item,
+    _name: '_line_item',
+    _required: false -%}
+  {%- include 'argument',
+    _value: content,
+    _name: 'content',
+    _required: true -%}
+{%- endcapture -%}
+
+{%- capture _errors -%}
+  {%- include 'errors' with _arguments, _snippet: 'product-container' -%}
+{%- endcapture -%}
+
+{%- assign _arguments = nil -%}
+
+{%- if _errors == '' -%}
+
+  <{{- tag }}
+    class="oo-container {{ classes -}}"
+    {%- if _product != blank -%}
+      data-product-container
+    {%- elsif _line_item != blank -%}
+      data-line-item-container
+    {%- endif -%}
+    {{ extra_attrs -}}>
+
+    {{- content -}}
+
+    {%- if _product != blank -%}
+
+      {%- include 'variant-data', _product: _product -%}
+
+      {%- include 'option-data', _product: _product -%}
+
+    {%- elsif _line_item != blank -%}
+
+      {%- include 'line-item-data', _line_item: _line_item -%}
+
+    {%- endif -%}
+
+  </{{- tag -}}>
+
+{%- else -%}
+
+  {{- _errors -}}
+
+{%- endif -%}
+
+{%- assign _errors = nil -%}
+
+{% endcomment %}

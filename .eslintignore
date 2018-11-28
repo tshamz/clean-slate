@@ -1,0 +1,6 @@
+archive/
+dist/
+src/assets/
+test/**/*.js
+slate.config.js
+node_modules/

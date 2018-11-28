@@ -1,0 +1,18 @@
+.oo-overlay {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1;
+  background-color: rgba(0, 0, 0, 0.2);
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s 300ms, opacity 300ms linear;
+
+  &.is-active {
+    visibility: visible;
+    opacity: 1;
+    transition: opacity 300ms linear;
+  }
+}

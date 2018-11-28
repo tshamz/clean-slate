@@ -1,0 +1,17 @@
+{%- comment -%}
+
+  Arguments:
+
+    • href - required
+    • content - required
+
+{%- endcomment -%}
+
+<a
+  class="oo-link {{ classes -}}"
+  href="{{- href -}}"
+  {{ extra_attrs -}}>
+
+  {{- content -}}
+
+</a>

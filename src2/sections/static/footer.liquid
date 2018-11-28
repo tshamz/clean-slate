@@ -1,0 +1,23 @@
+<section
+  class="oo-footer"
+  data-section-id="{{ section.id }}"
+  data-section-type="footer">
+
+  {%- include 'footer', menu: section.settings.footer_navigation -%}
+
+</section>
+
+{% schema %}
+  {
+    "name": "Footer",
+    "settings": [
+      {
+        "type": "link_list",
+        "id": "footer_navigation",
+        "label": "Footer Navigation Linklist",
+        "default": "footer"
+      }
+    ],
+    "blocks": []
+  }
+{% endschema %}

@@ -1,0 +1,61 @@
+{%- comment -%}
+
+  Arguments:
+
+    • resource - required
+    • size
+    • srcset
+    • sizes
+    • alt
+    • crop
+    • scale
+    • format
+    • lazyload
+
+{%- endcomment -%}
+
+{%- capture _src -%}
+  {%- include 'img-url',
+    resource: resource,
+    size: size,
+    crop: crop,
+    scale: scale,
+    format: format -%}
+{%- endcapture -%}
+
+{%- capture _lqip_src -%}
+  {%- include 'lqip-img-url',
+    resource: resource,
+    size: size,
+    crop: crop,
+    scale: scale,
+    format: format -%}
+{%- endcapture -%}
+
+{%- capture _srcset -%}
+  {%- include 'srcset' with srcset,
+    resource: resource,
+    size: size -%}
+{%- endcapture -%}
+
+{%- capture _sizes -%}
+  {%- include 'sizes' with sizes, resource: resource -%}
+{%- endcapture -%}
+
+
+<picture class="oo-image-wrapper {{ classes -}}" {{ extra_attrs -}}>
+
+  <img
+    class="oo-image {% unless lazyload -%}lazyload{%- endunless -%}"
+    data-src="{{- _src -}}"
+    data-srcset="{{- _srcset -}}"
+    alt="{%- if alt != blank %}{{- alt -}}{% elsif resource.alt != blank %}{{- resource.alt -}}{% endif -%}"
+    {%- if _lqip_src != blank -%}src="{{- _lqip_src -}}"{%- endif -%}
+    {%- if _sizes != blank -%}data-sizes="{{- _sizes -}}"{%- endif -%}>
+
+</picture>
+
+{%- assign _src = nil -%}
+{%- assign _srcset = nil -%}
+{%- assign _lqip_src = nil -%}
+{%- assign _sizes = nil -%}

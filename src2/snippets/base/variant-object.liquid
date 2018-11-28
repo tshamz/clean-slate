@@ -1,0 +1,45 @@
+{%- capture _arguments -%}
+  {%- include 'argument',
+    _value: _variant,
+    _name: '_variant',
+    _required: true -%}
+{%- endcapture -%}
+
+{%- capture _errors -%}
+  {%- include 'errors' with _arguments, _snippet: 'variant-object' -%}
+{%- endcapture -%}
+
+{%- assign _arguments = nil -%}
+
+{%- if _errors == '' -%}
+  {
+    "variant": {{ _variant | json }},
+    "inventory": {{- _variant.inventory_quantity -}}
+  }
+{%- else -%}
+
+  {{- _errors -}}
+
+{%- endif -%}
+
+{%- assign _errors = nil -%}
+
+    {% comment %}
+    "id": {{- _variant.id -}},
+    "prices": {
+      "price": {{- _variant.price | money_without_currency -}},
+      "compareAtPrice": {%- if _variant.compare_at_price -%}{{- _variant.compare_at_price | money_without_currency -}}{%- else -%}null{%- endif -%}
+    },
+    "options": {
+      {%- for _option in _product.options -%}
+        {%- assign _option_position = 'option' | append: forloop.index -%}
+        "{{- _option -}}": "{{- _variant[_option_position] -}}"{%- unless forloop.last -%},{%- endunless -%}
+      {%- endfor -%}
+    },
+    "inventory": {
+      "quantity": {{- _variant.inventory_quantity -}},
+      "policy": "{{- _variant.inventory_policy -}}",
+      "available": {{- _variant.available -}}
+    },
+    "sku": "{{- _variant.sku -}}"
+    {% endcomment %}

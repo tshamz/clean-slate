@@ -1,0 +1,20 @@
+{%- comment -%}
+
+  Arguments:
+
+    • name - required
+
+{%- endcomment -%}
+
+<div class="oo-icon icon-{{- name }} {{ classes -}}" {{ extra_attrs -}}>
+
+  {%- assign _icon_name = name | prepend: 'icon-' -%}
+
+  {%- include 'svg',
+    snippet: _icon_name,
+    classes: 'inside-oo-icon',
+    extra_attrs: '' -%}
+
+  {%- assign _icon_name = nil -%}
+
+</div>

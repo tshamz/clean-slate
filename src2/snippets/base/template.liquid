@@ -1,0 +1,33 @@
+{%- capture arguments -%}
+  {%- include 'argument',
+    _name: '',
+    _required: true,
+    _value: ,
+    _type: '',
+    _description: '' -%}
+  {%- include 'argument',
+    _name: '',
+    _required: false,
+    _value: ,
+    _type: '',
+    _description: '' -%}
+{%- endcapture -%}
+
+{%- capture errors -%}
+  {%- include 'errors' with arguments, snippet: '' -%}
+{%- endcapture -%}
+
+
+{%- if errors == '' -%}
+
+
+
+{%- else -%}
+
+  {{- errors -}}
+
+{%- endif -%}
+
+
+{%- assign arguments = nil -%}
+{%- assign errors = nil -%}

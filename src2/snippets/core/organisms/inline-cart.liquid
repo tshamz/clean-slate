@@ -1,0 +1,109 @@
+<section
+  class="oo-inline-cart {{ classes -}}"
+  data-inline-cart
+  {{ extra_attrs -}}>
+
+  {%- capture _content -%}
+    {%- include 'icon',
+      name: 'arrow-left',
+      classes: 'inside-oo-heading',
+      extra_attrs: '' -%}
+  {%- endcapture -%}
+
+  {%- include 'heading',
+    title: 'Your Shopping Cart',
+    level: 3,
+    content: _content,
+    classes: 'inside-oo-inline-cart',
+    extra_attrs: '' %}
+
+  {% assign _content = nil %}
+
+  <div class="oo-inline-cart--contents" data-inline-cart-contents>
+
+    {%- include 'ajax-inline-cart-contents',
+      classes: '',
+      extra_attrs: '' -%}
+
+  </div>
+
+  <footer class="oo-inline-cart--footer">
+
+    {%- include 'button',
+      content: 'View Cart',
+      classes: 'inside-oo-inline-cart--footer oo-inline-cart--view-cart',
+      extra_attrs: '' -%}
+
+    {%- include 'button',
+      content: 'Checkout',
+      classes: 'inside-oo-inline-cart--footer oo-inline-cart--checkout',
+      extra_attrs: '' -%}
+
+  </footer>
+</section>
+
+{% comment %}
+{%- capture _arguments -%}
+
+{%- endcapture -%}
+
+{%- capture _errors -%}
+  {%- include 'errors' with _arguments, _snippet: 'inline-cart' -%}
+{%- endcapture -%}
+
+{%- assign _arguments = nil -%}
+
+{%- if _errors == '' -%}
+
+  <section
+    class="oo-inline-cart {{ classes -}}"
+    data-inline-cart
+    {{ extra_attrs -}}>
+
+    {%- capture _content -%}
+      {%- include 'icon',
+        name: 'arrow-left',
+        classes: 'inside-oo-heading',
+        extra_attrs: '' -%}
+    {%- endcapture -%}
+
+    {%- include 'heading',
+      title: 'Your Shopping Cart',
+      level: 3,
+      content: _content,
+      classes: 'inside-oo-inline-cart',
+      extra_attrs: '' %}
+
+    {% assign _content = nil %}
+
+    <div class="oo-inline-cart--contents" data-inline-cart-contents>
+
+      {%- include 'ajax-inline-cart-contents',
+        classes: '',
+        extra_attrs: '' -%}
+
+    </div>
+
+    <footer class="oo-inline-cart--footer">
+
+      {%- include 'button',
+        content: 'View Cart',
+        classes: 'inside-oo-inline-cart--footer oo-inline-cart--view-cart',
+        extra_attrs: '' -%}
+
+      {%- include 'button',
+        content: 'Checkout',
+        classes: 'inside-oo-inline-cart--footer oo-inline-cart--checkout',
+        extra_attrs: '' -%}
+
+    </footer>
+  </section>
+
+{%- else -%}
+
+  {{- _errors -}}
+
+{%- endif -%}
+
+{%- assign _errors = nil -%}
+{% endcomment %}
