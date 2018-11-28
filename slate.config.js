@@ -7,6 +7,10 @@ const path = require('path');
 const { ProvidePlugin } = require('webpack');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
+const externals = {
+  jquery: 'jQuery',
+};
+
 const plugins = [
   new ProvidePlugin({
     '$': 'jquery',
@@ -15,21 +19,23 @@ const plugins = [
     'window.jQuery': 'jquery',
     'PubSub': 'pubsub-js',
   }),
-  new CopyWebpackPlugin(
-    { from: 'src/snippets/*', to: 'dist/snippets', flatten: true },
-    { from: 'src/sections/*', to: 'dist/sections', flatten: true }
-  ),
+  new CopyWebpackPlugin([
+    { from: 'snippets/**/*', to: '../snippets/', flatten: true },
+    { from: 'sections/**/*', to: '../sections/', flatten: true },
+  ]),
 ];
 
 const alias = {
-  // 'jquery': path.resolve('./node_modules/jquery'),
   'lodash-es': path.resolve('./node_modules/lodash-es'),
+  'styles': path.resolve('./src/styles'),
+  'scripts': path.resolve('./src/scripts'),
 };
 
 module.exports = {
   'eslint.config': '.eslintrc.js',
   'cssVarLoader.liquidPath': ['src/snippets/css-variables.liquid'],
   'webpack.extend': {
+    externals,
     plugins,
     resolve: { alias },
   },

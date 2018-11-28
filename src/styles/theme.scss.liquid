@@ -1,6 +1,20 @@
+{% comment %}
 /**
  * Insert your styles with Liquid below.
  *
  * Import additional stylesheets into this sheet using CSS imports:
- * @import url('./global/form.scss');
+ * @import url('../core/form.scss');
  */
+
+@font-face {
+  font-family: "<font_name>";
+  src: url('{{ "<font_location.woff>" | asset_url }}') format("woff"), url('{{ "<font_location.woff2" | asset_url }}') format('woff2'),;
+  font-style: normal;
+  font-weight: 400;
+}
+
+.slick-loading .slick-list {
+  background-image: url('{{ "ajax-loader.gif" | asset_url }}');
+}
+{% endcomment %}
+

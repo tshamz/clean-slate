@@ -1,73 +1,74 @@
 <!doctype html>
-<!--[if IE 9]> <html class="ie9 no-js supports-no-cookies" lang="{{ shop.locale }}"> <![endif]-->
-<!--[if (gt IE 9)|!(IE)]><!--> <html class="no-js supports-no-cookies" lang="{{ shop.locale }}"> <!--<![endif]-->
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="theme-color" content="{{ settings.color_accent }}">
-  <link rel="canonical" href="{{ canonical_url }}">
+  <!--[if IE 9]> <html class="ie9 no-js supports-no-cookies" lang="{{ shop.locale }}"> <![endif]-->
+  <!--[if (gt IE 9)|!(IE)]><!--> <html class="no-js supports-no-cookies" lang="{{ shop.locale }}"> <!--<![endif]-->
 
-  {%- if settings.favicon != blank -%}
-    <link rel="shortcut icon" href="{{ settings.favicon | img_url: '32x32' }}" type="image/png">
-  {%- endif -%}
+  <head>
 
-  {%- capture seo_title -%}
-    {{ page_title }}
-    {%- if current_tags -%}
-      {%- assign meta_tags = current_tags | join: ', ' -%} &ndash; {{ 'general.meta.tags' | t: tags: meta_tags -}}
-    {%- endif -%}
-    {%- if current_page != 1 -%}
-      &ndash; {{ 'general.meta.page' | t: page: current_page }}
-    {%- endif -%}
-    {%- assign escaped_page_title = page_title | escape -%}
-    {%- unless escaped_page_title contains shop.name -%}
-      &ndash; {{ shop.name }}
-    {%- endunless -%}
-  {%- endcapture -%}
-  <title>{{ seo_title | strip }}</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="theme-color" content="{{ settings.color_accent }}">
+    <link rel="canonical" href="{{ canonical_url }}">
 
-  {%- if page_description -%}
-    <meta name="description" content="{{ page_description | escape }}">
-  {%- endif -%}
+    {%- include 'favicon' -%}
 
-  {% include 'social-meta-tags' %}
-  {% include 'style-tags', layout: 'theme' %}
-  {% include 'css-variables' %}
+    {%- include 'seo-title' -%}
 
-  <script>
-    document.documentElement.className = document.documentElement.className.replace('no-js', '');
+    {%- include 'page-description' -%}
 
-    window.theme = {
-      strings: {
-        addToCart: {{ 'products.product.add_to_cart' | t | json }},
-        soldOut: {{ 'products.product.sold_out' | t | json }},
-        unavailable: {{ 'products.product.unavailable' | t | json }}
-      },
-      moneyFormat: {{ shop.money_format | json }}
-    };
-  </script>
+    {%- include 'social-meta-tags' -%}
+    {%- include 'style-tags', layout: 'theme' -%}
+    {%- include 'css-variables' -%}
 
-  {% if template.directory == 'customers' %}
-    <script src="{{ 'shopify_common.js' | shopify_asset_url }}" defer="defer"></script>
-  {% endif %}
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.min.js"
+      integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+      crossorigin="anonymous">
+    </script>
 
-  {% include 'script-tags', layout: 'theme' %}
+    {%- include 'api-shop' -%}
 
-  {{ content_for_header }}
-</head>
+    {% comment %}
+    {% if template.directory == 'customers' %}
+      <script src="{{ 'shopify_common.js' | shopify_asset_url }}" defer="defer"></script>
+    {% endif %}
+    {% endcomment %}
 
-<body id="{{ page_title | handle }}" class="template-{{ template.name | handle }}">
+    {% include 'script-tags', layout: 'theme' %}
 
-  <a class="in-page-link visually-hidden skip-link" href="#MainContent">{{ 'general.accessibility.skip_to_content' | t }}</a>
+    {{ content_for_header }}
+  </head>
 
-  {% section 'header' %}
+  <body
+    data-template="{{ template.name | handle }}"
+    {%- if template.suffix != blank -%}
+    data-alternate-template="{{ template.suffix | handle }}"
+    {%- endif -%}>
 
-  <main role="main" id="MainContent">
-    {{ content_for_layout }}
-  </main>
+    {%- section 'add-to-cart-controls' -%}
 
-  {% section 'footer' %}
+    {%- include 'link',
+      href: '#MainContent',
+      content: 'Skip to content',
+      classes: 'in-page-link u-visually-hidden u-skip-link' -%}
 
-</body>
+    {%- section 'inline-cart' -%}
+
+    {%- include 'overlay' -%}
+
+    {%- section 'topbar' -%}
+
+    {%- section 'header' -%}
+
+    <main role="main" class="oo-main" id="MainContent">
+      {{ content_for_layout }}
+    </main>
+
+    {%- section 'newsletter-signup' -%}
+
+    {%- section 'footer' -%}
+
+    {%- section 'bottombar' -%}
+
+  </body>
 </html>

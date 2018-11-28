@@ -36,6 +36,7 @@
     "pubsub-js": "^1.6.1"
   },
   "scripts": {
+    "dev": "slate-tools start --skipPrompts",
     "start": "slate-tools start",
     "watch": "slate-tools start --skipFirstDeploy",
     "build": "slate-tools build",

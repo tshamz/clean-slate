@@ -5,35 +5,48 @@
  */
 @import '~normalize.css/normalize';
 
-// Settings
-@import './variables';
+// Helpers
+@import './helpers/helpers';
 
-// Tools
-@import './tools/mixins';
-@import './tools/functions';
+// Base
+@import './base/base';
 
-// Core
-@import './core/forms';
-@import './core/helpers';
-@import './core/layout';
-@import './core/media';
-@import './core/responsive-tables';
-@import './core/rte';
-@import './core/typography';
+// Atoms
+@import './atoms/button';
+@import './atoms/grid';
+@import './atoms/heading';
+@import './atoms/icon';
+@import './atoms/image';
+@import './atoms/input';
+@import './atoms/label';
+@import './atoms/link';
+@import './atoms/price';
+@import './atoms/text';
+@import './atoms/overlay';
 
-// Components
-@import './components/buttons';
-@import './components/hero-banner';
-@import './components/icons';
-@import './components/placeholders';
-@import './components/responsive-images';
+// Molecules
+@import './molecules/icon-with-text';
+@import './molecules/input-group';
+@import './molecules/option-group';
+@import './molecules/product-card';
+@import './molecules/quantity-select';
 
-// Sections
-@import './sections/blog-posts';
-@import './sections/collection-list';
-@import './sections/featured-collection';
-@import './sections/image-with-text';
+// Organisms
+@import './organisms/inline-cart';
+@import './organisms/primary-navigation';
 
-// Templates
-@import './templates/gift_card';
-@import './templates/product';
+// Layout
+@import './layout/header';
+
+
+#preview-bar-iframe {
+  display: none !important;
+}
+
+.add-to-cart-controls {
+  width: 200px;
+  position: relative;
+  z-index: 100;
+  background-color: rgb(255, 255, 255);
+  // color: pink;
+}
