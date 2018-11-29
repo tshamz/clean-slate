@@ -3,11 +3,10 @@
 @import '~normalize.css/normalize';
 
 // Helpers
-@import './helpers/index';
+@import 'helpers/index';
 
 // Base
-@import './base/index';
+@import 'base/index';
 
 // Global
-@import './global/overlay';
-
+@import 'global/overlay';
