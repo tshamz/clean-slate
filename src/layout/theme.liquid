@@ -7,13 +7,11 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="theme-color" content="{{ settings.color_accent }}">
     <link rel="canonical" href="{{ canonical_url }}">
 
     {%- include 'favicon' -%}
 
-    {%- include 'seo-title' -%}
-
+    {%- include 'page-title' -%}
     {%- include 'page-description' -%}
 
     {%- include 'social-meta-tags' -%}
@@ -28,11 +26,9 @@
 
     {%- include 'api-shop' -%}
 
-    {% comment %}
     {% if template.directory == 'customers' %}
       <script src="{{ 'shopify_common.js' | shopify_asset_url }}" defer="defer"></script>
     {% endif %}
-    {% endcomment %}
 
     {% include 'script-tags', layout: 'theme' %}
 
@@ -45,30 +41,15 @@
     data-alternate-template="{{ template.suffix | handle }}"
     {%- endif -%}>
 
-    {%- section 'add-to-cart-controls' -%}
-
-    {%- include 'link',
-      href: '#MainContent',
-      content: 'Skip to content',
-      classes: 'in-page-link u-visually-hidden u-skip-link' -%}
-
-    {%- section 'inline-cart' -%}
 
     {%- include 'overlay' -%}
 
-    {%- section 'topbar' -%}
-
-    {%- section 'header' -%}
 
     <main role="main" class="oo-main" id="MainContent">
       {{ content_for_layout }}
     </main>
 
-    {%- section 'newsletter-signup' -%}
 
-    {%- section 'footer' -%}
-
-    {%- section 'bottombar' -%}
 
   </body>
 </html>

@@ -5,7 +5,6 @@
 
 const path = require('path');
 const { ProvidePlugin } = require('webpack');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 const externals = {
   jquery: 'jQuery',
@@ -17,16 +16,10 @@ const plugins = [
     'jQuery': 'jquery',
     'window.$': 'jquery',
     'window.jQuery': 'jquery',
-    'PubSub': 'pubsub-js',
   }),
-  new CopyWebpackPlugin([
-    { from: 'snippets/**/*', to: '../snippets/', flatten: true },
-    { from: 'sections/**/*', to: '../sections/', flatten: true },
-  ]),
 ];
 
 const alias = {
-  'lodash-es': path.resolve('./node_modules/lodash-es'),
   'styles': path.resolve('./src/styles'),
   'scripts': path.resolve('./src/scripts'),
 };

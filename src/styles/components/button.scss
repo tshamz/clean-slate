@@ -1,0 +1,29 @@
+.button {
+  display: inline-block;
+  vertical-align: middle;
+  margin: 0;
+  padding: $global-size-base ($global-size-base * 1.75);
+  text-align: center;
+  text-decoration: none;
+  white-space: nowrap;
+  user-select: none;
+  -webkit-appearance: none;
+
+  &.button--primary {
+    color: $color-white;
+    background-color: $color-primary;
+  }
+
+  &.button--secondary {
+    color: $color-black;
+    background-color: $color-secondary;
+  }
+
+  &.text-link {
+    border: 0 none;
+    background: none;
+    padding: 0;
+    user-select: text;
+    color: $global-font-color;
+  }
+}

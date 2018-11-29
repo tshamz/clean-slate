@@ -1,11 +1,2 @@
 {%- layout none -%}
-{
-  {%- for variant in product.variants -%}
-    {%- if variant.id -%}
-      "{{ variant.id }}": {
-        "available": {{ variant.available }},
-        "inventory": {{ variant.inventory_quantity }}
-      }{%- unless forloop.last -%},{%- endunless -%}
-    {%- endif -%}
-  {%- endfor -%}
-}
+{%- include 'ajax-inventory' -%}

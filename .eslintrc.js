@@ -8,7 +8,5 @@ module.exports = {
     "es6": true,
     "jquery": true
   },
-  "rules": {
-    "no-alert": "error"
-  }
+  "rules": {}
 }

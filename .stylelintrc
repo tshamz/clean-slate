@@ -1,5 +1,3 @@
 {
-  "rules": {
-    "color-named": "never"
-  }
+  "rules": {}
 }

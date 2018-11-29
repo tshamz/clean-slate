@@ -1,14 +1,14 @@
+// Helpers
+@import '../helpers';
+
+// Vendor
 @import '../vendor/slick';
 
-.product-container {
-  width: 100%;
-  max-width: 1440px;
-  padding-left: 60px;
-  padding-right: 60px;
-  display: flex;
-}
+// Components
+@import '../components/button';
 
-.product-image-gallery,
-.product-information {
-  width: 50%;
-}
+// Layout
+@import '../layout/product';
+
+// Overrides
+@import '../page/product';
