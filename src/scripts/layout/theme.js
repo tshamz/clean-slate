@@ -1,3 +1,12 @@
+import { bindUIActions as bindToggle } from 'components/Toggle';
+import { bindUIActions as bindButton } from 'components/Button';
+
+document.addEventListener('DOMContentLoaded', async () => {
+  bindToggle();
+  bindButton();
+});
+
+
 import 'styles/theme.scss';
 import 'styles/theme.scss.liquid';
 

@@ -29,6 +29,7 @@ const alias = {
   'lodash-es': path.resolve('./node_modules/lodash-es'),
   'styles': path.resolve('./src/styles'),
   'scripts': path.resolve('./src/scripts'),
+  'components': path.resolve('./src/scripts/components'),
 };
 
 module.exports = {
