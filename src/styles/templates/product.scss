@@ -1,8 +1,8 @@
 // Helpers
-@import '../helpers';
+@import '../helpers/index';
 
 // Vendor
-@import '../vendor/slick';
+@import '../vendor/slick/index';
 
 // Components
 @import '../components/button';
@@ -11,4 +11,4 @@
 @import '../layout/product';
 
 // Overrides
-@import '../page/product';
+@import '../pages/product';

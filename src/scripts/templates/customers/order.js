@@ -1,4 +1,4 @@
-import 'styles/templates/customers/orders.scss';
+import 'styles/templates/customers/order.scss';
 
 document.addEventListener('DOMContentLoaded', () => {
 

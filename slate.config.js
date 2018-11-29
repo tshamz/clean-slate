@@ -22,6 +22,8 @@ const plugins = [
 const alias = {
   'styles': path.resolve('./src/styles'),
   'scripts': path.resolve('./src/scripts'),
+  'common': path.resolve('./src/scripts/common'),
+  'components': path.resolve('./src/scripts/components'),
 };
 
 module.exports = {

@@ -37,7 +37,7 @@ button {
 }
 
 input {
-  font-family: $global-font-primary;
+  font-family: $color-body-text;
 
   &[type="number"]::-webkit-inner-spin-button,
   &[type="number"]::-webkit-outer-spin-button {

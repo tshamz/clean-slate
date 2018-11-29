@@ -17,5 +17,5 @@
     @error "`#{$value}` needs to be a number.";
   }
 
-  @return $value / $global-font-size * 1rem;
+  @return $value / $oo-size-base * 1rem;
 }

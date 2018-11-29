@@ -1,14 +1,12 @@
 @charset 'UTF-8';
 
-@if $enable-normalize {
-  @import '~normalize.css/normalize';
-}
+@import '~normalize.css/normalize';
 
 // Helpers
-@import './helpers';
+@import './helpers/index';
 
 // Base
-@import './base';
+@import './base/index';
 
 // Global
 @import './global/overlay';

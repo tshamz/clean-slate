@@ -14,10 +14,10 @@ html {
 }
 
 body {
-  font-size: $global-size-base; /* [1] */
-  line-height: $global-line-height; /* [1] */
-  font-family: $global-font-primary;
-  color: $global-font-color;
+  font-size: $oo-size-base; /* [1] */
+  line-height: $oo-line-height; /* [1] */
+  font-family: $font-body;
+  color: $color-body-text;
 }
 
 h1,
@@ -26,10 +26,10 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: $global-font-heading;
+  font-family: $font-heading;
   margin: 0;
-  margin-bottom: $global-spacing-unit;
-  color: $global-heading-color;
+  margin-bottom: $oo-spacing-unit;
+  color: $color-body-text;
 }
 
 body,
