@@ -12,3 +12,13 @@ export const getAlternativeTemplate = async (resource, templateName, json = fals
 export const unique = array => {
   return [ ...new Set(array) ];
 };
+
+export const animationEnd = (action, selector, resolve) => {
+  $(selector).one('transitionend', () => {
+    if (action === 'show' && $(selector).is('.is-active')) {
+      resolve();
+    } else if (action === 'hide' && !$(selector).is('.is-active')) {
+      resolve();
+    }
+  });
+};

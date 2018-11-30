@@ -1,0 +1,26 @@
+{%- comment -%}
+
+  Arguments:
+
+  - classes
+
+{%- endcomment -%}
+
+<div
+  class="oo-modal {{ classes -}}"
+  data-modal="{{ name }}"
+  {{ extra_attrs -}}>
+
+
+  {{ heading }}
+
+
+  <div class="oo-modal-content">
+    {{ content }}
+  </div>
+
+
+  {{ footer }}
+
+
+</div>

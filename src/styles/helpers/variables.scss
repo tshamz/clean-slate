@@ -33,6 +33,7 @@
 
   $color-white: #ffffff;
   $color-black: #000000;
+  $color-gray: #dddddd;
 
   $color-primary: #0074d9;
   $color-secondary: #ffdc00;
@@ -58,11 +59,10 @@
 //
 // =========================================================================
 
-  $font-heading: var(--font-heading);
-  $font-body: var(--font-body);
-  $font-body-weight: var(--font-body-weight);
-  $font-body-style: var(--font-body-style);
-  $font-body-bold-weight: var(--font-body-bold-weight);
+  $font-heading: $oo-font-primary;
+  $font-body: $oo-font-primary;
+  $font-body-weight: 400;
+  $font-body-bold-weight: 600;
 
 // =========================================================================
 //  __    __     ______

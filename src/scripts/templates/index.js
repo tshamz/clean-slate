@@ -1,7 +1,9 @@
 import 'styles/templates/index.scss';
 
-document.addEventListener('DOMContentLoaded', () => {
+// import { init as ModalInit } from 'components/Modal';
 
+document.addEventListener('DOMContentLoaded', () => {
+  // ModalInit();
 });
 
 window.addEventListener('load', () => {

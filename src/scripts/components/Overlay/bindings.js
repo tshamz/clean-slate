@@ -1,6 +1,10 @@
 import dom from 'common/Dom';
-import { hideOverlay } from './handlers';
+import bva from 'common/Constants';
+
+const handleOverlayClick = () => {
+  PubSub.publish(bva.hideOverlay, {})
+};
 
 export const bindActions = () => {
-  $(dom.overlay).on('click', hideOverlay);
+  $(dom.overlay).on('click', handleOverlayClick);
 };

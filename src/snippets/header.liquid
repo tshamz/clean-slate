@@ -1,0 +1,14 @@
+<header class="oo-header {{ classes -}}" {{ extra_attrs -}}>
+
+  {%- include 'heading',
+    level: level,
+    title: title,
+    classes: 'inside-oo-header' -%}
+
+  {%- unless content == blank -%}
+
+    {{- content -}}
+
+  {%- endunless -%}
+
+</header>

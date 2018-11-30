@@ -1,0 +1,55 @@
+{%- assign _modal_name = 'index-modal' -%}
+
+{%- capture _modal_heading_content -%}
+  {%- capture _modal_heading_header_content -%}
+    {%- capture _modal_heading_extra_attrs -%}
+      data-close-modal="{{ _modal_name }}"
+    {%- endcapture -%}
+    {%- include 'button',
+      content: '+',
+      classes: 'inside-oo-header text-link close-modal',
+      extra_attrs: _modal_heading_extra_attrs -%}
+  {%- endcapture -%}
+
+  {%- include 'header',
+    title: 'Basic Modal',
+    level: 3,
+    content: _modal_heading_header_content,
+    classes: 'inside-oo-modal' -%}
+{%- endcapture -%}
+
+
+{%- capture _modal_content -%}
+  {%- include 'text',
+    content: 'Some contents...<br>Some contents...<br>Some contents...',
+    classes: 'inside-oo-modal' -%}
+{%- endcapture -%}
+
+
+{%- capture _modal_footer_content -%}
+  {%- capture _footer_content -%}
+    {%- capture _modal_footer_buttons_extra_attrs -%}
+      data-close-modal="{{ _modal_name }}"
+    {%- endcapture -%}
+    {%- include 'button',
+      content: 'Cancel',
+      classes: 'inside-oo-modal button--neutral',
+      extra_attrs: _modal_footer_buttons_extra_attrs -%}
+
+    {%- include 'button',
+      content: 'OK',
+      classes: 'inside-oo-modal button--primary',
+      extra_attrs: _modal_footer_buttons_extra_attrs -%}
+  {%- endcapture -%}
+
+  {%- include 'footer',
+    content: _footer_content,
+    classes: 'inside-oo-modal' -%}
+{%- endcapture -%}
+
+
+{%- include 'modal',
+  heading: _modal_heading_content,
+  content: _modal_content,
+  footer: _modal_footer_content,
+  name: 'index-modal' -%}

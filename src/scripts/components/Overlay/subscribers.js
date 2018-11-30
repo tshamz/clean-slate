@@ -1,7 +1,7 @@
-import bva from 'core/Constants';
+import bva from 'common/Constants';
 
-PubSub.subscribe(bva.addToCartRequest, (message, { node, ...item }) => {
-  return addItemToCart(item)
-    .then(addToCartSuccess)
-    .catch(cartError('add to cart request'));
+import { hideOverlay } from './';
+
+PubSub.subscribe(bva.hideOverlay, (message, data) => {
+  return hideOverlay(data);
 });

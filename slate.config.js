@@ -16,6 +16,7 @@ const plugins = [
     'jQuery': 'jquery',
     'window.$': 'jquery',
     'window.jQuery': 'jquery',
+    'PubSub': 'pubsub-js',
   }),
 ];
 

@@ -1,0 +1,45 @@
+.oo-modal {
+  visibility: hidden;
+  opacity: 0;
+  position: fixed;
+  top: 100px;
+  left: 50%;
+  z-index: 101;
+  margin: 10px;
+  border-radius: 4px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  background-color: $color-white;
+  transform: translateX(-50%);
+  transition: visibility 0s 300ms, opacity 300ms linear;
+  @include mq('m') {
+    width: 520px;
+    margin: 0;
+  }
+  &.is-active {
+    visibility: visible;
+    opacity: 1;
+    transition: opacity 300ms linear;
+  }
+}
+
+.oo-header.inside-oo-modal {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid $color-gray;
+  padding: $oo-size-base ($oo-size-base * 1.5);
+}
+
+.oo-modal-content {
+  padding: ($oo-size-base * 1.5);
+}
+
+.oo-footer.inside-oo-modal {
+  display: flex;
+  justify-content: flex-end;
+  border-top: 1px solid $color-gray;
+  padding: $oo-size-base ($oo-size-base * 1.5);
+}
+
+.close-modal {
+  transform: rotate(45deg);
+}

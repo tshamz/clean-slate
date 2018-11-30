@@ -41,14 +41,26 @@
     data-alternate-template="{{ template.suffix | handle }}"
     {%- endif -%}>
 
-
-    {%- include 'overlay' -%}
+    {%- include 'button',
+      content: 'Toggle Overlay',
+      classes: 'button--primary dev-control',
+      extra_attrs: 'data-toggle="[data-overlay]"' -%}
+    {%- include 'button',
+      content: 'Open Modal',
+      classes: 'button--primary dev-control',
+      extra_attrs: 'data-open-modal="index-modal"' -%}
+    {%- include 'button',
+      content: 'Toggle Modal',
+      classes: 'button--primary dev-control',
+      extra_attrs: 'data-toggle="[data-modal]" data-toggle-class="is-active"' -%}
 
 
     <main role="main" class="oo-main" id="MainContent">
       {{ content_for_layout }}
     </main>
 
+
+    {%- include 'overlay' -%}
 
 
   </body>

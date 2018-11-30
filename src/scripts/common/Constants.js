@@ -10,3 +10,12 @@
   };
 
 */
+
+export default {
+  showOverlay: 'BVA.SHOW_OVERLAY',
+  hideOverlay: 'BVA.HIDE_OVERLAY',
+  toggleElement: 'BVA.TOGGLE_ELEMENT',
+  openModal: 'BVA.OPEN_MODAL',
+  closeModal: 'BVA.CLOSE_MODAL',
+  toggleModal: 'BVA.TOGGLE_MODAL',
+};

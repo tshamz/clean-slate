@@ -20,4 +20,8 @@
 
 export default {
   overlay: '[data-overlay]',
+  toggle: '[data-toggle]',
+  openModal: '[data-open-modal]',
+  closeModal: '[data-close-modal]',
+  toggleModal: '[data-toggle-modal]',
 };
