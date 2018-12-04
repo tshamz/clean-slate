@@ -1,0 +1,19 @@
+{% comment %}
+
+  Arguments:
+
+  - icon
+  - text
+  - classes
+  - attrs
+
+{% endcomment %}
+
+<div class="oo-icon-with-text {{ classes -}}" {{ attrs -}}>
+
+  {%- include 'core-icon', name: icon -%}
+
+  {{ text }}
+
+</div>
+

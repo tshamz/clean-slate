@@ -1,0 +1,40 @@
+{%- if srcset == blank -%}
+  {%- include 'base-img-url', resource: resource, size: size, scale: 1, descriptor: '1x' -%},
+  {%- include 'base-img-url', resource: resource, size: size, scale: 2, descriptor: '2x' -%}
+{%- else -%}
+  {%- assign srcsets = srcset | split: ',' -%}
+
+  {%- for srcset in srcsets -%}
+    {%- assign srcset_parts = srcset | split: ' ' -%}
+    {%- assign srcset_size = srcset_parts | first -%}
+    {%- assign dimensions = srcset_size | split: 'x' -%}
+    {%- assign descriptor = srcset_parts | last -%}
+
+    {%- if dimensions.size == 1 -%}
+
+      {%- if descriptor == srcset_size -%}
+        {%- assign descriptor = descriptor | remove: 'x' | append: 'w' -%}
+      {%- endif -%}
+
+    {%- elsif dimensions.size == 2 and dimensions[0] == blank -%}
+
+      {%- assign descriptor = ' 1x' -%}
+
+    {%- else -%}
+
+      {%- if descriptor == srcset_size -%}
+        {%- assign descriptor = dimensions[0] | append: 'w' -%}
+      {%- endif -%}
+
+    {%- endif -%}
+
+    {%- include 'base-img-url', resource: resource, size: srcset_size, descriptor: descriptor -%}{%- unless forloop.last -%},{%- endunless -%}
+  {%- endfor -%}
+
+  {%- assign srcsets = blank -%}
+  {%- assign srcset_parts = blank -%}
+  {%- assign srcset_size = blank -%}
+  {%- assign dimensions = blank -%}
+  {%- assign descriptor = blank -%}
+
+{%- endif -%}

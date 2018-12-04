@@ -1,0 +1,18 @@
+{%- assign sizeses = sizes | split: ',' -%}
+
+{%- for size in sizeses -%}
+  {%- assign size_parts = size | split: ' ' -%}
+
+  {%- if size_parts.size == 1 -%}
+
+    {{- size_parts[0] -}}
+
+  {%- else -%}
+
+    ({{- size_parts[0] -}}-width: {{ size_parts[1] }}) {{ size_parts[2] -}}{%- unless forloop.last -%}, {% endunless -%}
+
+  {%- endif -%}
+{%- endfor -%}
+
+{%- assign sizeses = blank -%}
+{%- assign size_parts = blank -%}

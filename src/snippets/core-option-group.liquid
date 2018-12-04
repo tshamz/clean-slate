@@ -1,0 +1,63 @@
+{%- comment -%}
+
+  Arguments:
+
+  - option
+  - show_option_name
+  - show_selected_value
+  - classes
+  - attrs
+
+{%- endcomment -%}
+
+<div
+  class="oo-option-group group-{{- option.name | handle }} {{ classes -}}"
+  data-option-group="{{- option.name -}}"
+  {{ attrs -}}>
+
+  {%- capture _selected_value -%}
+    {%- unless show_selected_value == blank -%}
+      <div data-selected-value>{{ option.selected_value }}</div>
+    {%- endunless -%}
+  {%- endcapture -%}
+  {%- assign _title = option.name | append: ':' -%}
+
+  {%- unless show_option_name == blank -%}
+    {%- include 'core-header',
+      title: _title,
+      level: 3,
+      content: _selected_value -%}
+  {%- endunless -%}
+
+  {%- assign _selected_value = nil -%}
+  {%- assign _title = nil -%}
+
+
+  {%- for _value in option.values -%}
+
+    {%- if option.selected_value == _value -%}
+      {%- assign _selected = 'checked' -%}
+    {%- endif -%}
+
+    {%- capture _classes -%}
+      oo-option-value swatch-{{- _value | handle -}}
+    {%- endcapture -%}
+
+    {%- capture _extra_attrs -%}
+      data-option-value
+    {%- endcapture -%}
+
+    {%- include 'core-input-group',
+      type: 'radio',
+      name: option.name,
+      value: _value,
+      hide_input: true,
+      input_attrs: _selected,
+      classes: _classes,
+      extra_attrs: _extra_attrs -%}
+
+    {%- assign _selected = nil -%}
+    {%- assign _extra_attrs = nil -%}
+
+  {%- endfor -%}
+</div>

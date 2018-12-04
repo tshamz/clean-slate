@@ -1,0 +1,25 @@
+{% comment %}
+
+  Arguments:
+
+  - title
+  - level
+  - content
+  - classes
+  - attrs
+
+{% endcomment %}
+
+<header class="oo-header {{ classes -}}" {{ attrs -}}>
+
+  {%- include 'core-heading',
+    level: level,
+    title: title -%}
+
+  {%- unless content == blank -%}
+
+    {{- content -}}
+
+  {%- endunless -%}
+
+</header>

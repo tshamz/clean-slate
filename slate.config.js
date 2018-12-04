@@ -28,7 +28,7 @@ const alias = {
 
 module.exports = {
   'eslint.config': '.eslintrc.js',
-  'cssVarLoader.liquidPath': ['src/snippets/css-variables.liquid'],
+  'cssVarLoader.liquidPath': ['src/snippets/api-css-variables.liquid'],
   'webpack.extend': {
     externals,
     plugins,

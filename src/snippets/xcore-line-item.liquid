@@ -1,0 +1,60 @@
+<div
+  class="oo-line-item {{ classes -}}"
+  data-line-item
+  {{ extra_attrs -}}>
+
+  {%- capture _link_content -%}
+    {%- include 'image',
+      resource: _line_item.product.featured_image,
+      size: '800x',
+      srcset: '480x,600x,768x,450x,575x',
+      sizes: 'max 480px 480px,max 600px 600px,max 768px 768px,max 992px 992px,min 993px 575px'
+      classes: 'inside-oo-line-item oo-line-item--image-wrapper',
+      extra_attrs: '' -%}
+  {%- endcapture -%}
+
+  {%- include 'link',
+    href: _line_item.variant.url,
+    content: _link_content -%}
+
+  {%- assign _link_content = nil -%}
+
+
+  <div class="oo-line-item--information-wrapper">
+
+    {%- include 'header',
+      title: _line_item.product.title,
+      level: 4 -%}
+
+    {%- include 'price',
+      resource: _line_item.variant -%}
+
+    <p>{{ _line_item.product.title }}</p>
+
+    {%- include 'quantity-select',
+      quantity: _line_item.quantity,
+      classes: 'inside-oo-line-item--information-wrapper',
+      extra_attrs: '' -%}
+
+    {%- include 'price',
+      resource: _line_item,
+      classes: 'inside-oo-line-item--information-wrapper',
+      extra_attrs: '' -%}
+
+  </div>
+
+  {%- capture _content -%}
+    {%- include 'icon',
+      name: 'cancel',
+      classes: 'inside-oo-button',
+      extra_attrs: '' -%}
+  {%- endcapture -%}
+
+  {%- include 'button',
+    content: _content,
+    classes: 'inside-oo-line-item',
+    extra_attrs: 'data-cart-remove-item' -%}
+
+  {%- assign _content = nil -%}
+
+</div>

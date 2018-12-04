@@ -1,0 +1,9 @@
+<script type="application/json" data-variant-data>
+{
+  "data": [
+    {%- for _variant in _product.variants -%}
+      {%- include 'api-variant-object', _variant: _variant -%}{%- unless forloop.last -%},{%- endunless -%}
+    {%- endfor -%}
+  ]
+}
+</script>

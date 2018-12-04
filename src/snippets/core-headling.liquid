@@ -1,0 +1,17 @@
+{% comment %}
+
+    Arguments:
+
+    - title
+    - level
+    - classes
+    - attrs
+
+{% endcomment %}
+
+<h{%- unless level -%}2{% else %}{{- level -}}{%- endunless %}
+  class="oo-heading {{ classes -}}" {{ attrs -}}>
+
+  {{- title -}}
+
+</h{%- unless level -%}2{% else %}{{- level -}}{%- endunless %}>

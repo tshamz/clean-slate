@@ -1,0 +1,30 @@
+{%- comment -%}
+
+  Arguments:
+
+  - networks
+  - classes
+  - attrs
+
+{%- endcomment -%}
+
+<div class="oo-social-media-icons {{ classes -}}" {{ attrs -}}>
+
+  {%- assign _networks_array = networks | split: ' ' -%}
+
+  {%- for _network in _networks_array -%}
+    {%- assign _setting_name = 'social_' | append: _network | append: '_link' -%}
+    {%- assign _href = settings[_setting_name] -%}
+    {%- assign _setting_name = nil -%}
+
+    <a href="{{ _href }}" data-network="{{ _network }}">
+
+      {%- include 'core-icon', name: _network -%}
+
+    </a>
+
+    {%- assign _href = nil -%}
+  {%- endfor -%}
+
+  {%- assign _networks_array = nil -%}
+</div>

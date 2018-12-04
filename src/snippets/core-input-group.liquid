@@ -1,0 +1,42 @@
+{%- comment -%}
+
+  Arguments:
+
+  - type
+  - name
+  - value
+  - hide_input
+  - hide_label
+  - classes
+  - attrs
+  - input_attrs
+  - label_attrs
+
+{%- endcomment -%}
+
+{%- capture _id -%}
+  {{- name | handle -}}-{{- value | handle -}}-{{- 'now' | date: '%N' | modulo: 9999 | plus: 1 -}}
+{%- endcapture -%}
+
+<div class="oo-input-group {{ classes -}}" {{ attrs -}}>
+
+  <input
+    class="oo-input input-type-{{- type }} {% if hide_input == true -%}u-visually-hidden{%- endif -%}"
+    type="{{- type -}}"
+    name="{{- name -}}"
+    value="{{- value -}}"
+    id="{{- _id -}}"
+    {{ input_attrs -}}>
+
+  <label
+    class="oo-label {% if hide_label == true -%}u-visually-hidden{%- endif -%}"
+    for="{{- _id -}}"
+    {{ label_attrs -}}>
+
+    {{- value -}}
+
+  </label>
+
+  {%- assign _id = nil -%}
+
+</div>
