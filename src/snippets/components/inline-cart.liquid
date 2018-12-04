@@ -1,0 +1,48 @@
+{%- comment -%}
+
+  Arguments:
+
+  - name
+  - classes
+  - attrs
+
+{%- endcomment -%}
+
+
+<section
+  class="oo-inline-cart {{ classes -}}"
+  data-inline-cart
+  {{ attrs -}}>
+
+  {%- capture content -%}
+    {%- include 'icon', name: 'arrow-left' -%}
+  {%- endcapture -%}
+
+  {%- include 'heading',
+    title: 'Your Shopping Cart',
+    level: 3,
+    content: content %}
+
+  {% assign content = nil %}
+
+
+  <div class="oo-inline-cart--contents" data-inline-cart-contents>
+
+    {%- include 'ajax-inline-cart-contents' -%}
+
+  </div>
+
+
+  <footer class="oo-inline-cart--footer">
+
+    {%- include 'button',
+      content: 'View Cart',
+      classes: 'oo-inline-cart--view-cart' -%}
+
+    {%- include 'button',
+      content: 'Checkout',
+      classes: 'oo-inline-cart--checkout' -%}
+
+  </footer>
+
+</section>

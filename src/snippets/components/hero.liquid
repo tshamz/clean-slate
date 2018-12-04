@@ -1,0 +1,68 @@
+{% comment %}
+
+  Arguments:
+
+  - image
+  - size
+  - video
+  - content
+  - title
+  - subtitle
+  - button_one_text
+  - button_one_href
+  - button_two_text
+  - button_two_href
+
+{% endcomment %}
+
+
+<div class="oo-hero {{ classes -}}" {{ attrs -}}>
+
+  {%- if image != blank -%}
+
+    {%- include 'image',
+      resource: image,
+      size: size -%}
+
+  {%- elsif video != blank -%}
+
+    {%- include 'video', src: video -%}
+
+  {%- else -%}
+
+    {{- content -}}
+
+  {%- endif -%}
+
+
+  {%- capture heading_content -%}
+    {%- if subtitle != blank -%}
+      <div class="oo-heading--content">{{ subtitle }}</div>
+    {%- endif -%}
+  {%- endcapture -%}
+
+  {%- include 'header',
+    title: title,
+    level: 3,
+    content: heading_content -%}
+  {%- assign heading_content = nil -%}
+
+
+  {%- if button_one_text != blank -%}
+
+    {%- include 'button',
+      href: button_one_href,
+      content: button_one_text -%}
+
+  {%- endif -%}
+
+
+  {%- if button_two_text != blank -%}
+
+    {%- include 'button',
+      href: button_two_href,
+      content: button_two_text -%}
+
+  {%- endif -%}
+
+</div>

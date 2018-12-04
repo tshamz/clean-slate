@@ -1,0 +1,18 @@
+{% comment %}
+
+  Arguments:
+
+  - option
+
+{% endcomment %}
+
+{
+  "name": "{{- option.name | json -}}",
+  "position": {{- option.position -}},
+  "values": [
+    {%- for value in option.values -%}
+      "{{- value | json -}}"{%- unless forloop.last -%},{%- endunless -%}
+    {%- endfor -%}
+  ],
+  "initialValue": "{{- option.selected_value | json -}}"
+}

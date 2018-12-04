@@ -1,0 +1,79 @@
+<section data-section-id="{{ section.id }}" data-section-type="hero">
+
+  {%- include 'hero',
+    image: block.settings.image,
+    size: block.settings.image_size,
+    video: block.settings.video_url,
+    content: block.settings.content,
+    title: block.settings.title,
+    subtitle: block.settings.subtitle,
+    button_one_text: block.settings.button_one_text,
+    button_one_href: block.settings.button_one_href,
+    button_two_text: block.settings.button_two_text,
+    button_two_href: block.settings.button_two_href -%}
+
+</section>
+
+{% schema %}
+  {
+    "name": "Hero",
+    "settings": [
+      {
+        "id": "image",
+        "type": "image_picker",
+        "label": "Image"
+      },
+      {
+        "type": "text",
+        "id": "image_size",
+        "label": "Image Size",
+        "info": "[Optional] e.g. 800x"
+      },
+      {
+        "type": "url",
+        "id": "video_url",
+        "label": "Video Url",
+        "info": "Url of hero video"
+      },
+      {
+        "type": "textarea",
+        "id": "content",
+        "label": "Hero content (if other than image or video)"
+      },
+      {
+        "id": "title",
+        "type": "text",
+        "label": "Title"
+      },
+      {
+        "id": "subtitle",
+        "type": "text",
+        "label": "Subtitle"
+      },
+      {
+        "id": "button_one_text",
+        "type": "text",
+        "label": "button 1 text",
+        "info": "[Optional]"
+      },
+      {
+        "id": "button_one_href",
+        "type": "url",
+        "label": "button 1 href",
+        "info": "[Optional]"
+      },
+      {
+        "id": "button_two_text",
+        "type": "text",
+        "label": "button 2 text",
+        "info": "[Optional]"
+      },
+      {
+        "id": "button_two_href",
+        "type": "url",
+        "label": "button 2 href",
+        "info": "[Optional]"
+      }
+    ]
+  }
+{% endschema %}

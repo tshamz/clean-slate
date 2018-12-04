@@ -2,12 +2,13 @@
 
     Arguments:
 
-    - title
     - level
+    - title
     - classes
     - attrs
 
 {% endcomment %}
+
 
 <h{%- unless level -%}2{% else %}{{- level -}}{%- endunless %}
   class="oo-heading {{ classes -}}" {{ attrs -}}>

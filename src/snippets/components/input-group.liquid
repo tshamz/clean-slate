@@ -14,9 +14,11 @@
 
 {%- endcomment -%}
 
-{%- capture _id -%}
+
+{%- capture id -%}
   {{- name | handle -}}-{{- value | handle -}}-{{- 'now' | date: '%N' | modulo: 9999 | plus: 1 -}}
 {%- endcapture -%}
+
 
 <div class="oo-input-group {{ classes -}}" {{ attrs -}}>
 
@@ -25,18 +27,18 @@
     type="{{- type -}}"
     name="{{- name -}}"
     value="{{- value -}}"
-    id="{{- _id -}}"
+    id="{{- id -}}"
     {{ input_attrs -}}>
 
   <label
     class="oo-label {% if hide_label == true -%}u-visually-hidden{%- endif -%}"
-    for="{{- _id -}}"
+    for="{{- id -}}"
     {{ label_attrs -}}>
 
     {{- value -}}
 
   </label>
 
-  {%- assign _id = nil -%}
-
 </div>
+
+{%- assign id = nil -%}

@@ -2,24 +2,21 @@
 
   Arguments:
 
-  - title
   - level
+  - title
   - content
   - classes
   - attrs
 
 {% endcomment %}
 
+
 <header class="oo-header {{ classes -}}" {{ attrs -}}>
 
-  {%- include 'core-heading',
+  {%- include 'heading',
     level: level,
     title: title -%}
 
-  {%- unless content == blank -%}
-
-    {{- content -}}
-
-  {%- endunless -%}
+  {{- content -}}
 
 </header>

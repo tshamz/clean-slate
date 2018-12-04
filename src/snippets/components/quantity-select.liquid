@@ -1,0 +1,33 @@
+{% comment %}
+
+  Arguments:
+
+  - quantity
+  - classes
+  - attrs
+
+{% endcomment %}
+
+
+<div
+  class="oo-quantity-select {{ classes -}}"
+  data-quantity-select
+  {{ attrs -}}>
+
+  {%- include 'button',
+    content: '-',
+    attrs: 'data-quantity-change=-1' -%}
+
+  <input
+    type="number"
+    name="quantity"
+    value="{{ quantity }}"
+    id="quantity"
+    min=1
+    data-quantity-value />
+
+  {%- include 'button',
+    content: '+',
+    attrs: 'data-quantity-change=1' -%}
+
+</div>

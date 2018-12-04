@@ -5,6 +5,7 @@
 
 const path = require('path');
 const { ProvidePlugin } = require('webpack');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 const externals = {
   jquery: 'jQuery',
@@ -17,6 +18,18 @@ const plugins = [
     'window.$': 'jquery',
     'window.jQuery': 'jquery',
   }),
+  new CopyWebpackPlugin([
+      {
+        from: 'sections/**/*',
+        to: '../sections/',
+        flatten: true,
+      },
+      {
+        from: 'snippets/**/*',
+        to: '../snippets/',
+        flatten: true,
+      },
+  ], { ignore: [ 'core/*' ] }),
 ];
 
 const alias = {
@@ -28,7 +41,8 @@ const alias = {
 
 module.exports = {
   'eslint.config': '.eslintrc.js',
-  'cssVarLoader.liquidPath': ['src/snippets/api-css-variables.liquid'],
+  'cssVarLoader.liquidPath': ['src/snippets/core/api-css-variables.liquid'],
+  'paths.theme.src.snippets': 'snippets/core',
   'webpack.extend': {
     externals,
     plugins,

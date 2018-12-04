@@ -1,0 +1,19 @@
+{% comment %}
+
+  Arguments:
+
+  - line_item
+
+{% endcomment %}
+
+<script type="application/json" data-line-item-data>
+{
+  "data": {
+    "key": "{{- line_item.key -}}",
+    "properties": [{%- for property in line_item.properties -%}
+      "{{- property.first | json -}}": "{{- property.last | json -}}"{%- unless forloop.last -%},{%- endunless -%}
+    {%- endfor -%}],
+    "variant": {%- include 'variant-object', variant: line_item.variant -%}
+  }
+}
+</script>

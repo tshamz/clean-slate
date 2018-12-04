@@ -42,15 +42,15 @@
     data-alternate-template="{{ template.suffix | handle }}"
     {%- endif -%}>
 
+    <a href="#MainContent" class="in-page-link u-visually-hidden">Skip to content</a>
 
-    {%- include 'core-overlay' -%}
-
+    {%- include 'inline-cart' -%}
 
     <main role="main" class="oo-main" id="MainContent">
       {{ content_for_layout }}
     </main>
 
-
+    {%- include 'overlay' -%}
 
   </body>
 </html>

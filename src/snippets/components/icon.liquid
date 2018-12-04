@@ -8,12 +8,13 @@
 
 {%- endcomment -%}
 
+
 <div class="oo-icon icon-{{- name }} {{ classes -}}" {{ attrs -}}>
 
-  {%- assign _icon_name = name | prepend: 'icon-' -%}
+  {%- assign icon_name = name | remove_first: 'icon-' | prepend: 'icon-' -%}
 
-  {%- include _icon_name -%}
+  {%- include icon_name -%}
 
-  {%- assign _icon_name = nil -%}
+  {%- assign icon_name = nil -%}
 
 </div>
