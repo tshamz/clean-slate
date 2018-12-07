@@ -41,17 +41,13 @@
       title: line_item.product.title,
       level: 4 -%}
 
-    {%- include 'price',
-      resource: line_item.variant -%}
+    {%- include 'price', resource: line_item.variant -%}
 
-    {%- include 'text',
-      content: line_item.product.title -%}
+    {%- include 'text', content: line_item.product.title -%}
 
-    {%- include 'quantity-select',
-      quantity: line_item.quantity -%}
+    {%- include 'quantity-select', quantity: line_item.quantity -%}
 
-    {%- include 'price',
-      resource: line_item -%}
+    {%- include 'price', resource: line_item -%}
 
   </div>
 

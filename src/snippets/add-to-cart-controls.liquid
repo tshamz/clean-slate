@@ -1,0 +1,26 @@
+<div class="debug add-to-cart-controls">
+  {%- include 'button',
+    content: 'Show Overlay',
+    classes: 'button--primary dev-control',
+    attrs: 'data-toggle="[data-overlay]" data-toggle-action="add" data-toggle-animated="true"' -%}
+
+  {%- include 'button',
+    content: 'Toggle Overlay',
+    classes: 'button--primary dev-control',
+    attrs: 'data-toggle="[data-overlay]" data-toggle-animated="true"' -%}
+
+  {% include 'button',
+    content: 'Toggle Inline Cart',
+    classes: 'button--primary dev-control',
+    attrs: 'data-inline-cart="toggle"' %}
+
+  {% include 'button',
+    content: 'Add To Cart',
+    classes: 'button--primary dev-control',
+    attrs: 'data-add-to-cart' %}
+
+  {% include 'button',
+    content: 'Empty Cart',
+    classes: 'button--secondary dev-control',
+    attrs: 'data-empty-cart' %}
+</div>

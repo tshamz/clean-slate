@@ -11,7 +11,7 @@
 {% endcomment %}
 
 
-<{%- if href != blank -%}a{%- else -%}button{%- endif -%}
+<{%- if href != blank -%}a{%- else -%}button{%- endif %}
   class="oo-button {{ classes -}}"
   {%- if type -%}type="{{- type -}}"{%- endif -%}
   {%- if href -%}href="{{- href -}}"{%- endif -%}

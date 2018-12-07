@@ -3,22 +3,30 @@ import 'styles/theme.scss.liquid';
 
 import { focusHash, bindInPageLinks } from '@shopify/theme-a11y';
 
-import { init as OverlayInit } from 'components/Overlay';
-
+import Toggle from 'components/Toggle';
+import Overlay from 'components/Overlay';
+import InlineCart from 'components/InlineCart';
 
 // Common a11y fixes
 focusHash();
 bindInPageLinks();
 
-
 document.addEventListener('DOMContentLoaded', async () => {
-  OverlayInit();
+  Toggle.initSubscribers();
+  Toggle.bindActions();
+
+  Overlay.initSubscribers();
+  Overlay.bindActions();
+
+  InlineCart.initSubscribers();
+  InlineCart.bindActions();
 });
 
 window.addEventListener('load', () => {
 
 });
 
+PubSub.subscribe('BVA', (message, data) => console.log(message, data));
 
 // HMR
 // if (module.hot) {

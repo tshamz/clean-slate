@@ -17,6 +17,7 @@ const plugins = [
     'jQuery': 'jquery',
     'window.$': 'jquery',
     'window.jQuery': 'jquery',
+    'PubSub': 'pubsub-js',
   }),
   new CopyWebpackPlugin([
       {
@@ -43,6 +44,7 @@ module.exports = {
   'eslint.config': '.eslintrc.js',
   'cssVarLoader.liquidPath': ['src/snippets/core/api-css-variables.liquid'],
   'paths.theme.src.snippets': 'snippets/core',
+  'paths.theme.src.sections': 'sections/core',
   'webpack.extend': {
     externals,
     plugins,

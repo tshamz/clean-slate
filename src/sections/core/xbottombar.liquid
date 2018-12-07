@@ -1,0 +1,173 @@
+<section data-section-id="{{ section.id }}" data-section-type="bottombar">
+
+  {%- for block in section.blocks -%}
+    {%- case block.type -%}
+
+      {%- when 'text' -%}
+
+        {%- include 'text', content: block.settings.title -%}
+
+      {%- when 'image' -%}
+
+        {%- if block.settings.svg_snippet != blank -%}
+
+          {%- include 'svg', snippet: block.settings.svg_snippet -%}
+
+        {%- else -%}
+
+          {%- include 'image',
+            resource: block.settings.image,
+            size: block.settings.size  -%}
+
+        {%- endif -%}
+
+      {%- when 'link' -%}
+
+        {%- include 'link',
+          href: block.settings.link_href,
+          content: block.settings.link_text -%}
+
+      {%- when 'social_media_icons' -%}
+
+        {%- capture _networks -%}
+          {% if block.settings.social_network_facebook -%}facebook{%- endif %}
+          {% if block.settings.social_network_twitter -%}twitter{%- endif %}
+          {% if block.settings.social_network_pinterest -%}pinterest{%- endif %}
+          {% if block.settings.social_network_instagram -%}instagram{%- endif %}
+          {% if block.settings.social_network_snapchat -%}snapchat{%- endif %}
+          {% if block.settings.social_network_tumblr -%}tumblr{%- endif %}
+          {% if block.settings.social_network_youtube -%}youtube{%- endif %}
+          {% if block.settings.social_network_vimeo -%}vimeo{%- endif %}
+        {%- endcapture -%}
+
+        {%- include 'social-media-icons',
+          networks: _networks,
+          type: 'link' -%}
+
+        {%- assign _networks = nil -%}
+
+    {%- endcase -%}
+  {%- endfor -%}
+
+</section>
+
+{% schema %}
+  {
+    "name": "Bottombar",
+    "settings": [],
+    "blocks": [
+      {
+        "name": "Text",
+        "type": "text",
+        "settings": [
+          {
+            "id": "title",
+            "type": "text",
+            "label": "Text Block"
+          }
+        ]
+      },
+      {
+        "name": "Image",
+        "type": "image",
+        "settings": [
+          {
+            "type": "text",
+            "id": "svg_snippet",
+            "label": ".svg Snippet Name",
+            "info": "If svg is a snippet, enter snippet name here"
+          },
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image"
+          },
+          {
+            "type": "text",
+            "id": "size",
+            "label": "Image Size",
+            "info": "e.g. 800x"
+          }
+        ]
+      },
+      {
+        "name": "Link",
+        "type": "link",
+        "settings": [
+          {
+            "type": "text",
+            "id": "link_text",
+            "label": "Link text"
+          },
+          {
+            "type": "url",
+            "id": "link_href",
+            "label": "Link destination"
+          }
+        ]
+      },
+      {
+        "name": "Social Media Icons",
+        "type": "social_media_icons",
+        "settings": [
+          {
+            "type": "checkbox",
+            "id": "social_network_facebook",
+            "default": false,
+            "label": "Facebook",
+            "default": true
+          },
+          {
+            "type": "checkbox",
+            "id": "social_network_twitter",
+            "default": false,
+            "label": "Twitter",
+            "default": true
+          },
+          {
+            "type": "checkbox",
+            "id": "social_network_pinterest",
+            "default": false,
+            "label": "Pinterest",
+            "default": true
+          },
+          {
+            "type": "checkbox",
+            "id": "social_network_instagram",
+            "default": false,
+            "label": "Instagram",
+            "default": true
+          },
+          {
+            "type": "checkbox",
+            "id": "social_network_snapchat",
+            "default": false,
+            "label": "Snapchat",
+            "default": false
+          },
+          {
+            "type": "checkbox",
+            "id": "social_network_tumblr",
+            "default": false,
+            "label": "Tumblr",
+            "default": false
+          },
+          {
+            "type": "checkbox",
+            "id": "social_network_youtube",
+            "default": false,
+            "label": "YouTube",
+            "default": false
+          },
+          {
+            "type": "checkbox",
+            "id": "social_network_vimeo",
+            "default": false,
+            "label": "Vimeo",
+            "default": false
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

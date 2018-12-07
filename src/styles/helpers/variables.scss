@@ -8,7 +8,6 @@
 // ============================================================================
 
   $enable-box-sizing-border-box: true;
-  $enable-normalize:             true;
 
   $oo-size-base:    16px;
   $oo-line-height:  1.4;
@@ -19,7 +18,7 @@
   $oo-font-primary:  Roboto, "Helvetica Neue", Arial, sans-serif;
   $oo-font-heading:  $oo-font-primary;
 
-  $oo-transition-duration: 250ms;
+  $oo-transition-duration: 300ms;
   $oo-transition-timing: ease-in-out;
 
 // ============================================================================
@@ -31,23 +30,19 @@
 //
 // ===========================================================================
 
-  $color-white: #ffffff;
-  $color-black: #000000;
+  $color-white: var(--color-default-white);
+  $color-black: var(--color-default-black);
+  $color-gray: var(--color-default-gray);
 
-  $color-primary: #0074d9;
-  $color-secondary: #ffdc00;
+  $color-1: var(--color-palette-1);
+  $color-2: var(--color-palette-2);
+  $color-3: var(--color-palette-3);
+  $color-4: var(--color-palette-4);
+  $color-5: var(--color-palette-5);
+  $color-6: var(--color-palette-6);
 
   $color-body-text: var(--color-body-text);
-  $color-body: var(--color-main-background);
-  $color-accent: var(--color-accent);
-  $color-border: var(--color-border);
-
-  $color-error: #ff6d6d;
-  $color-error-bg: #ffffff;
-  $color-success: #000000;
-  $color-success-bg: #000000;
-  $color-disabled: #000000;
-  $color-disabled-border: #000000;
+  $color-body-background: var(--color-body-background);
 
 // =========================================================================
 //  ______   ______     __   __     ______   ______

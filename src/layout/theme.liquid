@@ -9,31 +9,40 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <link rel="canonical" href="{{ canonical_url }}">
 
-    {%- include 'page-favicon' -%}
+    <!-- Site Meta ============================================ -->
 
-    {%- include 'page-title' -%}
-    {%- include 'page-description' -%}
+      {%- include 'page-favicon' -%}
+      {%- include 'page-title' -%}
+      {%- include 'page-description' -%}
+      {%- include 'page-social-meta-tags' -%}
 
-    {%- include 'page-social-meta-tags' -%}
+    <!-- jQuery =============================================== -->
 
-    {%- include 'style-tags', layout: 'theme' -%}
-    {%- include 'api-css-variables' -%}
+      <script
+        src="https://code.jquery.com/jquery-3.3.1.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous">
+      </script>
 
-    <script
-      src="https://code.jquery.com/jquery-3.3.1.min.js"
-      integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-      crossorigin="anonymous">
-    </script>
+    <!-- Header Content ======================================= -->
 
-    {%- include 'api-shop' -%}
+      {{ content_for_header }}
+
+    <!-- Stylesheets ========================================== -->
+
+      {%- include 'style-tags', layout: 'theme' -%}
+      {%- include 'api-css-variables' -%}
+
+    <!-- Scripts ============================================== -->
+
+      {%- include 'script-tags', layout: 'theme' -%}
+      {%- include 'api-shop' -%}
+
 
     {% if template.directory == 'customers' %}
       <script src="{{ 'shopify_common.js' | shopify_asset_url }}" defer="defer"></script>
     {% endif %}
 
-    {% include 'script-tags', layout: 'theme' %}
-
-    {{ content_for_header }}
   </head>
 
   <body
@@ -44,11 +53,21 @@
 
     <a href="#MainContent" class="in-page-link u-visually-hidden">Skip to content</a>
 
-    {%- include 'inline-cart' -%}
+    {%- include 'add-to-cart-controls' -%}
+
+    {%- section 'inline-cart' -%}
+
+    {%- section 'topbar' -%}
+
+    {%- section 'header' -%}
 
     <main role="main" class="oo-main" id="MainContent">
       {{ content_for_layout }}
     </main>
+
+    {%- section 'footer' -%}
+
+    {%- section 'bottombar' -%}
 
     {%- include 'overlay' -%}
 

@@ -17,5 +17,85 @@
         "info": "Will be scaled down to 32 x 32px"
       }
     ]
+  },
+  {
+    "name": "Colors",
+    "settings": [
+      {
+        "type": "header",
+        "content": "White, Black, and Gray"
+      },
+      {
+        "type": "color",
+        "id": "color_default_white",
+        "label": "White",
+        "default": "#ffffff",
+        "info": "default white"
+      },
+      {
+        "type": "color",
+        "id": "color_default_black",
+        "label": "Black",
+        "default": "#111111",
+        "info": "default black"
+      },
+      {
+        "type": "color",
+        "id": "color_default_gray",
+        "label": "Gray",
+        "default": "#aaaaaa",
+        "info": "default gray"
+      },
+      {
+        "type": "header",
+        "content": "Color Palette"
+      },
+      {
+        "type": "color",
+        "id": "color_palette_1",
+        "label": "Palette Color #1",
+        "default": "#cbd9d6"
+      },
+      {
+        "type": "color",
+        "id": "color_palette_2",
+        "label": "Palette Color #2",
+        "default": "#8da593"
+      },
+      {
+        "type": "color",
+        "id": "color_palette_3",
+        "label": "Palette Color #3",
+        "default": "#d9cba3"
+      },
+      {
+        "type": "color",
+        "id": "color_palette_4",
+        "label": "Palette Color #4",
+        "default": "#f2a88c"
+      },
+      {
+        "type": "color",
+        "id": "color_palette_5",
+        "label": "Palette Color #5",
+        "default": "#d98282"
+      },
+      {
+        "type": "header",
+        "content": "Body Colors"
+      },
+      {
+        "type": "color",
+        "id": "color_body_text",
+        "label": "Body Text",
+        "default": "#333333"
+      },
+      {
+        "type": "color",
+        "id": "color_body_background",
+        "label": "Body Background",
+        "default": "#ffffff"
+      }
+    ]
   }
 ]

@@ -10,3 +10,15 @@
   };
 
 */
+
+export default {
+  showOverlay: 'BVA.SHOW_OVERLAY',
+  hideOverlay: 'BVA.HIDE_OVERLAY',
+  toggleElement: 'BVA.TOGGLE_ELEMENT',
+  openModal: 'BVA.OPEN_MODAL',
+  closeModal: 'BVA.CLOSE_MODAL',
+  toggleModal: 'BVA.TOGGLE_MODAL',
+  showInlineCart: 'BVA.SHOW_INLINE_CART',
+  hideInlineCart: 'BVA.HIDE_INLINE_CART',
+  toggleInlineCart: 'BVA.TOGGLE_INLINE_CART',
+};

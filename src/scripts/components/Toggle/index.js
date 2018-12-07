@@ -1,4 +1,3 @@
-import './styles.scss';
 import { bindActions } from './bindings';
 import { initSubscribers } from './subscribers';
 

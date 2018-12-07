@@ -1,5 +1,6 @@
 @charset 'UTF-8';
 
+// Uncomment to include normalize.css
 @import '~normalize.css/normalize';
 
 // Helpers
@@ -8,5 +9,8 @@
 // Base
 @import 'base/index';
 
-// Global
-@import 'global/overlay';
+// Components
+@import 'components/button';
+
+// Shame
+@import 'helpers/shame';

@@ -1,4 +1,4 @@
-.button {
+.oo-button {
   display: inline-block;
   vertical-align: middle;
   margin: 0;
@@ -11,12 +11,12 @@
 
   &.button--primary {
     color: $color-white;
-    background-color: $color-primary;
+    background-color: $color-2;
   }
 
   &.button--secondary {
-    color: $color-black;
-    background-color: $color-secondary;
+    color: $color-white;
+    background-color: $color-5;
   }
 
   &.text-link {
