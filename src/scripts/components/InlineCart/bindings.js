@@ -2,7 +2,9 @@ import dom from 'common/Dom';
 import bva from 'common/Constants';
 
 const handleToggleInlineCartClick = () => {
-  PubSub.publish(bva.toggleInlineCart, {})
+  const origin = self
+  const initiator = 'click';
+  PubSub.publish(bva.toggleInlineCart, { origin, initiator });
 };
 
 export const bindActions = () => {

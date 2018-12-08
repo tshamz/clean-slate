@@ -1,10 +1,16 @@
-import dom from 'common/Dom';
 import bva from 'common/Constants';
-import { hideOverlay } from './handlers';
-import subscribers from './subscribers';
+import { showOverlay, hideOverlay, toggleOverlay } from './handlers';
 
 export const initSubscribers = () => {
+  PubSub.subscribe(bva.showOverlay, (message, data) => {
+    return showOverlay(data);
+  });
+
   PubSub.subscribe(bva.hideOverlay, (message, data) => {
-    PubSub.publish(bva.toggleElement, { selector: dom.overlay, ...data });
+    return hideOverlay(data);
+  });
+
+  PubSub.subscribe(bva.toggleOverlay, (message, data) => {
+    return toggleOverlay(data);
   });
 };

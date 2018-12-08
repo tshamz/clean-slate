@@ -1,8 +1,10 @@
 import dom from 'common/Dom';
 import bva from 'common/Constants';
 
-const handleOverlayClick = () => {
-  PubSub.publish(bva.hideOverlay, {})
+const handleOverlayClick = ({ currentTarget: self }) => {
+  const origin = self
+  const initiator = 'click';
+  PubSub.publish(bva.hideOverlay, { origin, initiator });
 };
 
 export const bindActions = () => {

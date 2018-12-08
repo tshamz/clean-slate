@@ -6,12 +6,18 @@ import { focusHash, bindInPageLinks } from '@shopify/theme-a11y';
 import Toggle from 'components/Toggle';
 import Overlay from 'components/Overlay';
 import InlineCart from 'components/InlineCart';
+import CartControls from 'components/CartControls';
 
 // Common a11y fixes
 focusHash();
 bindInPageLinks();
 
+CartControls.cacheCart();
+
 document.addEventListener('DOMContentLoaded', async () => {
+  CartControls.initSubscribers();
+  CartControls.bindActions();
+
   Toggle.initSubscribers();
   Toggle.bindActions();
 

@@ -20,10 +20,18 @@
 
 export default {
   overlay: '[data-overlay]',
+
   toggle: '[data-toggle]',
+
   openModal: '[data-open-modal]',
   closeModal: '[data-close-modal]',
   toggleModal: '[data-toggle-modal]',
-  toggleInlineCart: '[data-inline-cart="toggle"]',
+
+  toggleInlineCart: '[data-toggle-inline-cart]',
   inlineCart: '[data-inline-cart]',
+
+  addToCart: '[data-add-to-cart]',
+  removeFromCart: '[data-remove-from-cart]',
+
+  isActive: '.is-active',
 };

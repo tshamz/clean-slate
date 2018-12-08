@@ -348,7 +348,7 @@
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/@shopify/theme-a11y/-/theme-a11y-1.0.1.tgz#0081521a779a90d16969ac464c7a4e365bae1886"
 
-"@shopify/theme-cart@^1.0.0-alpha.7":
+"@shopify/theme-cart@^1.0.1":
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/@shopify/theme-cart/-/theme-cart-1.0.1.tgz#175e98dd1a3c18d27389bff7b5ee3fbd69e1a430"
 

@@ -12,13 +12,21 @@
 */
 
 export default {
+  toggleElement: 'BVA.TOGGLE_ELEMENT',
+
   showOverlay: 'BVA.SHOW_OVERLAY',
   hideOverlay: 'BVA.HIDE_OVERLAY',
-  toggleElement: 'BVA.TOGGLE_ELEMENT',
+
   openModal: 'BVA.OPEN_MODAL',
   closeModal: 'BVA.CLOSE_MODAL',
   toggleModal: 'BVA.TOGGLE_MODAL',
-  showInlineCart: 'BVA.SHOW_INLINE_CART',
-  hideInlineCart: 'BVA.HIDE_INLINE_CART',
+
+  openInlineCart: 'BVA.OPEN_INLINE_CART',
+  closeInlineCart: 'BVA.CLOSE_INLINE_CART',
   toggleInlineCart: 'BVA.TOGGLE_INLINE_CART',
+
+  addToCart: 'BVA.ADD_TO_CART',
+  removeFromCart: 'BVA.REMOVE_FROM_CART',
+
+  animationEnd: 'BVA.ANIMATION_END',
 };

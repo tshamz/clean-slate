@@ -2,6 +2,8 @@ import dom from 'common/Dom';
 import bva from 'common/Constants';
 
 const handleToggleClick = ({ currentTarget: self }) => {
+  const origin = self
+  const initiator = 'click';
   const selector = self.dataset.toggle;
   const className = self.dataset.toggleClass;
   const action = self.dataset.toggleAction;
