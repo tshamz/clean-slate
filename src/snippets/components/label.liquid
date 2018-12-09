@@ -1,0 +1,21 @@
+{%- comment -%}
+
+  Required arguments:
+  - content
+
+  Optional arguments:
+  - for
+  - classes
+  - attrs
+
+{%- endcomment -%}
+
+
+<label
+  class="oo-label {{ classes -}}"
+  {%- if for -%}for="{{- for -}}"{%- endif -%}
+  {{ attrs -}}>
+
+  {{- content -}}
+
+</label>

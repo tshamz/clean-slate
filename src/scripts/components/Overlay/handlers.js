@@ -1,17 +1,23 @@
 import dom from 'common/Dom';
 import bva from 'common/Constants';
-import { toggleElement } from 'components/Toggle/handlers';
+import { toggleElement } from 'common/Helpers';
 
 export const showOverlay = data => {
-  const toggleData = { selector: dom.overlay, action: 'add', animated: true, ...data };
-  PubSub.publish(bva.toggleElement, toggleData);
-  // return toggleElement({ selector: dom.overlay, action: 'add', animated: true, ...data });
+  const selector = dom.overlay;
+  const className = bva.isActive;
+  const action = 'add';
+  const animated = true;
+
+  return toggleElement({selector, action, animated});
 };
 
 export const hideOverlay = data => {
-  const toggleData = { selector: dom.overlay, action: 'remove', animated: true, ...data };
-  PubSub.publish(bva.toggleElement, toggleData);
-  // return toggleElement({ selector: dom.overlay, action: 'remove', animated: true, ...data });
+  const selector = dom.overlay;
+  const className = bva.isActive;
+  const action = 'remove';
+  const animated = true;
+
+  return toggleElement({selector, action, animated});
 };
 
 export const toggleOverlay = data => {

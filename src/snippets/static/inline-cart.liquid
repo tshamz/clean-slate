@@ -1,0 +1,60 @@
+{%- comment -%}
+
+  Required arguments:
+
+
+  Optional arguments:
+  - section_id
+  - classes
+  - attrs
+
+{%- endcomment -%}
+
+
+<section
+  class="oo-inline-cart {{ classes -}}"
+  data-inline-cart
+  data-section-id="{{- section_id -}}"
+  {{ attrs -}}>
+
+  {%- capture header_content -%}
+    {%- capture button_content -%}
+      {%- include 'icon', name: 'arrow-left' -%}
+    {%- endcapture -%}
+
+    {%- include 'button',
+      content: button_content,
+      classes: 'u-clear-padding',
+      attrs: 'data-close-inline-cart' -%}
+
+    {%- assign button_content = nil -%}
+  {%- endcapture -%}
+
+  {%- include 'header',
+    title: 'Your Shopping Cart',
+    level: 3,
+    content: header_content %}
+
+  {% assign header_content = nil %}
+
+
+  <div class="oo-inline-cart--contents" data-inline-cart-contents>
+
+    {%- include 'ajax-inline-cart-contents' -%}
+
+  </div>
+
+
+  <footer class="oo-inline-cart--footer">
+
+    {%- include 'button',
+      content: 'View Cart',
+      classes: 'oo-inline-cart--view-cart button--secondary' -%}
+
+    {%- include 'button',
+      content: 'Checkout',
+      classes: 'oo-inline-cart--checkout button--primary' -%}
+
+  </footer>
+
+</section>

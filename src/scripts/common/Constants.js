@@ -12,7 +12,7 @@
 */
 
 export default {
-  toggleElement: 'BVA.TOGGLE_ELEMENT',
+  toggle: 'BVA.TOGGLE',
 
   showOverlay: 'BVA.SHOW_OVERLAY',
   hideOverlay: 'BVA.HIDE_OVERLAY',

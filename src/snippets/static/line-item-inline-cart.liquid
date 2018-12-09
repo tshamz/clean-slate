@@ -1,0 +1,68 @@
+{%- comment -%}
+
+  Required arguments:
+  - line_item
+
+  Optional arguments:
+  - classes
+  - attrs
+
+{%- endcomment -%}
+
+
+{%- capture line_item_inline_cart_content -%}
+
+  {%- capture content -%}
+    {%- include 'icon', name: 'cancel' -%}
+  {%- endcapture -%}
+
+  {%- include 'button',
+    content: content,
+    classes: 'u-clear-padding',
+    attrs: 'data-remove-from-cart' -%}
+
+  {%- assign content = nil -%}
+
+  {%- capture href -%}
+    href="{{ line_item.variant.url }}"
+  {%- endcapture -%}
+
+  {%- include 'image',
+    resource: line_item.product.featured_image,
+    size: '800x',
+    srcset: '480x,600x,768x,450x,575x',
+    sizes: 'max 480px 480px,max 600px 600px,max 768px 768px,max 992px 992px,min 993px 575px',
+    wrapper_tag: 'a',
+    classes: 'oo-line-item--image-wrapper',
+    attrs: href -%}
+
+  {%- assign href = nil -%}
+
+
+  <div class="oo-line-item--information-wrapper">
+
+    {%- include 'header',
+      title: line_item.product.title,
+      level: 3,
+      content: line_item.product.vendor -%}
+
+    {%- include 'price', resource: line_item.variant -%}
+
+    {%- include 'button',
+      content: 'remove',
+      classes: 'text-link',
+      attrs: 'data-remove-from-cart' -%}
+
+    {%- include 'quantity-select', quantity: line_item.quantity -%}
+
+  </div>
+
+{%- endcapture -%}
+
+
+{%- include 'line-item-container',
+  name: 'inline-cart',
+  line_item: line_item,
+  content: line_item_inline_cart_content -%}
+
+{%- assign line_item_inline_cart_content = nil -%}

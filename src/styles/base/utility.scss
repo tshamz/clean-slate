@@ -68,3 +68,13 @@
   position: relative;
   z-index: 1000;
 }
+
+.u-clear-padding {
+  // stylelint-disable-next-line
+  margin: 0 !important;
+}
+
+.u-clear-padding {
+  // stylelint-disable-next-line
+  padding: 0 !important;
+}

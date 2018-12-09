@@ -1,8 +1,9 @@
 {%- comment -%}
 
-  Arguments:
-
+  Required arguments:
   - resource
+
+  Optional arguments:
   - size
   - crop
   - scale
@@ -19,7 +20,7 @@
 {%- endcomment -%}
 
 
-{%- capture src -%}
+{%- capture _src -%}
   {%- include 'base-img-url',
     resource: resource,
     size: size,
@@ -28,7 +29,7 @@
     format: format -%}
 {%- endcapture -%}
 
-{%- capture lqip_src -%}
+{%- capture _lqip_src -%}
   {%- include 'base-lqip-img-url',
     resource: resource,
     size: size,
@@ -37,14 +38,14 @@
     format: format -%}
 {%- endcapture -%}
 
-{%- capture srcset -%}
+{%- capture _srcset -%}
   {%- include 'base-srcset',
     resource: resource,
     srcset: srcset,
     size: size -%}
 {%- endcapture -%}
 
-{%- capture sizes -%}
+{%- capture _sizes -%}
   {%- include 'base-sizes',
   resource: resource,
   sizes: sizes -%}
@@ -52,7 +53,7 @@
 
 
 {%- unless wrapper == false -%}
-  <{%- if wrapper_tag != blank -%}{{- wrapper_tag -}}}{%- else -%}picture{%- endif -%}
+  <{%- if wrapper_tag != blank -%}{{- wrapper_tag }}{%- else -%}picture{%- endif %}
     class="oo-image-wrapper {{ classes -}}"
     {{ attrs -}}>
 {%- endunless -%}
@@ -60,18 +61,18 @@
 
   <img
     class="oo-image {% unless lazyload -%}lazyload{%- endunless -%}"
-    data-src="{{- src -}}"
-    data-srcset="{{- srcset -}}"
+    data-src="{{- _src -}}"
+    data-srcset="{{- _srcset -}}"
     alt="{%- if alt != blank %}{{- alt -}}{% elsif resource.alt != blank %}{{- resource.alt -}}{% endif -%}"
-    {%- if lqip_src != blank -%}src="{{- lqip_src -}}"{%- endif -%}
-    {%- if sizes != blank -%}data-sizes="{{- sizes -}}"{%- endif -%}>
+    {%- if lqip_src != blank -%}src="{{- _lqip_src -}}"{%- endif -%}
+    {%- if sizes != blank -%}data-sizes="{{- _sizes -}}"{%- endif -%}>
 
 
 {%- unless wrapper == false -%}
-  </{%- if wrapper_tag != blank -%}{{- wrapper_tag -}}}{%- else -%}picture{%- endif -%}>
+  </{%- if wrapper_tag != blank -%}{{- wrapper_tag -}}{%- else -%}picture{%- endif -%}>
 {%- endunless -%}
 
-{%- assign src = nil -%}
-{%- assign srcset = nil -%}
-{%- assign lqip_src = nil -%}
-{%- assign sizes = nil -%}
+{%- assign _src = nil -%}
+{%- assign _srcset = nil -%}
+{%- assign _lqip_src = nil -%}
+{%- assign _sizes = nil -%}

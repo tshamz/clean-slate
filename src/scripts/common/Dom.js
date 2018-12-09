@@ -27,8 +27,13 @@ export default {
   closeModal: '[data-close-modal]',
   toggleModal: '[data-toggle-modal]',
 
+  closeInlineCart: '[data-close-inline-cart]',
   toggleInlineCart: '[data-toggle-inline-cart]',
   inlineCart: '[data-inline-cart]',
+  inlineCartContents: '[data-inline-cart-contents]',
+
+  lineItem: '[data-line-item]',
+  lineItemKey: '[data-line-item-key]',
 
   addToCart: '[data-add-to-cart]',
   removeFromCart: '[data-remove-from-cart]',

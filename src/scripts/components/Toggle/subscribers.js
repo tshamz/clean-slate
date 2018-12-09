@@ -1,8 +1,8 @@
 import bva from 'common/Constants';
-import { toggleElement } from './handlers';
+import { toggle } from './handlers';
 
 export const initSubscribers = () => {
-  PubSub.subscribe(bva.toggleElement, (message, data) => {
-    return toggleElement(data);;
+  PubSub.subscribe(bva.toggle, (message, data) => {
+    return toggle(data);;
   });
 };

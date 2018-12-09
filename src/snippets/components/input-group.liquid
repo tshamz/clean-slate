@@ -1,44 +1,45 @@
 {%- comment -%}
 
-  Arguments:
-
+  Required arguments:
   - type
   - name
+
+  Optional arguments:
   - value
-  - hide_input
-  - hide_label
+  - input_classes
+  - input_attrs
+  - label_classes
+  - label_attrs
   - classes
   - attrs
-  - input_attrs
-  - label_attrs
 
 {%- endcomment -%}
 
 
 {%- capture id -%}
-  {{- name | handle -}}-{{- value | handle -}}-{{- 'now' | date: '%N' | modulo: 9999 | plus: 1 -}}
+  {{- name | handle -}}-{{- value | handle -}}-{{- 'now' | date: '%N' | modulo: 999999999 | plus: 1 -}}
 {%- endcapture -%}
 
 
 <div class="oo-input-group {{ classes -}}" {{ attrs -}}>
 
-  <input
-    class="oo-input input-type-{{- type }} {% if hide_input == true -%}u-visually-hidden{%- endif -%}"
-    type="{{- type -}}"
-    name="{{- name -}}"
-    value="{{- value -}}"
-    id="{{- id -}}"
-    {{ input_attrs -}}>
+  {%- include 'input',
+    type: type,
+    name: name,
+    value: value,
+    id: id,
+    classes: input_classes,
+    attrs: input_attrs -%}
 
-  <label
-    class="oo-label {% if hide_label == true -%}u-visually-hidden{%- endif -%}"
-    for="{{- id -}}"
-    {{ label_attrs -}}>
-
-    {{- value -}}
-
-  </label>
+  {%- include 'label',
+    for: id,
+    content: value,
+    classes: label_classes,
+    attrs: label_attrs -%}
 
 </div>
 
+
 {%- assign id = nil -%}
+{%- assign input_classes = nil -%}
+{%- assign label_classes = nil -%}

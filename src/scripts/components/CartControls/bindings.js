@@ -9,21 +9,26 @@ const getAddToCartData = () => {
   }
 };
 
+const getRemoveItemKey = self => {
+  const key = $(self).closest(dom.lineItem).data('line-item-key');
+
+  return key;
+};
+
 const handleAddToCartClick = () => {
-  const origin = self
-  const initiator = 'click';
-  const item = getAddToCartData();
-  PubSub.publish(bva.addToCart, item);
+  const { id, quantity, properties } = getAddToCartData();
+
+  PubSub.publish(bva.addToCart, { id, quantity, properties });
 };
 
 const handleRemoveFromCartClick = ({ currentTarget: self }) => {
-  const origin = self
-  const initiator = 'click';
-  const key = self.dataset.removeFromCart;
+  const key = getRemoveItemKey(self);
+  console.log(key);
+
   PubSub.publish(bva.removeFromCart, { key });
 };
 
 export const bindActions = () => {
   $(dom.addToCart).on('click', handleAddToCartClick);
-  $(dom.removeFromCart).on('click', handleRemoveFromCartClick);
+  $(document).on('click', dom.removeFromCart, handleRemoveFromCartClick);
 };

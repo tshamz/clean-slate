@@ -1,15 +1,16 @@
 {% comment %}
 
-  Arguments:
+  Required arguments:
+  - options
 
-  - product
+  Optional arguments:
 
 {% endcomment %}
 
 <script type="application/json" data-option-data>
 {
   "data": [
-    {%- for option in product.options_with_values -%}
+    {%- for option in options -%}
       {%- include 'api-option-object',
         option: option -%}{%- unless forloop.last -%},{%- endunless -%}
     {%- endfor -%}

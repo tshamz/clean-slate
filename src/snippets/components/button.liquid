@@ -1,20 +1,21 @@
-{% comment %}
+{%- comment -%}
 
-  Arguments:
-
+  Required arguments:
   - content
+
+  Optional arguments:
   - type
   - href
   - classes
   - attrs
 
-{% endcomment %}
+{%- endcomment -%}
 
 
 <{%- if href != blank -%}a{%- else -%}button{%- endif %}
   class="oo-button {{ classes -}}"
-  {%- if type -%}type="{{- type -}}"{%- endif -%}
-  {%- if href -%}href="{{- href -}}"{%- endif -%}
+  {%- if type != blank -%}type="{{- type -}}"{%- endif -%}
+  {%- if href != blank -%}href="{{- href -}}"{%- endif -%}
   {{ attrs -}}>
 
   {{- content -}}

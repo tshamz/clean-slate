@@ -1,17 +1,17 @@
 <div class="debug add-to-cart-controls">
   {% include 'button',
     content: 'Toggle Overlay',
-    classes: 'button--primary dev-control',
+    classes: 'button--primary',
     attrs: 'data-toggle="[data-overlay]" data-toggle-action="toggle" data-toggle-animated="true"' %}
 
   {% include 'button',
     content: 'Toggle Inline Cart',
-    classes: 'button--primary dev-control',
+    classes: 'button--primary',
     attrs: 'data-toggle-inline-cart' %}
 
   {% include 'button',
     content: 'Add To Cart',
-    classes: 'button--primary dev-control',
+    classes: 'button--primary',
     attrs: 'data-add-to-cart' %}
 
   {%- capture attrs -%}
@@ -20,7 +20,7 @@
 
   {% include 'button',
     content: 'Empty Cart',
-    classes: 'button--secondary dev-control',
+    classes: 'button--secondary',
     attrs: attrs %}
 
   {%- assign attrs = nil -%}

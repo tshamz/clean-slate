@@ -1,0 +1,60 @@
+{%- comment -%}
+
+  Required arguments:
+  - _product
+
+{%- endcomment -%}
+
+
+{%- capture form_add_to_cart_content -%}
+  {%- include 'input',
+    type: 'hidden',
+    name: 'id',
+    value: _product.selected_or_first_available_variant.id -%}
+
+  {%- include 'input',
+    type: 'hidden',
+    name: 'form_type',
+    value: 'product' -%}
+
+  {%- include 'input',
+    type: 'hidden',
+    name: 'utf8',
+    value: '✓' -%}
+
+
+  {%- for option in _product.options_with_values -%}
+
+    {%- include 'option-group',
+      option: option,
+      show_option_name: true,
+      show_selected_value: true -%}
+
+  {%- endfor -%}
+
+
+  {%- include 'quantity-select', quantity: 1 -%}
+
+
+  {%- include 'button',
+    type: 'submit',
+    content: 'Add to Cart',
+    classes: 'button--primary',
+    attrs: 'data-add-to-cart' -%}
+{%- endcapture -%}
+
+
+{%- capture form_add_to_cart_attrs -%}
+  accept-charset="UTF-8"
+  enctype="multipart/form-data"
+{%- endcapture -%}
+
+{%- include 'form-container',
+  name: 'add-to-cart',
+  method: 'post',
+  action: '/cart/add',
+  content: form_add_to_cart_content,
+  attrs: form_add_to_cart_attrs -%}
+
+{%- assign form_add_to_cart_content = nil -%}
+{%- assign form_add_to_cart_attrs = nil -%}

@@ -1,8 +1,9 @@
 {% comment %}
 
-  Arguments:
-
+  Required arguments:
   - line_item
+
+  Optional arguments:
 
 {% endcomment %}
 
@@ -10,10 +11,11 @@
 {
   "data": {
     "key": "{{- line_item.key -}}",
-    "properties": [{%- for property in line_item.properties -%}
-      "{{- property.first | json -}}": "{{- property.last | json -}}"{%- unless forloop.last -%},{%- endunless -%}
-    {%- endfor -%}],
-    "variant": {%- include 'variant-object', variant: line_item.variant -%}
+    "properties": {
+      {%- for property in line_item.properties -%}{{- property.first | json -}}: {{- property.last | json -}}{%- unless forloop.last -%},{%- endunless -%}
+    {%- endfor -%}
+    },
+    "variant": {%- include 'api-variant-object', variant: line_item.variant -%}
   }
 }
 </script>

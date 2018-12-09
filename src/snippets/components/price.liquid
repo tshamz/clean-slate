@@ -1,7 +1,9 @@
 {%- comment -%}
 
-  Arguments:
+  Required arguments:
+  - resource
 
+  Optional arguments:
   - compare_at_price
   - range
   - classes
@@ -10,70 +12,52 @@
 {%- endcomment -%}
 
 
+
+{%- assign price_type = 'price' -%}
+{%- if resource.line_price -%}
+  {%- assign price_type = 'line-price' -%}
+{%- elsif compare_at_price == true -%}
+  {%- assign price_type = 'compare-at-price' -%}
+{%- endif -%}
+
+{%- if range == true -%}
+  {%- assign price_min = resource.price_min -%}
+  {%- assign price_max = resource.price_max -%}
+  {%- if resource.compare_at_price_varies and compare_at_price == true -%}
+    {%- assign price_min = resource.compare_at_price_min -%}
+    {%- assign price_max = resource.compare_at_price_max -%}
+  {%- endif -%}
+{%- else -%}
+  {%- assign _price = resource.price -%}
+  {%- if resource.original_line_price and compare_at_price == true -%}
+    {%- assign _price = resource.original_line_price -%}
+  {%- elsif resource.line_price -%}
+    {%- assign _price = resource.line_price -%}
+  {%- elsif resource.compare_at_price and compare_at_price == true -%}
+    {%- assign _price = resource.compare_at_price -%}
+  {%- endif -%}
+{%- endif -%}
+
+
 <div
-  class="oo-prices {{ classes -}}"
-  data-price-control
+  class="oo-price {{ classes -}}"
+  data-price="{{- price_type -}}"
+  data-price-range="{%- if range == true -%}true{%- else -%}false{% endif %}"
   {{ attrs -}}>
 
-  {%- if resource.line_price -%}
+  {%- if range == true -%}
 
-    <div class="oo-prices--line-price" data-price="line-price">
-
-      {%- if resource.original_line_price and compare_at_price == true -%}
-
-        {{- resource.original_line_price | money -}}
-
-      {%- else -%}
-
-        {{- resource.line_price | money -}}
-
-      {%- endif  -%}
-
-    </div>
+    {{- price_min | money }} - {{ price_max | money -}}
 
   {%- else -%}
 
-    {%- if resource.compare_at_price and compare_at_price == true -%}
-
-      {%- if resource.compare_at_price_varies and range == true -%}
-
-        <div class="oo-prices--compare-at-price" data-price="compare-at-price" data-price-range>
-
-          {{- resource.compare_at_price_min | money }} - {{ resource.compare_at_price_max | money -}}
-
-        </div>
-
-      {%- else -%}
-
-        <div class="oo-prices--compare-at-price" data-price="compare-at-price">
-
-          {{- resource.compare_at_price | money -}}
-
-        </div>
-
-      {%- endif -%}
-
-    {%- endif -%}
-
-
-    {%- if resource.price_varies and range == true -%}
-
-      <div class="oo-prices--price" data-price="price" data-price-range>
-
-        {{- resource.price_min | money }} - {{ resource.price_max | money -}}
-
-      </div>
-
-    {%- else -%}
-
-      <div class="oo-prices--price" data-price="price">
-
-        {{- resource.price | money -}}
-
-      </div>
-
-    {%- endif -%}
+    {{- _price | money -}}
 
   {%- endif -%}
 
 </div>
+
+{%- assign _price = nil -%}
+{%- assign price_min = nil -%}
+{%- assign price_max = nil -%}
+{%- assign price_type = nil -%}

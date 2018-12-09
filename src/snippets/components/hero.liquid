@@ -1,9 +1,16 @@
-{% comment %}
+{%- comment -%}
 
-  Arguments:
+  Required arguments:
 
+  Optional arguments:
   - image
   - size
+  - crop
+  - scale
+  - format
+  - srcset
+  - sizes
+  - lazyload
   - video
   - content
   - title
@@ -13,7 +20,7 @@
   - button_two_text
   - button_two_href
 
-{% endcomment %}
+{%- endcomment -%}
 
 
 <div class="oo-hero {{ classes -}}" {{ attrs -}}>
@@ -22,7 +29,12 @@
 
     {%- include 'image',
       resource: image,
-      size: size -%}
+      size: size,
+      crop: crop,
+      scale: scale,
+      format: format,
+      srcset: srcset,
+      sizes: sizes -%}
 
   {%- elsif video != blank -%}
 

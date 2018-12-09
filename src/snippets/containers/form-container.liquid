@@ -1,0 +1,25 @@
+{% comment %}
+
+  Required arguments:
+  - name
+  - method
+  - action
+  - content
+
+  Optional arguments:
+  - classes
+  - attrs
+
+{% endcomment %}
+
+
+<form
+  class="oo-form {{ classes -}}"
+  method="{{- method -}}"
+  action="{{- action -}}"
+  data-form="{{- name -}}"
+  {{ attrs -}}>
+
+  {{- content -}}
+
+</form>

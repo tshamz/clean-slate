@@ -1,5 +1,5 @@
 import bva from 'common/Constants';
-import { addToCart, removeFromCart } from './handlers';
+import { addToCart, removeFromCart, updateInlineCartUI } from './handlers';
 
 export const initSubscribers = () => {
   PubSub.subscribe(bva.addToCart, (message, data) => {

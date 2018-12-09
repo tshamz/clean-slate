@@ -1,0 +1,25 @@
+{%- comment -%}
+
+  Required arguments:
+  - name
+  - line_item
+  - content
+
+  Optional arguments:
+  - classes
+  - attrs
+
+{%- endcomment -%}
+
+
+<section
+  class="oo-line-item {{ classes -}}"
+  data-line-item="{{ name }}"
+  data-line-item-key="{{ line_item.key }}"
+  {{ attrs -}}>
+
+  {{- content -}}
+
+  {%- include 'api-line-item-data', line_item: line_item -%}
+
+</section>

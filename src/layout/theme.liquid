@@ -11,10 +11,10 @@
 
     <!-- Site Meta ============================================ -->
 
-      {%- include 'page-favicon' -%}
-      {%- include 'page-title' -%}
-      {%- include 'page-description' -%}
-      {%- include 'page-social-meta-tags' -%}
+      {%- include 'layout-favicon' -%}
+      {%- include 'layout-title' -%}
+      {%- include 'layout-description' -%}
+      {%- include 'layout-social-meta-tags' -%}
 
     <!-- jQuery =============================================== -->
 
@@ -53,7 +53,7 @@
 
     <a href="#MainContent" class="in-page-link u-visually-hidden">Skip to content</a>
 
-    {%- include 'add-to-cart-controls' -%}
+    {%- include 'dev-add-to-cart-controls' -%}
 
     {%- section 'inline-cart' -%}
 
@@ -62,7 +62,9 @@
     {%- section 'header' -%}
 
     <main role="main" class="oo-main" id="MainContent">
+
       {{ content_for_layout }}
+
     </main>
 
     {%- section 'footer' -%}

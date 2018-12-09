@@ -1,0 +1,22 @@
+{%- comment -%}
+
+  Required arguments:
+  - type
+  - name
+
+  Optional arguments:
+  - value
+  - id
+  - classes
+  - attrs
+
+{%- endcomment -%}
+
+
+<input
+  class="oo-input oo-input--{{- type }} {{ classes -}}"
+  type="{{- type -}}"
+  name="{{- name -}}"
+  value="{{- value -}}"
+  {%- if id != blank -%}id="{{- id -}}"{%- endif -%}
+  {{ attrs }} />

@@ -1,15 +1,21 @@
 import dom from 'common/Dom';
 import bva from 'common/Constants';
-import { toggleElement } from 'components/Toggle/handlers';
+import { toggleElement } from 'common/Helpers';
 
 export const openInlineCart = async data => {
-  await toggleElement({ selector: dom.overlay, action: 'add', animated: true, ...data });
-  return toggleElement({ selector: dom.inlineCart, action: 'add', animated: true, ...data });
+  const action = 'add';
+  const animated = true;
+
+  await toggleElement({ selector: dom.overlay, action, animated });
+  return toggleElement({ selector: dom.inlineCart, action, animated });
 };
 
 export const closeInlineCart = async data => {
-  await toggleElement({ selector: dom.inlineCart, action: 'remove', animated: true, ...data });
-  return toggleElement({ selector: dom.overlay, action: 'remove', animated: true, ...data });
+  const action = 'remove';
+  const animated = true;
+
+  await toggleElement({ selector: dom.inlineCart, action, animated });
+  return toggleElement({ selector: dom.overlay, action, animated });
 };
 
 export const toggleInlineCart = async data => {

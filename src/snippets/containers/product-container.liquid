@@ -1,0 +1,34 @@
+{% comment %}
+
+  Required arguments:
+  - name
+  - _product
+  - content
+
+  Optional arguments:
+  - tag
+  - classes
+  - attrs
+
+{% endcomment %}
+
+
+{%- capture id -%}
+  {{- _product.handle =}}-{{- 'now' | date: '%N' | modulo: 999999999 | plus: 1 -}}
+{%- endcapture -%}
+
+
+<{%- if tag != blank -%}{{- tag }}{%- else -%}section{%- endif %}
+  class="oo-product-container {{ classes -}}"
+  data-product-container="{{- name -}}"
+  data-product-container-id="{{- id -}}"
+  {{ attrs -}}>
+
+  {%- assign id = nil -%}
+
+  {{- content -}}
+
+  {%- include 'api-option-data', options: _product.options_with_values -%}
+  {%- include 'api-variant-data', variants: _product.variants -%}
+
+</{%- if tag != blank -%}{{- tag -}}{%- else -%}section{%- endif %}>

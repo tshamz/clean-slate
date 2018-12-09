@@ -1,0 +1,21 @@
+{% comment %}
+
+  Required arguments:
+  - name
+  - slides
+
+  Optional arguments:
+  - classes
+  - attrs
+
+{% endcomment %}
+
+
+<div
+  class="oo-slider {{ classes -}}"
+  data-slider="{{- name -}}"
+  {{ attrs -}}>
+
+  {{- slides -}}
+
+</div>

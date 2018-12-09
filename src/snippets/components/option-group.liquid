@@ -1,8 +1,9 @@
 {%- comment -%}
 
-  Arguments:
-
+  Required arguments:
   - option
+
+  Optional arguments:
   - show_option_name
   - show_selected_value
   - classes
@@ -12,7 +13,7 @@
 
 
 <div
-  class="oo-option-group group-{{- option.name | handle }} {{ classes -}}"
+  class="oo-option-group option-group-{{- option.name | handle }} {{ classes -}}"
   data-option-group="{{- option.name -}}"
   {{ attrs -}}>
 
@@ -38,16 +39,14 @@
   {%- for value in option.values -%}
 
     {%- if option.selected_value == value -%}
-
       {%- assign selected = 'checked' -%}
-
     {%- endif -%}
 
-    {%- capture classes -%}
+    {%- capture input_group_classes -%}
       oo-option-value swatch-{{- value | handle -}}
     {%- endcapture -%}
 
-    {%- capture attrs -%}
+    {%- capture input_group_attrs -%}
       data-option-value
     {%- endcapture -%}
 
@@ -57,13 +56,14 @@
       value: value,
       hide_input: true,
       input_attrs: selected,
-      classes: classes,
-      attrs: attrs -%}
+      input_classes: 'u-visually-hidden',
+      classes: input_group_classes,
+      attrs: input_group_attrs -%}
 
     {%- assign value = nil -%}
     {%- assign selected = nil -%}
-    {%- assign classes = nil -%}
-    {%- assign attrs = nil -%}
+    {%- assign input_group_classes = nil -%}
+    {%- assign input_group_attrs = nil -%}
 
   {%- endfor -%}
 
