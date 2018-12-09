@@ -13,15 +13,4 @@
     content: 'Add To Cart',
     classes: 'button--primary',
     attrs: 'data-add-to-cart' %}
-
-  {%- capture attrs -%}
-    data-remove-from-cart="{{ cart.items[0].key }}"
-  {%- endcapture -%}
-
-  {% include 'button',
-    content: 'Empty Cart',
-    classes: 'button--secondary',
-    attrs: attrs %}
-
-  {%- assign attrs = nil -%}
 </div>

@@ -23,7 +23,6 @@ const handleAddToCartClick = () => {
 
 const handleRemoveFromCartClick = ({ currentTarget: self }) => {
   const key = getRemoveItemKey(self);
-  console.log(key);
 
   PubSub.publish(bva.removeFromCart, { key });
 };

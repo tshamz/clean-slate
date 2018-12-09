@@ -34,6 +34,13 @@ export default {
 
   lineItem: '[data-line-item]',
   lineItemKey: '[data-line-item-key]',
+  lineItemData: '[data-line-item-data]',
+
+  optionData: '[data-option-data]',
+
+  variantData: '[data-variant-data]',
+
+  productContainer: '[data-product-container]',
 
   addToCart: '[data-add-to-cart]',
   removeFromCart: '[data-remove-from-cart]',

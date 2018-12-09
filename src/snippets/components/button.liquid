@@ -6,6 +6,7 @@
   Optional arguments:
   - type
   - href
+  - icon
   - classes
   - attrs
 
@@ -18,6 +19,17 @@
   {%- if href != blank -%}href="{{- href -}}"{%- endif -%}
   {{ attrs -}}>
 
-  {{- content -}}
+  {%- if icon != blank -%}
+
+    {%- include 'icon',
+      name: icon,
+      classes: '',
+      attrs: '' -%}
+
+  {%- else -%}
+
+    {{- content -}}
+
+  {%- endif -%}
 
 </{%- if href != blank -%}a{%- else -%}button{%- endif -%}>

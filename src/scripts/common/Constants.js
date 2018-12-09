@@ -14,19 +14,26 @@
 export default {
   toggle: 'BVA.TOGGLE',
 
-  showOverlay: 'BVA.SHOW_OVERLAY',
-  hideOverlay: 'BVA.HIDE_OVERLAY',
+  showOverlay: 'BVA.OVERLAY.SHOW',
+  hideOverlay: 'BVA.OVERLAY.HIDE',
 
-  openModal: 'BVA.OPEN_MODAL',
-  closeModal: 'BVA.CLOSE_MODAL',
-  toggleModal: 'BVA.TOGGLE_MODAL',
+  openModal: 'BVA.MODAL.OPEN',
+  closeModal: 'BVA.MODAL.CLOSE',
+  toggleModal: 'BVA.MODAL.TOGGLE',
 
-  openInlineCart: 'BVA.OPEN_INLINE_CART',
-  closeInlineCart: 'BVA.CLOSE_INLINE_CART',
-  toggleInlineCart: 'BVA.TOGGLE_INLINE_CART',
+  openInlineCart: 'BVA.INLINE_CART.OPEN',
+  closeInlineCart: 'BVA.INLINE_CART.CLOSE',
+  toggleInlineCart: 'BVA.INLINE_CART.TOGGLE',
 
-  addToCart: 'BVA.ADD_TO_CART',
-  removeFromCart: 'BVA.REMOVE_FROM_CART',
+  addToCart: 'BVA.CART.ADD',
+  removeFromCart: 'BVA.CART.REMOVE',
+  updateCart: 'BVA.CART.REMOVE',
+  cartRequestSuccess: 'BVA.CART.REQUEST.SUCCESS',
+  cartRequestError: 'BVA.CART.REQUEST.ERROR',
 
-  animationEnd: 'BVA.ANIMATION_END',
+  animationStart: 'BVA.ANIMATION.START',
+  animationEnd: 'BVA.ANIMATION.END',
+
+  updateLineItemsData: 'BVA.DATA.LINE_ITEMS.UPDATE',
+  updateProductsData: 'BVA.DATA.PRODUCTS.UPDATE',
 };

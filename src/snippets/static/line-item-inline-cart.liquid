@@ -12,16 +12,10 @@
 
 {%- capture line_item_inline_cart_content -%}
 
-  {%- capture content -%}
-    {%- include 'icon', name: 'cancel' -%}
-  {%- endcapture -%}
-
   {%- include 'button',
-    content: content,
-    classes: 'u-clear-padding',
+    icon: 'cancel',
+    classes: 'button--reset',
     attrs: 'data-remove-from-cart' -%}
-
-  {%- assign content = nil -%}
 
   {%- capture href -%}
     href="{{ line_item.variant.url }}"

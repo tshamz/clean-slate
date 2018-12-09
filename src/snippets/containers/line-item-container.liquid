@@ -12,11 +12,19 @@
 {%- endcomment -%}
 
 
+{%- capture id -%}
+  {{- line_item.product.handle -}}-{{- 'now' | date: '%N' | modulo: 999999999 | plus: 1 -}}
+{%- endcapture -%}
+
+
 <section
   class="oo-line-item {{ classes -}}"
-  data-line-item="{{ name }}"
-  data-line-item-key="{{ line_item.key }}"
+  data-line-item="{{- name -}}"
+  data-line-item-id="{{- id -}}"
+  data-line-item-key="{{- line_item.key -}}"
   {{ attrs -}}>
+
+  {%- assign id = nil -%}
 
   {{- content -}}
 

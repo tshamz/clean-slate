@@ -18,16 +18,10 @@
   {{ attrs -}}>
 
   {%- capture header_content -%}
-    {%- capture button_content -%}
-      {%- include 'icon', name: 'arrow-left' -%}
-    {%- endcapture -%}
-
     {%- include 'button',
-      content: button_content,
-      classes: 'u-clear-padding',
+      icon: 'arrow-left',
+      classes: 'button--reset',
       attrs: 'data-close-inline-cart' -%}
-
-    {%- assign button_content = nil -%}
   {%- endcapture -%}
 
   {%- include 'header',
