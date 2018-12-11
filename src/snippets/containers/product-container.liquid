@@ -20,8 +20,9 @@
 
 <{%- if tag != blank -%}{{- tag }}{%- else -%}section{%- endif %}
   class="oo-product-container {{ classes -}}"
-  data-product-container="{{- name -}}"
-  data-product-container-id="{{- id -}}"
+  data-container="product"
+  data-container-name="{{- name -}}"
+  data-container-id="{{- id -}}"
   {{ attrs -}}>
 
   {%- assign id = nil -%}

@@ -2,10 +2,9 @@ import dom from 'common/Dom';
 import bva from 'common/Constants';
 
 const handleOptionValueClick = ({ currentTarget: self })=> {
-  const containerId = $(self).closest(dom.productContainer).data('product-container-id');
-  const newState = { [self.name]: self.value };
+  const id = $(self).closest(dom.productContainer).data('product-container-id');
 
-  PubSub.publish(bva.updateOptionGroupValue, { containerId, newState });
+  PubSub.publish(bva.updateOptionGroupValue, { id, [self.name]: self.value });
 };
 
 export const bindActions = () => {

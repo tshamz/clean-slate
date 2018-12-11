@@ -10,25 +10,27 @@
 {%- endcomment -%}
 
 
-<div
-  class="oo-quantity-select {{ classes -}}"
-  data-quantity-select
-  {{ attrs -}}>
+{%- capture input_value -%}
+  {%- if quantity != blank -%}{{ quantity }}{%- else -%}1{%- endif -%}
+{%- endcapture -%}
+
+
+<div class="oo-quantity-select {{ classes -}}" {{ attrs -}}>
 
   {%- include 'button',
     content: '-',
     attrs: 'data-quantity-change=-1' -%}
 
-  <input
-    type="number"
-    name="quantity"
-    value="{{ quantity }}"
-    id="quantity"
-    min=1
-    data-quantity-value />
+  {%- include 'input',
+    type: 'number',
+    name: 'quantity',
+    value: input_value,
+    attrs: 'min=1 data-quantity-value' -%}
 
   {%- include 'button',
     content: '+',
     attrs: 'data-quantity-change=1' -%}
 
 </div>
+
+{%- assign input_value = nil -%}

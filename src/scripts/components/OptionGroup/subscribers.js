@@ -1,8 +1,8 @@
 import bva from 'common/Constants';
-import { updateOptionGroupValue, } from './handlers';
+import { updateOptionGroupSelectedText, } from './handlers';
 
 export const initSubscribers = () => {
-  // PubSub.subscribe(bva.updateOptionGroupValue, (message, data) => {
-  //   return updateOptionGroupValue(data);
-  // });
+  PubSub.subscribe(bva.updateOptionGroupValue, (message, data) => {
+    return updateOptionGroupSelectedText(data);
+  });
 };

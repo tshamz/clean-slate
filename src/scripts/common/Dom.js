@@ -32,21 +32,21 @@ export default {
   inlineCart: '[data-inline-cart]',
   inlineCartContents: '[data-inline-cart-contents]',
 
-  lineItem: '[data-line-item]',
+  lineItemContainer: '[data-container="line-item"]',
   lineItemKey: '[data-line-item-key]',
   lineItemData: '[data-line-item-data]',
 
+  productContainer: '[data-container="product"]',
+  selectedOptionValue: '[data-selected-option-value]',
   optionValue: '[data-option-value]',
   optionData: '[data-option-data]',
-
   variantData: '[data-variant-data]',
-
-  productContainer: '[data-product-container]',
 
   addToCart: '[data-add-to-cart]',
   removeFromCart: '[data-remove-from-cart]',
 
-
+  quantityValue: '[data-quantity-value]',
+  quantityChange: '[data-quantity-change]',
 
   isActive: '.is-active',
 };

@@ -1,9 +1,12 @@
+import dom from 'common/Dom';
+
 import { initSubscribers } from './subscribers';
-import LineItems from './lineItemContainers';
-import Products from './productContainers';
+import { init } from './handlers';
+
+export const state = {};
+window._s = state;
 
 export default {
   initSubscribers,
-  LineItems,
-  Products,
+  init,
 };

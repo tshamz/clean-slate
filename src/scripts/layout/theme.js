@@ -37,8 +37,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   OptionGroup.bindActions();
 
   state.initSubscribers();
-  window._l = state.LineItems.setState();
-  window._p = state.Products.setState();
+  state.init();
 });
 
 window.addEventListener('load', () => {

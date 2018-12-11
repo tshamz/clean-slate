@@ -12,11 +12,14 @@
 {%- endcomment -%}
 
 
-<div class="oo-option-group {{ classes -}}" {{ attrs -}}>
+<div
+  class="oo-option-group {{ classes -}}"
+  data-option-group="{{ option.name }}"
+  {{ attrs -}}>
 
   {%- capture selected_value -%}
     {%- unless show_selected_value == blank -%}
-      <div data-selected-value>{{ option.selected_value }}</div>
+      <div data-selected-option-value>{{ option.selected_value }}</div>
     {%- endunless -%}
   {%- endcapture -%}
 
