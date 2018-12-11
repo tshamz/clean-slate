@@ -36,6 +36,7 @@ export default {
   lineItemKey: '[data-line-item-key]',
   lineItemData: '[data-line-item-data]',
 
+  optionValue: '[data-option-value]',
   optionData: '[data-option-data]',
 
   variantData: '[data-variant-data]',
@@ -44,6 +45,8 @@ export default {
 
   addToCart: '[data-add-to-cart]',
   removeFromCart: '[data-remove-from-cart]',
+
+
 
   isActive: '.is-active',
 };

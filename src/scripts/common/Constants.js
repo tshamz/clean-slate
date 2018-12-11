@@ -34,6 +34,9 @@ export default {
   animationStart: 'BVA.ANIMATION.START',
   animationEnd: 'BVA.ANIMATION.END',
 
-  updateLineItemsData: 'BVA.DATA.LINE_ITEMS.UPDATE',
-  updateProductsData: 'BVA.DATA.PRODUCTS.UPDATE',
+  updateCart: 'BVA.STATE.CART.UPDATE',
+
+  updateProductsState: 'BVA.STATE.PRODUCTS.UPDATE',
+
+  updateOptionGroupValue: 'BVA.OPTION_GROUP.VALUE_CHANGE',
 };

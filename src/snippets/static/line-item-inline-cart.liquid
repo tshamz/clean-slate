@@ -35,17 +35,17 @@
 
   <div class="oo-line-item--information-wrapper">
 
+    {%- include 'button',
+      content: 'remove',
+      classes: 'text-link',
+      attrs: 'data-remove-from-cart' -%}
+
     {%- include 'header',
       title: line_item.product.title,
       level: 3,
       content: line_item.product.vendor -%}
 
     {%- include 'price', resource: line_item.variant -%}
-
-    {%- include 'button',
-      content: 'remove',
-      classes: 'text-link',
-      attrs: 'data-remove-from-cart' -%}
 
     {%- include 'quantity-select', quantity: line_item.quantity -%}
 

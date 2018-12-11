@@ -12,10 +12,7 @@
 {%- endcomment -%}
 
 
-<div
-  class="oo-option-group option-group-{{- option.name | handle }} {{ classes -}}"
-  data-option-group="{{- option.name -}}"
-  {{ attrs -}}>
+<div class="oo-option-group {{ classes -}}" {{ attrs -}}>
 
   {%- capture selected_value -%}
     {%- unless show_selected_value == blank -%}
@@ -38,16 +35,13 @@
 
   {%- for value in option.values -%}
 
+    {%- assign input_attrs = 'data-option-value' -%}
     {%- if option.selected_value == value -%}
-      {%- assign selected = 'checked' -%}
+      {%- assign input_attrs = input_attrs | append: ' checked' -%}
     {%- endif -%}
 
     {%- capture input_group_classes -%}
-      oo-option-value swatch-{{- value | handle -}}
-    {%- endcapture -%}
-
-    {%- capture input_group_attrs -%}
-      data-option-value
+      swatch-{{- value | handle -}}
     {%- endcapture -%}
 
     {%- include 'input-group',
@@ -55,15 +49,12 @@
       name: option.name,
       value: value,
       hide_input: true,
-      input_attrs: selected,
+      input_attrs: input_attrs,
       input_classes: 'u-visually-hidden',
-      classes: input_group_classes,
-      attrs: input_group_attrs -%}
+      classes: input_group_classes -%}
 
-    {%- assign value = nil -%}
-    {%- assign selected = nil -%}
+    {%- assign input_attrs = nil -%}
     {%- assign input_group_classes = nil -%}
-    {%- assign input_group_attrs = nil -%}
 
   {%- endfor -%}
 

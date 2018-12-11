@@ -1,4 +1,5 @@
 {
   "variant": {{ variant | json }},
+  "isInitialVariant": {%- if variant.id == _product.selected_or_first_available_variant.id -%}true{%- else -%}false{%- endif -%},
   "inventory": {{- variant.inventory_quantity -}}
 }

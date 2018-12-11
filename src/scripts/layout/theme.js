@@ -5,10 +5,14 @@ import Toggle from 'components/Toggle';
 import Overlay from 'components/Overlay';
 import InlineCart from 'components/InlineCart';
 import CartControls from 'components/CartControls';
-import Data from 'components/Data';
+import OptionGroup from 'components/OptionGroup';
+
+import state from 'state';
 
 import 'styles/theme.scss';
 import 'styles/theme.scss.liquid';
+
+PubSub.immediateExceptions = true;
 
 // Common a11y fixes
 focusHash();
@@ -29,9 +33,12 @@ document.addEventListener('DOMContentLoaded', async () => {
   InlineCart.initSubscribers();
   InlineCart.bindActions();
 
-  Data.initSubscribers();
-  Data.setLineItemsData();
-  Data.setProductsData();
+  OptionGroup.initSubscribers();
+  OptionGroup.bindActions();
+
+  state.initSubscribers();
+  window._l = state.LineItems.setState();
+  window._p = state.Products.setState();
 });
 
 window.addEventListener('load', () => {

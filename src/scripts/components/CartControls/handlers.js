@@ -13,7 +13,7 @@ const updateInlineCartUI = async data => {
 
 export const cartRequestSuccess = async data => {
   await updateInlineCartUI();
-  PubSub.publish(bva.updateLineItemsData, {});
+  PubSub.publish(bva.updateCart, {});
   PubSub.publish(bva.openInlineCart, {});
 };
 

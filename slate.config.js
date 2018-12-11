@@ -30,6 +30,14 @@ const plugins = [
         to: '../snippets/',
         flatten: true,
       },
+      {
+        from: 'scripts/**/*.liquid',
+        to: '../snippets/',
+        flatten: true,
+      },
+  ], { ignore: [ 'core/*' ] }),
+  new CopyWebpackPlugin([
+
   ], { ignore: [ 'core/*' ] }),
 ];
 
@@ -38,6 +46,7 @@ const alias = {
   'scripts': path.resolve('./src/scripts'),
   'common': path.resolve('./src/scripts/common'),
   'components': path.resolve('./src/scripts/components'),
+  'state': path.resolve('./src/scripts/state'),
 };
 
 module.exports = {
