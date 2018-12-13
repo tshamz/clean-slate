@@ -9,4 +9,8 @@ export const initSubscribers = () => {
   PubSub.subscribe(bva.updateOptionGroupValue, (message, data) => {
     return setState(data);
   });
+
+  PubSub.subscribe(bva.updateQuantity, (message, data) => {
+    return setState(data);
+  });
 };

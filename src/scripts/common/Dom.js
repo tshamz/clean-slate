@@ -23,6 +23,8 @@ export default {
 
   toggle: '[data-toggle]',
 
+  container: '[data-container]',
+
   openModal: '[data-open-modal]',
   closeModal: '[data-close-modal]',
   toggleModal: '[data-toggle-modal]',

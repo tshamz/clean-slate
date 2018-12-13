@@ -6,6 +6,7 @@ import Overlay from 'components/Overlay';
 import InlineCart from 'components/InlineCart';
 import CartControls from 'components/CartControls';
 import OptionGroup from 'components/OptionGroup';
+import QuantitySelect from 'components/QuantitySelect';
 
 import state from 'state';
 
@@ -35,6 +36,10 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   OptionGroup.initSubscribers();
   OptionGroup.bindActions();
+
+  QuantitySelect.initSubscribers();
+  QuantitySelect.bindActions();
+
 
   state.initSubscribers();
   state.init();

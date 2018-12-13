@@ -39,4 +39,6 @@ export default {
   updateProductsState: 'BVA.STATE.PRODUCTS.UPDATE',
 
   updateOptionGroupValue: 'BVA.OPTION_GROUP.VALUE_CHANGE',
+
+  updateQuantity: 'BVA.QUANTITY.UPDATE',
 };

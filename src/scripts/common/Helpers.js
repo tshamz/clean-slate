@@ -48,3 +48,8 @@ export const toggleElement = ({selector, className = dom.isActive, action = 'tog
 
   return Promise.resolve({ selector, className, action, animated });
 };
+
+export const debounce = (callback, time = 250, interval) => (...args) => {
+  clearTimeout(interval);
+  interval = setTimeout(() => callback(...args), time);
+};

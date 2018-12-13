@@ -3,12 +3,19 @@ import bva from 'common/Constants';
 
 import state from 'state';
 
-const handleQuantityChangeClick = ({ currentTarget: self }) => {
+const handleQuantityChangeClick = ({ currentTarget: self, ...rest }) => {
   const change = parseInt(self.dataset.quantityChange, 10);
+  const id = $(self).closest(dom.container).data('container-id');
+  const { quantity: oldQuantity } = state.getState(id);
+  const newQuantity = oldQuantity + change;
 
-  PubSub.publish(bva.toggle, {});
+  if (newQuantity >= 1) {
+    PubSub.publish(bva.updateQuantity, { id, quantity: newQuantity });
+  }
+
+  return false;
 };
 
 export const bindActions = () => {
-  $(dom.quanityChange).on('click', handleQuantityChangeClick);
+  $(document).on('click', dom.quantityChange, handleQuantityChangeClick);
 };

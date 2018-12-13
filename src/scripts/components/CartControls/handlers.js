@@ -1,8 +1,10 @@
-import { addItem, removeItem } from '@shopify/theme-cart';
+import { addItem, removeItem, updateItem } from '@shopify/theme-cart';
 
 import dom from 'common/Dom';
 import bva from 'common/Constants';
-import { getAlternativeTemplate } from 'common/Helpers';
+import { getAlternativeTemplate, debounce } from 'common/Helpers';
+
+import state from 'state';
 
 const updateInlineCartUI = async data => {
   const resource = 'cart';
@@ -30,7 +32,8 @@ export const addToCart = async data => {
 };
 
 export const removeFromCart = async data => {
-  const { key } = data;
+  const { id } = data;
+  const { key } = state.getState(id);
   const requestData = { key };
   return removeItem(key)
     .then(responseData => {
@@ -38,7 +41,18 @@ export const removeFromCart = async data => {
     })
     .catch(error => {
       PubSub.publish(bva.cartRequestError, { error, requestData });
-    })
+    });
 };
 
-
+export const updateCart = debounce(async data => {
+  const { id, quantity } = data;
+  const { key } = state.getState(id);
+  const requestData = { key, quantity };
+  return updateItem(key, { quantity })
+    .then(responseData => {
+      PubSub.publish(bva.cartRequestSuccess, { action: 'update', requestData, responseData });
+    })
+    .catch(error => {
+      PubSub.publish(bva.cartRequestError, { error, requestData });
+    });
+}, 250);

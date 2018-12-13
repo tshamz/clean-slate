@@ -1,6 +1,8 @@
 import dom from 'common/Dom';
 import bva from 'common/Constants';
 
+import state from 'state';
+
 const getAddToCartData = () => {
   return {
     id: 15895504420975,
@@ -22,9 +24,9 @@ const handleAddToCartClick = () => {
 };
 
 const handleRemoveFromCartClick = ({ currentTarget: self }) => {
-  const key = getRemoveItemKey(self);
+  const id = $(self).closest(dom.container).data('container-id');
 
-  PubSub.publish(bva.removeFromCart, { key });
+  PubSub.publish(bva.removeFromCart, { id });
 };
 
 export const bindActions = () => {
