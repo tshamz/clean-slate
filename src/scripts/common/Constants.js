@@ -41,4 +41,8 @@ export default {
   updateOptionGroupValue: 'BVA.OPTION_GROUP.VALUE_CHANGE',
 
   updateQuantity: 'BVA.QUANTITY.UPDATE',
+  updateVariant: 'BVA.VARIANT.UPDATE',
+  updateInventory: 'BVA.INVENTORY.UPDATE',
+
+  updateVariantId: 'BVA.VARIANT_ID.UPDATE',
 };

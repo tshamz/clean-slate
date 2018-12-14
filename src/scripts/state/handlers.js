@@ -1,16 +1,49 @@
 import dom from 'common/Dom';
+import bva from 'common/Constants';
 
 import { state } from 'state';
 
 export const getState = containerId => {
-  return (containerId) ? state[containerId] : state;
+  return Promise.resolve((containerId) ? state[containerId] : state);
 };
 
 export const setState = data => {
   const { id, ...newState } = data;
   const oldState = state[id];
   state[id] = { ...oldState, ...newState };
-  return state[id];
+  return Promise.resolve(state[id]);
+};
+
+export const updateVariant = data => {
+  return setState(data);
+};
+
+export const updateInventory = data => {
+  return setState(data);
+};
+
+export const updateQuantity = data => {
+  return setState(data);
+};
+
+const optionGroupChangeHandler = (id, state) => {
+  const { options, variants } = state.data;
+  const selectedOptions = options
+    .map(option => option.name)
+    .map(name => state[name]);
+  const selectedVariant = variants.find(variant =>
+    selectedOptions.every(selectedOption => variant.variant.options.includes(selectedOption)));
+  const { inventory, variant: { id: variantId }} = selectedVariant;
+  return { inventory, variantId };
+};
+
+export const updateOptionGroupValue = async data => {
+  const { id } = data;
+  const state = await setState(data);
+  const { inventory, variantId } = optionGroupChangeHandler(id, state);
+  PubSub.publish(bva.updateVariant, { id, variantId });
+  PubSub.publish(bva.updateInventory, { id, inventory });
+  return state;
 };
 
 const getInitialOptionValues = options => {
@@ -51,17 +84,19 @@ const getLineItemContainerData = () => {
   });
 };
 
+export const initLineItemContainers = data => {
+  return getLineItemContainerData()
+    .map(item => setState(item));
+};
+
+export const initProductContainers = data => {
+  return getProductContainerData()
+    .map(item => setState(item));
+};
+
 export const init = data => {
-  let initData;
-  if (!data) {
-    initData = [
-      ...getLineItemContainerData(),
-      ...getProductContainerData(),
-    ];
-  } else {
-    initData = [
-      ...getLineItemContainerData(),
-    ];
-  }
-  return initData.map(item => setState(item));
+  return [
+    ...initLineItemContainers(data),
+    ...initProductContainers(data),
+  ];
 };
