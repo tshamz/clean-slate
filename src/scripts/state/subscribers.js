@@ -26,4 +26,16 @@ export const initSubscribers = () => {
   PubSub.subscribe(bva.updateInventory, (message, data) => {
     return updateQuantity(data);
   });
+
+  PubSub.subscribe(bva.updateState, (message, data) => {
+    if (data.change === 'variant') {
+
+    } else if (data.change === 'inventory') {
+
+    } else if (data.change === 'quantity') {
+
+    } else if (data.change === 'option') {
+
+    }
+  });
 };

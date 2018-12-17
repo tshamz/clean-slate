@@ -4,46 +4,46 @@ import bva from 'common/Constants';
 import { state } from 'state';
 
 export const getState = containerId => {
-  return Promise.resolve((containerId) ? state[containerId] : state);
+  return (containerId) ? state[containerId] : state;
 };
 
 export const setState = data => {
   const { id, ...newState } = data;
   const oldState = state[id];
   state[id] = { ...oldState, ...newState };
-  return Promise.resolve(state[id]);
+  PubSub.publish(bva.updateState, { id, data, state: state[id] });
+  return state[id];
 };
 
-export const updateVariant = data => {
-  return setState(data);
-};
-
-export const updateInventory = data => {
-  return setState(data);
-};
-
-export const updateQuantity = data => {
-  return setState(data);
-};
-
-const optionGroupChangeHandler = (id, state) => {
+const getVariant = id => {
+  const state = getState(id);
   const { options, variants } = state.data;
   const selectedOptions = options
     .map(option => option.name)
     .map(name => state[name]);
-  const selectedVariant = variants.find(variant =>
+  const variant = variants.find(variant =>
     selectedOptions.every(selectedOption => variant.variant.options.includes(selectedOption)));
-  const { inventory, variant: { id: variantId }} = selectedVariant;
-  return { inventory, variantId };
+  return variant;
 };
 
-export const updateOptionGroupValue = async data => {
-  const { id } = data;
-  const state = await setState(data);
-  const { inventory, variantId } = optionGroupChangeHandler(id, state);
-  PubSub.publish(bva.updateVariant, { id, variantId });
-  PubSub.publish(bva.updateInventory, { id, inventory });
-  return state;
+export const updateVariant = data => {
+  const { variant: { id: variantId }} = getVariant(data.id);
+  setState({ ...data, variantId, change: 'variant' });
+  PubSub.publish(bva.updateInventory, data);
+};
+
+export const updateInventory = data => {
+  const { inventory } = getVariant(data.id);
+  setState({ ...data, inventory, change: 'inventory' });
+};
+
+export const updateQuantity = data => {
+  setState({ ...data, change: 'quantity' });
+};
+
+export const updateOptionGroupValue = data => {
+  setState({ ...data, change: 'option' });
+  PubSub.publish(bva.updateVariant, data);
 };
 
 const getInitialOptionValues = options => {

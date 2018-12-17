@@ -45,4 +45,6 @@ export default {
   updateInventory: 'BVA.INVENTORY.UPDATE',
 
   updateVariantId: 'BVA.VARIANT_ID.UPDATE',
+
+  updateState: 'BVA.STATE.UPDATE',
 };
