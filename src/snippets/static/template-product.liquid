@@ -18,24 +18,11 @@
   <div class="product-info">
     {%- include 'header', title: _product.title -%}
 
-    {%- if _product.price_varies -%}
-      {%- include 'price',
-        resource: _product,
-        range: true -%}
-    {%- else -%}
-      {%- include 'price', resource: _product -%}
-    {%- endif -%}
+    {%- include 'price', resource: _product -%}
 
-    {%- if _product.compare_at_price_varies and _product.compare_at_price-%}
-      {%- include 'price',
-        resource: _product,
-        compare_at_price: true,
-        range: true -%}
-    {%- elsif _product.compare_at_price-%}
-      {%- include 'price',
-        resource: _product,
-        compare_at_price: true -%}
-    {%- endif -%}
+    {%- include 'price',
+      resource: _product,
+      compare_at_price: true -%}
 
     {%- include 'form-add-to-cart', _product: _product -%}
   </div>
@@ -45,6 +32,7 @@
 {%- include 'product-container',
   name: 'product-template',
   _product: _product,
-  content: template_product_content -%}
+  content: template_product_content,
+  classes: 'product-main' -%}
 
 {%- assign template_product_content = nil -%}

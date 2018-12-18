@@ -4,7 +4,9 @@ import {
   initLineItemContainers,
   updateOptionGroupValue,
   updateVariant,
-  updateQuantity } from './handlers';
+  updateQuantity,
+  updateInventory,
+  updatePrice, } from './handlers';
 
 export const initSubscribers = () => {
   PubSub.subscribe(bva.updateCart, (message, data) => {
@@ -24,7 +26,11 @@ export const initSubscribers = () => {
   });
 
   PubSub.subscribe(bva.updateInventory, (message, data) => {
-    return updateQuantity(data);
+    return updateInventory(data);
+  });
+
+  PubSub.subscribe(bva.updatePrice, (message, data) => {
+    return updatePrice(data);
   });
 
   PubSub.subscribe(bva.updateState, (message, data) => {

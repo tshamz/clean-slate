@@ -25,6 +25,10 @@ export default {
 
   container: '[data-container]',
 
+  slider: '[data-slider]',
+
+  $getContainer: id => $(`[data-container-id="${id}"]`),
+
   openModal: '[data-open-modal]',
   closeModal: '[data-close-modal]',
   toggleModal: '[data-toggle-modal]',
@@ -50,5 +54,13 @@ export default {
   quantityValue: '[data-quantity-value]',
   quantityChange: '[data-quantity-change]',
 
+  price: '[data-price="price"]',
+  compareAtPrice: '[data-price="compare-at-price"]',
+
   isActive: '.is-active',
+
+  priceString: (strings, priceInCents) => {
+    const price = (priceInCents / 100).toFixed(2);
+    return `$${price}`;
+  }
 };

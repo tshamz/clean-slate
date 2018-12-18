@@ -43,8 +43,9 @@ export default {
   updateQuantity: 'BVA.QUANTITY.UPDATE',
   updateVariant: 'BVA.VARIANT.UPDATE',
   updateInventory: 'BVA.INVENTORY.UPDATE',
-
   updateVariantId: 'BVA.VARIANT_ID.UPDATE',
+  updatePrice: 'BVA.PRICE.UPDATE',
 
   updateState: 'BVA.STATE.UPDATE',
+  updateStatePrice: 'BVA.STATE.UPDATE.PRICE',
 };

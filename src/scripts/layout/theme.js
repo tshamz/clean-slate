@@ -7,6 +7,8 @@ import InlineCart from 'components/InlineCart';
 import CartControls from 'components/CartControls';
 import OptionGroup from 'components/OptionGroup';
 import QuantitySelect from 'components/QuantitySelect';
+import Price from 'components/Price';
+import Slider from 'components/Slider';
 
 import state from 'state';
 
@@ -40,6 +42,9 @@ document.addEventListener('DOMContentLoaded', async () => {
   QuantitySelect.initSubscribers();
   QuantitySelect.bindActions();
 
+  Price.initSubscribers();
+
+  Slider.initSliders();
 
   state.initSubscribers();
   state.init();

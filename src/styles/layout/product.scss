@@ -1,0 +1,16 @@
+.product-main {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.product-images {
+  width: 50%;
+  max-width: 50%;
+  flex-basis: 50%;
+}
+
+.product-info {
+  width: 50%;
+  max-width: 50%;
+  flex-basis: 50%;
+}
