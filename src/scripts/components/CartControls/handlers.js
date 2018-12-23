@@ -8,7 +8,7 @@ import state from 'state';
 
 const updateInlineCartUI = async data => {
   const resource = 'cart';
-  const templateName = 'ajax-inline-cart-contents';
+  const templateName = 'ajax-inline-cart';
   const newCart = await getAlternativeTemplate({ resource, templateName });
   $(dom.inlineCartContents).html(newCart);
 };

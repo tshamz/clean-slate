@@ -11,10 +11,10 @@
 
     <!-- Site Meta ============================================ -->
 
-      {%- include 'layout-favicon' -%}
-      {%- include 'layout-title' -%}
-      {%- include 'layout-description' -%}
-      {%- include 'layout-social-meta-tags' -%}
+      {%- include 'favicon' -%}
+      {%- include 'page-title' -%}
+      {%- include 'page-description' -%}
+      {%- include 'social-meta-tags' -%}
 
     <!-- jQuery =============================================== -->
 
@@ -31,12 +31,12 @@
     <!-- Stylesheets ========================================== -->
 
       {%- include 'style-tags', layout: 'theme' -%}
-      {%- include 'api-css-variables' -%}
+      {%- include 'css-variables' -%}
 
     <!-- Scripts ============================================== -->
 
       {%- include 'script-tags', layout: 'theme' -%}
-      {%- include 'api-shop' -%}
+      {%- include 'shop-api' -%}
 
 
     {% if template.directory == 'customers' %}

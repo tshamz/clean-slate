@@ -12,7 +12,9 @@
 
 {%- capture template_product_content -%}
   <div class="product-images">
-    {%- include 'slider-product-gallery', images: _product.images, -%}
+
+    {%- include 'product-gallery', images: _product.images, -%}
+
   </div>
 
   <div class="product-info">
@@ -24,7 +26,7 @@
       resource: _product,
       compare_at_price: true -%}
 
-    {%- include 'form-add-to-cart', _product: _product -%}
+    {%- include 'add-to-cart-form', _product: _product -%}
   </div>
 {%- endcapture -%}
 

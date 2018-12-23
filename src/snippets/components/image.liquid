@@ -21,7 +21,7 @@
 
 
 {%- capture _src -%}
-  {%- include 'base-img-url',
+  {%- include 'img-url',
     resource: resource,
     size: size,
     crop: crop,
@@ -30,7 +30,7 @@
 {%- endcapture -%}
 
 {%- capture _lqip_src -%}
-  {%- include 'base-lqip-img-url',
+  {%- include 'lqip-img-url',
     resource: resource,
     size: size,
     crop: crop,
@@ -39,14 +39,14 @@
 {%- endcapture -%}
 
 {%- capture _srcset -%}
-  {%- include 'base-srcset',
+  {%- include 'srcset',
     resource: resource,
     srcset: srcset,
     size: size -%}
 {%- endcapture -%}
 
 {%- capture _sizes -%}
-  {%- include 'base-sizes',
+  {%- include 'sizes',
   resource: resource,
   sizes: sizes -%}
 {%- endcapture -%}

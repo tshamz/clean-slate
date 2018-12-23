@@ -29,7 +29,7 @@
 
   {{- content -}}
 
-  {%- include 'api-option-data', options: _product.options_with_values -%}
-  {%- include 'api-variant-data', _product: _product, variants: _product.variants -%}
+  {%- include 'option-data', options: _product.options_with_values -%}
+  {%- include 'variant-data', _product: _product, variants: _product.variants -%}
 
 </{%- if tag != blank -%}{{- tag -}}{%- else -%}section{%- endif %}>

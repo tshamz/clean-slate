@@ -35,10 +35,10 @@ const plugins = [
         to: '../snippets/',
         flatten: true,
       },
-  ], { ignore: [ 'core/*' ] }),
+  ], { ignore: [ 'static/*' ] }),
   new CopyWebpackPlugin([
 
-  ], { ignore: [ 'core/*' ] }),
+  ], { ignore: [ 'static/*' ] }),
 ];
 
 const alias = {
@@ -51,9 +51,9 @@ const alias = {
 
 module.exports = {
   'eslint.config': '.eslintrc.js',
-  'cssVarLoader.liquidPath': ['src/snippets/core/api-css-variables.liquid'],
-  'paths.theme.src.snippets': 'snippets/core',
-  'paths.theme.src.sections': 'sections/core',
+  'cssVarLoader.liquidPath': ['src/snippets/api/css-variables.liquid'],
+  'paths.theme.src.snippets': 'snippets/static',
+  'paths.theme.src.sections': 'sections/static',
   'webpack.extend': {
     externals,
     plugins,

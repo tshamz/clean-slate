@@ -1,6 +1,6 @@
 {%- if srcset == blank -%}
-  {%- include 'base-img-url', resource: resource, size: size, scale: 1, descriptor: '1x' -%},
-  {%- include 'base-img-url', resource: resource, size: size, scale: 2, descriptor: '2x' -%}
+  {%- include 'img-url', resource: resource, size: size, scale: 1, descriptor: '1x' -%},
+  {%- include 'img-url', resource: resource, size: size, scale: 2, descriptor: '2x' -%}
 {%- else -%}
   {%- assign srcsets = srcset | split: ',' -%}
 
@@ -28,7 +28,7 @@
 
     {%- endif -%}
 
-    {%- include 'base-img-url', resource: resource, size: srcset_size, descriptor: descriptor -%}{%- unless forloop.last -%},{%- endunless -%}
+    {%- include 'img-url', resource: resource, size: srcset_size, descriptor: descriptor -%}{%- unless forloop.last -%},{%- endunless -%}
   {%- endfor -%}
 
   {%- assign srcsets = blank -%}
