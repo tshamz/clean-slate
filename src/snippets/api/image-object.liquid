@@ -1,0 +1,18 @@
+{% comment %}
+
+  Required arguments:
+  - image
+
+  Optional arguments:
+
+{% endcomment %}
+
+{
+  "id": {{- image.id -}},
+  "alt": {{- image.alt | json -}},
+  "position": {{- image.position -}},
+  "aspectRatio": {{- image.aspect_ratio -}},
+  "attachedToVariant": {{- image.attached_to_variant? -}},
+  "src": {{- image.src | json -}}
+}
+

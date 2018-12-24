@@ -53,3 +53,15 @@ export const debounce = (callback, time = 250, interval) => (...args) => {
   clearTimeout(interval);
   interval = setTimeout(() => callback(...args), time);
 };
+
+export const getSearchParm = param => {
+  const searchParams = new URLSearchParams(window.location.search);
+  return searchParams.get(param);
+};
+
+export const setSearchParm = (param, value) => {
+  const searchParams = new URLSearchParams(window.location.search);
+  searchParams.set(param, value);
+  window.history.pushState('', '', `?${searchParams.toString()}`);
+  return searchParams;
+};

@@ -1,0 +1,28 @@
+{% comment %}
+
+  Required arguments:
+
+  Optional arguments:
+  - with_nav
+  - nav_slides
+
+{% endcomment %}
+
+
+<div class="product-images {{ classes -}}" {{ attrs -}}>
+
+  {%- capture product_gallery_slides -%}
+    {%- for image in _product.images -%}
+      {%- include 'image',
+        resource: image,
+        size: '800x' -%}
+    {%- endfor -%}
+  {%- endcapture -%}
+
+  {%- include 'slider',
+    name: 'product-gallery',
+    slides: product_gallery_slides,
+    with_nav: with_nav,
+    filter_group: 'Color' -%}
+
+</div>

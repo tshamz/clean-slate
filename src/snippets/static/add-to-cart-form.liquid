@@ -2,6 +2,8 @@
 
   Required arguments:
   - _product
+  - show_option_name
+  - show_selected_value
 
 {%- endcomment -%}
 
@@ -27,8 +29,8 @@
 
     {%- include 'option-group',
       option: option,
-      show_option_name: true,
-      show_selected_value: true -%}
+      show_option_name: show_option_name,
+      show_selected_value: show_selected_value -%}
 
   {%- endfor -%}
 
@@ -38,8 +40,8 @@
 
   {%- include 'button',
     type: 'submit',
-    content: 'Add to Cart',
-    classes: 'button--primary',
+    content: add_to_cart_button_text,
+    classes: add_to_cart_button_classes,
     attrs: 'data-add-to-cart' -%}
 {%- endcapture -%}
 
@@ -52,7 +54,7 @@
 {%- include 'form-container',
   name: 'add-to-cart',
   method: 'post',
-  action: '/cart/add',
+  action: 'cart/add',
   content: form_add_to_cart_content,
   attrs: form_add_to_cart_attrs -%}
 

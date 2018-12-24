@@ -44,6 +44,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   Price.initSubscribers();
 
+  Slider.initSubscribers();
   Slider.initSliders();
 
   state.initSubscribers();

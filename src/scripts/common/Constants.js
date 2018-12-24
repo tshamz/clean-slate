@@ -35,17 +35,17 @@ export default {
   animationEnd: 'BVA.ANIMATION.END',
 
   updateCart: 'BVA.STATE.CART.UPDATE',
+  updateState: 'BVA.STATE.UPDATE',
+  updateStatePrice: 'BVA.STATE.UPDATE.PRICE',
+  updateStateOption: 'BVA.STATE.UPDATE.OPTION',
 
   updateProductsState: 'BVA.STATE.PRODUCTS.UPDATE',
 
   updateOptionGroupValue: 'BVA.OPTION_GROUP.VALUE_CHANGE',
-
   updateQuantity: 'BVA.QUANTITY.UPDATE',
   updateVariant: 'BVA.VARIANT.UPDATE',
   updateInventory: 'BVA.INVENTORY.UPDATE',
   updateVariantId: 'BVA.VARIANT_ID.UPDATE',
   updatePrice: 'BVA.PRICE.UPDATE',
 
-  updateState: 'BVA.STATE.UPDATE',
-  updateStatePrice: 'BVA.STATE.UPDATE.PRICE',
 };

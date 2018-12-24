@@ -1,0 +1,38 @@
+{% comment %}
+
+  Required arguments:
+
+  Optional arguments:
+  - is_price_range
+  - show_compare_at_price
+  - show_option_name
+  - show_selected_value
+  - add_to_cart_button_text
+  - add_to_cart_button_classes
+
+{% endcomment %}
+
+
+<div class="product-info {{ classes -}}" {{ attrs -}}>
+  {%- include 'header', title: _product.title -%}
+
+  {%- include 'price',
+    resource: _product,
+    range: is_price_range -%}
+
+  {%- if show_compare_at_price -%}
+
+    {%- include 'price',
+      resource: _product,
+      compare_at_price: true,
+      range: is_price_range -%}
+
+  {%- endif -%}
+
+
+  {%- include 'add-to-cart-form',
+    show_option_name: show_option_name,
+    show_selected_value: show_selected_value,
+    add_to_cart_button_text: add_to_cart_button_text
+    add_to_cart_button_classes: add_to_cart_button_classes -%}
+</div>

@@ -1,0 +1,19 @@
+{% comment %}
+
+  Required arguments:
+  - images
+
+  Optional arguments:
+
+{% endcomment %}
+
+<script type="application/json" data-image-data>
+{
+  "data": [
+    {%- for image in images -%}
+      {%- include 'image-object',
+        image: image -%}{%- unless forloop.last -%},{%- endunless -%}
+    {%- endfor -%}
+  ]
+}
+</script>

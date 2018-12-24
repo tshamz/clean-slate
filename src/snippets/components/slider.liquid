@@ -1,0 +1,45 @@
+{% comment %}
+
+  Required arguments:
+  - name
+  - slides
+
+  Optional arguments:
+  - with_nav
+  - nav_slides
+  - filter_group
+  - classes
+  - attrs
+
+{% endcomment %}
+
+
+{%- if with_nav -%}
+  <div
+    class="oo-slider slider--{{- name -}}-nav"
+    data-slider="{{- name -}}-nav"
+    data-slider-nav-for="{{- name -}}"
+    data-filter-group="{{- filter_group -}}">
+
+    {%- if nav_slides -%}
+
+      {{- nav_slides -}}
+
+    {%- else -%}
+
+      {{- slides -}}
+
+    {%- endif -%}
+
+  </div>
+{%- endif -%}
+
+<div
+  class="oo-slider slider--{{- name }} {{ classes -}}"
+  data-slider="{{- name -}}"
+  {%- if with_nav -%}data-slider-has-nav="{{- name -}}-nav"{%- endif -%}
+  {{ attrs -}}>
+
+  {{- slides -}}
+
+</div>

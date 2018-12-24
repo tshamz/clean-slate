@@ -14,7 +14,7 @@
 
 
 {%- capture id -%}
-  {{- _product.handle =}}-{{- 'now' | date: '%N' | modulo: 999999999 | plus: 1 -}}
+  {{- _product.handle -}}-{{- 'now' | date: '%N' | modulo: 999999999 | plus: 1 -}}
 {%- endcapture -%}
 
 
@@ -29,6 +29,7 @@
 
   {{- content -}}
 
+  {%- include 'image-data', images: _product.images -%}
   {%- include 'option-data', options: _product.options_with_values -%}
   {%- include 'variant-data', _product: _product, variants: _product.variants -%}
 

@@ -1,5 +1,6 @@
 import dom from 'common/Dom';
 import bva from 'common/Constants';
+import { getSearchParm, setSearchParm } from 'common/Helpers';
 
 import { state } from 'state';
 
@@ -31,6 +32,7 @@ export const updateVariant = data => {
   setState({ ...data, variantId, change: 'VARIANT' });
   PubSub.publish(bva.updateInventory, data);
   PubSub.publish(bva.updatePrice, data);
+  setSearchParm('variant', variantId);
 };
 
 export const updateInventory = data => {

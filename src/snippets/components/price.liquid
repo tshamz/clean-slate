@@ -12,6 +12,10 @@
 {%- endcomment -%}
 
 
+{%- assign show_price = true -%}
+{%- if resource.compare_at_price <= resource.price or resource.compare_at_price == null and compare_at_price == true -%}
+  {%- assign show_price = false -%}
+{%- endif -%}
 
 {%- assign price_type = 'price' -%}
 {%- if resource.line_price -%}
@@ -20,44 +24,47 @@
   {%- assign price_type = 'compare-at-price' -%}
 {%- endif -%}
 
-{%- if range == true -%}
-  {%- assign price_min = resource.price_min -%}
-  {%- assign price_max = resource.price_max -%}
-  {%- if resource.compare_at_price_varies and compare_at_price == true -%}
-    {%- assign price_min = resource.compare_at_price_min -%}
-    {%- assign price_max = resource.compare_at_price_max -%}
-  {%- endif -%}
+{%- assign is_range = false -%}
+{%- if resource.compare_at_price_varies and compare_at_price == true and range == true -%}
+  {%- assign is_range = true -%}
+  {%- assign price_min = resource.compare_at_price_min | money -%}
+  {%- assign price_max = resource.compare_at_price_max | money -%}
+  {%- assign _price = price_min | append: ' - ' | append: price_max -%}
+{%- elsif resource.price_varies and compare_at_price != true and range == true -%}
+  {%- assign is_range = true -%}
+  {%- assign price_min = resource.price_min | money -%}
+  {%- assign price_max = resource.price_max | money -%}
+  {%- assign _price = price_min | append: ' - ' | append: price_max -%}
 {%- else -%}
-  {%- assign _price = resource.price -%}
+  {%- assign _price = resource.price | money -%}
   {%- if resource.original_line_price and compare_at_price == true -%}
-    {%- assign _price = resource.original_line_price -%}
+    {%- assign _price = resource.original_line_price | money -%}
+  {%- elsif resource.compare_at_price > resource.price and compare_at_price == true -%}
+    {%- assign _price = resource.compare_at_price | money -%}
   {%- elsif resource.line_price -%}
-    {%- assign _price = resource.line_price -%}
-  {%- elsif resource.compare_at_price and compare_at_price == true -%}
-    {%- assign _price = resource.compare_at_price -%}
-  {%- endif -%}
-{%- endif -%}
+    {%- assign _price = resource.line_price | money -%}
+  {% endif %}
+{% endif %}
 
 
 <div
   class="oo-price {{ classes -}}"
   data-price="{{- price_type -}}"
-  data-price-range="{%- if range == true -%}true{%- else -%}false{% endif %}"
+  data-price-range="{{- is_range -}}"
   {{ attrs -}}>
 
-  {%- if range == true -%}
+  {%- if show_price == true -%}
 
-    {{- price_min | money }} - {{ price_max | money -}}
-
-  {%- else -%}
-
-    {{- _price | money -}}
+    {{- _price -}}
 
   {%- endif -%}
 
 </div>
 
+
 {%- assign _price = nil -%}
 {%- assign price_min = nil -%}
 {%- assign price_max = nil -%}
 {%- assign price_type = nil -%}
+{%- assign show_price = nil -%}
+{%- assign is_range = nil -%}
