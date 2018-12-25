@@ -38,6 +38,20 @@
 
 
 <footer class="oo-inline-cart--footer">
+
+  <div class="oo-inline-cart-subtotal">
+
+    {%- include 'heading',
+      title: 'Subtotal:',
+      level: 3 -%}
+
+    {%- include 'price',
+      _price: cart.total_price,
+      type: 'cart.total_price' -%}
+
+  </div>
+
+
   {%- if inline_cart_button_one_enabled == true-%}
 
     {%- include 'button',

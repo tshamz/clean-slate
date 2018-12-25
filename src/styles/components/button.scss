@@ -2,7 +2,7 @@
   display: inline-block;
   vertical-align: middle;
   margin: 0;
-  padding: $oo-spacing-unit ($oo-spacing-unit * 1.75);
+  padding: $oo-base-spacing-size calc(#{$oo-base-spacing-size} * 1.75);
   font-family: $font-heading;
   font-weight: $font-heading-bold-weight;
   font-size: $font-size-minor;

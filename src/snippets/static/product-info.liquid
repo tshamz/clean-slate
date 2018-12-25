@@ -3,7 +3,6 @@
   Required arguments:
 
   Optional arguments:
-  - is_price_range
   - show_compare_at_price
   - show_option_name
   - show_selected_value
@@ -17,21 +16,18 @@
   {%- include 'header', title: _product.title -%}
 
   {%- include 'price',
-    resource: _product,
-    range: is_price_range -%}
+    _price: _product.price,
+    type: 'product.price' -%}
 
-  {%- if show_compare_at_price -%}
+  {%- if _product.compare_at_price > _product.price and show_compare_at_price == true -%}
 
     {%- include 'price',
-      resource: _product,
-      compare_at_price: true,
-      range: is_price_range -%}
+      _price: _product.compare_at_price,
+      type: 'product.compare_at_price' -%}
 
   {%- endif -%}
 
-  {%- include 'text',
-    content: _product.description,
-    rte: true -%}
+  {%- include 'text', content: _product.description, rte: true -%}
 
   {%- include 'add-to-cart-form',
     show_option_name: show_option_name,

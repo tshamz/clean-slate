@@ -9,6 +9,7 @@ import OptionGroup from 'components/OptionGroup';
 import QuantitySelect from 'components/QuantitySelect';
 import Price from 'components/Price';
 import Slider from 'components/Slider';
+import Modal from 'components/Modal';
 
 import state from 'state';
 
@@ -49,6 +50,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   Slider.initSubscribers();
   Slider.initSliders();
+
+  Modal.initSubscribers();
+  Modal.bindActions();
 });
 
 window.addEventListener('load', () => {

@@ -19,6 +19,90 @@
     ]
   },
   {
+    "name": "Sizes",
+    "settings": [
+      {
+        "type": "range",
+        "id": "main_container_size",
+        "min": 1000,
+        "max": 2000,
+        "step": 10,
+        "unit": "px",
+        "label": "Main Container Size",
+        "default": 1440
+      },
+      {
+        "type": "range",
+        "id": "base_spacing_size",
+        "min": 1,
+        "max": 100,
+        "step": 1,
+        "unit": "px",
+        "label": "Base Spacing Unit",
+        "default": 12
+      },
+      {
+        "type": "range",
+        "id": "font_size_base",
+        "min": 1,
+        "max": 100,
+        "step": 1,
+        "unit": "px",
+        "label": "Font Size Base",
+        "default": 16
+      },
+      {
+        "type": "range",
+        "id": "font_size_minor",
+        "min": 1,
+        "max": 100,
+        "step": 1,
+        "unit": "px",
+        "label": "Font Size Minor",
+        "default": 12
+      },
+      {
+        "type": "range",
+        "id": "font_size_major",
+        "min": 1,
+        "max": 100,
+        "step": 1,
+        "unit": "px",
+        "label": "Font Size Major",
+        "default": 24
+      },
+      {
+        "type": "range",
+        "id": "font_size_super",
+        "min": 1,
+        "max": 100,
+        "step": 1,
+        "unit": "px",
+        "label": "Font Size Super",
+        "default": 32
+      },
+      {
+        "type": "range",
+        "id": "base_line_height",
+        "min": 0.5,
+        "max": 2,
+        "step": 0.1,
+        "label": "Base Line Height",
+        "default": 1.5
+      },
+      {
+        "type": "range",
+        "id": "transition_duration",
+        "min": 0,
+        "max": 1000,
+        "step": 10,
+        "unit": "ms",
+        "label": "Default Transition Duration",
+        "default": 300
+      }
+    ]
+  },
+  {
     "name": "Typography",
     "settings": [
       {

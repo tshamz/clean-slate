@@ -6,10 +6,17 @@ import state from 'state';
 const handleQuantityChangeClick = ({ currentTarget: self, ...rest }) => {
   const change = parseInt(self.dataset.quantityChange, 10);
   const id = $(self).closest(dom.container).data('container-id');
-  const { quantity: oldQuantity } = state.getState(id);
+  const { quantity: oldQuantity, inventory } = state.getState(id);
   const newQuantity = oldQuantity + change;
 
-  if (newQuantity >= 1) {
+  console.log(newQuantity);
+  console.log(inventory);
+
+  if (newQuantity > inventory) {
+    const name = 'not-enough-inventory';
+    const data = { newQuantity, inventory };
+    PubSub.publish(bva.showModal, { name, data });
+  } else if (newQuantity >= 1) {
     PubSub.publish(bva.updateQuantity, { id, quantity: newQuantity });
   }
 

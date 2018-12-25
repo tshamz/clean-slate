@@ -61,6 +61,8 @@ export default {
 
   sliderHasNav: '[data-has-nav]',
 
+  modalContents: '[data-modal-contents]',
+
   isActive: '.is-active',
 
   priceString: (strings, priceInCents) => {

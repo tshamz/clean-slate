@@ -1,8 +1,7 @@
 {%- comment -%}
 
   Required arguments:
-  - price
-  - compare_at_price
+  - _price
   - type
 
   Optional arguments:
@@ -12,99 +11,11 @@
 {%- endcomment -%}
 
 
-{%- assign price_type = 'price' -%}
-{%- if type != blank -%}
-  {%- assign price_type = type -%}
-{%- elsif compare_at_price == true -%}
-  {%- assign price_type = 'compare_at_price' -%}
-{%- endif -%}
-
-
 <div
   class="oo-price {{ classes -}}"
-  data-price="{{- price_type -}}"
+  data-price="{{- type -}}"
   {{ attrs -}}>
 
-  {{- price | money -}}
+  {{- _price | money -}}
 
 </div>
-
-
-{%- assign price_type = nil -%}
-
-
-{%- comment -%}
-
-  Required arguments:
-  - price
-  - price_min
-  - price_max
-  - type
-
-  Optional arguments:
-  - compare_at_price
-  - range
-  - classes
-  - attrs
-
-
-
-
-{%- assign show_price = true -%}
-{%- if resource.compare_at_price <= resource.price or resource.compare_at_price == null and compare_at_price == true -%}
-  {%- assign show_price = false -%}
-{%- endif -%}
-
-{%- assign price_type = 'price' -%}
-{%- if resource.line_price -%}
-  {%- assign price_type = 'line-price' -%}
-{%- elsif compare_at_price == true -%}
-  {%- assign price_type = 'compare-at-price' -%}
-{%- endif -%}
-
-{%- assign is_range = false -%}
-{%- if resource.compare_at_price_varies and compare_at_price == true and range == true -%}
-  {%- assign is_range = true -%}
-  {%- assign price_min = resource.compare_at_price_min | money -%}
-  {%- assign price_max = resource.compare_at_price_max | money -%}
-  {%- assign _price = price_min | append: ' - ' | append: price_max -%}
-{%- elsif resource.price_varies and compare_at_price != true and range == true -%}
-  {%- assign is_range = true -%}
-  {%- assign price_min = resource.price_min | money -%}
-  {%- assign price_max = resource.price_max | money -%}
-  {%- assign _price = price_min | append: ' - ' | append: price_max -%}
-{%- else -%}
-  {%- assign _price = resource.price | money -%}
-  {%- if resource.original_line_price and compare_at_price == true -%}
-    {%- assign _price = resource.original_line_price | money -%}
-  {%- elsif resource.compare_at_price > resource.price and compare_at_price == true -%}
-    {%- assign _price = resource.compare_at_price | money -%}
-  {%- elsif resource.line_price -%}
-    {%- assign _price = resource.line_price | money -%}
-  {% endif %}
-{% endif %}
-
-
-<div
-  class="oo-price {{ classes -}}"
-  data-price="{{- price_type -}}"
-  data-price-range="{{- is_range -}}"
-  {{ attrs -}}>
-
-  {%- if show_price == true -%}
-
-    {{- _price -}}
-
-  {%- endif -%}
-
-</div>
-
-
-{%- assign _price = nil -%}
-{%- assign price_min = nil -%}
-{%- assign price_max = nil -%}
-{%- assign price_type = nil -%}
-{%- assign show_price = nil -%}
-{%- assign is_range = nil -%}
-
-{%- endcomment -%}

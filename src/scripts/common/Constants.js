@@ -48,4 +48,5 @@ export default {
   updateVariantId: 'BVA.VARIANT_ID.UPDATE',
   updatePrice: 'BVA.PRICE.UPDATE',
 
+  showModal: 'BVA.MODAL.SHOW',
 };
