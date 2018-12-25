@@ -10,10 +10,11 @@
   - format
   - srcset
   - sizes
+  - sources
   - lazyload
-  - alt
   - wrapper
   - wrapper_tag
+  - picture
   - classes
   - attrs
 
@@ -46,33 +47,50 @@
 {%- endcapture -%}
 
 {%- capture _sizes -%}
-  {%- include 'sizes',
-  resource: resource,
-  sizes: sizes -%}
+  {%- include 'sizes' with sizes -%}
 {%- endcapture -%}
 
+{%- assign tag = 'div' -%}
+{%- if picture == true -%}
+  {%- assign tag = 'picture' -%}
+{%- elsif wrapper_tag != blank -%}
+  {%- assign tag = wrapper_tag -%}
+{%- endif -%}
+
 
 {%- unless wrapper == false -%}
-  <{%- if wrapper_tag != blank -%}{{- wrapper_tag }}{%- else -%}picture{%- endif %}
-    class="oo-image-wrapper {{ classes -}}"
-    {{ attrs -}}>
+  <{{- tag }} class="oo-image-wrapper {{ classes -}}" {{ attrs -}}>
 {%- endunless -%}
 
+  {%- if sources != blank -%}
 
-  <img
-    class="oo-image {% unless lazyload -%}lazyload{%- endunless -%}"
-    data-src="{{- _src -}}"
-    data-srcset="{{- _srcset -}}"
-    alt="{%- if alt != blank %}{{- alt -}}{% elsif resource.alt != blank %}{{- resource.alt -}}{% endif -%}"
-    {%- if lqip_src != blank -%}src="{{- _lqip_src -}}"{%- endif -%}
-    {%- if sizes != blank -%}data-sizes="{{- _sizes -}}"{%- endif -%}>
+    {{- sources -}}
+
+  {%- else -%}
+
+    <img
+      class="oo-image {% unless lazyload == false -%}lazyload{%- endunless %}"
+      alt="{{- resource.alt -}}"
+      {%- if lazyload != false -%}
+        data-src="{{- _src -}}"
+        data-srcset="{{- _srcset -}}"
+        src="{{- _lqip_src -}}"
+      {%- else -%}
+        srcset="{{- _srcset -}}"
+        src="{{- _src -}}"
+      {%- endif -%}
+      {%- if sizes != blank -%}data-sizes="{{- _sizes -}}"{%- endif -%}
+      {%- if wrapper == false -%}{{ attrs -}}{%- endif -%}>
+
+  {%- endif -%}
 
 
 {%- unless wrapper == false -%}
-  </{%- if wrapper_tag != blank -%}{{- wrapper_tag -}}{%- else -%}picture{%- endif -%}>
+  </{{- tag -}}>
 {%- endunless -%}
 
 {%- assign _src = nil -%}
-{%- assign _srcset = nil -%}
 {%- assign _lqip_src = nil -%}
+{%- assign _srcset = nil -%}
 {%- assign _sizes = nil -%}
+{%- assign tag = nil -%}

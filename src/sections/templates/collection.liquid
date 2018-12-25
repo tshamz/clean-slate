@@ -1,0 +1,28 @@
+{%- include 'collection',
+  _collection: collection,
+  collection_hero_enabled: section.settings.collection_hero_enabled,
+  collection_hero_fallback_image: section.settings.collection_hero_fallback_image -%}
+
+{% schema %}
+  {
+    "name": "Collection Template",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Collection Hero"
+      },
+      {
+        "id": "collection_hero_enabled",
+        "type": "checkbox",
+        "label": "Collection Hero enabled?",
+        "default": true
+      },
+      {
+        "id": "collection_hero_fallback_image",
+        "type": "image_picker",
+        "label": "[Optional] Fallback Image if no Collection Image"
+      }
+    ],
+    "blocks": []
+  }
+{% endschema %}

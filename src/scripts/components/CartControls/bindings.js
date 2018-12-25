@@ -3,30 +3,22 @@ import bva from 'common/Constants';
 
 import state from 'state';
 
-const getAddToCartData = () => {
-  return {
-    id: 15895504420975,
-    quantity: 1,
-    properties: { first: 'tyler', last: 'shambora' }
-  }
-};
+const handleAddToCartClick = ({ currentTarget: self }) => {
+  const id = $(self).closest(dom.container).data('container-id');
+  const { variantId, quantity, properties } = state.getState(id);
 
-const getRemoveItemKey = self => {
-  const key = $(self).closest(dom.lineItem).data('line-item-key');
+  PubSub.publish(bva.addToCart, { id: variantId, quantity, properties });
 
-  return key;
-};
-
-const handleAddToCartClick = () => {
-  const { id, quantity, properties } = getAddToCartData();
-
-  PubSub.publish(bva.addToCart, { id, quantity, properties });
+  return false;
 };
 
 const handleRemoveFromCartClick = ({ currentTarget: self }) => {
   const id = $(self).closest(dom.container).data('container-id');
+  const { key } = state.getState(id);
 
-  PubSub.publish(bva.removeFromCart, { id });
+  PubSub.publish(bva.removeFromCart, { key });
+
+  return false;
 };
 
 export const bindActions = () => {

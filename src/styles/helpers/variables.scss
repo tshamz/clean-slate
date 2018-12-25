@@ -9,14 +9,8 @@
 
   $enable-box-sizing-border-box: true;
 
-  $oo-size-base:    16px;
-  $oo-line-height:  1.4;
-  $oo-spacing-unit: $oo-size-base;
-
-  $oo-container-max: 1280px;
-
-  $oo-font-primary:  Roboto, "Helvetica Neue", Arial, sans-serif;
-  $oo-font-heading:  $oo-font-primary;
+  $oo-container-max: 1440px;
+  $oo-spacing-unit: 12px;
 
   $oo-transition-duration: 300ms;
   $oo-transition-timing: ease-in-out;
@@ -54,10 +48,16 @@
 // =========================================================================
 
   $font-heading: var(--font-heading);
-  $font-body: var(--font-body);
-  $font-body-weight: var(--font-body-weight);
-  $font-body-style: var(--font-body-style);
-  $font-body-bold-weight: var(--font-body-bold-weight);
+  $font-heading-bold-weight: var(--font-heading-bold-weight);
+  $font-primary: var(--font-primary);
+  $font-primary-light-weight: var(--font-primary-light-weight);
+  $font-primary-bold-weight: var(--font-primary-bold-weight);
+
+  $font-size-base:    16px;
+  $font-size-minor:   12px;
+  $font-size-major:   24px;
+  $font-size-super:   32px;
+  $font-line-height:  1.5;
 
 // =========================================================================
 //  __    __     ______

@@ -1,7 +1,45 @@
 {%- comment -%}
 
   Required arguments:
-  - resource
+  - price
+  - compare_at_price
+  - type
+
+  Optional arguments:
+  - classes
+  - attrs
+
+{%- endcomment -%}
+
+
+{%- assign price_type = 'price' -%}
+{%- if type != blank -%}
+  {%- assign price_type = type -%}
+{%- elsif compare_at_price == true -%}
+  {%- assign price_type = 'compare_at_price' -%}
+{%- endif -%}
+
+
+<div
+  class="oo-price {{ classes -}}"
+  data-price="{{- price_type -}}"
+  {{ attrs -}}>
+
+  {{- price | money -}}
+
+</div>
+
+
+{%- assign price_type = nil -%}
+
+
+{%- comment -%}
+
+  Required arguments:
+  - price
+  - price_min
+  - price_max
+  - type
 
   Optional arguments:
   - compare_at_price
@@ -9,7 +47,7 @@
   - classes
   - attrs
 
-{%- endcomment -%}
+
 
 
 {%- assign show_price = true -%}
@@ -68,3 +106,5 @@
 {%- assign price_type = nil -%}
 {%- assign show_price = nil -%}
 {%- assign is_range = nil -%}
+
+{%- endcomment -%}

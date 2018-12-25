@@ -22,7 +22,7 @@
   {%- endcapture -%}
 
   {%- include 'image',
-    resource: line_item.product.featured_image,
+    resource: line_item,
     size: '800x',
     srcset: '480x,600x,768x,450x,575x',
     sizes: 'max 480px 480px,max 600px 600px,max 768px 768px,max 992px 992px,min 993px 575px',

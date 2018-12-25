@@ -14,9 +14,9 @@ html {
 }
 
 body {
-  font-size: $oo-size-base; /* [1] */
-  line-height: $oo-line-height; /* [1] */
-  font-family: $font-body;
+  font-size: $font-size-base; /* [1] */
+  line-height: $font-line-height; /* [1] */
+  font-family: $font-primary;
   color: $color-body-text;
 }
 

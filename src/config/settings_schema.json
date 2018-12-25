@@ -19,6 +19,41 @@
     ]
   },
   {
+    "name": "Typography",
+    "settings": [
+      {
+        "type": "font_picker",
+        "label": "Heading Font",
+        "id": "font_heading",
+        "default": "raleway_n4"
+      },
+      {
+        "type": "font_picker",
+        "label": "Heading Font - Bold",
+        "id": "font_heading_bold",
+        "default": "raleway_n6"
+      },
+      {
+        "type": "font_picker",
+        "label": "Primary Font",
+        "id": "font_primary",
+        "default": "open_sans_n4"
+      },
+      {
+        "type": "font_picker",
+        "label": "Primary Font - Light",
+        "id": "font_primary_light",
+        "default": "open_sans_n3"
+      },
+      {
+        "type": "font_picker",
+        "label": "Primary Font - Bold",
+        "id": "font_primary_bold",
+        "default": "open_sans_n6"
+      }
+    ]
+  },
+  {
     "name": "Colors",
     "settings": [
       {

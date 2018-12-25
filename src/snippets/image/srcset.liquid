@@ -1,8 +1,9 @@
 {%- if srcset == blank -%}
   {%- include 'img-url', resource: resource, size: size, scale: 1, descriptor: '1x' -%},
-  {%- include 'img-url', resource: resource, size: size, scale: 2, descriptor: '2x' -%}
+  {%- include 'img-url', resource: resource, size: size, scale: 2, descriptor: '2x' -%},
+  {%- include 'img-url', resource: resource, size: size, scale: 3, descriptor: '3x' -%}
 {%- else -%}
-  {%- assign srcsets = srcset | split: ',' -%}
+  {%- assign srcsets = srcset | split: ', ' -%}
 
   {%- for srcset in srcsets -%}
     {%- assign srcset_parts = srcset | split: ' ' -%}

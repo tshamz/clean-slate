@@ -1,60 +1,94 @@
 {%- comment -%}
 
   Required arguments:
+  - primary_image
 
   Optional arguments:
-  - image
-  - size
-  - crop
-  - scale
-  - format
-  - srcset
-  - sizes
-  - lazyload
-  - video
-  - content
-  - title
-  - subtitle
+  - primary_image_size
+  - primary_image_srcset
+  - primary_image_sizes
+  - second_image
+  - second_image_size
+  - second_image_srcset
+  - second_image_sizes
+  - third_image
+  - third_image_size
+  - third_image_srcset
+  - third_image_sizes
+  - hero_title
+  - hero_subtitle
   - button_one_text
   - button_one_href
+  - button_one_classes
   - button_two_text
   - button_two_href
+  - button_two_classes
+
+  - lazyload
 
 {%- endcomment -%}
 
 
 <div class="oo-hero {{ classes -}}" {{ attrs -}}>
 
-  {%- if image != blank -%}
+  {%- if second_image != blank or third_image != blank -%}
+
+    {%- capture sources -%}
+      {%- include 'source',
+        resource: primary_image,
+        srcset: primary_image_srcset,
+        size: primary_image_size,
+        sizes: primary_image_sizes -%}
+
+      {%- if second_image != blank -%}
+
+        {%- include 'source',
+          resource: second_image,
+          srcset: second_image_srcset,
+          size: second_image_size,
+          sizes: second_image_sizes -%}
+
+      {%- elsif third_image != blank -%}
+
+        {%- include 'source',
+          resource: third_image,
+          srcset: third_image_srcset,
+          size: third_image_size,
+          sizes: third_image_sizes -%}
+
+      {%- endif -%}
+
+      {%- include 'image',
+        wrapper: false,
+        resource: primary_image,
+        srcset: primary_image_srcset,
+        size: primary_image_size -%}
+    {%- endcapture -%}
 
     {%- include 'image',
-      resource: image,
-      size: size,
-      crop: crop,
-      scale: scale,
-      format: format,
-      srcset: srcset,
-      sizes: sizes -%}
-
-  {%- elsif video != blank -%}
-
-    {%- include 'video', src: video -%}
+      sources: sources,
+      picture: true -%}
 
   {%- else -%}
 
-    {{- content -}}
-
+    {%- include 'image',
+      wrapper: false,
+      resource: primary_image,
+      size: primary_image_size,
+      srcset: primary_image_srcset,
+      sizes: primary_image_sizes -%}
   {%- endif -%}
 
 
   {%- capture heading_content -%}
-    {%- if subtitle != blank -%}
-      <div class="oo-heading--content">{{ subtitle }}</div>
+    {%- if hero_subtitle != blank -%}
+      <div class="oo-heading--content">{{ hero_subtitle }}</div>
     {%- endif -%}
   {%- endcapture -%}
 
+
   {%- include 'header',
-    title: title,
+    title: hero_title,
     level: 3,
     content: heading_content -%}
   {%- assign heading_content = nil -%}
@@ -64,7 +98,8 @@
 
     {%- include 'button',
       href: button_one_href,
-      content: button_one_text -%}
+      content: button_one_text,
+      classes: button_one_classes -%}
 
   {%- endif -%}
 
@@ -73,8 +108,8 @@
 
     {%- include 'button',
       href: button_two_href,
-      content: button_two_text -%}
+      content: button_two_text,
+      classes: button_two_classes -%}
 
   {%- endif -%}
-
 </div>

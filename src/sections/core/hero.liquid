@@ -1,16 +1,36 @@
 <section data-section-id="{{ section.id }}" data-section-type="hero">
 
-  {%- include 'hero',
-    image: block.settings.image,
-    size: block.settings.image_size,
-    video: block.settings.video_url,
-    content: block.settings.content,
-    title: block.settings.title,
-    subtitle: block.settings.subtitle,
-    button_one_text: block.settings.button_one_text,
-    button_one_href: block.settings.button_one_href,
-    button_two_text: block.settings.button_two_text,
-    button_two_href: block.settings.button_two_href -%}
+  {%- capture hero_slides -%}
+    {%- for block in section.blocks -%}
+
+      {%- include 'hero',
+        primary_image: block.settings.primary_image,
+        primary_image_size: block.settings.primary_image_size,
+        primary_image_srcset: block.settings.primary_image_srcset,
+        primary_image_sizes: block.settings.primary_image_sizes,
+        second_image: block.settings.second_image,
+        second_image_size: block.settings.second_image_size,
+        second_image_srcset: block.settings.second_image_srcset,
+        second_image_sizes: block.settings.second_image_sizes,
+        third_image: block.settings.third_image,
+        third_image_size: block.settings.third_image_size,
+        third_image_srcset: block.settings.third_image_srcset,
+        third_image_sizes: block.settings.third_image_sizes,
+        hero_title: block.settings.hero_title,
+        hero_subtitle: block.settings.hero_subtitle,
+        button_one_text: block.settings.button_one_text,
+        button_one_href: block.settings.button_one_href,
+        button_one_classes: block.settings.button_one_classes,
+        button_two_text: block.settings.button_two_text,
+        button_two_href: block.settings.button_two_href,
+        button_two_classes: block.settings.button_two_classes -%}
+
+    {%- endfor -%}
+  {%- endcapture -%}
+
+  {%- include 'slider',
+    name: section.settings.title,
+    slides: hero_slides -%}
 
 </section>
 
@@ -20,60 +40,156 @@
     "name": "Hero",
     "settings": [
       {
-        "id": "image",
-        "type": "image_picker",
-        "label": "Image"
-      },
-      {
-        "type": "text",
-        "id": "image_size",
-        "label": "Image Size",
-        "info": "[Optional] e.g. 800x"
-      },
-      {
-        "type": "url",
-        "id": "video_url",
-        "label": "Video Url",
-        "info": "Url of hero video"
-      },
-      {
-        "type": "textarea",
-        "id": "content",
-        "label": "Hero content (if other than image or video)"
-      },
-      {
         "id": "title",
         "type": "text",
-        "label": "Title"
-      },
+        "label": "Hero Name"
+      }
+    ],
+    "blocks": [
       {
-        "id": "subtitle",
-        "type": "text",
-        "label": "Subtitle"
-      },
+        "type": "slide",
+        "name": "Slide",
+        "settings": [
+          {
+            "type": "header",
+            "content": "Slide Images"
+          },
+          {
+            "id": "primary_image",
+            "type": "image_picker",
+            "label": "[Required] Primary Image"
+          },
+          {
+            "type": "text",
+            "id": "primary_image_size",
+            "label": "Primary Image Size",
+            "info": "[Optional] e.g. 800x"
+          },
+          {
+            "type": "text",
+            "id": "primary_image_srcset",
+            "label": "Primary Image Srcset",
+            "info": "[Optional] e.g. 800x 800w, 1200x 1200w"
+          },
+          {
+            "type": "text",
+            "id": "primary_image_sizes",
+            "label": "Primary Image Sizes",
+            "info": "[Optional] e.g. min 380px 100vw, min 1600px 50vw or min 640px"
+          },
+          {
+            "id": "second_image",
+            "type": "image_picker",
+            "label": "[Optional] Second Image"
+          },
+          {
+            "type": "text",
+            "id": "second_image_size",
+            "label": "Second Image Size",
+            "info": "[Optional] e.g. 800x"
+          },
+          {
+            "type": "text",
+            "id": "second_image_srcset",
+            "label": "Second Image Srcset",
+            "info": "[Optional] e.g. 800x 800w, 1200x 1200w"
+          },
+          {
+            "type": "text",
+            "id": "second_image_sizes",
+            "label": "Second Image Sizes",
+            "info": "[Optional] e.g. min 380px 100vw, min 1600px 50vw or min 640px"
+          },
+          {
+            "id": "third_image",
+            "type": "image_picker",
+            "label": "[Optional] Third Image"
+          },
+          {
+            "type": "text",
+            "id": "third_image_size",
+            "label": "Third Image Size",
+            "info": "[Optional] e.g. 800x"
+          },
+          {
+            "type": "text",
+            "id": "third_image_srcset",
+            "label": "Third Image Srcset",
+            "info": "[Optional] e.g. 800x 800w, 1200x 1200w"
+          },
+          {
+            "type": "text",
+            "id": "third_image_sizes",
+            "label": "Third Image Sizes",
+            "info": "[Optional] e.g. min 380px 100vw, min 1600px 50vw or min 640px"
+          },
+          {
+            "type": "header",
+            "content": "Slide Copy"
+          },
+          {
+            "id": "hero_title",
+            "type": "textarea",
+            "label": "[Optional] Title"
+          },
+          {
+            "id": "hero_subtitle",
+            "type": "textarea",
+            "label": "[Optional] Subtitle"
+          },
+          {
+            "type": "header",
+            "content": "Slide CTAs"
+          },
+          {
+            "id": "button_one_text",
+            "type": "text",
+            "label": "Button One Text",
+            "info": "[Optional]"
+          },
+          {
+            "id": "button_one_href",
+            "type": "url",
+            "label": "Button One href",
+            "info": "[Optional]"
+          },
+          {
+            "id": "button_one_classes",
+            "type": "text",
+            "label": "Button One Classes"
+          },
+          {
+            "id": "button_two_text",
+            "type": "text",
+            "label": "Button Two Text",
+            "info": "[Optional]"
+          },
+          {
+            "id": "button_two_href",
+            "type": "url",
+            "label": "Button Two href",
+            "info": "[Optional]"
+          },
+          {
+            "id": "button_two_classes",
+            "type": "text",
+            "label": "Button Two Classes"
+          }
+        ]
+      }
+    ],
+    "presets": [
       {
-        "id": "button_one_text",
-        "type": "text",
-        "label": "button 1 text",
-        "info": "[Optional]"
-      },
-      {
-        "id": "button_one_href",
-        "type": "url",
-        "label": "button 1 href",
-        "info": "[Optional]"
-      },
-      {
-        "id": "button_two_text",
-        "type": "text",
-        "label": "button 2 text",
-        "info": "[Optional]"
-      },
-      {
-        "id": "button_two_href",
-        "type": "url",
-        "label": "button 2 href",
-        "info": "[Optional]"
+        "name": "Hero",
+        "category": "_Custom Content",
+        "settings": {
+          "title": "Sample Hero"
+        },
+        "blocks": [
+          {
+            "type": "slide"
+          }
+        ]
       }
     ]
   }

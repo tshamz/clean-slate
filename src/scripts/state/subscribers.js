@@ -17,7 +17,7 @@ export const initSubscribers = () => {
     return updateQuantity(data);
   });
 
-  PubSub.subscribe(bva.updateOptionGroupValue, async (message, data) => {
+  PubSub.subscribe(bva.updateOptionGroupValue, (message, data) => {
     return updateOptionGroupValue(data);
   });
 

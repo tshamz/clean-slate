@@ -23,7 +23,10 @@ bindInPageLinks();
 
 CartControls.cacheCart();
 
-document.addEventListener('DOMContentLoaded', async () => {
+document.addEventListener('DOMContentLoaded', () => {
+  state.initSubscribers();
+  state.init();
+
   CartControls.initSubscribers();
   CartControls.bindActions();
 
@@ -46,9 +49,6 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   Slider.initSubscribers();
   Slider.initSliders();
-
-  state.initSubscribers();
-  state.init();
 });
 
 window.addEventListener('load', () => {

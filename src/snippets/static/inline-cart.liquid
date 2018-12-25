@@ -1,54 +1,59 @@
 {%- comment -%}
 
-  Required arguments:
-
-
-  Optional arguments:
-  - section_id
-  - classes
-  - attrs
+  Arguments:
+  - inline_cart_heading
+  - inline_cart_close_icon
+  - inline_cart_button_one_enabled
+  - inline_cart_button_one_text
+  - inline_cart_button_one_href
+  - inline_cart_button_one_classes
+  - inline_cart_button_two_enabled
+  - inline_cart_button_two_text
+  - inline_cart_button_two_href
+  - inline_cart_button_two_classes
 
 {%- endcomment -%}
 
 
-<section
-  class="oo-inline-cart {{ classes -}}"
-  data-inline-cart
-  data-section-id="{{- section_id -}}"
-  {{ attrs -}}>
+{%- capture inline_cart_header_content -%}
+  {%- include 'button',
+    icon: inline_cart_close_icon,
+    classes: 'button--reset',
+    attrs: 'data-close-inline-cart' -%}
+{%- endcapture -%}
 
-  {%- capture header_content -%}
-    {%- include 'button',
-      icon: 'arrow-left',
-      classes: 'button--reset',
-      attrs: 'data-close-inline-cart' -%}
-  {%- endcapture -%}
+{%- include 'header',
+  title: inline_cart_heading,
+  level: 3,
+  content: inline_cart_header_content %}
 
-  {%- include 'header',
-    title: 'Your Shopping Cart',
-    level: 3,
-    content: header_content %}
-
-  {% assign header_content = nil %}
+{% assign inline_cart_header_content = nil %}
 
 
-  <div class="oo-inline-cart--contents" data-inline-cart-contents>
+<div class="oo-inline-cart--contents" data-inline-cart-contents>
 
-    {%- include 'inline-cart-contents' -%}
+  {%- include 'inline-cart-contents' -%}
 
-  </div>
+</div>
 
 
-  <footer class="oo-inline-cart--footer">
+<footer class="oo-inline-cart--footer">
+  {%- if inline_cart_button_one_enabled == true-%}
 
     {%- include 'button',
-      content: 'View Cart',
-      classes: 'oo-inline-cart--view-cart button--secondary' -%}
+      content: inline_cart_button_one_text,
+      href: inline_cart_button_one_href,
+      classes: inline_cart_button_one_classes -%}
+
+  {%- endif -%}
+
+
+  {%- if inline_cart_button_two_enabled == true -%}
 
     {%- include 'button',
-      content: 'Checkout',
-      classes: 'oo-inline-cart--checkout button--primary' -%}
+      content: inline_cart_button_two_text,
+      href: inline_cart_button_two_href,
+      classes: inline_cart_button_two_classes -%}
 
-  </footer>
-
-</section>
+  {%- endif -%}
+</footer>

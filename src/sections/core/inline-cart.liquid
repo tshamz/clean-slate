@@ -1,7 +1,97 @@
-{%- include 'inline-cart', section_id: section.id -%}
+<section class="oo-inline-cart"
+  data-section-id="{{ section.id }}"
+  data-section-type="inline-cart"
+  data-inline-cart>
+
+  {%- include 'inline-cart',
+    inline_cart_heading: section.settings.inline_cart_heading,
+    inline_cart_close_icon: section.settings.inline_cart_close_icon,
+    inline_cart_button_one_enabled: section.settings.inline_cart_button_one_enabled,
+    inline_cart_button_one_text: section.settings.inline_cart_button_one_text,
+    inline_cart_button_one_href: section.settings.inline_cart_button_one_href,
+    inline_cart_button_one_classes: section.settings.inline_cart_button_one_classes,
+    inline_cart_button_two_enabled: section.settings.inline_cart_button_two_enabled,
+    inline_cart_button_two_text: section.settings.inline_cart_button_two_text,
+    inline_cart_button_two_href: section.settings.inline_cart_button_two_href,
+    inline_cart_button_two_classes: section.settings.inline_cart_button_two_classes -%}
+
+</section>
+
 
 {% schema %}
   {
-    "name": "Inline Cart"
+    "name": "Inline Cart",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Inline Cart Header"
+      },
+      {
+        "id": "inline_cart_heading",
+        "type": "text",
+        "label": "Inline Cart Heading",
+        "default": "Your Shopping Cart"
+      },
+      {
+        "id": "inline_cart_close_icon",
+        "type": "text",
+        "label": "Inline Cart Close Icon",
+        "default": "arrow-left",
+        "placeholder": "Icon Name",
+        "info": "use icon snippet name w/o 'icon-'"
+      },
+      {
+        "type": "header",
+        "content": "Inline Cart Line Items"
+      },
+      {
+        "type": "header",
+        "content": "Inline Cart Footer"
+      },
+      {
+        "id": "inline_cart_button_one_enabled",
+        "type": "checkbox",
+        "label": "Button One Enabled?",
+        "default": true
+      },
+      {
+        "id": "inline_cart_button_one_text",
+        "type": "text",
+        "label": "Button One Text",
+        "default": "View Cart"
+      },
+      {
+        "id": "inline_cart_button_one_href",
+        "type": "url",
+        "label": "Button One href"
+      },
+      {
+        "id": "inline_cart_button_one_classes",
+        "type": "text",
+        "label": "Button One Classes"
+      },
+      {
+        "id": "inline_cart_button_two_enabled",
+        "type": "checkbox",
+        "label": "Button Two Enabled?",
+        "default": false
+      },
+      {
+        "id": "inline_cart_button_two_text",
+        "type": "text",
+        "label": "Button Two Text",
+        "default": "Checkout"
+      },
+      {
+        "id": "inline_cart_button_two_href",
+        "type": "url",
+        "label": "Button Two href"
+      },
+      {
+        "id": "inline_cart_button_two_classes",
+        "type": "text",
+        "label": "Button Two Classes"
+      }
+    ]
   }
 {% endschema %}

@@ -4,22 +4,22 @@ import dom from 'common/Dom';
 import bva from 'common/Constants';
 import { getAlternativeTemplate, debounce } from 'common/Helpers';
 
-import state from 'state';
-
-const updateInlineCartUI = async data => {
+const updateInlineCartUI = data => {
   const resource = 'cart';
   const templateName = 'ajax-inline-cart';
-  const newCart = await getAlternativeTemplate({ resource, templateName });
-  $(dom.inlineCartContents).html(newCart);
+  return getAlternativeTemplate({ resource, templateName })
+    .then(newCart => $(dom.inlineCartContents).html(newCart));
 };
 
-export const cartRequestSuccess = async data => {
-  await updateInlineCartUI();
-  PubSub.publish(bva.updateCart, {});
-  PubSub.publish(bva.openInlineCart, {});
+export const cartRequestSuccess = data => {
+  updateInlineCartUI()
+    .then(() => {
+      PubSub.publish(bva.updateCart, {});
+      PubSub.publish(bva.openInlineCart, {});
+    });
 };
 
-export const addToCart = async data => {
+export const addToCart = data => {
   const { id, quantity, properties } = data;
   const requestData = { id, quantity, properties };
   return addItem(id, { quantity, properties })
@@ -31,9 +31,8 @@ export const addToCart = async data => {
     });
 };
 
-export const removeFromCart = async data => {
-  const { id } = data;
-  const { key } = state.getState(id);
+export const removeFromCart = data => {
+  const { key } = data;
   const requestData = { key };
   return removeItem(key)
     .then(responseData => {
@@ -44,9 +43,8 @@ export const removeFromCart = async data => {
     });
 };
 
-export const updateCart = debounce(async data => {
-  const { id, quantity } = data;
-  const { key } = state.getState(id);
+export const updateCart = debounce(data => {
+  const { key, quantity } = data;
   const requestData = { key, quantity };
   return updateItem(key, { quantity })
     .then(responseData => {

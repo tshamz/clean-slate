@@ -12,6 +12,12 @@
 {% endcomment %}
 
 <style>
+  {{ settings.font_heading | font_face }}
+  {{ settings.font_heading_bold | font_face }}
+  {{ settings.font_primary | font_face }}
+  {{ settings.font_primary_light | font_face }}
+  {{ settings.font_primary_bold | font_face }}
+
   :root {
     --color-default-white: {{ settings.color_default_white }};
     --color-default-black: {{ settings.color_default_black }};
@@ -21,8 +27,12 @@
     --color-palette-3: {{ settings.color_palette_3 }};
     --color-palette-4: {{ settings.color_palette_4 }};
     --color-palette-5: {{ settings.color_palette_5 }};
-    --color-palette-6: {{ settings.color_palette_6 }};
     --color-body-text: {{ settings.color_body_text }};
     --color-body-background: {{ settings.color_body_background }};
+    --font-primary: {{ settings.font_primary.family }}, {{ settings.font_primary.fallback_families }};
+    --font-primary-light-weight: {{ settings.font_primary_light.weight }};
+    --font-primary-bold-weight: {{ settings.font_primary_bold.weight }};
+    --font-heading: {{ settings.font_heading.family }}, {{ settings.font_heading.fallback_families }};
+    --font-heading-bold-weight: {{ settings.font_heading_bold.weight }};
   }
 </style>

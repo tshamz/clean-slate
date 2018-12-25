@@ -1,5 +1,8 @@
 {%- capture product_main -%}
-  {%- include 'product-images', with_nav: product_images_has_nav -%}
+  {%- include 'product-images',
+    with_nav: product_images_has_nav,
+    filter_group_option: product_images_filter_group_option,
+    filter_attr: product_images_filter_attr -%}
 
   {%- include 'product-info',
     is_price_range: product_info_is_price_range,

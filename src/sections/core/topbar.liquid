@@ -1,0 +1,30 @@
+{%- if section.settings.topbar_content != blank and section.settings.topbar_enabled == true -%}
+
+  <section data-section-id="{{ section.id }}" data-section-type="topbar">
+
+    {%- include 'topbar', content: section.settings.topbar_content -%}
+
+  </section>
+
+{%- endif -%}
+
+
+{% schema %}
+  {
+    "name": "Topbar",
+    "class": "topbar-wrapper",
+    "settings": [
+      {
+        "id": "topbar_enabled",
+        "type": "checkbox",
+        "label": "Topbar Enabled?",
+        "default": true
+      },
+      {
+        "id": "topbar_content",
+        "type": "textarea",
+        "label": "Topbar Content"
+      }
+    ]
+  }
+{% endschema %}

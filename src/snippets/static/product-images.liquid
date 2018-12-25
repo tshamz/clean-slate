@@ -4,7 +4,8 @@
 
   Optional arguments:
   - with_nav
-  - nav_slides
+  - filter_group_option
+  - filter_attr
 
 {% endcomment %}
 
@@ -15,7 +16,12 @@
     {%- for image in _product.images -%}
       {%- include 'image',
         resource: image,
-        size: '800x' -%}
+        size: '1440x',
+        srcset: '480x 480w, 720x 720w, 1440px 2x'
+        lazyload: false,
+        wrapper: false,
+        format: 'pjpg',
+        attrs: 'data-product-gallery-slide'  -%}
     {%- endfor -%}
   {%- endcapture -%}
 
@@ -23,6 +29,7 @@
     name: 'product-gallery',
     slides: product_gallery_slides,
     with_nav: with_nav,
-    filter_group: 'Color' -%}
+    filter_group_option: filter_group_option,
+    filter_attr: filter_attr -%}
 
 </div>

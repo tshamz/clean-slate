@@ -1,0 +1,15 @@
+{%- if collection_hero_enabled == true -%}
+  {%- unless collection_hero_fallback_image == blank and _collection.image == blank -%}
+
+    {%- assign hero_image = _collection.image -%}
+    {%- if collection_hero_fallback_image != blank and _collection.image == blank -%}
+      {%- assign hero_image = collection_hero_fallback_image -%}
+    {%- endif -%}
+
+    {%- include 'hero',
+      primary_image: hero_image,
+      primary_image_size: '3200x',
+      primary_image_srcset: '800x 800w, 1200x 1200w, 1600x 1600w' -%}
+
+  {%- endunless -%}
+{%- endif -%}

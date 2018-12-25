@@ -57,6 +57,10 @@ export default {
   price: '[data-price="price"]',
   compareAtPrice: '[data-price="compare-at-price"]',
 
+  productGallerySlide: '[data-product-gallery-slide]',
+
+  sliderHasNav: '[data-has-nav]',
+
   isActive: '.is-active',
 
   priceString: (strings, priceInCents) => {

@@ -33,6 +33,7 @@
       {%- include 'style-tags', layout: 'theme' -%}
       {%- include 'css-variables' -%}
 
+
     <!-- Scripts ============================================== -->
 
       {%- include 'script-tags', layout: 'theme' -%}
@@ -48,7 +49,7 @@
   <body
     data-template="{{ template.name | handle }}"
     {%- if template.suffix != blank -%}
-    data-alternate-template="{{ template.suffix | handle }}"
+      data-alternate-template="{{ template.suffix | handle }}"
     {%- endif -%}>
 
     <a href="#MainContent" class="in-page-link u-visually-hidden">Skip to content</a>

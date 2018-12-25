@@ -1,12 +1,14 @@
 {%- include 'product',
   _product: product,
   product_images_has_nav: section.settings.product_images_has_nav,
+  product_images_filter_group_option: section.settings.product_images_filter_group_option,
+  product_images_filter_attr: section.settings.product_images_filter_attr,
   product_info_is_price_range: section.settings.product_info_is_price_range,
   product_info_show_compare_at_price: section.settings.product_info_show_compare_at_price,
   product_info_show_option_name: section.settings.product_info_show_option_name,
   product_info_show_selected_value: section.settings.product_info_show_selected_value,
   product_info_add_to_cart_button_text: section.settings.product_info_add_to_cart_button_text,
-  product_info_add_to_cart_button_classes: section.settings.product_info_add_to_cart_button_classes -%}
+  product_info_add_to_cart_button_classes: section.settings.product_info_add_to_cart_button_classes  -%}
 
 {% schema %}
   {
@@ -19,8 +21,22 @@
       {
         "id": "product_images_has_nav",
         "type": "checkbox",
-        "label": "Product Images has Navigation?",
+        "label": "Product images has navigation?",
         "default": true
+      },
+      {
+        "id": "product_images_filter_group_option",
+        "type": "text",
+        "label": "Option to group images by",
+        "placeholder": "Optional",
+        "info": "(navigation must be enabled)"
+      },
+      {
+        "id": "product_images_filter_attr",
+        "type": "text",
+        "label": "Slide attribute with value to filter on",
+        "placeholder": "Optional",
+        "info": "(navigation must be enabled)"
       },
       {
         "type": "header",
@@ -29,37 +45,37 @@
       {
         "id": "product_info_is_price_range",
         "type": "checkbox",
-        "label": "Show Price as Range?",
+        "label": "Show price as range?",
         "default": false
       },
       {
         "id": "product_info_show_compare_at_price",
         "type": "checkbox",
-        "label": "Show Compare at Price?",
+        "label": "Show compare at price?",
         "default": true
       },
       {
         "id": "product_info_show_option_name",
         "type": "checkbox",
-        "label": "Show Option Name?",
+        "label": "Show option name?",
         "default": true
       },
       {
         "id": "product_info_show_selected_value",
         "type": "checkbox",
-        "label": "Show Selected Option Value?",
+        "label": "Show selected option value?",
         "default": true
       },
       {
         "id": "product_info_add_to_cart_button_text",
         "type": "text",
-        "label": "Add To Cart Button Text",
+        "label": "Add to cart button text",
         "default": "Add to Cart"
       },
       {
         "id": "product_info_add_to_cart_button_classes",
         "type": "text",
-        "label": "Add To Cart Button Classes",
+        "label": "Add to cart button classes",
         "default": "button--primary"
       }
     ],

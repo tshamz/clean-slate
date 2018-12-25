@@ -1,4 +1,4 @@
-{%- assign sizeses = sizes | split: ',' -%}
+{%- assign sizeses = _sizes | split: ', ' -%}
 
 {%- for size in sizeses -%}
   {%- assign size_parts = size | split: ' ' -%}

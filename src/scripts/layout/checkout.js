@@ -1,6 +1,6 @@
 import 'styles/checkout.scss';
 
-document.addEventListener('DOMContentLoaded', async () => {
+document.addEventListener('DOMContentLoaded', () => {
 
 });
 

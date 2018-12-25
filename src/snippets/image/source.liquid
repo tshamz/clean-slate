@@ -1,0 +1,29 @@
+{%- comment -%}
+
+  Required arguments:
+  - resource
+
+  Optional arguments:
+  - size
+  - srcset
+  - sizes
+
+{%- endcomment -%}
+
+
+{%- capture _srcset -%}
+  {%- include 'srcset',
+    resource: resource,
+    srcset: srcset,
+    size: size -%}
+{%- endcapture -%}
+
+{%- capture _sizes -%}
+  {%- include 'sizes',
+    _sizes: sizes -%}
+{%- endcapture -%}
+
+
+<source
+  srcset="{{- _srcset -}}"
+  {%- if sizes != blank -%}media="{{- _sizes -}}"{%- endif -%}>

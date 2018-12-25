@@ -4,14 +4,24 @@
   - content
 
   Optional arguments:
+  - rte
   - classes
   - attrs
 
 {%- endcomment -%}
 
 
-<p class="oo-text {{ classes -}}" {{ attrs -}}>
+{%- assign tag = 'p' -%}
+{%- if rte == true -%}
+  {%- assign tag = 'p' -%}
+  {%- assign classes = classes | append: ' rte'  -%}
+{%- endif -%}
+
+<{{- tag }} class="oo-text {{ classes -}}" {{ attrs -}}>
 
   {{- content -}}
 
-</p>
+</{{- tag -}}>
+
+{%- assign tag = nil -%}
+{%- assign classes = nil -%}

@@ -29,6 +29,9 @@
 
   {%- endif -%}
 
+  {%- include 'text',
+    content: _product.description,
+    rte: true -%}
 
   {%- include 'add-to-cart-form',
     show_option_name: show_option_name,

@@ -1,0 +1,30 @@
+{%- if section.settings.bottombar_content != blank and section.settings.bottombar_enabled == true -%}
+
+  <section data-section-id="{{ section.id }}" data-section-type="topbar">
+
+    {%- include 'bottombar', content: section.settings.bottombar_content  -%}
+
+  </section>
+
+{%- endif -%}
+
+
+{% schema %}
+  {
+    "name": "Bottombar",
+    "class": "bottombar-wrapper",
+    "settings": [
+      {
+        "id": "bottombar_enabled",
+        "type": "checkbox",
+        "label": "Bottombar Enabled?",
+        "default": true
+      },
+      {
+        "id": "bottombar_content",
+        "type": "textarea",
+        "label": "Bottombar Content"
+      }
+    ]
+  }
+{% endschema %}
