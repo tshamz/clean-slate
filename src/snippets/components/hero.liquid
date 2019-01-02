@@ -25,6 +25,7 @@
   - button_two_classes
 
   - lazyload
+  - classes
 
 {%- endcomment -%}
 
@@ -96,7 +97,8 @@
 
   {%- if button_one_text != blank -%}
 
-    {%- include 'button',
+    {%- include 'link',
+      button: true,
       href: button_one_href,
       content: button_one_text,
       classes: button_one_classes -%}
@@ -106,7 +108,8 @@
 
   {%- if button_two_text != blank -%}
 
-    {%- include 'button',
+    {%- include 'link',
+      button: true,
       href: button_two_href,
       content: button_two_text,
       classes: button_two_classes -%}

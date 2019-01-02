@@ -1,0 +1,119 @@
+<section
+  class="oo-footer"
+  data-section-id="{{ section.id }}"
+  data-section-type="footer">
+
+  {%- include 'footer', menu: section.settings.footer_navigation -%}
+
+</section>
+
+{% schema %}
+  {
+    "name": "Footer",
+    "settings": [
+
+    ],
+    "blocks": [
+      {
+        "type": "logo",
+        "name": "Logo",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "footer_logo",
+            "label": "Footer Logo"
+          }
+        ]
+      },
+      {
+        "type": "contact",
+        "name": "Contact",
+        "settings": [
+          {
+            "type": "textarea",
+            "id": "footer_contact_info",
+            "label": "Footer Contact Info"
+          }
+        ]
+      },
+      {
+        "type": "social_links",
+        "name": "Social Links",
+        "settings": [
+          {
+            "type": "checkbox",
+            "id": "show_facebook_link",
+            "label": "Show Facebook Link",
+            "default": true
+          },
+          {
+            "type": "checkbox",
+            "id": "show_twitter_link",
+            "label": "Show Twitter Link",
+            "default": true
+          },
+          {
+            "type": "checkbox",
+            "id": "show_instagram_link",
+            "label": "Show Instagram Link",
+            "default": true
+          },
+          {
+            "type": "checkbox",
+            "id": "show_youtube_link",
+            "label": "Show YouTube Link",
+            "default": false
+          },
+          {
+            "type": "checkbox",
+            "id": "show_pinterest_link",
+            "label": "Show Pinterest Link",
+            "default": true
+          }
+        ]
+      },
+      {
+        "type": "links",
+        "name": "Links",
+        "settings": [
+          {
+            "type": "checkbox",
+            "id": "show_social_icons",
+            "label": "Show Icon with Social Links",
+            "default": true
+          },
+          {
+            "type": "link_list",
+            "id": "footer_navigation",
+            "label": "Footer Navigation Linklist",
+            "default": "footer"
+          }
+        ]
+      },
+      {
+        "type": "newsletter",
+        "name": "Newsletter",
+        "settings": [
+          {
+            "type": "text",
+            "id": "heading",
+            "label": "Newsletter Signup Heading",
+            "default": "Sign Up For Newsletter"
+          },
+          {
+            "type": "text",
+            "id": "placeholder_text",
+            "label": "Email Input Placeholder Text",
+            "default": "Enter your email address"
+          },
+          {
+            "type": "text",
+            "id": "submit_content",
+            "label": "Content for Submit Button",
+            "info": "if you'd like to use an icon instead, write out the icon snippet name e.g. `icon-envelope`"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

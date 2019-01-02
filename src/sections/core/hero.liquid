@@ -23,7 +23,8 @@
         button_one_classes: block.settings.button_one_classes,
         button_two_text: block.settings.button_two_text,
         button_two_href: block.settings.button_two_href,
-        button_two_classes: block.settings.button_two_classes -%}
+        button_two_classes: block.settings.button_two_classes,
+        classes: block.settings.classes -%}
 
     {%- endfor -%}
   {%- endcapture -%}
@@ -50,6 +51,11 @@
         "type": "slide",
         "name": "Slide",
         "settings": [
+          {
+            "type": "text",
+            "id": "classes",
+            "placeholder": "custom classes for slide element"
+          },
           {
             "type": "header",
             "content": "Slide Images"

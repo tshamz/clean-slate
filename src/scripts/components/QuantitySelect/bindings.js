@@ -9,9 +9,6 @@ const handleQuantityChangeClick = ({ currentTarget: self, ...rest }) => {
   const { quantity: oldQuantity, inventory } = state.getState(id);
   const newQuantity = oldQuantity + change;
 
-  console.log(newQuantity);
-  console.log(inventory);
-
   if (newQuantity > inventory) {
     const name = 'not-enough-inventory';
     const data = { newQuantity, inventory };

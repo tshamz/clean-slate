@@ -4,16 +4,18 @@
   - content
 
   Optional arguments:
-  - type
+  - button
+  - href
+  - target
   - icon
   - classes
   - attrs
 
 {%- endcomment -%}
 
-
-<button class="oo-button {{ classes -}}"
-  {%- if type != blank -%}type="{{- type -}}"{%- endif -%}
+<a class="oo-link {% if button != blank -%}oo-button{%- endif %} {{ classes -}}"
+  href="{{- href -}}"
+  {%- if target != blank -%}target="{{- target -}}"{%- endif -%}
   {{ attrs -}}>
 
   {%- if icon != blank -%}
@@ -29,4 +31,4 @@
 
   {%- endif -%}
 
-</button>
+</a>

@@ -29,7 +29,9 @@ const getVariant = id => {
 
 export const updateVariant = data => {
   const { variant: { id: variantId }} = getVariant(data.id);
-  setState({ ...data, variantId, change: 'VARIANT' });
+  const change = 'VARIANT';
+
+  setState({ ...data, variantId, change });
   PubSub.publish(bva.updateInventory, data);
   PubSub.publish(bva.updatePrice, data);
   setSearchParm('variant', variantId);
@@ -37,22 +39,40 @@ export const updateVariant = data => {
 
 export const updateInventory = data => {
   const { inventory } = getVariant(data.id);
-  setState({ ...data, inventory, change: 'INVENTORY' });
+  const change = 'INVENTORY';
+
+  setState({ ...data, inventory, change });
 };
 
 export const updatePrice = data => {
   const { variant: { price, compare_at_price }} = getVariant(data.id);
-  setState({ ...data, price, compare_at_price, change: 'PRICE' });
+  const change = 'PRICE';
+
+  setState({ ...data, price, compare_at_price, change });
 };
 
 export const updateQuantity = data => {
-  setState({ ...data, change: 'QUANTITY' });
+  const change = 'QUANTITY';
+
+  setState({ ...data, change });
 };
 
 export const updateOptionGroupValue = data => {
-  setState({ ...data, change: 'OPTION' });
+  const change = 'OPTION';
+
+  setState({ ...data, change });
   PubSub.publish(bva.updateVariant, data);
 };
+
+export const updateModal = data => {
+  const id = 'modal';
+  const change = 'MODAL';
+  const { name, close } = data;
+  const active = (close) ? undefined : name;
+
+  setState({ id, change, active });
+};
+
 
 const getInitialOptionValues = options => {
   return options.reduce((optionValues, option) =>

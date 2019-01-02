@@ -6,7 +6,8 @@ import {
   updateVariant,
   updateQuantity,
   updateInventory,
-  updatePrice, } from './handlers';
+  updatePrice,
+  updateModal, } from './handlers';
 
 export const initSubscribers = () => {
   PubSub.subscribe(bva.updateCart, (message, data) => {
@@ -43,5 +44,13 @@ export const initSubscribers = () => {
     } else if (data.change === 'option') {
 
     }
+  });
+
+  PubSub.subscribe(bva.showModal, (message, data) => {
+    return updateModal(data);
+  });
+
+  PubSub.subscribe(bva.hideModal, (message, data) => {
+    return updateModal(data);
   });
 };

@@ -27,8 +27,11 @@ export default {
 
   slider: '[data-slider]',
 
+  getContainer: id => $(`[data-container-id="${id}"]`).get(),
   $getContainer: id => $(`[data-container-id="${id}"]`),
 
+  modal: '[data-modal]',
+  modalContents: '[data-modal-contents]',
   openModal: '[data-open-modal]',
   closeModal: '[data-close-modal]',
   toggleModal: '[data-toggle-modal]',
@@ -60,8 +63,6 @@ export default {
   productGallerySlide: '[data-product-gallery-slide]',
 
   sliderHasNav: '[data-has-nav]',
-
-  modalContents: '[data-modal-contents]',
 
   isActive: '.is-active',
 

@@ -49,4 +49,5 @@ export default {
   updatePrice: 'BVA.PRICE.UPDATE',
 
   showModal: 'BVA.MODAL.SHOW',
+  hideModal: 'BVA.MODAL.HIDE',
 };
