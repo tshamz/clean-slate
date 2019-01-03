@@ -1,0 +1,35 @@
+{%- comment -%}
+
+  Required arguments:
+  -
+
+  Optional arguments:
+  - icon
+  - placeholder
+
+{%- endcomment -%}
+
+
+{%- capture search_form_content -%}
+  {%- capture input_placeholder -%}
+    placeholder="{{ placeholder }}"
+  {%- endcapture -%}
+
+  {%- include 'input',
+    type: 'search',
+    name: 'header-search',
+    attrs: input_placeholder -%}
+
+  {%- include 'button',
+    type: 'submit',
+    icon: icon -%}
+{%- endcapture -%}
+
+
+{%- include 'form-container',
+  name: 'header-search',
+  method: 'post',
+  action: '/search',
+  content: search_form_content -%}
+
+{%- assign search_form_content = nil -%}

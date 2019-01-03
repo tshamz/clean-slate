@@ -1,0 +1,46 @@
+{%- comment -%}
+
+  Required arguments:
+  - menu
+
+  Optional arguments:
+  - show_social_icons
+
+{%- endcomment -%}
+
+
+{%- for parent in linklists[menu].links -%}
+
+  <section class="footer--links-block">
+
+    {%- include 'header',
+      level: 3,
+      title: parent.title,
+      classes: 'footer--links-header' -%}
+
+      <div class="footer--links">
+
+      {%- for child in parent.links -%}
+
+        {%- assign icon = blank -%}
+        {%- assign networks = 'facebook,twitter,instagram,youtube,pinterest' | split: ',' -%}
+
+        {%- if show_social_icons == true -%}
+          {%- if networks contains child.handle -%}
+            {%- assign icon = child.handle -%}
+          {%- endif -%}
+        {%- endif -%}
+
+        {%- include 'link',
+          href: child.url,
+          content: child.title,
+          icon: icon,
+          classes: 'footer--link' -%}
+
+      {%- endfor -%}
+
+      </div>
+
+  </section>
+
+{%- endfor -%}

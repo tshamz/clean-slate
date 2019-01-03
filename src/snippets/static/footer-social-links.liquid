@@ -1,0 +1,20 @@
+{%- comment -%}
+
+  Required arguments:
+  -
+
+  Optional arguments:
+  -
+
+{%- endcomment -%}
+
+
+{%- assign networks = '' -%}
+{%- for network in block_settings -%}
+  {%- if block_settings[network] == true  -%}
+    {%- assign network_name = network | remove: '_link' -%}
+    {%- assign networks = networks | append: ' ' | append: network_name | strip -%}
+  {%- endif -%}
+{%- endfor -%}
+
+{%- include 'social-media-icons', networks: networks -%}

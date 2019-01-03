@@ -3,20 +3,62 @@
   data-section-id="{{ section.id }}"
   data-section-type="footer">
 
-  {%- include 'footer', menu: section.settings.footer_navigation -%}
+  {%- for block in section.blocks -%}
+    {%- case block.type -%}
+
+      {%- when 'logo' -%}
+
+        {%- include 'image',
+          resource: block.settings.footer_logo,
+          size: '200x',
+          wrapper_tag: 'a',
+          classes: 'footer--logo',
+          attrs: 'href="/"' -%}
+
+      {%- when 'contact' -%}
+
+        {%- include 'footer-contact', content: block.settings.footer_contact_info -%}
+
+      {%- when 'social_links' -%}
+
+        {%- include 'footer-social-links', block_settings: block.settings, -%}
+
+      {%- when 'footer_links' -%}
+
+        {%- include 'footer-links',
+          menu: block.settings.footer_links_link_list,
+          show_social_icons: block.settings.show_social_icons -%}
+
+      {%- when 'newsletter' -%}
+
+        {%- include 'footer-newsletter-signup',
+          header: block.settings.heading,
+          placeholder: block.settings.placeholder_text,
+          submit_icon: block.settings.submit_icon,
+          submit_text: block.settings.submit_text -%}
+
+    {%- endcase -%}
+  {%- endfor -%}
 
 </section>
+
 
 {% schema %}
   {
     "name": "Footer",
     "settings": [
-
+      {
+        "type": "checkbox",
+        "id": "footer_enabled",
+        "label": "Footer Enabled?",
+        "default": true
+      }
     ],
     "blocks": [
       {
         "type": "logo",
         "name": "Logo",
+        "limit": 1,
         "settings": [
           {
             "type": "image_picker",
@@ -28,53 +70,57 @@
       {
         "type": "contact",
         "name": "Contact",
+        "limit": 1,
         "settings": [
           {
             "type": "textarea",
             "id": "footer_contact_info",
-            "label": "Footer Contact Info"
+            "label": "Footer Contact Info",
+            "default": "<ul class='contact-items'><li><a href='mailto:support@mvmt.com'>support@mvmt.com</a></li><li>Call Toll-Free <br> <a href='tel:8885070220'>+1 (888) 507-0220</a></li><li>M-T 8:30-2 pm &amp; F 9-1 pm PST</li></ul>"
           }
         ]
       },
       {
         "type": "social_links",
         "name": "Social Links",
+        "limit": 1,
         "settings": [
           {
             "type": "checkbox",
-            "id": "show_facebook_link",
+            "id": "facebook_link",
             "label": "Show Facebook Link",
             "default": true
           },
           {
             "type": "checkbox",
-            "id": "show_twitter_link",
+            "id": "twitter_link",
             "label": "Show Twitter Link",
             "default": true
           },
           {
             "type": "checkbox",
-            "id": "show_instagram_link",
+            "id": "instagram_link",
             "label": "Show Instagram Link",
             "default": true
           },
           {
             "type": "checkbox",
-            "id": "show_youtube_link",
+            "id": "youtube_link",
             "label": "Show YouTube Link",
             "default": false
           },
           {
             "type": "checkbox",
-            "id": "show_pinterest_link",
+            "id": "pinterest_link",
             "label": "Show Pinterest Link",
-            "default": true
+            "default": false
           }
         ]
       },
       {
-        "type": "links",
-        "name": "Links",
+        "type": "footer_links",
+        "name": "Footer Links",
+        "limit": 1,
         "settings": [
           {
             "type": "checkbox",
@@ -84,7 +130,7 @@
           },
           {
             "type": "link_list",
-            "id": "footer_navigation",
+            "id": "footer_links_link_list",
             "label": "Footer Navigation Linklist",
             "default": "footer"
           }
@@ -92,25 +138,32 @@
       },
       {
         "type": "newsletter",
-        "name": "Newsletter",
+        "name": "Newsletter Sign Up",
+        "limit": 1,
         "settings": [
           {
             "type": "text",
             "id": "heading",
-            "label": "Newsletter Signup Heading",
+            "label": "Newsletter Sign Up Heading",
             "default": "Sign Up For Newsletter"
           },
           {
             "type": "text",
             "id": "placeholder_text",
             "label": "Email Input Placeholder Text",
-            "default": "Enter your email address"
+            "default": "Email"
           },
           {
             "type": "text",
-            "id": "submit_content",
-            "label": "Content for Submit Button",
-            "info": "if you'd like to use an icon instead, write out the icon snippet name e.g. `icon-envelope`"
+            "id": "submit_icon",
+            "label": "Icon for Submit Button",
+            "info": "write out the icon snippet name e.g. `icon-envelope`",
+            "default": "icon-add"
+          },
+          {
+            "type": "text",
+            "id": "submit_text",
+            "label": "Text for Submit Button"
           }
         ]
       }

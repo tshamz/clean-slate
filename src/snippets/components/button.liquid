@@ -23,7 +23,9 @@
       classes: '',
       attrs: '' -%}
 
-  {%- else -%}
+  {%- endif -%}
+
+  {%- if content != blank -%}
 
     {{- content -}}
 

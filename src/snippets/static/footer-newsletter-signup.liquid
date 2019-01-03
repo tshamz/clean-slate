@@ -1,0 +1,43 @@
+{%- comment -%}
+
+  Required arguments:
+  -
+
+  Optional arguments:
+  -
+
+{%- endcomment -%}
+
+
+<section>
+
+  {%- include 'header',
+    level: 3,
+    title: header -%}
+
+  {%- capture footer_newsletter_signup_content -%}
+    {%- capture input_placeholder -%}
+      placeholder="{{ placeholder }}"
+    {%- endcapture -%}
+
+
+    {%- include 'input',
+      type: 'email',
+      name: 'footer-newsletter-signup',
+      attrs: input_placeholder -%}
+
+    {%- include 'button',
+      type: 'submit',
+      icon: submit_icon,
+      content: submit_text -%}
+  {%- endcapture -%}
+
+  {%- include 'form-container',
+    name: 'footer-newsletter-signup',
+    method: 'post',
+    action: '',
+    content: footer_newsletter_signup_content -%}
+
+  {%- assign footer_newsletter_signup_content = nil -%}
+
+</section>

@@ -1,9 +1,9 @@
 {%- comment -%}
 
   Required arguments:
-  - content
 
   Optional arguments:
+  - content
   - button
   - href
   - target
@@ -25,7 +25,9 @@
       classes: '',
       attrs: '' -%}
 
-  {%- else -%}
+  {%- endif -%}
+
+  {%- if content != blank -%}
 
     {{- content -}}
 
